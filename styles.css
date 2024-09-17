@@ -9,16 +9,19 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #f4f4f4;
+    text-align: center;
 }
 
 header {
     background-color: #333;
     padding: 10px 0;
-    text-align: center;
+    color: white;
 }
 
 header nav ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 header nav ul li {
@@ -33,10 +36,10 @@ header nav ul li a {
 }
 
 #hero {
-    text-align: center;
-    padding: 50px 20px;
     background-color: #1abc9c;
     color: white;
+    padding: 50px 20px;
+    text-align: center;
 }
 
 .profile-pic img {
@@ -48,6 +51,27 @@ header nav ul li a {
 
 h1 {
     font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 30px;
+    background-color: #333;
+    color: white;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #555;
 }
 
 .section {
@@ -62,7 +86,8 @@ h2 {
 }
 
 ul {
-    list-style-type: none;
+    list-style: none;
+    padding: 0;
 }
 
 ul li {
@@ -79,8 +104,8 @@ a:hover {
 }
 
 footer {
-    text-align: center;
-    padding: 20px 0;
     background-color: #333;
     color: white;
+    padding: 20px 0;
+    font-size: 0.9rem;
 }
