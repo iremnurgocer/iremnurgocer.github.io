@@ -41,90 +41,97 @@
             </div>
         </div>
     </nav>
-
     <!-- Hero Section with Parallax Effect -->
     <section id="hero" class="d-flex flex-column align-items-center justify-content-center text-center parallax">
         <div class="container">
             <img src="profile.png" alt="İrem Nur Göçer" class="rounded-circle mb-4 profile-pic">
             <h1 class="display-4 mb-3">İrem Nur Göçer</h1>
             <p class="lead mb-5">Backend Developer</p>
-            <a href="#projects" class="btn btn-primary rounded-pill px-4 py-2">Projelerimi Gör</a>
+            <!-- Projeler, Hakkımda, Blog ve İletişim için bağlantı -->
+            <div>
+                <a href="#about" class="btn btn-secondary rounded-pill px-4 py-2">Hakkımda</a>
+                <a href="#projects" class="btn btn-primary rounded-pill px-4 py-2">Projeler</a>
+                <a href="#blog" class="btn btn-secondary rounded-pill px-4 py-2">Blog</a>
+                <a href="#contact" class="btn btn-secondary rounded-pill px-4 py-2">İletişim</a>
+            </div>
         </div>
     </section>
 
     <!-- About Section with Scroll Animation -->
-    <section id="about" class="py-5 bg-light">
+    <section id="about" class="p-selection bg-light">
         <div class="container" data-aos="fade-up">
             <h2 class="text-center mb-4">Hakkımda</h2>
             <p class="text-center">Ben İrem Nur Göçer, backend geliştiriciyim.</p>
         </div>
     </section>
-
     <!-- Projects Section with Modal Windows -->
-    <section id="projects" class="py-5">
+    <section id="projects" class="p-selection">
         <div class="container">
             <h2 class="text-center mb-4">Projelerim</h2>
             <div class="row">
                 <!-- Project 1 -->
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
-                        <img src="project1.jpg" class="card-img-top" alt="Proje 1">
+                        <img src="chatapp.png" class="card-img-top" alt="Proje 1">
                         <div class="card-body">
-                            <h5 class="card-title">Proje 1</h5>
-                            <p class="card-text">Mikroservis Yapısında Bir Uygulama</p>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#project1Modal">
-                                Daha Fazla Bilgi
-                            </button>
+                            <h5 class="card-title">CHAT APP</h5>
+                            <p class="card-text">WebSocket ile gerçek zamanlı chat uygulaması</p>
+                            <a href="https://github.com/iremnurgocer/chat-app" class="btn btn-primary mt-auto" target="_blank">GitHub'da Gör</a>
                         </div>
                     </div>
                 </div>
-                <!-- Project 1 Modal -->
-                <div class="modal fade" id="project1Modal" tabindex="-1" aria-labelledby="project1ModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="project1ModalLabel">Proje 1: Mikroservis Yapısında Bir Uygulama</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Bu proje, mikroservis mimarisine sahip büyük ölçekli bir web uygulamasıdır...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-                            </div>
+                <!-- Project 2 (Sepet Uygulaması) -->
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="sepet.png" class="card-img-top" alt="Sepet Uygulaması">
+                        <div class="card-body">
+                            <h5 class="card-title">Sepet Uygulaması</h5>
+                            <p class="card-text">MVC pattern ve route yapısı kullanılarak geliştirilen e-ticaret sepet uygulaması.</p>
+                            <a href="https://github.com/iremnurgocer/sepet" class="btn btn-primary mt-auto" target="_blank">GitHub'da Gör</a>
                         </div>
                     </div>
                 </div>
-                <!-- Similar structure for Project 2 and Project 3 -->
-                <!-- Repeat for other projects with modals -->
             </div>
         </div>
     </section>
-
-    <!-- Blog Section with Scroll Animation -->
-    <section id="blog" class="py-5 bg-light">
-        <div class="container" data-aos="fade-up">
-            <h2 class="text-center mb-4">Blog</h2>
-            <ul class="list-group">
-                <li class="list-group-item"><a href="#">Backend Teknolojilerinde Yeni Trendler</a></li>
-                <li class="list-group-item"><a href="#">Docker ile Geliştirme Ortamı Nasıl Kurulur?</a></li>
-                <li class="list-group-item"><a href="#">Laravel'de Performans Optimizasyonu</a></li>
-            </ul>
+    <!-- Blog Section as Cards -->
+    <section id="blog" class="p-selection bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Bloglar</h2>
+            <div class="row">
+                <!-- Blog 1 -->
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="https://microservices.io/i/Microservice_Architecture.png" class="card-img-top" alt="Mikroservis Mimarisi" style="height: 200px; object-fit: contain;">
+                        <div class="card-body">
+                            <h5 class="card-title">Mikroservis Mimarisi</h5>
+                            <p class="card-text">Mikroservis mimarisi hakkında detaylı bilgiler ve nasıl entegre edileceği...</p>
+                            <a href="blogs/blog1.html" class="btn btn-primary">Blogu Oku</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
     <!-- Contact Section -->
-    <section id="contact" class="py-5">
+    <section id="contact" class="p-selection bg-light">
         <div class="container text-center">
             <h2 class="mb-4">İletişim</h2>
-            <p>Bana ulaşmak için <a href="mailto:irem@example.com">iremnurgocer99@gmail.com</a> adresine e-posta gönderebilirsiniz.</p>
-            <div class="mt-3">
-                <a target="_blank" href="https://tr.linkedin.com/in/iremnurgocer" class="text-dark me-3"><i class="fab fa-linkedin fa-2x"></i></a>
-                <a target="_blank" href="https://github.com/iremnurgocer" class="text-dark me-3"><i class="fab fa-github fa-2x"></i></a>
+            <p>Bana ulaşmak için aşağıdaki butona tıklayarak e-posta gönderebilirsiniz:</p>
+            <div class="d-grid gap-2 d-md-block">
+                <a href="mailto:iremnurgocer99@gmail.com" class="btn btn-primary btn-lg px-4 py-2">E-posta Gönder</a>
+            </div>
+            <div class="mt-5">
+                <h4 class="mb-3">Beni Takip Et:</h4>
+                <a target="_blank" href="https://tr.linkedin.com/in/iremnurgocer" class="text-dark me-3">
+                    <i class="fab fa-linkedin fa-2x"></i>
+                </a>
+                <a target="_blank" href="https://github.com/iremnurgocer" class="text-dark me-3">
+                    <i class="fab fa-github fa-2x"></i>
+                </a>
             </div>
         </div>
     </section>
-
     <!-- Footer -->
     <footer class="py-4 bg-dark text-white text-center">
         <p>&copy; 2024 İrem Nur Göçer. Tüm hakları saklıdır.</p>

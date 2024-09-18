@@ -52,3 +52,56 @@ footer {
     background-color: #395d00;
     color: #f8efed;
 }
+/* Kartın içindeki resim normal durumda */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Kartın üzerine gelindiğinde kartın ve resmin hareketini sağlar */
+.card:hover .card-img-top {
+    transform: scale(0.95); /* Resim kartın hover durumunda küçülür */
+}
+
+/* Kart için 3 boyutlu etki */
+.card {
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif bir başlangıç gölgesi */
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.card-body {
+    flex-grow: 1;
+}
+
+/* Kartın hover durumunda yukarı kalkması ve gölgenin büyümesi */
+.card:hover {
+    transform: translateY(-10px); /* Kartı yukarı kaldırır */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2); /* Daha büyük gölge efekti */
+}
+
+.p-selection {
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+/* Bağlantıların (linklerin) rengi ve hover durumu */
+.custom-link {
+    color: #332600; /* Link rengi */
+    text-decoration: none; /* Alt çizgiyi kaldır */
+}
+
+.custom-link:hover {
+    color: #395d00; /* Hover durumunda renk değişimi */
+    text-decoration: underline; /* Üzerine gelindiğinde alt çizgi ekle */
+}
+
+/* Profil resmi ve diğer resimlerin stili */
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 5px solid #f3f3f3;
+}

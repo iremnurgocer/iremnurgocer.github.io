@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mikroservis Mimarisi hakkında teknik detaylı blog yazısı.">
+    <title>Mikroservis Mimarisi - Detaylı İnceleme</title>
+
+    <!-- Stil Dosyası ve Bootstrap Bağlantısı -->
+    <link href="../styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">İrem Nur Göçer</a>
+        </div>
+    </nav>
+
+    <!-- Blog İçerik -->
+    <section class="container mt-5 pt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-left">
+                <!-- Blog Resmi -->
+                <div class="text-center">
+                    <img src="../profile.png" alt="Profil Resmi" class="rounded-circle mb-4 profile-pic" style="width: 150px; height: 150px;">
+                </div>
+                
+                <!-- Blog Başlığı -->
+                <h1 class="mb-4 text-center">Mikroservis Mimarisi: Detaylı İnceleme ve Entegrasyon Yöntemleri</h1>
+
+                <!-- İçindekiler Bölümü -->
+                <h2 class="mb-4">İçindekiler</h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a href="#mikroservis-nedir" class="custom-link">Mikroservis Mimarisi Nedir?</a></li>
+                    <li class="list-group-item"><a href="#monolitik-karsilastirma" class="custom-link">Mikroservis ile Monolitik Mimari Karşılaştırması</a></li>
+                    <li class="list-group-item"><a href="#entegrasyon" class="custom-link">Mikroservis Entegrasyonu: Kullanılan Teknolojiler ve Yöntemler</a></li>
+                    <li class="list-group-item"><a href="#avantajlar-dezavantajlar" class="custom-link">Mikroservislerin Avantajları ve Dezavantajları</a></li>
+                    <li class="list-group-item"><a href="#zorluklar-cozumler" class="custom-link">Zorluklar ve Çözümler</a></li>
+                    <li class="list-group-item"><a href="#sonuc" class="custom-link">Sonuç</a></li>
+                </ul>
+
+                <!-- Blog İçeriği -->
+                <h2 id="mikroservis-nedir">Mikroservis Mimarisi Nedir?</h2>
+                <p>
+                    <strong>Mikroservis mimarisi</strong>, yazılım dünyasında son yılların en büyük devrimlerinden biridir. Özellikle monolitik uygulamaların yönetim ve bakım zorluklarına karşı geliştirilmiş bu mimari yaklaşım, yazılım projelerinde esneklik, ölçeklenebilirlik ve modülerlik sağlar. Bu yazıda, mikroservis mimarisinin ne olduğunu, nasıl entegre edileceğini, kullanılan teknolojileri, avantaj ve dezavantajlarını, zorlukları ve çözümlerini detaylı bir şekilde inceleyeceğiz.
+                </p>
+
+                <h2 id="monolitik-karsilastirma">Mikroservis Mimarisi ile Monolitik Mimari Karşılaştırması</h2>
+                <p>
+                    Mikroservis mimarisi, bir uygulamanın daha küçük ve bağımsız servislerden oluştuğu bir yazılım mimarisi tarzıdır. Her mikroservis, belirli bir işlevi yerine getiren ve diğer servislerden bağımsız olarak geliştirilebilen bir modüldür. Bu yapı, uygulamaların bağımsız bir şekilde geliştirilmesine, dağıtılmasına ve yönetilmesine olanak tanır. Mikroservisler, genellikle RESTful API'ler, gRPC veya mesajlaşma sistemleri (örneğin Kafka veya RabbitMQ) aracılığıyla birbirleriyle iletişim kurarlar.
+                </p>
+
+                <img src="https://microservices.io/i/Microservice_Architecture.png" class="img-fluid mt-4 mb-4" alt="Mikroservis Mimarisi">
+                <p class="text-center">Mikroservis Mimarisi Yapısı. Kaynak: <a target="_blank" href="https://microservices.io" target="_blank" class="custom-link">Microservices.io</a></p>
+                
+                <h2>Mikroservis Mimarisi ile Monolitik Mimari Karşılaştırması</h2>
+                <p>
+                    Mikroservis mimarisi, monolitik mimariden birçok açıdan ayrılır. Monolitik mimari, tüm uygulamanın tek bir kod tabanı içerisinde yer aldığı bir yapıdır. Bu, küçük projeler için uygun olabilir, ancak uygulama büyüdükçe ve yeni özellikler eklendikçe yönetimi zorlaşır. Monolitik uygulamalarda bir hata tüm sistemi etkileyebilirken, mikroservis mimarisinde bir servisin çökmesi diğer servisleri etkilemez.
+                </p>
+                <p>
+                    Monolitik mimaride her güncelleme tüm uygulamanın tekrar dağıtılmasını gerektirir. Bu da büyük projelerde zaman alıcı ve hataya açık olabilir. Mikroservis mimarisi ise her servisin bağımsız olarak dağıtılmasına olanak tanır, böylece sadece güncellenen servis dağıtılır.
+                </p>
+
+                <h2 id="entegrasyon">Mikroservis Entegrasyonu: Kullanılan Teknolojiler ve Yöntemler</h2>
+                <p>
+                    Mikroservis mimarisi, birden fazla teknoloji ve aracı bir araya getirerek en iyi sonuçları verir. İşte mikroservis mimarisinde sıkça kullanılan bazı teknolojiler ve entegrasyon yöntemleri:
+                </p>
+
+                <h3>1. API Gateway</h3>
+                <p>
+                    Mikroservislerin yönetiminde API Gateway büyük bir rol oynar. İstemcilerden gelen tüm istekler API Gateway üzerinden mikroservislere yönlendirilir. API Gateway, kimlik doğrulama, yük dengeleme ve istek yönlendirme gibi işlevler sağlar. Popüler API Gateway araçları arasında <strong>Kong</strong>, <strong>NGINX</strong> ve <strong>Amazon API Gateway</strong> bulunmaktadır.
+                </p>
+
+                <img src="https://learn.microsoft.com/en-us/azure/architecture/microservices/images/gateway.png" class="img-fluid mt-4 mb-4" alt="API Gateway ile Mikroservis Yönetimi">
+                <p class="text-center">API Gateway ile Mikroservis Yönetimi. Kaynak: <a target="_blank" href="https://learn.microsoft.com/en-us/azure/architecture/microservices/design/gateway" target="_blank" class="custom-link">microsoft</a></p>
+
+                <h3>2. İletişim Protokolleri</h3>
+                <p>
+                    Mikroservisler arası iletişim, genellikle HTTP tabanlı REST servisleri veya <strong>gRPC</strong> gibi yüksek performanslı protokoller kullanılarak gerçekleştirilir. REST, yaygın kullanılan bir protokol olmakla birlikte, gRPC daha yüksek performans sağlar ve düşük gecikme süresi gerektiren projeler için tercih edilir.
+                </p>
+
+                <h3>3. Mesajlaşma Sistemleri</h3>
+                <p>
+                    Mikroservisler arası iletişimi daha etkili ve asenkron hale getirmek için mesajlaşma sistemleri kullanılır. <strong>RabbitMQ</strong> ve <strong>Apache Kafka</strong>, mikroservisler arasında veri alışverişini sağlamak için kullanılan en popüler mesajlaşma sistemlerindendir. Kafka, büyük miktarda verinin düşük gecikme ile aktarılmasını sağlayan yüksek performanslı bir platform sunar.
+                </p>
+
+                <a target="_blank" href="https://kafka.apache.org/quickstart"><img src="https://kafka.apache.org/images/what_is_kafka.png" class="img-fluid mt-4 mb-4" alt="Apache Kafka Yapısı"></a>
+                <p class="text-center">Apache Kafka ile Mikroservis Mesajlaşma. Kaynak: <a target="_blank" href="https://kafka.apache.org" target="_blank" class="custom-link">Apache Kafka</a></p>
+
+                <h3>4. Veri Yönetimi</h3>
+                <p>
+                    Her mikroservis kendi veri tabanına sahip olabilir, bu da dağıtık veri yönetimini gerektirir. Mikroservisler genellikle SQL ve NoSQL veri tabanları kullanarak verilerini yönetirler. <strong>MySQL</strong> ve <strong>PostgreSQL</strong>, mikroservisler için yaygın kullanılan SQL veri tabanlarıdır. Öte yandan, <strong>MongoDB</strong> ve <strong>Cassandra</strong> gibi NoSQL veri tabanları da mikroservis mimarisinde sıkça tercih edilir.
+                </p>
+
+                <h2 id="avantajlar-dezavantajlar">Mikroservislerin Avantajları ve Dezavantajları</h2>
+                <p>
+                    Mikroservis mimarisi, birçok avantaj sunmasına rağmen bazı dezavantajları da beraberinde getirir. İşte bu mimarinin avantajları ve zorlukları:
+                </p>
+
+                <h3>Avantajları</h3>
+                <ul>
+                    <li><strong>Bağımsız Geliştirme ve Dağıtım:</strong> Mikroservisler bağımsız olarak geliştirilip dağıtılabilir.</li>
+                    <li><strong>Ölçeklenebilirlik:</strong> Her mikroservis bağımsız olarak ölçeklenebilir.</li>
+                    <li><strong>Arıza Yalıtımı:</strong> Bir mikroservisin çökmesi diğer servisleri etkilemez.</li>
+                    <li><strong>Farklı Teknolojilerin Kullanımı:</strong> Her mikroservis farklı bir teknoloji ile geliştirilebilir.</li>
+                </ul>
+
+                <h3>Dezavantajları</h3>
+                <ul>
+                    <li><strong>Karmaşıklık:</strong> Mikroservisler dağıtık bir yapı oluşturduğundan, yönetimi ve izlenmesi zordur.</li>
+                    <li><strong>Dağıtık Veri Yönetimi:</strong> Veritabanı tutarlılığı ve yönetimi daha zor olabilir.</li>
+                    <li><strong>Performans Maliyeti:</strong> Mikroservisler arası iletişim, monolitik yapılara göre daha yavaş olabilir.</li>
+                </ul>
+
+                <h2 id="zorluklar-cozumler">Zorluklar ve Çözümler</h2>
+                <p>
+                    Mikroservis mimarisini uygularken karşılaşılan bazı zorluklar ve bunları çözmek için kullanılan araçlar şunlardır:
+                </p>
+                <ul>
+                    <li><strong>Servis Keşfi:</strong> Mikroservislerin birbirini bulması için <strong>Consul</strong> veya <strong>Eureka</strong> gibi servis keşif araçları kullanılabilir.</li>
+                    <li><strong>İzleme ve Yönetim:</strong> Mikroservisler dağıtık olduğundan izleme ve hata ayıklama zor olabilir. Bu nedenle <strong>Prometheus</strong> ve <strong>Grafana</strong> gibi izleme araçları kullanılmalıdır.</li>
+                    <li><strong>Veri Tutarlılığı:</strong> Dağıtık veri yönetimi sorunları için Event Sourcing ve CQRS desenleri kullanılabilir.</li>
+                </ul>
+
+                <h2 id="sonuc">Sonuç</h2>
+                <p>
+                    Mikroservis mimarisi, büyük ölçekli uygulamalar için modern ve esnek bir çözüm sunar. Ancak, bu mimarinin başarılı bir şekilde uygulanabilmesi için doğru araçların kullanılması ve zorlukların dikkatle yönetilmesi gerekmektedir. Mikroservis mimarisinin sağladığı esneklik, ölçeklenebilirlik ve bağımsızlık, günümüz yazılım dünyasında önemli bir yer edinmesini sağlamaktadır.
+                </p>
+
+                <!-- Kaynaklar -->
+                <h3 class="mt-5">Kaynaklar:</h3>
+                <ul class="list-unstyled">
+                    <li><a target="_blank" href="https://martinfowler.com/articles/microservices.html" target="_blank" class="custom-link">Martin Fowler - Microservices</a></li>
+                    <li><a target="_blank" href="https://microservices.io" target="_blank" class="custom-link">Microservices.io</a></li>
+                    <li><a target="_blank" href="https://kafka.apache.org" target="_blank" class="custom-link">Apache Kafka</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark text-white text-center">
+        <p>&copy; 2024 İrem Nur Göçer. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
