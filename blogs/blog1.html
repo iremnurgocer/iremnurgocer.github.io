@@ -9,6 +9,124 @@
     <!-- Stil Dosyası ve Bootstrap Bağlantısı -->
     <link href="../styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #f3f3f3;
+    }
+
+    #hero {
+        background-image: url('background.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #a5ad0c;
+        text-align: center;
+    }
+
+    .parallax {
+        background-attachment: fixed;
+    }
+
+    .profile-pic {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border: 5px solid #f3f3f3;
+    }
+
+    .section {
+        padding: 100px 0;
+    }
+
+    .card {
+        border: none;
+    }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    footer {
+        background-color: #343a40;
+        color: #a5ad0c;
+    }
+
+    .btn {
+        background-color: #332600;
+    }
+
+    .btn:hover {
+        background-color: #395d00;
+        color: #f8efed;
+    }
+    /* Kartın içindeki resim normal durumda */
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* Kartın üzerine gelindiğinde kartın ve resmin hareketini sağlar */
+    .card:hover .card-img-top {
+        transform: scale(0.95); /* Resim kartın hover durumunda küçülür */
+    }
+
+    /* Kart için 3 boyutlu etki */
+    .card {
+        border: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif bir başlangıç gölgesi */
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .card-body {
+        flex-grow: 1;
+    }
+
+    /* Kartın hover durumunda yukarı kalkması ve gölgenin büyümesi */
+    .card:hover {
+        transform: translateY(-10px); /* Kartı yukarı kaldırır */
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2); /* Daha büyük gölge efekti */
+    }
+
+    .p-selection {
+        padding-top: 100px;
+        padding-bottom: 50px;
+    }
+    /* Bağlantıların (linklerin) rengi ve hover durumu */
+    .custom-link {
+        color: #332600; /* Link rengi */
+        text-decoration: none; /* Alt çizgiyi kaldır */
+    }
+
+    .custom-link:hover {
+        color: #395d00; /* Hover durumunda renk değişimi */
+        text-decoration: underline; /* Üzerine gelindiğinde alt çizgi ekle */
+    }
+
+    /* Profil resmi ve diğer resimlerin stili */
+    .profile-pic {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border: 5px solid #f3f3f3;
+    }
+    
+    body {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    </style>
 </head>
 <body>
 

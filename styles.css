@@ -105,3 +105,6 @@ footer {
     object-fit: cover;
     border: 5px solid #f3f3f3;
 }
+body {
+    font-family: 'Roboto', sans-serif;
+}
