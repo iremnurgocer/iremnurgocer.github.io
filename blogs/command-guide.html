@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Windows, macOS ve Linux komut satırı komutlarını tek kaynakta toplayan kapsamlı rehber.">
+    <title>Windows, macOS ve Linux Komut Rehberi</title>
+
+    <link href="../styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f3f3f3;
+        }
+        .blog-hero {
+            background-color: #161616;
+            color: #f1f1f1;
+            border-radius: 16px;
+            padding: 48px 32px;
+            text-align: center;
+        }
+        .blog-hero img {
+            max-width: 180px;
+        }
+        .blog-hero h1 {
+            font-weight: 700;
+            margin-top: 24px;
+        }
+        .toc a {
+            color: #332600;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+            color: #395d00;
+        }
+        .callout {
+            background-color: #ffffff;
+            border-left: 4px solid #395d00;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+        table thead {
+            background-color: #343a40;
+            color: #f3f3f3;
+        }
+        table td, table th {
+            vertical-align: middle;
+        }
+        .section-divider {
+            border-top: 1px solid rgba(0,0,0,0.05);
+            margin: 48px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">İrem Nur Göçer</a>
+        </div>
+    </nav>
+
+    <main class="container mt-5 pt-5 pb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <section class="blog-hero shadow-sm">
+                    <img src="../cmd-komutlari.png" alt="Komut Rehberi Görseli" class="img-fluid rounded mb-3">
+                    <h1>Windows, macOS ve Linux İçin Kapsamlı Komut Rehberi</h1>
+                    <p class="lead mb-0">
+                        Terminal, sistem yöneticilerinin olduğu kadar geliştiricilerin de en güçlü araçlarından biri.
+                        COMMAND-GUIDE projesi sayesinde Windows, macOS ve Linux komutlarının platformlar arası karşılıklarını tek kaynaktan öğrenebilir,
+                        parametre mantığını kavrayabilir ve otomasyona hızlıca adım atabilirsiniz.
+                    </p>
+                </section>
+
+                <section class="mt-5">
+                    <h2 class="mb-4">İçindekiler</h2>
+                    <div class="toc">
+                        <ol class="list-group list-group-numbered list-group-flush">
+                            <li class="list-group-item"><a href="#overview">Rehberin Genel Bakışı</a></li>
+                            <li class="list-group-item"><a href="#core-features">Temel Başlıklar ve Kazanımlar</a></li>
+                            <li class="list-group-item"><a href="#navigation-basics">Temel Dizin ve Dosya Komutları</a></li>
+                            <li class="list-group-item"><a href="#permissions">İzin ve Sahiplik Yönetimi</a></li>
+                            <li class="list-group-item"><a href="#packages-automation">Paket Yönetimi ve Otomasyon</a></li>
+                            <li class="list-group-item"><a href="#debug-security">Hata Ayıklama & Güvenlik İpuçları</a></li>
+                            <li class="list-group-item"><a href="#shortcuts">Kısayollar ve Platform Karşılaştırmaları</a></li>
+                            <li class="list-group-item"><a href="#resources">Kaynaklar ve İleri Okuma</a></li>
+                        </ol>
+                    </div>
+                </section>
+
+                <div class="section-divider"></div>
+
+                <section id="overview" class="mt-4">
+                    <h2>Rehberin Genel Bakışı</h2>
+                    <p>
+                        COMMAND-GUIDE, farklı platformlarda terminale hızlıca adapte olmanızı amaçlayan, on bölümden oluşan kapsamlı bir komut kataloğudur.
+                        Her başlık altında, komutun karşılıkları, açıklamaları ve örnek kullanımları yer alır; böylece Windows, PowerShell ve Unix tabanlı
+                        sistemler arasında geçiş yaparken zaman kaybetmezsiniz.
+                    </p>
+                    <div class="callout">
+                        <strong>Hedef:</strong> Komut satırını güvenli, hızlı ve platform bağımsız biçimde kullanmak isteyen geliştiriciler,
+                        DevOps ekipleri, siber güvenlik uzmanları ve teknik destek sorumluları.
+                    </div>
+                </section>
+
+                <section id="core-features" class="mt-5">
+                    <h2>Temel Başlıklar ve Kazanımlar</h2>
+                    <ul>
+                        <li>Dosya yönetiminden ağ teşhisine uzanan <strong>10 kapsamlı bölüm</strong>.</li>
+                        <li>Komut parametrelerini ezberlemeden anlamaya yardımcı <strong>detaylı açıklamalar</strong>.</li>
+                        <li>Windows CMD, PowerShell ve macOS/Linux için <strong>yan yana karşılaştırmalar</strong>.</li>
+                        <li>Bash ve PowerShell ile <strong>betik ve otomasyon örnekleri</strong>.</li>
+                        <li>Hata ayıklama, loglama, güvenlik önlemleri ve riskli komutlar için <strong>uyarı rehberi</strong>.</li>
+                    </ul>
+                </section>
+
+                <section id="navigation-basics" class="mt-5">
+                    <h2>Temel Dizin ve Dosya Komutları</h2>
+                    <p>
+                        İlk bölüm, terminalde gezinme ve dosya işlemlerini ele alır. Aşağıdaki tablo, en sık kullanılan komutların platform karşılıklarını özetler:
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle text-center">
+                            <thead>
+                                <tr>
+                                    <th>İşlem</th>
+                                    <th>Windows CMD</th>
+                                    <th>PowerShell</th>
+                                    <th>macOS / Linux</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Bulunduğun dizini öğren</td>
+                                    <td><code>cd</code></td>
+                                    <td><code>Get-Location</code></td>
+                                    <td><code>pwd</code></td>
+                                </tr>
+                                <tr>
+                                    <td>Dizin içeriğini listele</td>
+                                    <td><code>dir</code></td>
+                                    <td><code>Get-ChildItem</code></td>
+                                    <td><code>ls</code></td>
+                                </tr>
+                                <tr>
+                                    <td>Dosya oluştur</td>
+                                    <td><code>type nul &gt; dosya.txt</code></td>
+                                    <td><code>New-Item dosya.txt</code></td>
+                                    <td><code>touch dosya.txt</code></td>
+                                </tr>
+                                <tr>
+                                    <td>Dosya sil</td>
+                                    <td><code>del dosya.txt</code></td>
+                                    <td><code>Remove-Item dosya.txt</code></td>
+                                    <td><code>rm dosya.txt</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                        Rehber, her komut için parametre örnekleri (örneğin <code>-r</code>, <code>-f</code>, <code>--help</code>) ve dikkat edilmesi gereken noktaları da içerir.
+                    </p>
+                </section>
+
+                <section id="permissions" class="mt-5">
+                    <h2>İzin ve Sahiplik Yönetimi</h2>
+                    <p>
+                        Üçüncü bölüm, dosya izinleri, sahiplik ve ACL yönetimine odaklanır. Özellikle ekip çalışması ve sunucu yönetiminde
+                        doğru yetkilendirme kritik olduğundan, <code>chmod</code>, <code>chown</code>, <code>icacls</code> ve <code>Set-Acl</code> gibi komutların
+                        hem sayısal hem de sembolik kullanımları örneklerle açıklanır.
+                    </p>
+                    <ul>
+                        <li><strong>chmod 755</strong> ile komut dosyalarını çalıştırılabilir kılma.</li>
+                        <li><strong>icacls /grant</strong> ile Windows kullanıcılarına hassas yetkiler tanımlama.</li>
+                        <li>Linux’ta <strong>setfacl</strong> ile kullanıcı bazlı ek izinler ekleme.</li>
+                    </ul>
+                    <div class="callout">
+                        İpucu: Rehber, izinleri yanlışlıkla genişletmekten kaçınmanız için
+                        <code>chmod -R 777</code> gibi riskli örnekleri de “yapılmaması gerekenler” başlığı altında vurgular.
+                    </div>
+                </section>
+
+                <section id="packages-automation" class="mt-5">
+                    <h2>Paket Yönetimi ve Otomasyon</h2>
+                    <p>
+                        Altıncı ve sekizinci bölümler, paket yöneticileri ile otomasyon betiklerini kapsar.
+                        Hem sistem güncellemelerini hem de tekrarlayan görevleri standartlaştırmak için şu konular işlenir:
+                    </p>
+                    <ul>
+                        <li><strong>choco</strong>, <strong>winget</strong>, <strong>brew</strong> ve <strong>apt</strong> ile paket kurulum &amp; güncelleme akışları.</li>
+                        <li>Bash ve PowerShell betikleriyle dosya yedekleme, log temizleme ve sistem raporlama.</li>
+                        <li><strong>cron</strong> ve <strong>schtasks</strong> ile zamanlanmış görevler; <code>@reboot</code> veya <code>/sc daily</code> örnekleri.</li>
+                    </ul>
+                    <p>
+                        Bu sayede CI/CD iş akışlarınızı manuel müdahale gerektirmeden sürdürebilir, bakım senaryolarında zamandan kazanabilirsiniz.
+                    </p>
+                </section>
+
+                <section id="debug-security" class="mt-5">
+                    <h2>Hata Ayıklama &amp; Güvenlik İpuçları</h2>
+                    <p>
+                        Dokuzuncu bölüm, terminalde yaygın hataları okuyup çözebilmek için pratik örnekler sunar.
+                        <code>bash -x</code> ile betiklerde adım adım debug yapma, <code>tail -f</code> ile canlı log takibi veya
+                        <code>journalctl -p 3 -xe</code> ile kritik Linux hata loglarını inceleme gibi konular detaylandırılır.
+                    </p>
+                    <ul>
+                        <li>Riskli komutlar: <code>rm -rf /</code>, <code>chmod -R 777 /</code>, <code>:(){ :|:& };:</code>.</li>
+                        <li>Yetki yükseltme ve güvenli <code>sudo</code> kullanımı.</li>
+                        <li>Windows Event Viewer ve PowerShell <code>Get-EventLog</code> ile olay inceleme.</li>
+                    </ul>
+                </section>
+
+                <section id="shortcuts" class="mt-5">
+                    <h2>Kısayollar ve Platform Karşılaştırmaları</h2>
+                    <p>
+                        Son bölüm, üretkenliği artıracak klavye kısayolları ve platform karşılaştırmalarını içerir.
+                        <code>Ctrl + R</code> ile geçmiş araması, <code>Tab</code> ile otomatik tamamlama, <code>Ctrl + L</code> ile ekran temizleme gibi ipuçları,
+                        her terminal oturumunu daha verimli hale getirir.
+                    </p>
+                    <p>
+                        Ayrıca ağ teşhisi (<code>ping</code>, <code>traceroute</code>, <code>netstat</code>), paket yönetimi ve sistem bilgisi komutları için
+                        Windows ↔ Unix karşılaştırma tabloları da rehberin sonunda yer alır.
+                    </p>
+                </section>
+
+                <section id="resources" class="mt-5">
+                    <h2>Kaynaklar ve İleri Okuma</h2>
+                    <p>
+                        Rehberin tam metnine ve katkı yönergelerine GitHub üzerinden ulaşabilirsiniz.
+                        Yeni komut önerileri veya geliştirme notları için katkıda bulunmaktan çekinmeyin.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li><a class="custom-link" href="https://github.com/iremnurgocer/COMMAND-GUIDE" target="_blank" rel="noopener">COMMAND-GUIDE GitHub Deposu</a></li>
+                        <li><a class="custom-link" href="https://learn.microsoft.com/windows/terminal/" target="_blank" rel="noopener">Microsoft Terminal Belgeleri</a></li>
+                        <li><a class="custom-link" href="https://man7.org/linux/man-pages/" target="_blank" rel="noopener">man7.org Linux Man Sayfaları</a></li>
+                    </ul>
+                </section>
+
+                <div class="section-divider"></div>
+
+                <section class="mb-5">
+                    <p class="text-muted small">
+                        COMMAND-GUIDE; Windows, macOS ve Linux kullanıcılarının komut satırına hızlı adapte olmasını sağlayan açık kaynaklı bir projedir.
+                        Rehberi düzenli olarak güncelliyor, yeni komut kümeleri ve platform notları ekliyoruz.
+                    </p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-4 bg-dark text-white text-center">
+        <p>&copy; 2024 İrem Nur Göçer. Tüm hakları saklıdır.</p>
+    </footer>
+
+</body>
+</html>
+
