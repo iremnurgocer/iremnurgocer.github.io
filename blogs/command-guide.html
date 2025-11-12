@@ -10,255 +10,870 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #f3f3f3;
+            color: #1f1f1f;
+            line-height: 1.65;
+        }
+        main {
+            padding-bottom: 5rem;
         }
         .blog-hero {
             background-color: #161616;
             color: #f1f1f1;
-            border-radius: 16px;
-            padding: 48px 32px;
+            border-radius: 20px;
+            padding: 56px 40px;
             text-align: center;
-        }
-        .blog-hero img {
-            max-width: 180px;
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
         }
         .blog-hero h1 {
             font-weight: 700;
             margin-top: 24px;
         }
-        .toc a {
-            color: #332600;
-            text-decoration: none;
+        main section {
+            background-color: #ffffff;
+            border-radius: 24px;
+            padding: 40px 48px;
+            box-shadow: 0 24px 48px rgba(22, 22, 22, 0.08);
+            margin-bottom: 64px;
         }
-        .toc a:hover {
-            text-decoration: underline;
-            color: #395d00;
+        main section:last-of-type {
+            margin-bottom: 0;
+        }
+        .section-title {
+            border-left: 6px solid #395d00;
+            padding-left: 14px;
+            margin-top: 0;
+            font-weight: 700;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dfe3e8;
+            padding: 12px 16px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #1f1f1f;
+            color: #ffffff;
+            letter-spacing: 0.02em;
+        }
+        .table {
+            background-color: #ffffff;
+            margin-bottom: 0;
+        }
+        .table + .table {
+            margin-top: 32px;
+        }
+        .table-responsive {
+            background-color: #ffffff;
+            border-radius: 18px;
+            padding: 0;
+            margin: 32px 0;
+            box-shadow: 0 20px 42px rgba(22, 29, 36, 0.08);
+        }
+        .table-responsive table {
+            margin-bottom: 0;
+        }
+        main section > table {
+            margin: 32px 0;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 20px 42px rgba(22, 29, 36, 0.08);
+        }
+        @media (max-width: 992px) {
+            .table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+        code {
+            background-color: #eef2f7;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.95rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 18px;
+            border-radius: 12px;
+            overflow-x: auto;
+            border: 1px solid #e4e7eb;
+        }
+        hr {
+            border-top: 1px solid #e4e7eb;
+            margin: 2.5rem 0;
+        }
+        ul, ol {
+            padding-left: 1.2rem;
         }
         .callout {
-            background-color: #ffffff;
-            border-left: 4px solid #395d00;
-            padding: 16px 20px;
-            border-radius: 12px;
-            margin: 24px 0;
+            background: linear-gradient(135deg, #f7fff0 0%, #ffffff 90%);
+            border-left: 6px solid #8bc34a;
+            padding: 20px 24px;
+            border-radius: 18px;
+            margin: 32px 0;
+            box-shadow: 0 18px 40px rgba(132, 197, 57, 0.18);
         }
-        table thead {
-            background-color: #343a40;
-            color: #f3f3f3;
+        .callout strong {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
-        table td, table th {
-            vertical-align: middle;
-        }
-        .section-divider {
-            border-top: 1px solid rgba(0,0,0,0.05);
-            margin: 48px 0;
+        @media (max-width: 768px) {
+            .blog-hero {
+                padding: 40px 24px;
+                text-align: left;
+            }
+            main section {
+                padding: 28px 20px;
+                margin-bottom: 40px;
+            }
+            hr {
+                margin: 2.5rem 0;
+            }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="../index.html">İrem Nur Göçer</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="../index.html">İrem Nur Göçer</a>
+    </div>
+</nav>
+
+<main class="container mt-5 pt-5 pb-5">
+    <div class="blog-hero shadow-sm">
+        <h1>Windows, macOS ve Linux İçin Kapsamlı Komut Rehberi</h1>
+        <p class="lead mb-0">
+            Bu proje; <strong>Windows, macOS ve Linux</strong> işletim sistemlerinde kullanılan terminal / komut satırı komutlarını tek bir yerde toplamak amacıyla hazırlanmıştır.
+        </p>
+    </div>
+
+    <section class="mt-5">
+        <h2 class="section-title">1. BÖLÜM – TEMEL KOMUTLAR ve GEZİNME</h2>
+        <p>
+            Bu bölümde terminalde dosya sisteminde gezinme, dosya oluşturma, listeleme, silme gibi
+            <strong>en sık kullanılan temel komutlar</strong> bulunur. Her komutun hemen yanında kısa açıklaması,
+            parametreleri ve farklı platformlardaki karşılıkları yer alır.
+        </p>
+
+        <h3 class="mt-4">1.1. Dizin (Klasör) Gezinme Komutları</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>İşlem</th>
+                        <th>Windows CMD</th>
+                        <th>PowerShell</th>
+                        <th>macOS / Linux</th>
+                        <th>Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Mevcut dizini göster</td><td><code>cd</code></td><td><code>Get-Location</code></td><td><code>pwd</code></td><td>Şu anda bulunduğun klasörü gösterir.</td></tr>
+                    <tr><td>Dizin değiştir</td><td><code>cd dizin_adı</code></td><td><code>Set-Location dizin_adı</code></td><td><code>cd dizin_adı</code></td><td>Belirtilen klasöre geçiş yapar.</td></tr>
+                    <tr><td>Üst dizine çık</td><td><code>cd ..</code></td><td><code>Set-Location ..</code></td><td><code>cd ..</code></td><td>Bir üst klasöre döner.</td></tr>
+                    <tr><td>Ekranı temizle</td><td><code>cls</code></td><td><code>Clear-Host</code></td><td><code>clear</code></td><td>Terminal ekranını temizler.</td></tr>
+                    <tr><td>Dizin içeriğini listele</td><td><code>dir</code></td><td><code>Get-ChildItem</code></td><td><code>ls</code></td><td>Bulunduğun klasördeki dosya ve klasörleri gösterir.</td></tr>
+                </tbody>
+            </table>
         </div>
-    </nav>
 
-    <main class="container mt-5 pt-5 pb-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-9">
-                <section class="blog-hero shadow-sm">
-                    <img src="../cmd-komutlari.png" alt="Komut Rehberi Görseli" class="img-fluid rounded mb-3">
-                    <h1>Windows, macOS ve Linux İçin Kapsamlı Komut Rehberi</h1>
-                    <p class="lead mb-0">
-                        Terminal, sistem yöneticilerinin olduğu kadar geliştiricilerin de en güçlü araçlarından biri.
-                        COMMAND-GUIDE projesi sayesinde Windows, macOS ve Linux komutlarının platformlar arası karşılıklarını tek kaynaktan öğrenebilir,
-                        parametre mantığını kavrayabilir ve otomasyona hızlıca adım atabilirsiniz.
-                    </p>
-                </section>
+        <h4>Faydalı Parametreler</h4>
+        <table class="table table-bordered">
+            <thead><tr><th>Parametre</th><th>Açıklama</th><th>Örnek</th></tr></thead>
+            <tbody>
+                <tr><td><code>ls -l</code></td><td>Uzun liste (boyut, izin, tarih gösterir)</td><td><code>ls -l</code></td></tr>
+                <tr><td><code>ls -a</code></td><td>Gizli dosyaları da gösterir</td><td><code>ls -a</code></td></tr>
+                <tr><td><code>dir /a</code></td><td>Windows’ta gizli dosyaları gösterir</td><td><code>dir /a</code></td></tr>
+            </tbody>
+        </table>
 
-                <section class="mt-5">
-                    <h2 class="mb-4">İçindekiler</h2>
-                    <div class="toc">
-                        <ol class="list-group list-group-numbered list-group-flush">
-                            <li class="list-group-item"><a href="#overview">Rehberin Genel Bakışı</a></li>
-                            <li class="list-group-item"><a href="#core-features">Temel Başlıklar ve Kazanımlar</a></li>
-                            <li class="list-group-item"><a href="#navigation-basics">Temel Dizin ve Dosya Komutları</a></li>
-                            <li class="list-group-item"><a href="#permissions">İzin ve Sahiplik Yönetimi</a></li>
-                            <li class="list-group-item"><a href="#packages-automation">Paket Yönetimi ve Otomasyon</a></li>
-                            <li class="list-group-item"><a href="#debug-security">Hata Ayıklama & Güvenlik İpuçları</a></li>
-                            <li class="list-group-item"><a href="#shortcuts">Kısayollar ve Platform Karşılaştırmaları</a></li>
-                            <li class="list-group-item"><a href="#resources">Kaynaklar ve İleri Okuma</a></li>
-                        </ol>
-                    </div>
-                </section>
-
-                <div class="section-divider"></div>
-
-                <section id="overview" class="mt-4">
-                    <h2>Rehberin Genel Bakışı</h2>
-                    <p>
-                        COMMAND-GUIDE, farklı platformlarda terminale hızlıca adapte olmanızı amaçlayan, on bölümden oluşan kapsamlı bir komut kataloğudur.
-                        Her başlık altında, komutun karşılıkları, açıklamaları ve örnek kullanımları yer alır; böylece Windows, PowerShell ve Unix tabanlı
-                        sistemler arasında geçiş yaparken zaman kaybetmezsiniz.
-                    </p>
-                    <div class="callout">
-                        <strong>Hedef:</strong> Komut satırını güvenli, hızlı ve platform bağımsız biçimde kullanmak isteyen geliştiriciler,
-                        DevOps ekipleri, siber güvenlik uzmanları ve teknik destek sorumluları.
-                    </div>
-                </section>
-
-                <section id="core-features" class="mt-5">
-                    <h2>Temel Başlıklar ve Kazanımlar</h2>
-                    <ul>
-                        <li>Dosya yönetiminden ağ teşhisine uzanan <strong>10 kapsamlı bölüm</strong>.</li>
-                        <li>Komut parametrelerini ezberlemeden anlamaya yardımcı <strong>detaylı açıklamalar</strong>.</li>
-                        <li>Windows CMD, PowerShell ve macOS/Linux için <strong>yan yana karşılaştırmalar</strong>.</li>
-                        <li>Bash ve PowerShell ile <strong>betik ve otomasyon örnekleri</strong>.</li>
-                        <li>Hata ayıklama, loglama, güvenlik önlemleri ve riskli komutlar için <strong>uyarı rehberi</strong>.</li>
-                    </ul>
-                </section>
-
-                <section id="navigation-basics" class="mt-5">
-                    <h2>Temel Dizin ve Dosya Komutları</h2>
-                    <p>
-                        İlk bölüm, terminalde gezinme ve dosya işlemlerini ele alır. Aşağıdaki tablo, en sık kullanılan komutların platform karşılıklarını özetler:
-                    </p>
-                    <div class="table-responsive">
-                        <table class="table table-bordered align-middle text-center">
-                            <thead>
-                                <tr>
-                                    <th>İşlem</th>
-                                    <th>Windows CMD</th>
-                                    <th>PowerShell</th>
-                                    <th>macOS / Linux</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Bulunduğun dizini öğren</td>
-                                    <td><code>cd</code></td>
-                                    <td><code>Get-Location</code></td>
-                                    <td><code>pwd</code></td>
-                                </tr>
-                                <tr>
-                                    <td>Dizin içeriğini listele</td>
-                                    <td><code>dir</code></td>
-                                    <td><code>Get-ChildItem</code></td>
-                                    <td><code>ls</code></td>
-                                </tr>
-                                <tr>
-                                    <td>Dosya oluştur</td>
-                                    <td><code>type nul &gt; dosya.txt</code></td>
-                                    <td><code>New-Item dosya.txt</code></td>
-                                    <td><code>touch dosya.txt</code></td>
-                                </tr>
-                                <tr>
-                                    <td>Dosya sil</td>
-                                    <td><code>del dosya.txt</code></td>
-                                    <td><code>Remove-Item dosya.txt</code></td>
-                                    <td><code>rm dosya.txt</code></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p>
-                        Rehber, her komut için parametre örnekleri (örneğin <code>-r</code>, <code>-f</code>, <code>--help</code>) ve dikkat edilmesi gereken noktaları da içerir.
-                    </p>
-                </section>
-
-                <section id="permissions" class="mt-5">
-                    <h2>İzin ve Sahiplik Yönetimi</h2>
-                    <p>
-                        Üçüncü bölüm, dosya izinleri, sahiplik ve ACL yönetimine odaklanır. Özellikle ekip çalışması ve sunucu yönetiminde
-                        doğru yetkilendirme kritik olduğundan, <code>chmod</code>, <code>chown</code>, <code>icacls</code> ve <code>Set-Acl</code> gibi komutların
-                        hem sayısal hem de sembolik kullanımları örneklerle açıklanır.
-                    </p>
-                    <ul>
-                        <li><strong>chmod 755</strong> ile komut dosyalarını çalıştırılabilir kılma.</li>
-                        <li><strong>icacls /grant</strong> ile Windows kullanıcılarına hassas yetkiler tanımlama.</li>
-                        <li>Linux’ta <strong>setfacl</strong> ile kullanıcı bazlı ek izinler ekleme.</li>
-                    </ul>
-                    <div class="callout">
-                        İpucu: Rehber, izinleri yanlışlıkla genişletmekten kaçınmanız için
-                        <code>chmod -R 777</code> gibi riskli örnekleri de “yapılmaması gerekenler” başlığı altında vurgular.
-                    </div>
-                </section>
-
-                <section id="packages-automation" class="mt-5">
-                    <h2>Paket Yönetimi ve Otomasyon</h2>
-                    <p>
-                        Altıncı ve sekizinci bölümler, paket yöneticileri ile otomasyon betiklerini kapsar.
-                        Hem sistem güncellemelerini hem de tekrarlayan görevleri standartlaştırmak için şu konular işlenir:
-                    </p>
-                    <ul>
-                        <li><strong>choco</strong>, <strong>winget</strong>, <strong>brew</strong> ve <strong>apt</strong> ile paket kurulum &amp; güncelleme akışları.</li>
-                        <li>Bash ve PowerShell betikleriyle dosya yedekleme, log temizleme ve sistem raporlama.</li>
-                        <li><strong>cron</strong> ve <strong>schtasks</strong> ile zamanlanmış görevler; <code>@reboot</code> veya <code>/sc daily</code> örnekleri.</li>
-                    </ul>
-                    <p>
-                        Bu sayede CI/CD iş akışlarınızı manuel müdahale gerektirmeden sürdürebilir, bakım senaryolarında zamandan kazanabilirsiniz.
-                    </p>
-                </section>
-
-                <section id="debug-security" class="mt-5">
-                    <h2>Hata Ayıklama &amp; Güvenlik İpuçları</h2>
-                    <p>
-                        Dokuzuncu bölüm, terminalde yaygın hataları okuyup çözebilmek için pratik örnekler sunar.
-                        <code>bash -x</code> ile betiklerde adım adım debug yapma, <code>tail -f</code> ile canlı log takibi veya
-                        <code>journalctl -p 3 -xe</code> ile kritik Linux hata loglarını inceleme gibi konular detaylandırılır.
-                    </p>
-                    <ul>
-                        <li>Riskli komutlar: <code>rm -rf /</code>, <code>chmod -R 777 /</code>, <code>:(){ :|:& };:</code>.</li>
-                        <li>Yetki yükseltme ve güvenli <code>sudo</code> kullanımı.</li>
-                        <li>Windows Event Viewer ve PowerShell <code>Get-EventLog</code> ile olay inceleme.</li>
-                    </ul>
-                </section>
-
-                <section id="shortcuts" class="mt-5">
-                    <h2>Kısayollar ve Platform Karşılaştırmaları</h2>
-                    <p>
-                        Son bölüm, üretkenliği artıracak klavye kısayolları ve platform karşılaştırmalarını içerir.
-                        <code>Ctrl + R</code> ile geçmiş araması, <code>Tab</code> ile otomatik tamamlama, <code>Ctrl + L</code> ile ekran temizleme gibi ipuçları,
-                        her terminal oturumunu daha verimli hale getirir.
-                    </p>
-                    <p>
-                        Ayrıca ağ teşhisi (<code>ping</code>, <code>traceroute</code>, <code>netstat</code>), paket yönetimi ve sistem bilgisi komutları için
-                        Windows ↔ Unix karşılaştırma tabloları da rehberin sonunda yer alır.
-                    </p>
-                </section>
-
-                <section id="resources" class="mt-5">
-                    <h2>Kaynaklar ve İleri Okuma</h2>
-                    <p>
-                        Rehberin tam metnine ve katkı yönergelerine GitHub üzerinden ulaşabilirsiniz.
-                        Yeni komut önerileri veya geliştirme notları için katkıda bulunmaktan çekinmeyin.
-                    </p>
-                    <ul class="list-unstyled">
-                        <li><a class="custom-link" href="https://github.com/iremnurgocer/COMMAND-GUIDE" target="_blank" rel="noopener">COMMAND-GUIDE GitHub Deposu</a></li>
-                        <li><a class="custom-link" href="https://learn.microsoft.com/windows/terminal/" target="_blank" rel="noopener">Microsoft Terminal Belgeleri</a></li>
-                        <li><a class="custom-link" href="https://man7.org/linux/man-pages/" target="_blank" rel="noopener">man7.org Linux Man Sayfaları</a></li>
-                    </ul>
-                </section>
-
-                <div class="section-divider"></div>
-
-                <section class="mb-5">
-                    <p class="text-muted small">
-                        COMMAND-GUIDE; Windows, macOS ve Linux kullanıcılarının komut satırına hızlı adapte olmasını sağlayan açık kaynaklı bir projedir.
-                        Rehberi düzenli olarak güncelliyor, yeni komut kümeleri ve platform notları ekliyoruz.
-                    </p>
-                </section>
-            </div>
+        <h3 class="mt-4">1.2. Klasör (Dizin) Oluşturma, Taşıma, Silme</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>İşlem</th>
+                        <th>Windows CMD</th>
+                        <th>PowerShell</th>
+                        <th>macOS / Linux</th>
+                        <th>Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Klasör oluştur</td><td><code>mkdir yeni_klasor</code></td><td><code>New-Item -ItemType Directory yeni_klasor</code></td><td><code>mkdir yeni_klasor</code></td><td>Yeni klasör oluşturur.</td></tr>
+                    <tr><td>Klasör taşımak</td><td><code>move kaynak hedef</code></td><td><code>Move-Item kaynak hedef</code></td><td><code>mv kaynak hedef</code></td><td>Klasörü veya dosyayı başka yere taşır.</td></tr>
+                    <tr><td>Dolu klasör silmek</td><td><code>rmdir /s /q klasor</code></td><td><code>Remove-Item -Recurse -Force klasor</code></td><td><code>rm -rf klasor</code></td><td>Tüm içeriğiyle birlikte siler. ⚠️ Dikkatli kullan!</td></tr>
+                </tbody>
+            </table>
         </div>
-    </main>
 
-    <footer class="py-4 bg-dark text-white text-center">
-        <p>&copy; 2024 İrem Nur Göçer. Tüm hakları saklıdır.</p>
-    </footer>
+        <h4>Faydalı Parametreler</h4>
+        <table class="table table-bordered">
+            <thead><tr><th>Parametre</th><th>Açıklama</th><th>Örnek</th></tr></thead>
+            <tbody>
+                <tr><td><code>-r / /s</code></td><td>Alt dizinleri de dahil et</td><td><code>rm -r klasor</code></td></tr>
+                <tr><td><code>-f / /q</code></td><td>Onay sormadan sil</td><td><code>rm -rf klasor</code></td></tr>
+                <tr><td><code>-p</code></td><td>Gereken üst dizinleri de oluştur</td><td><code>mkdir -p dizin/yeni</code></td></tr>
+            </tbody>
+        </table>
+    </section>
+    <section class="mt-5">
+        <h3>1.3. Dosya Oluşturma, Yeniden Adlandırma, Silme</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>İşlem</th>
+                        <th>Windows CMD</th>
+                        <th>PowerShell</th>
+                        <th>macOS / Linux</th>
+                        <th>Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Yeni dosya oluştur</td><td><code>type nul > dosya.txt</code></td><td><code>New-Item dosya.txt</code></td><td><code>touch dosya.txt</code></td><td>Boş dosya oluşturur.</td></tr>
+                    <tr><td>Dosya silmek</td><td><code>del dosya.txt</code></td><td><code>Remove-Item dosya.txt</code></td><td><code>rm dosya.txt</code></td><td>Dosyayı siler.</td></tr>
+                    <tr><td>Onay sormadan sil</td><td><code>del /q dosya.txt</code></td><td><code>Remove-Item -Force dosya.txt</code></td><td><code>rm -f dosya.txt</code></td><td>Silme işlemini onaysız yapar.</td></tr>
+                    <tr><td>Dosyayı taşımak</td><td><code>move a.txt D:\hedef</code></td><td><code>Move-Item a.txt D:\hedef</code></td><td><code>mv a.txt ~/hedef/</code></td><td>Dosyayı taşır.</td></tr>
+                    <tr><td>Dosyayı yeniden adlandırmak</td><td><code>rename eski.txt yeni.txt</code></td><td><code>Rename-Item</code></td><td><code>mv eski.txt yeni.txt</code></td><td>Dosyanın adını değiştirir.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>1.4. Dosya İçeriğini Görüntüleme</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>İşlem</th>
+                        <th>Windows CMD</th>
+                        <th>PowerShell</th>
+                        <th>macOS / Linux</th>
+                        <th>Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Dosya içeriğini göster</td><td><code>type dosya.txt</code></td><td><code>Get-Content dosya.txt</code></td><td><code>cat dosya.txt</code></td><td>Dosyanın içeriğini ekrana basar.</td></tr>
+                    <tr><td>İlk satırları göster</td><td>—</td><td>—</td><td><code>head -n 10 dosya.txt</code></td><td>İlk 10 satırı gösterir.</td></tr>
+                    <tr><td>Son satırları göster</td><td>—</td><td>—</td><td><code>tail -n 10 dosya.txt</code></td><td>Son 10 satırı gösterir.</td></tr>
+                    <tr><td>Sayfa sayfa görüntüle</td><td>—</td><td>—</td><td><code>less dosya.txt</code></td><td>Uzun dosyaları kaydırarak okumanı sağlar (q → çıkış).</td></tr>
+                    <tr><td>Ekrana metin yazdırmak</td><td><code>echo Merhaba</code></td><td><code>Write-Output "Merhaba"</code></td><td><code>echo "Merhaba"</code></td><td>Basit çıktı verir.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>1.5. Dosya Arama ve İçerik Tarama</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>İşlem</th>
+                        <th>Windows CMD</th>
+                        <th>PowerShell</th>
+                        <th>macOS / Linux</th>
+                        <th>Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Dosya adıyla arama</td><td><code>dir /s *.txt</code></td><td><code>Get-ChildItem -Recurse -Filter *.txt</code></td><td><code>find . -name "*.txt"</code></td><td>Dizin içinde belirli dosya uzantısını arar.</td></tr>
+                    <tr><td>İçerikte kelime arama</td><td><code>find "metin" dosya.txt</code></td><td><code>Select-String "metin" dosya.txt</code></td><td><code>grep "metin" dosya.txt</code></td><td>Dosya içeriğinde geçen kelimeleri arar.</td></tr>
+                    <tr><td>Büyük/küçük harf duyarsız arama</td><td>—</td><td>—</td><td><code>grep -i "metin" dosya.txt</code></td><td>Harf duyarsız arama yapar.</td></tr>
+                    <tr><td>Satır numarasıyla arama</td><td>—</td><td>—</td><td><code>grep -n "metin" dosya.txt</code></td><td>Eşleşen satır numaralarını gösterir.</td></tr>
+                    <tr><td>Tüm dizinlerde arama</td><td>—</td><td>—</td><td><code>grep -r "metin" .</code></td><td>Alt dizinler dahil arar.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>1.6. Yardım, Bilgi ve Çıkış</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>İşlem</th>
+                        <th>Windows CMD</th>
+                        <th>PowerShell</th>
+                        <th>macOS / Linux</th>
+                        <th>Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Yardım görmek</td><td><code>komut /?</code></td><td><code>Get-Help komut</code></td><td><code>komut --help</code></td><td>Komutun açıklamasını ve parametrelerini gösterir.</td></tr>
+                    <tr><td>Manuel sayfasını açmak</td><td>—</td><td>—</td><td><code>man komut</code></td><td>Komutun ayrıntılı dokümantasyonunu gösterir.</td></tr>
+                    <tr><td>Terminali kapatmak</td><td><code>exit</code></td><td><code>exit</code></td><td><code>exit</code></td><td>Terminal oturumunu kapatır.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>1.7. Faydalı Kombinasyonlar</h3>
+        <ul>
+            <li><code>ls -la</code> — Gizli dosyalar dahil detaylı liste</li>
+            <li><code>echo "Merhaba" > deneme.txt</code> — Dosyayı oluştur ve içine yaz</li>
+            <li><code>tail -f log.txt</code> — Log takibi yap</li>
+            <li><code>rm -f *.txt</code> — Tüm .txt dosyalarını sil</li>
+            <li><code>cp -rav kaynak hedef</code> — Klasörü alt klasörlerle kopyala</li>
+        </ul>
+
+        <h3>1.8. Parametre Mantığı</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>Parametre</th><th>Açılım</th><th>Açıklama</th></tr></thead>
+            <tbody>
+                <tr><td>-r / /s</td><td>recursive</td><td>Alt dizinleri dahil et</td></tr>
+                <tr><td>-f / /q</td><td>force / quiet</td><td>Onay sormadan işlemi yap</td></tr>
+                <tr><td>-a</td><td>all</td><td>Gizli dosyalar dahil</td></tr>
+                <tr><td>-l</td><td>long</td><td>Detaylı listeleme</td></tr>
+                <tr><td>-v</td><td>verbose</td><td>İşlem detaylarını göster</td></tr>
+                <tr><td>-p</td><td>parents</td><td>Gerekli dizinleri de oluştur</td></tr>
+                <tr><td>--help</td><td>help</td><td>Komut yardımı göster</td></tr>
+            </tbody>
+        </table>
+
+        <hr>
+        <h2 class="section-title">2. BÖLÜM – DOSYA YÖNETİMİ, KOPYALAMA, TAŞIMA ve ARŞİVLEME</h2>
+        <p>
+            Bu bölümde; dosya ve klasörleri kopyalama, taşıma, yeniden adlandırma, arşivleme işlemleri için kullanılan
+            temel terminal komutları yer alır.
+        </p>
+
+        <h3>2.1. Dosya ve Klasör Kopyalama</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>İşlem</th><th>Windows CMD</th><th>PowerShell</th><th>macOS / Linux</th><th>Açıklama</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Dosya kopyala</td><td><code>copy kaynak hedef</code></td><td><code>Copy-Item kaynak hedef</code></td><td><code>cp kaynak hedef</code></td><td>Belirtilen dosyayı başka dizine kopyalar.</td></tr>
+                <tr><td>Klasör kopyala</td><td><code>xcopy kaynak hedef /s /e</code></td><td><code>Copy-Item kaynak -Destination hedef -Recurse</code></td><td><code>cp -r kaynak hedef</code></td><td>Alt klasörleri dahil kopyalar.</td></tr>
+                <tr><td>Kopyalama işlemini doğrula</td><td><code>xcopy /v</code></td><td><code>Copy-Item -Verbose</code></td><td><code>cp -v</code></td><td>Kopyalanan dosyaları ekranda gösterir.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>2.2. Dosya ve Klasör Taşıma</h3>
+        <p><code>move</code>, <code>mv</code> ve <code>Move-Item</code> komutları, dosya veya klasörleri yeni konuma taşımak için kullanılır.</p>
+
+        <h3>2.3. Arşivleme (Sıkıştırma)</h3>
+        <p>
+            Linux ve macOS’ta <code>tar</code>, <code>zip</code>, <code>gzip</code>; Windows’ta ise <code>Compress-Archive</code> veya PowerShell destekli komutlar kullanılır.
+        </p>
+        <ul>
+            <li><code>zip -r hedef.zip klasor</code> — ZIP arşivi oluşturur.</li>
+            <li><code>unzip dosya.zip</code> — ZIP arşivini açar.</li>
+            <li><code>tar -czvf yedek.tar.gz klasor</code> — TAR + GZIP arşiv oluşturur.</li>
+        </ul>
+
+        <h3>2.4. Dosya Senkronizasyonu</h3>
+        <p><code>robocopy</code> ve <code>rsync</code> gibi komutlar dosyaları hedef dizinle senkronize eder.</p>
+        <pre><code>rsync -av --delete kaynak/ hedef/</code></pre>
+
+        <h3>2.5. Geçici Dosyalar, Loglar ve Yedekler</h3>
+        <ul>
+            <li><code>find . -name "*.tmp" -delete</code> — Tüm geçici dosyaları siler.</li>
+            <li><code>find /var/log -type f -mtime +7 -delete</code> — 7 günden eski logları temizler.</li>
+            <li><code>du -sh *</code> — Klasör boyutlarını listeler.</li>
+        </ul>
+
+        <h3>2.6. Parametre Mantığı</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>Parametre</th><th>Açıklama</th></tr></thead>
+            <tbody>
+                <tr><td>-r, /s</td><td>Alt dizinleri dahil et</td></tr>
+                <tr><td>-f, /y, /q</td><td>Onay sormadan işlemi yap</td></tr>
+                <tr><td>-v</td><td>Ayrıntılı çıktı</td></tr>
+                <tr><td>-a</td><td>Arşiv modu</td></tr>
+                <tr><td>--delete</td><td>Hedefte olmayan dosyaları sil</td></tr>
+            </tbody>
+        </table>
+
+        <h3>2.7. Kullanışlı Kombinasyonlar</h3>
+        <ul>
+            <li><code>cp -rav kaynak hedef</code> — Alt dizinleri dahil kopyalar.</li>
+            <li><code>rsync -av --delete kaynak hedef</code> — Dizinleri senkronize eder.</li>
+            <li><code>tar -czvf yedek.tar.gz klasor</code> — Sıkıştırılmış arşiv oluşturur.</li>
+        </ul>
+    </section>
+    <section class="mt-5">
+        <h2 class="section-title">3. BÖLÜM – DOSYA İZİNLERİ, SAHİPLİK ve ERİŞİM YÖNETİMİ</h2>
+        <p>
+            Bu bölüm, kullanıcı izinlerini yönetmek, dosyaların kim tarafından okunabileceğini veya değiştirilebileceğini belirlemek için kullanılan terminal komutlarını kapsar.
+            Windows, macOS ve Linux’ta yetki sistemi farklı olsa da temel mantık aynıdır: <strong>okuma (read), yazma (write), çalıştırma (execute)</strong> izinleri.
+        </p>
+
+        <h3>3.1. Kullanıcı ve Grup Kavramı</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>Kavram</th><th>Açıklama</th><th>Örnek</th></tr></thead>
+            <tbody>
+                <tr><td>User (kullanıcı)</td><td>Sistemde oturum açan kişi</td><td><code>whoami</code> → geçerli kullanıcı</td></tr>
+                <tr><td>Group (grup)</td><td>Kullanıcıların toplandığı erişim grubu</td><td><code>groups</code> → ait olunan gruplar</td></tr>
+                <tr><td>Owner (sahip)</td><td>Dosyayı oluşturan kişi</td><td><code>ls -l</code> çıktısında ilk sütun</td></tr>
+            </tbody>
+        </table>
+
+        <h3>3.2. İzinleri Görüntüleme</h3>
+        <p>Linux/macOS ve Windows için izin görüntüleme komutları:</p>
+        <ul>
+            <li><code>ls -l</code> — Dosya izinlerini listeler.</li>
+            <li><code>stat dosya.txt</code> — Dosya hakkında detaylı bilgi verir.</li>
+            <li><code>icacls dosya.txt</code> — Windows’ta dosya izinlerini listeler.</li>
+            <li><code>Get-Acl dosya.txt</code> — PowerShell ACL detaylarını gösterir.</li>
+        </ul>
+
+        <div class="callout">
+            <strong>İpucu:</strong> <code>-rwxr-xr--</code> biçimi Linux’ta izinlerin kısa özetidir. İlk karakter türü (<code>-</code> = dosya, <code>d</code> = dizin), ardından kullanıcı, grup ve diğer kullanıcı izinleri gelir.
+        </div>
+
+        <h3>3.3. Dosya İzinlerini Değiştirme (chmod)</h3>
+        <ul>
+            <li><code>chmod izin dosya</code> — Dosya veya klasör izinlerini değiştirir (<code>chmod 755 script.sh</code>).</li>
+            <li><code>icacls dosya /grant kullanıcı:F</code> — Kullanıcıya tam yetki verir (Windows).</li>
+        </ul>
+        <p><strong>Sayısal izin sistemi (Linux/macOS):</strong></p>
+        <table class="table table-bordered">
+            <thead><tr><th>Rakam</th><th>Anlamı</th><th>Açıklama</th></tr></thead>
+            <tbody>
+                <tr><td>7</td><td>rwx</td><td>okuma + yazma + çalıştırma</td></tr>
+                <tr><td>6</td><td>rw-</td><td>okuma + yazma</td></tr>
+                <tr><td>5</td><td>r-x</td><td>okuma + çalıştırma</td></tr>
+                <tr><td>4</td><td>r--</td><td>sadece okuma</td></tr>
+            </tbody>
+        </table>
+
+        <h3>3.4. Sahiplik (chown) ve Grup Atama (chgrp)</h3>
+        <ul>
+            <li><code>chown kullanıcı dosya</code> — Dosya sahibini değiştirir (<code>chown ali belge.txt</code>).</li>
+            <li><code>chown kullanıcı:grup dosya</code> — Sahip ve grubu birlikte değiştirir.</li>
+            <li><code>chgrp grup dosya</code> — Sadece grubu değiştirir.</li>
+            <li><code>icacls dosya /setowner kullanıcı</code> — Windows’ta sahip atama yapar.</li>
+        </ul>
+
+        <h3>3.5. Yalnız Okunabilir / Yürütülebilir Dosyalar</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>Amaç</th><th>Linux/macOS</th><th>Windows</th><th>Açıklama</th></tr></thead>
+            <tbody>
+                <tr><td>Dosyayı sadece okunabilir yap</td><td><code>chmod 444 dosya.txt</code></td><td><code>attrib +R dosya.txt</code></td><td>Dosya değiştirilemez hale gelir.</td></tr>
+                <tr><td>Script çalıştırma izni ekle</td><td><code>chmod +x script.sh</code></td><td>—</td><td>Script’i çalıştırılabilir hale getirir.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>3.6. Erişim Listesi (ACL) Komutları</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>Platform</th><th>Komut</th><th>Açıklama</th><th>Örnek</th></tr></thead>
+            <tbody>
+                <tr><td>Linux</td><td><code>getfacl dosya</code></td><td>Dosyanın ACL izinlerini gösterir</td><td><code>getfacl belge.txt</code></td></tr>
+                <tr><td>Linux</td><td><code>setfacl -m u:ali:rwx dosya</code></td><td>Ali’ye özel izin tanımlar</td><td><code>setfacl -m u:ali:rwx belge.txt</code></td></tr>
+                <tr><td>Windows</td><td><code>icacls dosya /grant ali:F</code></td><td>Ali’ye tam erişim verir</td><td><code>icacls belge.txt /grant ali:F</code></td></tr>
+            </tbody>
+        </table>
+
+        <h3>3.7. İzin ve Sahiplik Kombinasyon Örnekleri</h3>
+        <ul>
+            <li><code>chown -R ali:admin proje/</code> — Alt dizinlerle birlikte sahipliği değiştirir.</li>
+            <li><code>chmod 700 gizli.txt</code> — Sadece sahip erişebilir.</li>
+            <li><code>setfacl -m u:veli:rw dosya.txt</code> — Veli’ye okuma-yazma izni verir.</li>
+            <li><code>icacls dosya.txt /remove user</code> — Windows’ta erişimi kaldırır.</li>
+        </ul>
+
+        <h3>3.8. Parametre ve Kısaltma Tablosu</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>Parametre</th><th>Açıklama</th></tr></thead>
+            <tbody>
+                <tr><td>-R</td><td>Alt dizinleri dahil et (recursive)</td></tr>
+                <tr><td>+x / -x</td><td>Çalıştırma izni ekle / kaldır</td></tr>
+                <tr><td>+r / -r</td><td>Okuma izni ekle / kaldır</td></tr>
+                <tr><td>+w / -w</td><td>Yazma izni ekle / kaldır</td></tr>
+                <tr><td>u, g, o, a</td><td>Kullanıcı, grup, diğer, tüm</td></tr>
+                <tr><td>/grant, /remove</td><td>Windows ACL işlemleri</td></tr>
+            </tbody>
+        </table>
+
+        <h3>3.9. Kısa Örnek Rehberi</h3>
+        <ul>
+            <li><code>ls -l</code> — İzinleri görüntüle</li>
+            <li><code>chown kullanıcı dosya</code> — Sahipliği değiştir</li>
+            <li><code>chmod +x script.sh</code> — Script’i çalıştırılabilir yap</li>
+            <li><code>getfacl dosya</code> — ACL listele</li>
+            <li><code>setfacl -m u:ali:rwx dosya</code> — ACL izin ekle</li>
+        </ul>
+
+        <div class="callout">
+            <strong>Bölüm Özeti:</strong> Bu bölümde <code>chmod</code>, <code>chown</code>, <code>icacls</code>, <code>setfacl</code> gibi komutlarla dosya izinleri ve sahipliği yönetmeyi öğrendin. Artık dosya erişimlerini güvenli şekilde düzenleyebilirsin.
+        </div>
+    </section>
+    <section class="mt-5">
+        <h2 class="section-title">4. BÖLÜM – SİSTEM BİLGİSİ, KAYNAK YÖNETİMİ ve PERFORMANS KOMUTLARI</h2>
+        <p>
+            Bu bölüm, bilgisayarın donanım, sistem, ağ ve kaynak durumunu terminal üzerinden izlemek ve yönetmek için kullanılan temel komutları kapsar.
+            Sistem yöneticileri ve geliştiriciler için kritik araçları içerir.
+        </p>
+
+        <h3>4.1. Genel Sistem Bilgisi Komutları</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>İşlem</th><th>Windows CMD</th><th>PowerShell</th><th>macOS / Linux</th><th>Açıklama</th></tr></thead>
+            <tbody>
+                <tr><td>Sistem bilgisi</td><td><code>systeminfo</code></td><td><code>Get-ComputerInfo</code></td><td><code>uname -a</code></td><td>İşletim sistemi sürümü, mimari ve detaylar.</td></tr>
+                <tr><td>Bilgisayar adı</td><td><code>hostname</code></td><td><code>hostname</code></td><td><code>hostname</code></td><td>Cihazın ağ üzerindeki adını gösterir.</td></tr>
+                <tr><td>Kullanıcı adı</td><td><code>echo %USERNAME%</code></td><td><code>$env:USERNAME</code></td><td><code>whoami</code></td><td>Oturum açan kullanıcıyı gösterir.</td></tr>
+                <tr><td>Çalışma süresi</td><td><code>net stats srv</code></td><td><code>(get-date) - (gcim Win32_OperatingSystem).LastBootUpTime</code></td><td><code>uptime</code></td><td>Sistemin açık kalma süresi.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>4.2. Disk ve Bellek Bilgisi</h3>
+        <ul>
+            <li><code>df -h</code> — Disk kullanımını insan okunabilir biçimde gösterir.</li>
+            <li><code>free -h</code> — RAM durumu.</li>
+            <li><code>du -sh *</code> — Klasör bazında boyut.</li>
+            <li><code>wmic logicaldisk get size,freespace,caption</code> — Windows disk bilgisi.</li>
+        </ul>
+
+        <h3>4.3. Süreç Yönetimi</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>İşlem</th><th>Windows CMD</th><th>PowerShell</th><th>macOS / Linux</th><th>Açıklama</th></tr></thead>
+            <tbody>
+                <tr><td>İşlemleri listele</td><td><code>tasklist</code></td><td><code>Get-Process</code></td><td><code>ps -e</code></td><td>Aktif süreçleri listeler.</td></tr>
+                <tr><td>İşlem sonlandır</td><td><code>taskkill /IM notepad.exe /F</code></td><td><code>Stop-Process -Name notepad</code></td><td><code>kill -9 PID</code></td><td>Belirli süreci kapatır.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>4.4. Kaynak İzleme</h3>
+        <ul>
+            <li><code>top</code> — Gerçek zamanlı CPU/RAM izleme.</li>
+            <li><code>htop</code> — Renkli kaynak monitörü (Linux).</li>
+            <li><code>perfmon</code> — Windows Performans Monitörü.</li>
+            <li><code>vmstat</code> — Bellek ve işlem istatistikleri.</li>
+        </ul>
+
+        <h3>4.5. Ağ ve IP Bilgisi</h3>
+        <ul>
+            <li><code>ipconfig</code> / <code>ifconfig</code> — IP yapılandırması.</li>
+            <li><code>netstat -ano</code> / <code>netstat -tulnp</code> — Aktif bağlantılar.</li>
+            <li><code>ping 8.8.8.8</code> — Bağlantı testi.</li>
+            <li><code>nslookup domain.com</code> — DNS çözümleme.</li>
+        </ul>
+
+        <div class="callout">
+            <strong>Bölüm Özeti:</strong> Bu bölümde sistem bilgilerini (<code>uname</code>, <code>systeminfo</code>), kaynak durumunu (<code>df</code>, <code>free</code>),
+            işlem yönetimini (<code>ps</code>, <code>kill</code>) ve ağ bağlantılarını (<code>netstat</code>, <code>ping</code>) öğrendin.
+        </div>
+    </section>
+
+    <section class="mt-5">
+        <h2 class="section-title">5. BÖLÜM – AĞ, İNTERNET ve BAĞLANTI KOMUTLARI</h2>
+        <p>
+            Bu bölüm, bilgisayarın ağ bağlantılarını, IP yapılandırmalarını, port dinlemelerini ve bağlantı sorunlarını yönetmek için kullanılan temel komutları kapsar.
+        </p>
+
+        <h3>5.1. Ağ Yapılandırması</h3>
+        <ul>
+            <li><code>ipconfig /all</code> — Tüm ağ adaptörlerini ve IP bilgilerini gösterir.</li>
+            <li><code>Get-NetIPAddress</code> — PowerShell ağ adres bilgisi.</li>
+            <li><code>ip a</code> — Linux IP yapılandırması.</li>
+        </ul>
+
+        <h3>5.2. Ağ Bağlantılarını İzleme</h3>
+        <ul>
+            <li><code>netstat -ano</code> — Aktif bağlantılar ve PID bilgisi.</li>
+            <li><code>ss -tuln</code> — Linux’ta port dinleme durumu.</li>
+            <li><code>netstat -p tcp</code> — Sadece TCP bağlantılarını gösterir.</li>
+        </ul>
+
+        <h3>5.3. Bağlantı Testi</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>İşlem</th><th>Windows CMD</th><th>PowerShell</th><th>macOS / Linux</th><th>Açıklama</th></tr></thead>
+            <tbody>
+                <tr><td>Ping testi</td><td><code>ping 8.8.8.8</code></td><td><code>Test-Connection 8.8.8.8</code></td><td><code>ping 8.8.8.8</code></td><td>Bağlantı kontrolü.</td></tr>
+                <tr><td>Traceroute</td><td><code>tracert google.com</code></td><td>—</td><td><code>traceroute google.com</code></td><td>Paketlerin geçtiği rotayı gösterir.</td></tr>
+                <tr><td>DNS sorgusu</td><td><code>nslookup openai.com</code></td><td><code>Resolve-DnsName openai.com</code></td><td><code>dig openai.com</code></td><td>DNS çözümleme testi.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>5.4. DNS ve Ağ Servisleri</h3>
+        <ul>
+            <li><code>ipconfig /flushdns</code> — DNS önbelleğini temizler.</li>
+            <li><code>systemd-resolve --flush-caches</code> — Linux DNS temizleme.</li>
+            <li><code>dig openai.com +trace</code> — DNS çözüm zincirini görüntüler.</li>
+        </ul>
+
+        <h3>5.5. Ağ Paylaşımları</h3>
+        <ul>
+            <li><code>net use</code> — Ağ sürücülerini listeler.</li>
+            <li><code>mount -t cifs //sunucu/paylasim /mnt/hedef</code> — SMB paylaşımlarını bağlar.</li>
+            <li><code>umount /mnt/hedef</code> — Paylaşımı kaldırır.</li>
+        </ul>
+
+        <h3>5.6. Gelişmiş Ağ Araçları</h3>
+        <ul>
+            <li><code>nc -zv IP PORT</code> — Port taraması yapar.</li>
+            <li><code>curl https://example.com</code> — HTTP isteği gönderir.</li>
+            <li><code>wget URL</code> — Dosya indirir.</li>
+            <li><code>tcpdump -i eth0</code> — Ağ trafiğini analiz eder.</li>
+        </ul>
+
+        <div class="callout">
+            <strong>Bölüm Özeti:</strong> Bu bölümde IP yapılandırma (<code>ipconfig</code>, <code>ifconfig</code>), ağ teşhisi (<code>ping</code>, <code>traceroute</code>),
+            bağlantı izleme (<code>netstat</code>, <code>ss</code>) ve port testleri (<code>nc</code>) konularını öğrendin.
+        </div>
+    </section>
+    <section class="mt-5">
+        <h2 class="section-title">6. BÖLÜM – PAKET, YAZILIM ve GÜNCELLEME YÖNETİMİ</h2>
+        <p>
+            Her işletim sisteminin kendine özgü paket yöneticisi vardır. Bu bölümde, Windows, macOS ve Linux için yazılım yükleme, güncelleme ve kaldırma komutlarını öğreneceksin.
+        </p>
+
+        <h3>6.1. Paket Yöneticileri Genel Görünüm</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>Platform</th><th>Yöneticiler</th><th>Açıklama</th></tr></thead>
+            <tbody>
+                <tr><td>Windows</td><td>choco, winget, scoop</td><td>3. parti yazılım yöneticileri</td></tr>
+                <tr><td>macOS</td><td>brew</td><td>Homebrew en yaygın araçtır</td></tr>
+                <tr><td>Linux</td><td>apt, yum, dnf, pacman</td><td>Dağıtıma göre farklılık gösterir</td></tr>
+            </tbody>
+        </table>
+
+        <h3>6.2. Paket Arama ve Kurulum</h3>
+        <ul>
+            <li><code>apt search paket</code> / <code>brew search paket</code> / <code>choco search paket</code> — Paket arar.</li>
+            <li><code>sudo apt install paket</code> / <code>brew install paket</code> / <code>choco install paket -y</code> — Paket yükler.</li>
+            <li><code>dpkg -i dosya.deb</code> — Dosyadan yükleme (manuel kurulum).</li>
+        </ul>
+
+        <h3>6.3. Paket Kaldırma</h3>
+        <ul>
+            <li><code>sudo apt remove paket</code> — Paketi kaldır.</li>
+            <li><code>brew uninstall paket</code> — macOS’ta kaldır.</li>
+            <li><code>choco uninstall paket</code> — Windows’ta kaldır.</li>
+        </ul>
+
+        <h3>6.4. Güncelleme Yönetimi</h3>
+        <ul>
+            <li><code>sudo apt update && sudo apt upgrade</code> — Linux sistem güncellemesi.</li>
+            <li><code>brew update && brew upgrade</code> — Homebrew güncellemesi.</li>
+            <li><code>choco upgrade all -y</code> — Tüm Windows paketlerini günceller.</li>
+        </ul>
+
+        <div class="callout">
+            <strong>Bölüm Özeti:</strong> Paket yöneticilerini (apt, brew, choco) kullanarak yazılım yüklemeyi, kaldırmayı ve güncellemeyi öğrendin.
+        </div>
+    </section>
+
+    <section class="mt-5">
+        <h2 class="section-title">7. BÖLÜM – ÇIKTI YÖNLENDİRME, LOGLAMA ve BORU HATLARI</h2>
+        <p>
+            Terminalde her komut bir çıktı üretir. Bu çıktı ekrana yazılabilir, dosyaya kaydedilebilir veya başka bir komuta aktarılabilir.
+            Bu sistemin temeli <strong>stdout</strong> (çıktı), <strong>stderr</strong> (hata) ve <strong>stdin</strong> (girdi) akışlarına dayanır.
+        </p>
+
+        <h3>7.1. Temel Operatörler</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>Operatör</th><th>Açıklama</th><th>Örnek</th></tr></thead>
+            <tbody>
+                <tr><td><code>></code></td><td>Çıktıyı dosyaya yazar (üzerine yazar)</td><td><code>ls > liste.txt</code></td></tr>
+                <tr><td><code>>></code></td><td>Dosyanın sonuna ekler</td><td><code>echo "Yeni" >> log.txt</code></td></tr>
+                <tr><td><code>2></code></td><td>Hata çıktısını yönlendirir</td><td><code>python app.py 2> hata.txt</code></td></tr>
+                <tr><td><code>&></code></td><td>Tüm çıktıları yönlendirir</td><td><code>command &> full.log</code></td></tr>
+            </tbody>
+        </table>
+
+        <h3>7.2. Boru (Pipe) Kullanımı</h3>
+        <ul>
+            <li><code>ls | grep .txt</code> — Tüm .txt dosyalarını filtreler.</li>
+            <li><code>ps aux | grep chrome</code> — Belirli işlemi bulur.</li>
+            <li><code>dmesg | less</code> — Çıktıyı sayfa sayfa gösterir.</li>
+        </ul>
+
+        <h3>7.3. Loglama</h3>
+        <ul>
+            <li><code>command > log.txt</code> — Çıktıyı kaydeder.</li>
+            <li><code>command &> full.log</code> — Hem hata hem çıktıyı loglar.</li>
+            <li><code>echo "$(date): işlem tamamlandı" >> app.log</code> — Zaman damgası ekler.</li>
+        </ul>
+
+        <h3>7.4. Metin Filtreleme ve İşleme</h3>
+        <ul>
+            <li><code>grep "error" log.txt</code> — Hata satırlarını bul.</li>
+            <li><code>sort dosya.txt</code> — Satırları sırala.</li>
+            <li><code>wc -l</code> — Satır say.</li>
+            <li><code>cut -d ":" -f1</code> — İlk sütunu al.</li>
+            <li><code>awk '{print $1}'</code> — İlk sütunu yazdır.</li>
+        </ul>
+
+        <div class="callout">
+            <strong>Bölüm Özeti:</strong> Komut çıktısını yönlendirmeyi (<code>></code>, <code>2></code>), filtrelemeyi (<code>grep</code>, <code>awk</code>) ve log tutmayı öğrendin.
+        </div>
+    </section>
+
+    <section class="mt-5">
+        <h2 class="section-title">8. BÖLÜM – BETİKLER, OTOMASYON ve ZAMANLAMA</h2>
+        <p>
+            Bu bölüm, komutları toplu halde çalıştırmayı, otomatikleştirmeyi ve zamanlanmış görevler oluşturmayı öğretir.
+            Bash (Linux/macOS) ve PowerShell (Windows) örnekleriyle birlikte gelir.
+        </p>
+
+        <h3>8.1. Betik Temelleri</h3>
+        <ul>
+            <li><strong>Bash:</strong> <code>#!/bin/bash</code> başlığıyla başlayan .sh dosyaları.</li>
+            <li><strong>PowerShell:</strong> <code>.ps1</code> uzantılı dosyalar.</li>
+            <li>Oluşturmak için: <code>nano script.sh</code> veya <code>notepad script.ps1</code>.</li>
+        </ul>
+
+        <h3>8.2. Değişkenler ve Parametreler</h3>
+        <ul>
+            <li>Bash: <code>isim="Ali"</code> → <code>echo $isim</code></li>
+            <li>PowerShell: <code>$isim = "Ali"</code> → <code>Write-Output $isim</code></li>
+            <li>Argümanlar: Bash’te <code>$1</code>, PowerShell’de <code>$args[0]</code></li>
+        </ul>
+
+        <h3>8.3. Koşullar ve Döngüler</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>Tür</th><th>Linux/macOS</th><th>PowerShell</th><th>Açıklama</th></tr></thead>
+            <tbody>
+                <tr><td>if</td><td><code>if [ -f dosya ]; then echo "Var"; fi</code></td><td><code>if (Test-Path "dosya") { "Var" }</code></td><td>Dosya kontrolü.</td></tr>
+                <tr><td>for</td><td><code>for i in *.txt; do echo $i; done</code></td><td><code>foreach ($i in Get-ChildItem *.txt) { $i }</code></td><td>Döngü örneği.</td></tr>
+                <tr><td>while</td><td><code>while true; do date; sleep 5; done</code></td><td><code>while ($true) { Get-Date; Start-Sleep 5 }</code></td><td>Sürekli çalıştırma.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>8.4. Görev Zamanlama</h3>
+        <ul>
+            <li><code>schtasks /create /tn "yedek" /tr "C:\yedek.ps1" /sc daily /st 09:00</code> — Windows’ta görev zamanlayıcı.</li>
+            <li><code>crontab -e</code> → <code>0 9 * * * /home/user/yedek.sh</code> — Linux’ta günlük görev.</li>
+            <li><code>@reboot</code> — Sistem açıldığında çalıştır.</li>
+        </ul>
+
+        <h3>8.5. Loglama ve Hata Yönetimi</h3>
+        <ul>
+            <li><code>bash script.sh > out.log 2> err.log</code> — Hataları ayrı logla.</li>
+            <li><code>.\script.ps1 *> full.log</code> — PowerShell’de birleşik log.</li>
+            <li><code>set -e</code> — Hata durumunda betiği durdurur.</li>
+        </ul>
+
+        <div class="callout">
+            <strong>Bölüm Özeti:</strong> Betik oluşturmayı, koşul/döngü yapılarını ve görev zamanlama araçlarını (<code>cron</code>, <code>schtasks</code>) öğrendin.
+        </div>
+    </section>
+    <section class="mt-5">
+        <h2 class="section-title">9. BÖLÜM – HATA AYIKLAMA, GÜVENLİK ve YAYGIN HATALAR</h2>
+        <p>
+            Terminal güçlüdür; yanlış bir komut geri döndürülemez sonuçlar doğurabilir.
+            Bu bölüm, güvenli çalışma yöntemlerini, hataları tanımayı ve düzeltmeyi öğretir.
+        </p>
+
+        <h3>9.1. Tehlikeli Komutlar</h3>
+        <ul>
+            <li><code>rm -rf /</code> — 🔥 Tüm sistemi siler.</li>
+            <li><code>chmod -R 777 /</code> — 🚫 Herkese tam erişim verir (tehlikeli).</li>
+            <li><code>dd if=/dev/zero of=/dev/sda</code> — 💀 Disk silme işlemi.</li>
+        </ul>
+        <div class="callout">
+            <strong>Uyarı:</strong> Root yetkisiyle çalışmadan önce iki kez düşün. Yanlış bir komut sistemin tamamını silebilir.
+        </div>
+
+        <h3>9.2. Komut Hatalarını Okuma</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>Hata</th><th>Açıklama</th><th>Çözüm</th></tr></thead>
+            <tbody>
+                <tr><td><code>command not found</code></td><td>Komut sistemde yok</td><td>Paket yöneticisiyle yükle (<code>sudo apt install</code>).</td></tr>
+                <tr><td><code>Permission denied</code></td><td>Yetki hatası</td><td><code>sudo</code> ekle veya izinleri değiştir (<code>chmod +x</code>).</td></tr>
+                <tr><td><code>No such file or directory</code></td><td>Dosya yolu hatalı</td><td>Yolu kontrol et.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>9.3. Hata Ayıklama Yöntemleri</h3>
+        <ul>
+            <li><code>bash -x script.sh</code> — Adım adım hata izleme.</li>
+            <li><code>Set-PSDebug -Trace 1</code> — PowerShell betik takibi.</li>
+            <li><code>echo $VAR</code> — Değişken değerini görüntüle.</li>
+            <li><code>set -e</code> — Hata olduğunda betiği durdur.</li>
+        </ul>
+
+        <h3>9.4. Log ve İzleme Dosyaları</h3>
+        <ul>
+            <li><code>/var/log/syslog</code> — Linux sistem logları.</li>
+            <li><code>journalctl -p 3 -xe</code> — Son kritik hatalar.</li>
+            <li><code>eventvwr.msc</code> — Windows Olay Görüntüleyici.</li>
+        </ul>
+
+        <h3>9.5. Güvenli Betik Yazımı</h3>
+        <ul>
+            <li>Kritik işlemler öncesi <code>cp</code> ile yedek al.</li>
+            <li><code>rm</code> yerine <code>mv</code> veya <code>trash</code> kullan.</li>
+            <li>Değişkenlerde tırnak kullan: <code>"$VAR"</code>.</li>
+            <li>Betiklerde loglama ekle: <code>echo "$(date): işlem yapıldı" >> script.log</code></li>
+        </ul>
+
+        <div class="callout">
+            <strong>Bölüm Özeti:</strong> Bu bölümde tehlikeli komutları, hata çözümleme yöntemlerini, güvenli sudo kullanımını ve hata loglamayı öğrendin.
+        </div>
+    </section>
+
+    <section class="mt-5">
+        <h2 class="section-title">10. BÖLÜM – KISAYOLLAR, PLATFORM KARŞILAŞTIRMALARI ve ÖZET</h2>
+        <p>
+            Bu son bölüm, sistemler arası komut farklarını, klavye kısayollarını ve verimlilik ipuçlarını içerir.
+        </p>
+
+        <h3>10.1. Klavye Kısayolları</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>Kısayol</th><th>Açıklama</th><th>Platform</th></tr></thead>
+            <tbody>
+                <tr><td><code>Ctrl + C</code></td><td>Çalışan komutu durdur</td><td>Tümü</td></tr>
+                <tr><td><code>Ctrl + L</code></td><td>Ekranı temizle</td><td>Linux/macOS</td></tr>
+                <tr><td><code>Ctrl + R</code></td><td>Komut geçmişinde arama</td><td>Tümü</td></tr>
+                <tr><td><code>Tab</code></td><td>Otomatik tamamlama</td><td>Tümü</td></tr>
+                <tr><td><code>Ctrl + D</code></td><td>Oturumu kapat</td><td>Linux/macOS</td></tr>
+            </tbody>
+        </table>
+
+        <h3>10.2. Platform Karşılaştırmaları</h3>
+        <table class="table table-bordered">
+            <thead><tr><th>İşlem</th><th>Windows</th><th>macOS / Linux</th><th>Açıklama</th></tr></thead>
+            <tbody>
+                <tr><td>Dizin listele</td><td><code>dir</code></td><td><code>ls</code></td><td>Bulunduğun dizini gösterir.</td></tr>
+                <tr><td>Dosya sil</td><td><code>del</code></td><td><code>rm</code></td><td>Dosya silme işlemi.</td></tr>
+                <tr><td>Klasör oluştur</td><td><code>mkdir</code></td><td><code>mkdir</code></td><td>Yeni dizin oluşturur.</td></tr>
+                <tr><td>İzin değiştir</td><td><code>icacls</code></td><td><code>chmod</code></td><td>Dosya izinlerini değiştirir.</td></tr>
+                <tr><td>Paket yöneticisi</td><td><code>choco / winget</code></td><td><code>apt / brew</code></td><td>Yazılım yükleme ve kaldırma.</td></tr>
+            </tbody>
+        </table>
+
+        <h3>10.3. Kullanışlı Sistem Komutları</h3>
+        <ul>
+            <li><code>shutdown /r /t 0</code> — Windows yeniden başlat.</li>
+            <li><code>sudo reboot</code> — Linux yeniden başlat.</li>
+            <li><code>uptime</code> — Sistem çalışma süresi.</li>
+            <li><code>nproc</code> — CPU çekirdek sayısı.</li>
+            <li><code>du -sh *</code> — Dizin boyutlarını özetle.</li>
+        </ul>
+
+        <div class="callout">
+            <strong>Bölüm Özeti:</strong> Platform farklarını, klavye kısayollarını ve sistem yönetimi için pratik komutları öğrendin.
+        </div>
+
+        <hr>
+        <h3>⚙️ Katkı ve Geliştirme</h3>
+        <p>Yeni komutlar, hatalar veya ek bilgiler paylaşmak istersen lütfen bir <strong>Pull Request (PR)</strong> aç veya <strong>Issue</strong> oluştur.</p>
+
+        <h3>📄 Lisans</h3>
+        <p>
+            Bu proje <strong>MIT Lisansı</strong> altındadır. Serbestçe kopyalayabilir, düzenleyebilir ve referans gösterebilirsin.
+        </p>
+    </section>
+</main>
+
+<footer class="py-4 bg-dark text-white text-center">
+    <p>&copy; 2024 İrem Nur Göçer. Tüm hakları saklıdır.</p>
+</footer>
 
 </body>
 </html>
-
