@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Security Engineer seviye eğitim seti: tehdit modelleme, pentest, SOC, DevSecOps, bulut ve Kubernetes güvenliği.">
+    <title>Security Engineer Eğitim Seti</title>
+
+    <link href="../styles.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f3f3f3;
+            color: #111111;
+            line-height: 1.65;
+        }
+        main {
+            padding-bottom: 6rem;
+        }
+        .blog-hero {
+            background: linear-gradient(135deg, #121212 0%, #1e2a2f 100%);
+            color: #f5f7fa;
+            border-radius: 24px;
+            padding: 56px 48px;
+            text-align: left;
+            box-shadow: 0 22px 48px rgba(10, 33, 45, 0.35);
+        }
+        .blog-hero h1 {
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+        .blog-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 24px;
+            font-size: 0.95rem;
+            color: rgba(245, 247, 250, 0.85);
+        }
+        main section {
+            background-color: #ffffff;
+            border-radius: 28px;
+            padding: 48px 52px;
+            box-shadow: 0 26px 52px rgba(13, 31, 44, 0.12);
+            margin-bottom: 72px;
+        }
+        main section:last-of-type {
+            margin-bottom: 0;
+        }
+        .section-title {
+            border-left: 6px solid #17a589;
+            padding-left: 18px;
+            margin-bottom: 28px;
+            font-weight: 700;
+        }
+        h3 {
+            font-weight: 700;
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+        h4 {
+            font-weight: 600;
+            margin-top: 28px;
+            margin-bottom: 8px;
+        }
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 1.25rem;
+            padding-left: 1.2rem;
+        }
+        li + li {
+            margin-top: 0.4rem;
+        }
+        .callout {
+            background: linear-gradient(135deg, #f1fff9 0%, #ffffff 100%);
+            border-left: 6px solid #28a745;
+            padding: 22px 26px;
+            border-radius: 18px;
+            margin: 36px 0;
+            box-shadow: 0 20px 44px rgba(12, 99, 58, 0.18);
+        }
+        .callout strong {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .warning {
+            background: linear-gradient(135deg, #fff7f0 0%, #ffffff 100%);
+            border-left: 6px solid #f39c12;
+            box-shadow: 0 20px 44px rgba(204, 133, 15, 0.16);
+        }
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #ecf5ff;
+            color: #145388;
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            margin-right: 12px;
+            margin-bottom: 12px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 32px 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(22, 29, 36, 0.08);
+        }
+        th, td {
+            border: 1px solid #e3e7ed;
+            padding: 16px 18px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #13293d;
+            color: #f6fbff;
+            letter-spacing: 0.02em;
+        }
+        code {
+            background-color: #eef3f9;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.95rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            overflow-x: auto;
+            border: 1px solid #dfe4ea;
+        }
+        .toc {
+            column-count: 2;
+            column-gap: 40px;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin-bottom: 12px;
+        }
+        .toc a {
+            color: #0a3d62;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            color: #1abc9c;
+            text-decoration: underline;
+        }
+        @media (max-width: 992px) {
+            main section {
+                padding: 32px 28px;
+                margin-bottom: 48px;
+            }
+            .blog-hero {
+                padding: 40px 28px;
+            }
+            .toc {
+                column-count: 1;
+            }
+        }
+        @media (max-width: 768px) {
+            .blog-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="../index.html">İrem Nur Göçer</a>
+    </div>
+</nav>
+
+<main class="container mt-5 pt-5 pb-5">
+    <header class="blog-hero">
+        <h1>Sızma Testi, Güvenlik Mühendisliği ve Savunma Operasyonları</h1>
+        <p class="lead mb-4">Security Engineer statüsüne ulaşmak isteyen profesyoneller için tehdit modelleme, pentest, SOC, DevSecOps, Cloud &amp; Kubernetes güvenliği gibi alanları bütünsel olarak kapsayan ileri seviye eğitim seti.</p>
+        <div class="blog-meta">
+            <span><strong>Yazar:</strong> İrem Nur Göçer</span>
+            <span><strong>Rol:</strong> Security Engineer</span>
+            <span><strong>Sürüm:</strong> v1.0</span>
+            <span><strong>Tarih:</strong> 30 Ekim 2025</span>
+            <span><strong>Lisans:</strong> Eğitim ve kurumsal farkındalık amacıyla kullanılabilir.</span>
+        </div>
+        <div class="callout warning mt-4">
+            <strong>Uyarı</strong>
+            <p>Bu içerikteki test adımları yalnızca izinli veya izole laboratuvar ortamlarında uygulanmalıdır. Canlı sistemlerde, yazılı izin olmaksızın gerçekleştirilen her işlem yasal suç teşkil eder.</p>
+        </div>
+    </header>
+
+    <section id="onsoz">
+        <h2 class="section-title">Önsöz</h2>
+        <p>Bu kaynak; güvenlik mühendisi veya sızma testi uzmanı olmak isteyen profesyoneller için teoriden pratiğe, etik temelden ileri tehdit modellemeye kadar uçtan uca rehberlik sunar. Saldırı yüzeylerinin anlaşılması kadar tespit, savunma, olay müdahalesi, otomasyon ve sürdürülebilir güvenlik kültürü inşasını da kapsar.</p>
+        <p>İçerik; NIST, PTES, OWASP, MITRE ATT&amp;CK, CIS Benchmarks ve Cloud Security Alliance standartları referans alınarak hazırlanmıştır. Her bölüm, gerçek dünyadaki güvenlik sorunlarını nasıl tanımlayıp önceliklendireceğini, nasıl güvenli hale getireceğini ve olay anında nasıl müdahale edeceğini adım adım anlatır. Hedefimiz yalnızca “sızma” değil; dayanıklı, izlenebilir ve sürdürülebilir sistemler tasarlayabilen uzmanlar yetiştirmektir.</p>
+    </section>
+
+    <section id="icerik">
+        <h2 class="section-title">İçindekiler</h2>
+        <div class="toc">
+            <ul>
+                <li><a href="#bolum-1">1. Bölüm – Giriş, Etik ve Yasal Çerçeve</a></li>
+                <li><a href="#bolum-2">2. Bölüm – Sistem Temelleri, IoC ve Korunma</a></li>
+                <li><a href="#bolum-3">3. Bölüm – Web ve Uygulama Katmanı Güvenliği</a></li>
+                <li><a href="#bolum-4">4. Bölüm – Uygulama ve API Güvenliği</a></li>
+                <li><a href="#bolum-5">5. Bölüm – Pentest Metodolojisi &amp; Araçlar</a></li>
+                <li><a href="#bolum-6">6. Bölüm – Sistem ve Ağ Güvenliği</a></li>
+                <li><a href="#bolum-7">7. Bölüm – Bulut Güvenliği &amp; Kubernetes</a></li>
+                <li><a href="#bolum-8">8. Bölüm – Güvenlik Mühendisliği &amp; Secure SDLC</a></li>
+                <li><a href="#bolum-9">9. Bölüm – Operasyonel Güvenlik &amp; Olay Müdahalesi</a></li>
+                <li><a href="#bolum-10">10. Bölüm – Portföy, Projeler &amp; Mülakat</a></li>
+                <li><a href="#ekler">Ekler ve Playbook’lar</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="bolum-1">
+        <h2 class="section-title">1. Bölüm – Giriş, Etik ve Yasal Çerçeve</h2>
+        <div class="callout">
+            <strong>Modül Yetkinlikleri</strong>
+            <ul>
+                <li>Sızma testi sözleşmeleri (SoW), yetkilendirme ve NDA belgelerini hazırlama.</li>
+                <li>Pre-engagement risklerini değerlendirip test planı ile rollback prosedürleri oluşturma.</li>
+                <li>Pasif/aktif keşif stratejilerini PTES/NIST standartlarına göre yürütme.</li>
+                <li>Web, API, Cloud, K8s gibi yüzeylerde ileri PoC’lar üretme ve CVSS + iş etkisi ile önceliklendirme.</li>
+                <li>SIEM/EDR üzerinde detection engineering yapma ve bulguları C-level &amp; engineering ekipleri için raporlama.</li>
+            </ul>
+        </div>
+
+        <h3>1.1 Pre-Engagement Belgeleri</h3>
+        <p>Profesyonel çalışmalar; kapsamı, sorumlulukları ve iletişim trafiğini netleştiren belgelerle başlar.</p>
+        <ul>
+            <li><strong>Statement of Work (SoW):</strong> IP/URL listeleri, test pencereleri, teknik kapsam, iletişim ve sorumluluk maddelerini içerir.</li>
+            <li><strong>Authorization Letter:</strong> Yetkili imzalar, test ekibinin kimlik bilgileri, whitelist IP’ler ve acil stop prosedürlerini tanımlar.</li>
+            <li><strong>Non-Disclosure Agreement (NDA):</strong> Veri mahremiyetine dair yükümlülükleri, saklama süreçlerini ve paylaşım kısıtlarını belirtir.</li>
+            <li><strong>Rules of Engagement (RoE):</strong> Yasaklanan teknikler, log saklama yöntemleri ve data handling kurallarını listeler.</li>
+        </ul>
+
+        <h3>1.2 Risk ve Rollback Planlaması</h3>
+        <ul>
+            <li>Canlı sistem etkisi, downtime senaryoları ve iş sürekliliği planları değerlendirilmelidir.</li>
+            <li>Snapshot/backup planları ve kill-switch prosedürleri önceden kurgulanmalıdır.</li>
+            <li>SOC/IR ekipleri test süresince bilgilendirilmeli, koordinasyon kanalları tanımlanmalıdır.</li>
+        </ul>
+
+        <h3>1.3 Keşif (Reconnaissance)</h3>
+        <h4>Pasif OSINT</h4>
+        <ul>
+            <li>DNS kayıtları, sertifika logları, halka açık kod depoları, public cloud asset taramaları.</li>
+            <li>Örnek: <code>dig +short ANY example.com</code>, <code>crt.sh</code> üstünden wildcard sorguları.</li>
+        </ul>
+        <h4>Aktif Keşif</h4>
+        <ul>
+            <li>İzinli hız limitleriyle <code>nmap</code>, <code>masscan</code> (yalnızca lab), <code>httprobe</code>, <code>whatweb</code>.</li>
+            <li>Hizmet imzaları, TLS sertifikaları ve API keşfi (OpenAPI, Swagger) odaklı analiz.</li>
+        </ul>
+
+        <h3>1.4 Zafiyet Analizi</h3>
+        <p>Otomatik taramalar (Burp, ZAP, Nessus) yalnızca başlangıçtır; manuel doğrulama ve bağlam analizi şarttır. Otomatik raporlardaki bulgular false-positive açısından mutlaka triage edilmelidir.</p>
+
+        <h3>1.5 Exploitation &amp; Post-Exploitation</h3>
+        <ul>
+            <li>PoC’lar “read-only” olmalı, veri maskelemesi uygulanmalıdır.</li>
+            <li>Onay olmadan privilege escalation veya persistent foothold oluşturulmamalıdır.</li>
+            <li>Tüm adımlar, kullanılan araç sürümleri ve çıktılar raporda kanıtlanabilir olmalıdır.</li>
+        </ul>
+
+        <h3>1.6 Raporlama ve Prioritization</h3>
+        <p>Bulgular CVSS v3.1 ve iş etkisi katsayılarıyla önceliklendirilir. Her bulgu için özet, teknik detay, PoC, remediation adımları, doğrulama ve sorumlu ekip bilgileri yer almalıdır.</p>
+
+        <h3>1.7 Detection Engineering &amp; SIEM Kuralları</h3>
+        <ul>
+            <li>Her kritik bulgu için tespit kuralı yazılmalıdır (ör. brute-force, SSRF, token abuse).</li>
+            <li>Kuralların false positive / false negative analizleri yapılmalı, playbook ile bağlanmalıdır.</li>
+        </ul>
+
+        <h3>1.8 Doğrulama ve Regression Testleri</h3>
+        <ul>
+            <li>PoC’lar düzeltme sonrası tekrar yürütülür; başarısız olması beklenir.</li>
+            <li>CI pipeline’larına ilgili regresyon testleri eklenir.</li>
+            <li>Denetim izleri ve artefaktlar saklanır.</li>
+        </ul>
+
+        <h3>1.9 Laboratuvar Görevleri</h3>
+        <ul>
+            <li>Asset inventory oluşturma ve tehdit modelleme.</li>
+            <li>IDOR tespiti, fix ve regression testi yazımı.</li>
+            <li>SSRF OOB PoC ve mitigation planı hazırlama.</li>
+        </ul>
+    </section>
+
+    <section id="bolum-2">
+        <h2 class="section-title">2. Bölüm – Sistem Temelleri, IoC ve Korunma</h2>
+        <p>Bu bölüm, normal sistem davranışını tanıma, saldırı göstergelerini (IoC) saptama ve olay anındaki savunma adımlarını kapsar.</p>
+
+        <h3>2.1 “Normal” Davranışı Tanımak</h3>
+        <ul>
+            <li>CPU, bellek ve ağ trafiği için baseline değerler oluşturulmalıdır.</li>
+            <li>Kimlerin hangi servislere bağlandığı kayıt altına alınmalıdır.</li>
+            <li>HTOP, iftop, netstat, sysmon gibi araçlarla takip planları kurulmalıdır.</li>
+        </ul>
+
+        <h3>2.2 Saldırı Göstergeleri (IoC)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Katman</th>
+                    <th>Belirti</th>
+                    <th>Önleme</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ağ</td>
+                    <td>Port taramaları, brute-force, DDoS</td>
+                    <td>Firewall rate limit, fail2ban, WAF/CDN</td>
+                </tr>
+                <tr>
+                    <td>Uygulama</td>
+                    <td>SQLi, XSS, API abuse logları</td>
+                    <td>Input validation, WAF politikaları</td>
+                </tr>
+                <tr>
+                    <td>Sistem</td>
+                    <td>Yeni kullanıcılar, beklenmedik süreçler</td>
+                    <td>Bütünlük izleme (AIDE), EDR/IDS</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>2.3 Linux / Sunucu Güvenliği</h3>
+        <ul>
+            <li>Sudo erişimlerini minimumda tutmak, gereksiz servisleri kapatmak.</li>
+            <li>Fail2ban, Wazuh, Suricata gibi araçları etkinleştirmek.</li>
+            <li>Günlükleri düzenli analiz etmek ve otomatik bildirimler oluşturmak.</li>
+        </ul>
+
+        <h3>2.4 HTTP / Web Sunucu Savunması</h3>
+        <ul>
+            <li>Apache/Nginx ayarlarında <code>server_tokens off</code>, güvenlik başlıkları, TLS sertleştirme.</li>
+            <li>WAF veya reverse proxy katmanında anomali tespiti.</li>
+        </ul>
+
+        <h3>2.5 Gerçek Olay Senaryoları</h3>
+        <ul>
+            <li><strong>SSH brute-force:</strong> Fail2ban, IP engelleme, anahtar tabanlı yetkilendirme.</li>
+            <li><strong>SQL injection denemesi:</strong> WAF kuralı, endpoint izolasyonu, log inceleme.</li>
+            <li><strong>Beklenmeyen outbound trafik:</strong> Ağ izolasyonu, süreç analizi, IDS logları.</li>
+        </ul>
+
+        <h3>2.6 Incident Response Mini Playbook</h3>
+        <div class="section-grid">
+            <div><strong>Tespit:</strong> Anomali logu veya IDS alarmı.</div>
+            <div><strong>Containment:</strong> Servis izolasyonu, firewall kuralı.</div>
+            <div><strong>Analiz:</strong> Süreç, log, bağlantı inceleme.</div>
+            <div><strong>Kaldırma:</strong> Zararlı süreçleri sonlandırma.</div>
+            <div><strong>İyileştirme:</strong> Temiz yedek, patch uygulama.</div>
+            <div><strong>İzleme:</strong> Sonraki 72 saat sıkı takip.</div>
+        </div>
+
+        <h3>2.7 Proaktif Güvenlik</h3>
+        <ul>
+            <li>Baseline scriptleri, hash kontrolleri, otomatik yama yönetimi.</li>
+            <li>Kullanıcı farkındalık eğitimleri, log korelasyonu ve alarm eşikleri.</li>
+        </ul>
+
+        <h3>2.8 Laboratuvar Görevleri</h3>
+        <ul>
+            <li>Normal/anormal trafik analizleri.</li>
+            <li>Fail2ban kuralı yazma ve doğrulama.</li>
+            <li>Olay simülasyonu ve raporlama.</li>
+        </ul>
+    </section>
+
+    <section id="bolum-3">
+        <h2 class="section-title">3. Bölüm – Web ve Uygulama Katmanı Güvenliği</h2>
+        <p>Bu bölümde OWASP Top 10 odaklı güvenlik açıkları, olay tespiti, log analizi ve savunma pratikleri ele alınır.</p>
+
+        <h3>3.1 Uygulama Mimarisi</h3>
+        <p>İstemci → Uygulama Sunucusu → Veritabanı → Harici Servisler hattındaki riskleri analiz edin: XSS, CSRF, kimlik doğrulama, konfigürasyon hataları, enjeksiyon v.b.</p>
+
+        <h3>3.2 Sık Saldırı Kategorileri ve Belirtiler</h3>
+        <ul>
+            <li><strong>SQL Injection:</strong> Loglarda <code>' OR 1=1</code> kalıpları veya 500 hata artışı.</li>
+            <li><strong>XSS:</strong> <code>&lt;script&gt;</code> içeren parametreler, bozuk arayüz.</li>
+            <li><strong>Broken Auth:</strong> Çoklu başarısız giriş, beklenmedik oturumlar.</li>
+            <li><strong>CSRF:</strong> Token eksik POST istekleri.</li>
+            <li><strong>SSRF:</strong> İç IP’lere outbound trafik.</li>
+        </ul>
+
+        <h3>3.3 Olay Tespiti ve Log Analizi</h3>
+        <p>Web sunucu logları, uygulama logları ve WAF kayıtlarını korele ederek anomaliyi belirleyin. SIEM üzerinde regex veya sorgu tabanlı alarmlar oluşturun.</p>
+
+        <h3>3.4 Güvenli Kodlama İlkeleri</h3>
+        <ul>
+            <li>Input doğrulama ve whitelist yaklaşımı.</li>
+            <li>Context aware output encoding.</li>
+            <li>Sunucu tarafı yetkilendirme kontrolleri.</li>
+            <li>Güvenli şifre saklama (bcrypt, Argon2).</li>
+            <li>API güvenlik politikaları, CORS ve rate-limit.</li>
+        </ul>
+
+        <h3>3.5 Savunma ve Araçlar</h3>
+        <ul>
+            <li>WAF (ModSecurity, Cloud WAF) kuralları.</li>
+            <li>SonarQube, OWASP Dependency-Check gibi statik analiz araçları.</li>
+            <li>ZAP/Burp ile zamanlanmış DAST taramaları.</li>
+        </ul>
+
+        <h3>3.6 Gerçekçi Olay Örnekleri</h3>
+        <ul>
+            <li>SQLi denemesinde endpoint’i geçici devre dışı bırakmak ve logları analiz etmek.</li>
+            <li>XSS alarmında CSP politikalarını sıkılaştırmak ve input encoding’i doğrulamak.</li>
+            <li>Yetki ihlallerinde token iptali, rol kontrolü ve WAF güçlendirmesi.</li>
+        </ul>
+
+        <h3>3.7 Olay Yanıtı</h3>
+        <ol>
+            <li>Tespit: Alarm veya kullanıcı raporu.</li>
+            <li>Kısıtlama: Endpoint veya kullanıcıyı kısıtla.</li>
+            <li>Analiz: Log ve kod incelemesi.</li>
+            <li>Kaldırma: Patch ve yapılandırma düzeltmesi.</li>
+            <li>Doğrulama: PoC tekrarı başarısız olmalı.</li>
+            <li>Raporlama: Zaman çizelgesi ve alınan önlemler.</li>
+        </ol>
+
+        <h3>3.8 Laboratuvar Görevleri</h3>
+        <ul>
+            <li>OWASP Juice Shop üzerinde trafik kaydı ve saldırı tespiti.</li>
+            <li>WAF kuralı yazma ve etkisini gözlemleme.</li>
+        </ul>
+    </section>
+
+    <section id="bolum-4">
+        <h2 class="section-title">4. Bölüm – Uygulama ve API Güvenliği (Derin Analiz)</h2>
+        <p>Modern web ve API mimarilerinde kimlik doğrulama, yetkilendirme, girdi/çıktı güvenliği, SSRF, deserialization, CORS/CSRF, rate limit ve loglama süreçleri mitre ATT&amp;CK uyumlu olarak incelenir.</p>
+
+        <h3>4.1 Mimari Temeller</h3>
+        <p>İstemci → Reverse Proxy/WAF → Uygulama → Kimlik Sağlayıcı → Veri &amp; Harici Servisler zincirinde hata sınıflarını belirleyin.</p>
+
+        <h3>4.2 Kimlik Doğrulama, Oturum ve Yetkilendirme</h3>
+        <ul>
+            <li>Cookie politikaları (HttpOnly, Secure, SameSite) ve server-side session yönetimi.</li>
+            <li>JWT alg none bypass, kid manipülasyonu gibi tekniklere karşı koruma.</li>
+            <li>Parola politikaları, MFA, brute-force rate limit.</li>
+            <li>Server-side authorize kontrolleri (IDOR/BOLA engelleme).</li>
+        </ul>
+
+        <h3>4.3 Girdi/Çıktı Güvenliği</h3>
+        <ul>
+            <li>XSS’e karşı context-aware encoding, CSP, şablon motoru sertleştirmesi.</li>
+            <li>SQL/NoSQL/LDAP injection’lara karşı parametreli sorgular ve safe ORM API’leri.</li>
+            <li>Template injection risklerine karşı güvenli placeholder kullanımı.</li>
+        </ul>
+
+        <h3>4.4 Kaynak Koruma</h3>
+        <p>Rate-limiting, token bucket algoritmaları, idempotency anahtarları ve abuse tespiti için log korelasyonu.</p>
+
+        <h3>4.5 Dosya Yükleme &amp; Path Traversal</h3>
+        <ul>
+            <li>Allow-list MIME/uzantı, AV taraması, izole depolama klasörleri.</li>
+            <li>Path traversal Normalizasyon, chroot/jail, ID → dosya eşlemesi.</li>
+        </ul>
+
+        <h3>4.6 SSRF</h3>
+        <p>Allow-list, egress filtering, metadata servis korumaları (IMDSv2), redirect engelleme.</p>
+
+        <h3>4.7 Insecure Deserialization</h3>
+        <p>JSON gibi şemalı formatlar, bilinmeyen tiplerin reddi, güncel kütüphane kullanımı.</p>
+
+        <h3>4.8 CORS &amp; CSRF</h3>
+        <ul>
+            <li>CORS allow-list, wildcard + credentials kombinasyonundan kaçınma.</li>
+            <li>CSRF token, SameSite cookie, Origin/Referer doğrulaması.</li>
+        </ul>
+
+        <h3>4.9 Güvenli HTTP Başlıkları</h3>
+        <p>HSTS, CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy başlıklarını zorunlu kılın.</p>
+
+        <h3>4.10 API Güvenliği</h3>
+        <ul>
+            <li>OAuth2/OIDC Authorization Code + PKCE, redirect URI tam eşleşmesi.</li>
+            <li>Minimal scope, deny-by-default, tutarlı hata kodları ve kaynak bazlı yetki kontrolü.</li>
+        </ul>
+
+        <h3>4.11 Loglama &amp; Korelasyon</h3>
+        <p>PII maskesi, request-id, tenant-id ve latency gibi alanlarla zenginleştirilmiş loglar, SIEM üzerinde korelasyon kurallarıyla birleştirilmelidir.</p>
+
+        <h3>4.12 Incident Response Playbook</h3>
+        <ol>
+            <li>Tespit → WAF/SIEM alarmı.</li>
+            <li>Containment → Endpoint’i sınırla, WAF kuralı uygula.</li>
+            <li>Toplama → Log, config, release hash.</li>
+            <li>Analiz → Kök neden, etki analizi.</li>
+            <li>Düzeltme → Patch, config fix.</li>
+            <li>Doğrulama → Regresyon testi, PoC ret.</li>
+            <li>İyileştirme → Otomasyon, pipeline güncellemesi.</li>
+        </ol>
+
+        <h3>4.13 Laboratuvarlar</h3>
+        <ul>
+            <li>Güvenli başlıklar &amp; CSP uygulama.</li>
+            <li>Rate limit kuralı ve SIEM korelasyonu.</li>
+            <li>Dosya yükleme karantinası &amp; AV taraması.</li>
+            <li>OAuth2/OIDC PKCE akış testi.</li>
+        </ul>
+
+        <h3>4.14 Security Gates</h3>
+        <ul>
+            <li>CI/CD pipeline’a SAST, SCA, DAST, secret scanning eklemek.</li>
+            <li>“Security stage” geçmeden release’e izin vermemek.</li>
+        </ul>
+
+        <h3>4.15 Hızlı Denetim Checklist</h3>
+        <ul>
+            <li>Cookie politikaları, JWT doğrulamaları, IDOR kontrolleri.</li>
+            <li>Prepared statements, XSS korumaları, SSRF guardları.</li>
+            <li>CORS/CSRF, rate-limit, loglama, WAF &amp; SIEM entegrasyonu.</li>
+        </ul>
+
+        <h3>4.16 Değerlendirme Soruları</h3>
+        <ul>
+            <li>IDOR ve rate-limit açıklarında IR sıralaması.</li>
+            <li>JWT kid manipülasyonu riskleri.</li>
+            <li>CSP nonce vs strict-dynamic farkı.</li>
+            <li>MIME spoofing tespiti.</li>
+            <li>SSRF’yi ağ ve uygulama katmanında bloklama.</li>
+            <li>OAuth2 redirect URI risks.</li>
+            <li>SIEM’de 500/401/429 korelasyonunu yorumlama.</li>
+        </ul>
+    </section>
+
+    <section id="bolum-5">
+        <h2 class="section-title">5. Bölüm – Pentest Metodolojisi &amp; Araçlar</h2>
+        <p>PTES/NIST uyumlu metodoloji ile uçtan uca test planlama, güvenli yoğunluk yönetimi, WAF/SIEM korelasyonu ve raporlama.</p>
+
+        <h3>5.1 Metodoloji Adımları</h3>
+        <ol>
+            <li>Pre-engagement</li>
+            <li>Keşif (pasif &amp; aktif)</li>
+            <li>Yüzey haritalama</li>
+            <li>Hedefli testler</li>
+            <li>Raporlama &amp; önceliklendirme</li>
+            <li>İyileştirme &amp; geri doğrulama</li>
+        </ol>
+
+        <h3>5.2 Araç Zinciri</h3>
+        <ul>
+            <li>Ağ: nmap, testssl.sh, ffuf, nikto (düşük hız), masscan (yalnız lab).</li>
+            <li>Web/API: Burp Suite, ZAP, Postman/Insomnia.</li>
+            <li>Bulut/K8s: ScoutSuite, Prowler, kube-bench, kube-hunter.</li>
+            <li>Tespit: Wazuh, Zeek, Suricata, Elastic/Splunk.</li>
+        </ul>
+
+        <h3>5.3 Keşif ve Yüzey Haritalama</h3>
+        <ul>
+            <li>Pasif keşif ile domain ve sertifika envanteri oluşturma.</li>
+            <li>Aktif keşifte izinli hızlarda port/servis taraması.</li>
+            <li>SOC/SIEM loglarıyla keşfi korele etme.</li>
+        </ul>
+
+        <h3>5.4 Web/API Test Akışı</h3>
+        <ol>
+            <li>Proxy &amp; oturum kaydı.</li>
+            <li>Endpoint haritalama.</li>
+            <li>Repeater ile güvenli parametre doğrulaması.</li>
+            <li>Kısıtlı Intruder kullanımı.</li>
+            <li>Out-of-Band testler (Collaborator).</li>
+        </ol>
+
+        <h3>5.5 Altyapı &amp; TLS Kontrolleri</h3>
+        <p>TLS profili, SSH güvenliği, HTTP başlıkları ve yapılandırma doğrulaması.</p>
+
+        <h3>5.6 WAF Tuning</h3>
+        <ul>
+            <li>Canary endpoint’ler, detect-only → block geçişi, false positive yönetimi.</li>
+            <li>SIEM’de korelasyon ve raporlama.</li>
+        </ul>
+
+        <h3>5.7 Olay Tatbikatı</h3>
+        <p>“Tarama algılandı” senaryosu ile containment, log toplama, düzeltici kontrol ve post-mortem süreçlerini pratik edin.</p>
+
+        <h3>5.8 Laboratuvarlar</h3>
+        <ul>
+            <li>Ağ keşfi &amp; yüzey envanteri.</li>
+            <li>Burp ile manuel doğrulama.</li>
+            <li>TLS ve güvenlik başlıklarını sertleştirme.</li>
+            <li>WAF kural yaşam döngüsü.</li>
+        </ul>
+
+        <h3>5.9 Raporlama</h3>
+        <p>Kanıt + iş etkisi + yol haritası üçlüsünü içeren rapor formatı. CVSS ve iş etkisi çarpanları ile önceliklendirme.</p>
+
+        <h3>5.10 Otomasyon</h3>
+        <ul>
+            <li>CI/CD’de SAST, SCA, DAST ve secret scan.</li>
+            <li>SBOM üretimi ve supply-chain kontrolleri.</li>
+        </ul>
+
+        <h3>5.11 Hızlı Kontrol Listesi</h3>
+        <ul>
+            <li>SoW, yetki, kill-switch doğrulaması.</li>
+            <li>Düşük gürültülü keşif yapıldığından emin ol.</li>
+            <li>WAF/SIEM korelasyonları izlendi mi?</li>
+            <li>Kanıtlar maskeli ve tekrarlanabilir mi?</li>
+        </ul>
+
+        <h3>5.12 Değerlendirme</h3>
+        <ul>
+            <li>Üretim ortamında düşük gürültülü nmap stratejisi.</li>
+            <li>WAF detect-only → block geçiş metrikleri.</li>
+            <li>Büyük Intruder setleri yerine küçük set kullanımının avantajları.</li>
+            <li>TLS başlıklarını reverse proxy’de eklemenin artıları/eksileri.</li>
+            <li>IDS korelasyon senaryoları.</li>
+            <li>CVSS yüksek ama iş etkisi düşük bulgu örneği.</li>
+        </ul>
+    </section>
+
+    <section id="bolum-6">
+        <h2 class="section-title">6. Bölüm – Sistem ve Ağ Güvenliği</h2>
+        <p>Linux &amp; Windows hardening, Active Directory güvenliği, ağ segmentasyonu, forensics ve patch management üzerine derin içerik.</p>
+
+        <h3>6.1 Linux Hardening</h3>
+        <ul>
+            <li>CIS Benchmark uygulamaları, otomatik güvenlik güncellemeleri.</li>
+            <li>SSH sertleştirme (PasswordAuthentication no, PermitRootLogin no).</li>
+            <li>SUID/SGID taramaları, AIDE/Tripwire ile bütünlük kontrolü.</li>
+            <li>auditd kuralları ile kritik dosya ve syscalls izleme.</li>
+        </ul>
+
+        <h3>6.2 Windows &amp; Active Directory</h3>
+        <ul>
+            <li>WSUS/Intune patch politikasının dağıtımı.</li>
+            <li>LAPS, SMB/NTLM sertleştirmesi, Sysmon + Defender entegrasyonu.</li>
+            <li>Tier’li admin modeli, MFA zorunluluğu, LDAP signing.</li>
+            <li>Event ID’leri (4624, 4625, 4720, 4672) analiz ve SIEM kural örnekleri.</li>
+        </ul>
+
+        <h3>6.3 Ağ Güvenliği ve Segmentasyon</h3>
+        <ul>
+            <li>Management/Production/Database ağ ayrımı.</li>
+            <li>Egress filtering, metadata IP bloklama.</li>
+            <li>IDS/IPS (Zeek, Suricata), NetFlow/VPC Flow logları.</li>
+        </ul>
+
+        <h3>6.4 Forensics</h3>
+        <ul>
+            <li>Volatile veri toplama (ps, netstat, lsof), disk imajı alma, hashleme.</li>
+            <li>Ağ delilleri (pcap, DNS logları), timeline oluşturma.</li>
+        </ul>
+
+        <h3>6.5 Patch &amp; Vulnerability Management</h3>
+        <p>Risk tabanlı patch planlaması, SBOM ve CVE takibi, otomasyon pipeline’ları.</p>
+
+        <h3>6.6 Detection Engineering</h3>
+        <ul>
+            <li>Linux brute-force tespiti, lateral movement korelasyonu.</li>
+            <li>AIDE change + process execution senaryoları.</li>
+        </ul>
+
+        <h3>6.7 Playbook Örnekleri</h3>
+        <ul>
+            <li><strong>SSH brute-force:</strong> Fail2ban, IP bloklama, anahtar rotasyonu.</li>
+            <li><strong>AD compromise şüphesi:</strong> Hesap kilitleme, KRBTGT rotasyonu, Defender for Identity analizi.</li>
+        </ul>
+
+        <h3>6.8 Laboratuvarlar</h3>
+        <ul>
+            <li>Linux hardening &amp; AIDE/Auditd entegrasyonu.</li>
+            <li>Windows &amp; Sysmon konfigürasyonu.</li>
+            <li>AD hygiene ve detection tatbikatı.</li>
+            <li>Zeek/Suricata kural yazımı.</li>
+        </ul>
+
+        <h3>6.9 KPI’lar</h3>
+        <ul>
+            <li>MTTD &lt; 4 saat, MTTR &lt; 72 saat.</li>
+            <li>Patch uyumluluğu, false positive oranı.</li>
+        </ul>
+
+        <h3>6.10 Kaynaklar</h3>
+        <ul>
+            <li>CIS Benchmarks, Red Hat AIDE dokümantasyonu.</li>
+            <li>Microsoft Defender for Identity rehberleri.</li>
+            <li>NIST SP 800-40, Zeek/Suricata community kaynakları.</li>
+        </ul>
+
+        <h3>6.11 Quick Wins</h3>
+        <ul>
+            <li>SSH parola girişini devre dışı bırakmak.</li>
+            <li>AIDE deploy ve baseline almak.</li>
+            <li>Sysmon yüklemek ve logları SIEM’e aktarmak.</li>
+            <li>Egress whitelisting.</li>
+            <li>Fail2ban kuralı oluşturmak.</li>
+        </ul>
+    </section>
+
+    <section id="bolum-7">
+        <h2 class="section-title">7. Bölüm – Bulut Güvenliği &amp; Kubernetes</h2>
+        <p>IAM, metadata, nesne depolama, Kubernetes hardening, cloud posture management ve forensics süreçleri.</p>
+
+        <h3>7.1 IAM</h3>
+        <ul>
+            <li>Least privilege, MFA zorunluluğu, temporary credential kullanımı.</li>
+            <li>Secret scanning, service control policies.</li>
+            <li>CloudTrail &amp; SIEM korelasyonu.</li>
+        </ul>
+
+        <h3>7.2 Instance Metadata (IMDS)</h3>
+        <ul>
+            <li>IMDSv2 zorunluluğu, egress kontrolü, uygulama seviyesinde whitelisting.</li>
+            <li>Metadata erişim logları ve SIEM kuralları.</li>
+        </ul>
+
+        <h3>7.3 Nesne Depolama Güvenliği</h3>
+        <ul>
+            <li>Account-level public access block.</li>
+            <li>Buket policy sertleştirme, encryption, Macie ile veri sınıflandırması.</li>
+        </ul>
+
+        <h3>7.4 Kubernetes Güvenliği</h3>
+        <ul>
+            <li>Pod Security Admission, RBAC hardening, NetworkPolicy.</li>
+            <li>Admission controller (OPA Gatekeeper), image scanning, etcd encryption.</li>
+            <li>Kubelet auth, audit log korelasyonu.</li>
+        </ul>
+
+        <h3>7.5 Cloud Posture Management</h3>
+        <p>Prowler, ScoutSuite gibi araçlarla sürekli tarama ve otomasyon.</p>
+
+        <h3>7.6 Cloud Forensics</h3>
+        <ul>
+            <li>Snapshot alma, CloudTrail loglarını koruma, timeline oluşturma.</li>
+        </ul>
+
+        <h3>7.7 Egress &amp; Data Exfil Detection</h3>
+        <ul>
+            <li>High entropy DNS, beaconing davranışları, DLP politikaları.</li>
+        </ul>
+
+        <h3>7.8 Playbook’lar</h3>
+        <ul>
+            <li>Public S3 bucket, şüpheli IAM anahtar kullanımı, Kubernetes ClusterRoleBinding, IMDS erişimi.</li>
+        </ul>
+
+        <h3>7.9 Policy-as-Code</h3>
+        <p>OPA/Rego, Terraform Sentinel, AWS Config ile guardrail otomasyonu.</p>
+
+        <h3>7.10 SIEM Kuralları</h3>
+        <ul>
+            <li>IAM anomaly, IMDS erişimi, public bucket yazma, K8s RBAC oluşturma.</li>
+        </ul>
+
+        <h3>7.11 Laboratuvarlar</h3>
+        <ul>
+            <li>Cloud audit, IMDSv2 rollout planı, K8s hardening, S3 public access tatbikatı.</li>
+        </ul>
+
+        <h3>7.12 Quick Wins</h3>
+        <ul>
+            <li>Public S3 access block, IAM wildcard izinlerini kaldırma.</li>
+            <li>IMDSv2 enforcement, PodSecurity admission.</li>
+            <li>Daily posture scanning.</li>
+        </ul>
+
+        <h3>7.13 KPI’lar</h3>
+        <ul>
+            <li>Kritik cloud misconfig remediation süresi &lt; 72 saat.</li>
+            <li>Public bucket oranı 0, IMDSv1 devre dışı, CIS K8s compliance ≥ %95.</li>
+        </ul>
+    </section>
+
+    <section id="bolum-8">
+        <h2 class="section-title">8. Bölüm – Güvenlik Mühendisliği &amp; Secure SDLC</h2>
+        <p>Threat modeling, güvenli tasarım, SAST/DAST, CI/CD güvenliği, policy-as-code, DevSecOps pratikleri.</p>
+
+        <h3>8.1 Secure SDLC Aşamaları</h3>
+        <ol>
+            <li>Gereksinim &amp; Threat Modeling</li>
+            <li>Tasarım &amp; Risk Analizi</li>
+            <li>Kodlama &amp; SAST</li>
+            <li>Test &amp; DAST/IAST</li>
+            <li>Dağıtım &amp; Konfigürasyon</li>
+            <li>Sürekli izleme &amp; geri besleme</li>
+        </ol>
+
+        <h3>8.2 Threat Modeling</h3>
+        <p>STRIDE, PASTA gibi çerçeveleri veri akış diyagramları ile birleştirin. Her tehdit için mitigasyon planı üretin.</p>
+
+        <h3>8.3 Güvenli Tasarım İlkeleri</h3>
+        <ul>
+            <li>Least privilege, fail secure, defense in depth, secure defaults.</li>
+            <li>Audit &amp; logging, separation of duties, client input’a güvenmeme.</li>
+        </ul>
+
+        <h3>8.4 Kodlama &amp; SAST</h3>
+        <ul>
+            <li>SonarQube, CodeQL, Semgrep, Bandit.</li>
+            <li>Dependency-Check, Snyk, secret scanning.</li>
+        </ul>
+
+        <h3>8.5 DAST &amp; IAST</h3>
+        <p>Test ortamında ZAP/Burp taramaları, agent tabanlı IAST çözümleri.</p>
+
+        <h3>8.6 CI/CD Güvenlik Aşamaları</h3>
+        <ul>
+            <li>Pre-commit secret/lint.</li>
+            <li>Build aşamasında SAST + SCA.</li>
+            <li>Test aşamasında DAST.</li>
+            <li>Deploy aşamasında imzalı artefakt, SBOM.</li>
+        </ul>
+
+        <h3>8.7 Policy-as-Code</h3>
+        <p>OPA/Rego, Terraform Sentinel, AWS Config Rules ile güvenlik politikalarını kod olarak yönetmek.</p>
+
+        <h3>8.8 Threat Model &amp; Secure Code Review Lab</h3>
+        <ul>
+            <li>STRIDE tablosu oluşturma.</li>
+            <li>Bandit/Dependency-Check taraması ve düzeltme PR’ı.</li>
+            <li>CI security stage implementasyonu.</li>
+        </ul>
+
+        <h3>8.9 Olay Simülasyonu</h3>
+        <p>CI runner’da API anahtarı sızıntısı senaryosu: revoke, log analizi, Vault kullanımı, pipeline güncellemesi.</p>
+
+        <h3>8.10 KPI’lar</h3>
+        <ul>
+            <li>Build başına SAST/SCA: %100.</li>
+            <li>Ortalama zafiyet kapatma süresi &lt; 7 gün.</li>
+            <li>Threat model güncelliği her major release.</li>
+        </ul>
+
+        <h3>8.11 Kaynaklar</h3>
+        <ul>
+            <li>OWASP SAMM &amp; ASVS, Microsoft SDL, NIST SSDF.</li>
+            <li>Semgrep, SonarQube, OPA/Sentinel dokümantasyonları.</li>
+        </ul>
+    </section>
+
+    <section id="bolum-9">
+        <h2 class="section-title">9. Bölüm – Operasyonel Güvenlik &amp; Olay Müdahalesi</h2>
+        <p>SOC süreçleri, SIEM, EDR, detection engineering, hunting, SOAR, playbook yönetimi ve RCA.</p>
+
+        <h3>9.1 Olay Müdahale Yaşam Döngüsü</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Aşama</th>
+                    <th>Açıklama</th>
+                    <th>Araçlar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Preparation</td>
+                    <td>Plan, prosedür, envanter</td>
+                    <td>IR planları, SIEM, SOAR</td>
+                </tr>
+                <tr>
+                    <td>Detection</td>
+                    <td>Alarm/Anomali tespiti</td>
+                    <td>SIEM, EDR, IDS</td>
+                </tr>
+                <tr>
+                    <td>Containment</td>
+                    <td>Yayılımı engelleme</td>
+                    <td>Firewall, SOAR, EDR isolate</td>
+                </tr>
+                <tr>
+                    <td>Eradication</td>
+                    <td>Zararlı unsuru kaldırma</td>
+                    <td>EDR, patch</td>
+                </tr>
+                <tr>
+                    <td>Recovery</td>
+                    <td>Sistem geri yükleme</td>
+                    <td>Backup, yedekleme</td>
+                </tr>
+                <tr>
+                    <td>Lessons Learned</td>
+                    <td>Süreci iyileştirme</td>
+                    <td>Rapor, RCA</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>9.2 SOC Bileşenleri</h3>
+        <ul>
+            <li>Tier-1 analistler, Tier-2 incident responder, Tier-3 threat hunter.</li>
+            <li>SOC manager ve IR lead, süreç yönetimi ve raporlama.</li>
+        </ul>
+
+        <h3>9.3 SIEM</h3>
+        <ul>
+            <li>Log toplama, korelasyon, görselleştirme, raporlama.</li>
+            <li>Windows Event, syslog, firewall, WAF, VPN, CloudTrail, DNS logları.</li>
+            <li>Alarm süresi &lt; 2 dakika hedeflenir.</li>
+        </ul>
+
+        <h3>9.4 EDR/NDR/SOAR Entegrasyonu</h3>
+        <ul>
+            <li>EDR ile host davranış izleme, NDR ile ağ analizi, SOAR ile otomasyon.</li>
+            <li>EDR alarmı → SIEM korelasyonu → SOAR izolasyon aksiyonu.</li>
+        </ul>
+
+        <h3>9.5 Detection Engineering</h3>
+        <ul>
+            <li>Signature, davranış, anomali, hunt sorguları.</li>
+            <li>Sigma, YARA, KQL, MITRE ATT&amp;CK uyumlu kurallar.</li>
+        </ul>
+
+        <h3>9.6 Threat Hunting</h3>
+        <ul>
+            <li>Hipotez, istihbarat veya davranış odaklı hunting.</li>
+            <li>EDR telemetry, DNS/proxy logları, CloudTrail, auth logları.</li>
+            <li>Hunting çıktıları SIEM kuralına dönüştürülmelidir.</li>
+        </ul>
+
+        <h3>9.7 Playbook’lar</h3>
+        <ul>
+            <li>Kimlik bilgisi sızıntısı, zararlı makro, şüpheli ağ trafiği gibi senaryolar.</li>
+        </ul>
+
+        <h3>9.8 Olay Raporlama &amp; RCA</h3>
+        <p>Özet, etki analizi, kök neden, zaman çizelgesi, düzeltici önlemler ve öğrenilen dersler belgelendirilmelidir.</p>
+
+        <h3>9.9 KPI’lar</h3>
+        <ul>
+            <li>MTTD &lt; 4h, MTTR &lt; 24h.</li>
+            <li>Alarm doğruluk oranı &gt; %90, false alarm oranı &lt; %10.</li>
+            <li>Playbook otomasyon oranı &gt; %60.</li>
+        </ul>
+
+        <h3>9.10 Laboratuvarlar</h3>
+        <ul>
+            <li>SIEM kuralı oluşturma.</li>
+            <li>EDR alert analizi.</li>
+            <li>Threat hunting tatbikatı.</li>
+        </ul>
+
+        <h3>9.11 En İyi Uygulamalar</h3>
+        <ul>
+            <li>Log bütünlüğü (hash &amp; WORM depolama).</li>
+            <li>Alarm yorgunluğunu azaltma, triage rehberleri.</li>
+            <li>Düzenli tabletop exercise.</li>
+        </ul>
+    </section>
+
+    <section id="bolum-10">
+        <h2 class="section-title">10. Bölüm – Portföy, Projeler ve Mülakat Hazırlığı</h2>
+        <p>Güvenlik mühendisliği kariyer yol haritası, portföy içerikleri, örnek projeler, mülakat simülasyonları ve KPI planı.</p>
+
+        <h3>10.1 Hedefler</h3>
+        <ul>
+            <li>Teknik portföy oluşturma, mülakat sorularını yapılandırılmış cevaplama.</li>
+            <li>CV, GitHub ve LinkedIn profillerini güvenlik odaklı güncelleme.</li>
+        </ul>
+
+        <h3>10.2 Kariyer Yol Haritası</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Düzey</th>
+                    <th>Odak</th>
+                    <th>Yetkinlikler</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Junior</td>
+                    <td>Log analizi, zafiyet tarama</td>
+                    <td>Wireshark, nmap, temel SIEM</td>
+                </tr>
+                <tr>
+                    <td>Mid-Level</td>
+                    <td>Olay analizi, otomasyon</td>
+                    <td>SIEM kural yazımı, EDR, Python</td>
+                </tr>
+                <tr>
+                    <td>Senior</td>
+                    <td>Mimari güvenlik, liderlik</td>
+                    <td>Threat modeling, IR yönetimi, Cloud/K8s</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>10.3 Portföy İçeriği</h3>
+        <ul>
+            <li>CV, teknik rapor, rapor şablonu, lab/kod, demo/sunum, sertifikalar.</li>
+        </ul>
+
+        <h3>10.4 Örnek Portföy Projeleri</h3>
+        <ul>
+            <li><strong>Web Güvenliği Laboru:</strong> OWASP Juice Shop üzerinde zafiyet tespiti ve savunma önerisi.</li>
+            <li><strong>Cloud Güvenliği Denetimi:</strong> Prowler/ScoutSuite taraması ve remediation.</li>
+            <li><strong>SOC/IR Analizi:</strong> SIEM kuralı, olay raporu, lessons learned.</li>
+        </ul>
+
+        <h3>10.5 Mülakat Hazırlığı</h3>
+        <ul>
+            <li>Ağ, web, cloud, SOC, DevSecOps konularında teknik soru bankası.</li>
+            <li>Davranışsal sorular (problem çözme, stres yönetimi, ekip içi iletişim).</li>
+        </ul>
+
+        <h3>10.6 Mülakat Simülasyonu</h3>
+        <p>“30 dakika içinde olağandışı oturum tespiti” senaryosuna log kontrolü, containment, delil toplama ve lessons learned içeren yapılandırılmış yanıt.</p>
+
+        <h3>10.7 Portföy Sunumu</h3>
+        <p>Projeler, rapor ekran görüntüleri, gelecek planları ve iletişim bilgilerinin yer aldığı kısa sunum.</p>
+
+        <h3>10.8 KPI Takvimi</h3>
+        <ul>
+            <li>1. ay: Portföy 1.</li>
+            <li>2. ay: SAST/DAST pipeline.</li>
+            <li>3. ay: SIEM kural seti.</li>
+            <li>4. ay: IR rapor şablonu.</li>
+            <li>6. ay: Üç proje ve LinkedIn portföyü.</li>
+        </ul>
+
+        <h3>10.9 Kaynaklar</h3>
+        <ul>
+            <li>OWASP SAMM &amp; ASVS, NIST Workforce Framework.</li>
+            <li>MITRE ATT&amp;CK, LinkedIn Learning, TryHackMe/HackTheBox.</li>
+            <li>AWS Skill Builder, Awesome Security Engineer listeleri.</li>
+        </ul>
+    </section>
+
+    <section id="ekler">
+        <h2 class="section-title">Ekler &amp; Playbook Seti</h2>
+        <h3>Playbook &amp; Runbook’lar</h3>
+        <ul>
+            <li>Playbook A – Public S3 Bucket Bulundu.</li>
+            <li>Playbook B – Şüpheli IAM Anahtar Kullanımı.</li>
+            <li>Playbook C – Kubernetes ClusterRoleBinding Anomalisi.</li>
+            <li>Playbook D – IMDS Erişimi Tespiti.</li>
+        </ul>
+
+        <h3>Lab Kurulum Rehberi</h3>
+        <ul>
+            <li>Prowler &amp; ScoutSuite ortamı.</li>
+            <li>Minikube cluster hardening.</li>
+            <li>IMDSv2 doğrulama.</li>
+            <li>S3 public access simülasyonu.</li>
+        </ul>
+
+        <h3>OPA/Gatekeeper Örnek Constraint’ler</h3>
+        <ul>
+            <li>Privileged container engelleme.</li>
+            <li>hostPath kullanımını bloklama.</li>
+            <li>Root user kullanımını engelleme.</li>
+            <li>Image kaynaklarını kısıtlama.</li>
+        </ul>
+
+        <h3>Otomasyon Akışı</h3>
+        <p>Security stage pipeline, SOAR tetikleyicileri, auto-remediation akışları.</p>
+
+        <h3>Değerlendirme &amp; Portföy Teslim Örnekleri</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Görev</th>
+                    <th>Çıktı</th>
+                    <th>Teslim</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>IAM Audit</td>
+                    <td>Riskli policy listesi</td>
+                    <td>Rapor + plan</td>
+                </tr>
+                <tr>
+                    <td>K8s Hardening</td>
+                    <td>Constraint &amp; benchmark raporu</td>
+                    <td>YAML + sonuç</td>
+                </tr>
+                <tr>
+                    <td>IMDSv2 Uygulaması</td>
+                    <td>AWS CLI çıktıları</td>
+                    <td>Script + ekran görüntüsü</td>
+                </tr>
+                <tr>
+                    <td>S3 Kapanış Tatbikatı</td>
+                    <td>Önce/sonra policy durumu</td>
+                    <td>JSON + log</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer class="py-4 bg-dark text-white text-center">
+    <p>&copy; 2025 İrem Nur Göçer. Tüm hakları saklıdır.</p>
+</footer>
+
+</body>
+</html>
+
