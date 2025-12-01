@@ -85,15 +85,30 @@
             box-shadow: 0 20px 44px rgba(12, 99, 58, 0.18);
         }
         .callout strong {
+            color: inherit; 
             display: block;
             font-weight: 700;
             margin-bottom: 8px;
         }
-        .warning {
-            background: linear-gradient(135deg, #fff7f0 0%, #ffffff 100%);
-            border-left: 6px solid #f39c12;
-            box-shadow: 0 20px 44px rgba(204, 133, 15, 0.16);
+        .blog-hero .callout {
+            color: #111; /* kutu içindeki yazıyı koyu yap */
+            background: #fff7e0; /* kontrast yarat */
+            margin-top: 24px;
         }
+
+        .warning {
+            background: linear-gradient(135deg, #ffe3c7 0%, #fff8ef 100%);
+            border-left: 6px solid #f39c12;
+        }
+        .blog-hero .warning {
+            color: #000;
+        }
+        .warning-box {
+            background: #fff4e5;
+            border-left: 6px solid #f39c12;
+        }
+
+
         .section-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -207,7 +222,7 @@
             <span><strong>Tarih:</strong> 30 Ekim 2025</span>
             <span><strong>Lisans:</strong> Eğitim ve kurumsal farkındalık amacıyla kullanılabilir.</span>
         </div>
-        <div class="callout warning mt-4">
+        <div class="callout warning-box">
             <strong>Uyarı</strong>
             <p>Bu içerikteki test adımları yalnızca izinli veya izole laboratuvar ortamlarında uygulanmalıdır. Canlı sistemlerde, yazılı izin olmaksızın gerçekleştirilen her işlem yasal suç teşkil eder.</p>
         </div>
