@@ -3,421 +3,594 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="İrem Nur Göçer'in kişisel web sayfası.">
-    <title>İrem Nur Göçer | Backend Developer</title>
+    <title>İrem Nur Göçer | Yazılım Geliştirme Uzmanı</title>
+    <meta name="description" content="İrem Nur Göçer — yazılım geliştirme uzmanı. Yapay zekâ destekli sistemler, backend geliştirme, veritabanı ve güvenlik üzerine projeler, blog yazıları ve iletişim.">
+    <meta name="author" content="İrem Nur Göçer">
+    <link rel="canonical" href="https://iremnurgocer.github.io/">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Sosyal medya önizlemesi -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:title" content="İrem Nur Göçer | Yazılım Geliştirme Uzmanı">
+    <meta property="og:description" content="Yapay zekâ destekli sistemler, backend geliştirme, veritabanı ve güvenlik üzerine projeler ve yazılar.">
+    <meta property="og:url" content="https://iremnurgocer.github.io/">
+    <meta property="og:image" content="https://iremnurgocer.github.io/profile.jpg">
+    <meta name="twitter:card" content="summary_large_image">
 
-    <style>
-        body {
-        font-family: 'Montserrat', sans-serif;
-        background-color: #f3f3f3;
-    }
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%235f7a12'/><text x='50' y='68' font-size='52' font-family='sans-serif' font-weight='600' fill='%23fff' text-anchor='middle'>İG</text></svg>">
 
-    #hero {
-        background-image: url('background.jpg');
-        background-size: cover;
-        background-position: center;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #a5ad0c;
-        text-align: center;
-    }
-
-    .parallax {
-        background-attachment: fixed;
-    }
-
-    .profile-pic {
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-        border: 5px solid #f3f3f3;
-    }
-
-    .section {
-        padding: 100px 0;
-    }
-
-    .card {
-        border: none;
-    }
-
-    .card-img-top {
-        height: 200px;
-        object-fit: cover;
-    }
-
-    footer {
-        background-color: #343a40;
-        color: #a5ad0c;
-    }
-
-    .btn {
-        background-color: #332600;
-    }
-
-    .btn:hover {
-        background-color: #395d00;
-        color: #f8efed;
-    }
-    /* Kartın içindeki resim normal durumda */
-    .card-img-top {
-        height: 200px;
-        object-fit: cover;
-        transition: transform 0.3s ease-in-out;
-    }
-
-    /* Kartın üzerine gelindiğinde kartın ve resmin hareketini sağlar */
-    .card:hover .card-img-top {
-        transform: scale(0.95); /* Resim kartın hover durumunda küçülür */
-    }
-
-    /* Kart için 3 boyutlu etki */
-    .card {
-        border: none;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif bir başlangıç gölgesi */
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .card-body {
-        flex-grow: 1;
-    }
-
-    /* Kartın hover durumunda yukarı kalkması ve gölgenin büyümesi */
-    .card:hover {
-        transform: translateY(-10px); /* Kartı yukarı kaldırır */
-        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2); /* Daha büyük gölge efekti */
-    }
-
-    .p-selection {
-        padding-top: 100px;
-        padding-bottom: 50px;
-    }
-    /* Bağlantıların (linklerin) rengi ve hover durumu */
-    .custom-link {
-        color: #332600; /* Link rengi */
-        text-decoration: none; /* Alt çizgiyi kaldır */
-    }
-
-    .custom-link:hover {
-        color: #395d00; /* Hover durumunda renk değişimi */
-        text-decoration: underline; /* Üzerine gelindiğinde alt çizgi ekle */
-    }
-
-    /* Profil resmi ve diğer resimlerin stili */
-    .profile-pic {
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-        border: 5px solid #f3f3f3;
-    }
-    
-    body {
-        font-family: 'Montserrat', sans-serif;
-    }
-
-    </style>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <a class="skip-link" href="#main">İçeriğe geç</a>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">İrem Nur Göçer</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+    <!-- Gezinme -->
+    <header class="nav">
+        <div class="wrap nav__inner">
+            <a class="nav__brand" href="#hero">İrem Nur Göçer<span>.</span></a>
+
+            <nav aria-label="Ana menü">
+                <ul class="nav__links" id="nav-links">
+                    <li><a class="nav__link" href="#about">Hakkımda</a></li>
+                    <li><a class="nav__link" href="#skills">Yetkinlikler</a></li>
+                    <li><a class="nav__link" href="#experience">Deneyim</a></li>
+                    <li><a class="nav__link" href="#projects">Projeler</a></li>
+                    <li><a class="nav__link" href="#academic">Akademik</a></li>
+                    <li><a class="nav__link" href="#blog">Blog</a></li>
+                    <li><a class="nav__link" href="#contact">İletişim</a></li>
+                </ul>
+            </nav>
+
+            <button class="icon-btn" type="button" data-theme-toggle aria-label="Koyu temaya geç">
+                <i class="fa-solid fa-moon" aria-hidden="true"></i>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">Hakkımda</a>
+
+            <button class="icon-btn nav__toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="nav-links" aria-label="Menüyü aç">
+                <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- Giriş -->
+        <section class="hero" id="hero">
+            <div class="wrap hero__inner">
+                <div>
+                    <p class="hero__status">Yazılım geliştirme &amp; yapay zekâ projeleri</p>
+                    <h1 class="hero__title">İrem Nur Göçer</h1>
+                    <ul class="hero__roles">
+                        <li>Software Developer</li>
+                        <li>AI &amp; Backend</li>
+                        <li>Database Developer</li>
+                        <li>Security Engineer</li>
+                    </ul>
+                    <p class="hero__text">
+                        Matematik ve Bilgisayar Bilimleri kökenli bir yazılım geliştiriciyim.
+                        Kurumsal sistemlerde yapay zekâ destekli servisler, backend mimarileri ve
+                        veri katmanları kuruyorum; akademik tarafta yapay zekâ algoritmalarını
+                        diferansiyel geometri ile inceliyorum.
+                    </p>
+                    <div class="hero__actions">
+                        <a class="btn btn--primary" href="#projects">
+                            <i class="fa-solid fa-diagram-project" aria-hidden="true"></i> Projelerimi gör
+                        </a>
+                        <a class="btn btn--ghost" href="IremNurGocer-CV.pdf" download>
+                            <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> CV indir
+                        </a>
+                        <a class="btn btn--ghost" href="#contact">
+                            <i class="fa-regular fa-envelope" aria-hidden="true"></i> İletişim
+                        </a>
+                    </div>
+                </div>
+                <img class="hero__portrait" src="profile.jpg" width="240" height="240" alt="İrem Nur Göçer portresi">
+            </div>
+        </section>
+
+        <!-- Hakkımda -->
+        <section class="section section--alt" id="about">
+            <div class="wrap reveal">
+                <span class="section__eyebrow">Hakkımda</span>
+                <h2 class="section__title">Temiz, sürdürülebilir ve güvenli kod</h2>
+                <p class="section__lead" style="max-width: 72ch;">
+                    Merhaba, ben İrem. Eskişehir Osmangazi Üniversitesi Matematik ve Bilgisayar
+                    Bilimleri bölümünden derece ile mezun oldum, aynı bölümde yüksek lisansımı
+                    tamamladım. Backend ve frontend geliştirme, sunucu yönetimi, veritabanı
+                    geliştirme, sistem yönetimi ve DevOps konularında deneyim sahibiyim.
+                    Son dönemde kurumsal süreçleri hızlandıran yapay zekâ destekli servisler
+                    (RAG mimarileri, doküman analizi, Azure OpenAI entegrasyonları) üzerine
+                    çalışıyorum. <strong>Node.js, PHP, JavaScript, C# ve Python</strong> ile
+                    ürün geliştirdim; hedefim güvenlik açığı bırakmayan, güncel teknolojilerle
+                    temiz ve sürdürülebilir kod yazan bir geliştirici olmak.
+                </p>
+
+                <div class="grid grid--4">
+                    <div class="skill-group">
+                        <div class="skill-group__head">
+                            <span class="skill-group__icon"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
+                            <h3 class="skill-group__title">5+ yıl</h3>
+                        </div>
+                        <p class="card__text" style="margin:0;">Profesyonel yazılım geliştirme deneyimi</p>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group__head">
+                            <span class="skill-group__icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span>
+                            <h3 class="skill-group__title">3.70 GNO</h3>
+                        </div>
+                        <p class="card__text" style="margin:0;">Matematik ve Bilgisayar Bilimleri yüksek lisansı</p>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group__head">
+                            <span class="skill-group__icon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></span>
+                            <h3 class="skill-group__title">Full-stack</h3>
+                        </div>
+                        <p class="card__text" style="margin:0;">API, veritabanı, arayüz ve dağıtım zinciri</p>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-group__head">
+                            <span class="skill-group__icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+                            <h3 class="skill-group__title">Güvenlik</h3>
+                        </div>
+                        <p class="card__text" style="margin:0;">Güvenli kod, pentest araçları ve DevSecOps pratikleri</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Yetkinlikler -->
+        <section class="section" id="skills">
+            <div class="wrap reveal">
+                <span class="section__eyebrow">Yetkinlikler</span>
+                <h2 class="section__title">Teknik bilgiler</h2>
+                <p class="section__lead">Projelerde aktif olarak kullandığım diller, araçlar ve platformlar.</p>
+
+                <div class="skills">
+                    <div class="skill-group">
+                        <div class="skill-group__head">
+                            <span class="skill-group__icon"><i class="fa-solid fa-terminal" aria-hidden="true"></i></span>
+                            <h3 class="skill-group__title">Programlama dilleri</h3>
+                        </div>
+                        <ul class="badges">
+                            <li>Python</li><li>JavaScript</li><li>Node.js</li><li>PHP</li>
+                            <li>C#</li><li>SQL</li><li>MATLAB</li><li>Maple</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group__head">
+                            <span class="skill-group__icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></span>
+                            <h3 class="skill-group__title">Yapay zekâ &amp; veri</h3>
+                        </div>
+                        <ul class="badges">
+                            <li>Azure OpenAI</li><li>RAG</li><li>FAISS</li><li>FastAPI</li>
+                            <li>Document Intelligence</li><li>Streamlit</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group__head">
+                            <span class="skill-group__icon"><i class="fa-solid fa-database" aria-hidden="true"></i></span>
+                            <h3 class="skill-group__title">Veritabanları</h3>
+                        </div>
+                        <ul class="badges">
+                            <li>PostgreSQL</li><li>MongoDB</li><li>MySQL</li>
+                            <li>Oracle</li><li>MSSQL</li><li>Redis</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group__head">
+                            <span class="skill-group__icon"><i class="fa-solid fa-cloud" aria-hidden="true"></i></span>
+                            <h3 class="skill-group__title">Bulut &amp; sunucu</h3>
+                        </div>
+                        <ul class="badges">
+                            <li>Azure</li><li>AWS</li><li>Linux</li>
+                            <li>Docker</li><li>CI/CD</li><li>IIS</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group__head">
+                            <span class="skill-group__icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+                            <h3 class="skill-group__title">Güvenlik &amp; test</h3>
+                        </div>
+                        <ul class="badges">
+                            <li>Burp Suite</li><li>Postman</li><li>SOAPUI</li>
+                            <li>Git</li><li>OWASP</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group__head">
+                            <span class="skill-group__icon"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></span>
+                            <h3 class="skill-group__title">Web &amp; arayüz</h3>
+                        </div>
+                        <ul class="badges">
+                            <li>REST API</li><li>SOAP</li><li>React</li>
+                            <li>HTML</li><li>CSS</li><li>Bootstrap</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deneyim ve eğitim -->
+        <section class="section section--alt" id="experience">
+            <div class="wrap reveal">
+                <span class="section__eyebrow">Kariyer</span>
+                <h2 class="section__title">Deneyim</h2>
+
+                <div class="grid grid--2" style="align-items: start; gap: 48px;">
+                    <ol class="timeline">
+                        <li class="timeline__item timeline__item--current">
+                            <span class="timeline__period">2025 — Halen</span>
+                            <h3 class="timeline__role">Yazılım Geliştirme Uzmanı</h3>
+                            <p class="timeline__org">IC Holding</p>
+                            <p class="timeline__desc">
+                                Kurumsal süreçler için yapay zekâ destekli servisler: doküman analizi,
+                                Azure OpenAI entegrasyonları ve backend mimarileri.
+                            </p>
+                        </li>
+                        <li class="timeline__item">
+                            <span class="timeline__period">Mar 2023 — 2025</span>
+                            <h3 class="timeline__role">Software Developer</h3>
+                            <p class="timeline__org">Key Yazılım Çözümleri A.Ş.</p>
+                            <p class="timeline__desc">PHP tabanlı kurumsal uygulamaların geliştirilmesi ve bakımı.</p>
+                        </li>
+                        <li class="timeline__item">
+                            <span class="timeline__period">Ara 2022 — Mar 2023</span>
+                            <h3 class="timeline__role">Back-end Developer</h3>
+                            <p class="timeline__org">Mevsimi Gıda Pazarlama Ticaret A.Ş.</p>
+                            <p class="timeline__desc">PHP, Symfony ve Laravel ile e-ticaret servisleri.</p>
+                        </li>
+                        <li class="timeline__item">
+                            <span class="timeline__period">Tem 2022 — Ağu 2022</span>
+                            <h3 class="timeline__role">Junior Back-end Developer</h3>
+                            <p class="timeline__org">Jotform Yazılım A.Ş.</p>
+                            <p class="timeline__desc">PHP ve JavaScript ile ürün geliştirme.</p>
+                        </li>
+                        <li class="timeline__item">
+                            <span class="timeline__period">Ara 2021 — Tem 2022</span>
+                            <h3 class="timeline__role">Back-end Developer</h3>
+                            <p class="timeline__org">Piton Ar-Ge ve Yazılım</p>
+                            <p class="timeline__desc">C# ve .NET ile servis geliştirme.</p>
+                        </li>
+                        <li class="timeline__item">
+                            <span class="timeline__period">Nis 2021 — Nis 2022</span>
+                            <h3 class="timeline__role">Full Stack Intern</h3>
+                            <p class="timeline__org">FetalIST Bilişim Teknolojileri A.Ş.</p>
+                            <p class="timeline__desc">Java ve AWS üzerinde uçtan uca geliştirme.</p>
+                        </li>
+                    </ol>
+
+                    <div>
+                        <h2 class="section__title" style="font-size: 1.45rem;">Eğitim</h2>
+                        <ol class="timeline" style="margin-bottom: 40px;">
+                            <li class="timeline__item">
+                                <span class="timeline__period">Yüksek Lisans</span>
+                                <h3 class="timeline__role">Matematik ve Bilgisayar Bilimleri</h3>
+                                <p class="timeline__org">Eskişehir Osmangazi Üniversitesi — 3.70 GNO</p>
+                                <p class="timeline__desc">
+                                    Tez: Yapay zekâ algoritmalarının diferansiyel geometri ile incelenmesi.
+                                </p>
+                            </li>
+                            <li class="timeline__item">
+                                <span class="timeline__period">Lisans</span>
+                                <h3 class="timeline__role">Matematik ve Bilgisayar Bilimleri</h3>
+                                <p class="timeline__org">Eskişehir Osmangazi Üniversitesi — 3.12 GNO</p>
+                                <p class="timeline__desc">Bölüm derecesi ile mezuniyet.</p>
+                            </li>
+                        </ol>
+
+                        <!-- ============================================================
+                             SERTİFİKALAR
+                             Uydurma bilgi yazmamak için bu bölüm kapalı bırakıldı.
+                             Kendi sertifikalarını aşağıdaki şablona göre doldur, sonra
+                             bu bloğu saran yorum işaretlerini kaldır; bölüm yayına girer.
+                        <h2 class="section__title" style="font-size: 1.45rem;">Sertifikalar</h2>
+                        <div class="grid" style="gap: 12px;">
+                            <article class="cert">
+                                <span class="cert__icon"><i class="fa-solid fa-certificate" aria-hidden="true"></i></span>
+                                <div>
+                                    <h3 class="cert__title">Sertifika adı</h3>
+                                    <p class="cert__meta">Veren kurum · Yıl</p>
+                                </div>
+                            </article>
+                            <article class="cert">
+                                <span class="cert__icon"><i class="fa-solid fa-certificate" aria-hidden="true"></i></span>
+                                <div>
+                                    <h3 class="cert__title">Sertifika adı</h3>
+                                    <p class="cert__meta">Veren kurum · Yıl</p>
+                                </div>
+                            </article>
+                        </div>
+                             ============================================================ -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projeler -->
+        <section class="section" id="projects">
+            <div class="wrap reveal">
+                <span class="section__eyebrow">Portföy</span>
+                <h2 class="section__title">Projelerim</h2>
+                <p class="section__lead">Kaynak kodları GitHub üzerinde açık olan kişisel ve deneysel projeler.</p>
+
+                <div class="grid grid--3">
+                    <article class="card">
+                        <img class="card__media" src="chatcoreai.jpg" alt="ChatCore.AI arayüzü" loading="lazy">
+                        <div class="card__body">
+                            <h3 class="card__title">ChatCore.AI</h3>
+                            <p class="card__text">
+                                Kurumsal veriler üzerinde çalışan RAG destekli yapay zekâ asistanı.
+                                Vektör arama ve önbellek katmanıyla ölçeklenebilir sohbet deneyimi.
+                            </p>
+                            <ul class="card__tags">
+                                <li>FastAPI</li><li>Streamlit</li><li>FAISS</li><li>PostgreSQL</li><li>Redis</li>
+                            </ul>
+                            <div class="card__actions">
+                                <a class="btn btn--primary btn--sm btn--block" href="https://github.com/iremnurgocer/ChatCore.AI" target="_blank" rel="noopener">
+                                    <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub'da gör
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img class="card__media" src="task-client.jpg" alt="Task Manager istemci arayüzü" loading="lazy">
+                        <div class="card__body">
+                            <h3 class="card__title">Task Manager Platformu</h3>
+                            <p class="card__text">
+                                JWT tabanlı kimlik doğrulamalı görev yönetim sistemi.
+                                React arayüzü, Express.js API'si ve Sequelize ile PostgreSQL katmanı.
+                            </p>
+                            <ul class="card__tags">
+                                <li>React</li><li>Ant Design</li><li>Express.js</li><li>Sequelize</li><li>JWT</li>
+                            </ul>
+                            <div class="card__actions">
+                                <a class="btn btn--primary btn--sm" href="https://github.com/iremnurgocer/task-manager-client" target="_blank" rel="noopener">
+                                    <i class="fa-brands fa-github" aria-hidden="true"></i> Frontend
+                                </a>
+                                <a class="btn btn--ghost btn--sm" href="https://github.com/iremnurgocer/task-manager-api" target="_blank" rel="noopener">
+                                    <i class="fa-brands fa-github" aria-hidden="true"></i> Backend
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img class="card__media" src="gr-genarator.jpg" alt="QR Generator arayüzü" loading="lazy">
+                        <div class="card__body">
+                            <h3 class="card__title">QR Generator</h3>
+                            <p class="card__text">
+                                Metin veya bağlantıları anında QR koda dönüştüren web uygulaması;
+                                renk ve logo özelleştirmesi ile geçmiş yönetimi sunar.
+                            </p>
+                            <ul class="card__tags">
+                                <li>FastAPI</li><li>Python</li><li>Jinja2</li>
+                            </ul>
+                            <div class="card__actions">
+                                <a class="btn btn--primary btn--sm btn--block" href="https://github.com/iremnurgocer/qr-generator" target="_blank" rel="noopener">
+                                    <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub'da gör
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img class="card__media" src="chatapp.jpg" alt="Gerçek zamanlı sohbet uygulaması" loading="lazy">
+                        <div class="card__body">
+                            <h3 class="card__title">Chat App</h3>
+                            <p class="card__text">
+                                WebSocket üzerinden çalışan, odalara ayrılmış gerçek zamanlı
+                                mesajlaşma uygulaması.
+                            </p>
+                            <ul class="card__tags">
+                                <li>Node.js</li><li>WebSocket</li><li>JavaScript</li>
+                            </ul>
+                            <div class="card__actions">
+                                <a class="btn btn--primary btn--sm btn--block" href="https://github.com/iremnurgocer/chat-app" target="_blank" rel="noopener">
+                                    <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub'da gör
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img class="card__media" src="sepet.jpg" alt="Sepet uygulaması arayüzü" loading="lazy">
+                        <div class="card__body">
+                            <h3 class="card__title">Sepet Uygulaması</h3>
+                            <p class="card__text">
+                                MVC deseni ve özel yönlendirme yapısı kullanılarak geliştirilen
+                                e-ticaret sepet uygulaması.
+                            </p>
+                            <ul class="card__tags">
+                                <li>PHP</li><li>MVC</li><li>MySQL</li>
+                            </ul>
+                            <div class="card__actions">
+                                <a class="btn btn--primary btn--sm btn--block" href="https://github.com/iremnurgocer/sepet" target="_blank" rel="noopener">
+                                    <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub'da gör
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card__body" style="justify-content: center; text-align: center; gap: 12px;">
+                            <span class="skill-group__icon" style="margin: 0 auto; width: 44px; height: 44px; font-size: 1.1rem;">
+                                <i class="fa-brands fa-github" aria-hidden="true"></i>
+                            </span>
+                            <h3 class="card__title" style="margin: 0;">Diğer projeler</h3>
+                            <p class="card__text">Tüm açık kaynak depolarım GitHub profilimde.</p>
+                            <div class="card__actions" style="justify-content: center;">
+                                <a class="btn btn--ghost btn--sm" href="https://github.com/iremnurgocer?tab=repositories" target="_blank" rel="noopener">
+                                    Depoların tamamı
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Akademik -->
+        <section class="section section--alt" id="academic">
+            <div class="wrap reveal">
+                <span class="section__eyebrow">Araştırma</span>
+                <h2 class="section__title">Akademik çalışmalar</h2>
+                <p class="section__lead">
+                    Yapay zekâ algoritmalarının geometrik yapısı üzerine yürüttüğüm çalışmalar.
+                </p>
+
+                <div class="grid grid--2">
+                    <article class="paper">
+                        <span class="paper__kind">Yüksek lisans tezi</span>
+                        <h3 class="paper__title">Yapay zekâ algoritmalarının diferansiyel geometri ile incelenmesi</h3>
+                        <p class="paper__meta">Eskişehir Osmangazi Üniversitesi — Matematik ve Bilgisayar Bilimleri</p>
+                        <p class="paper__abstract">
+                            Öğrenme algoritmalarının parametre uzayını bir manifold olarak ele alıp,
+                            optimizasyon davranışını diferansiyel geometri araçlarıyla inceleyen çalışma.
+                        </p>
+                    </article>
+
+                    <article class="paper">
+                        <span class="paper__kind">İlgi alanları</span>
+                        <h3 class="paper__title">Devam eden araştırma konuları</h3>
+                        <p class="paper__meta">Sürekli güncellenen çalışma başlıkları</p>
+                        <ul class="card__points" style="margin: 0;">
+                            <li>Bilgi geometrisi ve optimizasyon yüzeyleri</li>
+                            <li>Retrieval-augmented generation mimarilerinin değerlendirilmesi</li>
+                            <li>Büyük dil modellerinde maliyet ve kalite dengesi</li>
+                            <li>Güvenli yazılım geliştirme ve tehdit modelleme</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog -->
+        <section class="section" id="blog">
+            <div class="wrap reveal">
+                <span class="section__eyebrow">Yazılar</span>
+                <h2 class="section__title">Bloglar</h2>
+                <p class="section__lead">Öğrendiklerimi derlediğim uzun soluklu teknik rehberler.</p>
+
+                <div class="grid grid--3">
+                    <article class="card">
+                        <img class="card__media" src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Güvenlik operasyonları görseli" loading="lazy">
+                        <div class="card__body">
+                            <h3 class="card__title">Security Engineer Eğitim Seti</h3>
+                            <p class="card__text">
+                                Tehdit modelleme, pentest, SOC, DevSecOps, bulut ve Kubernetes
+                                güvenliğini kapsayan ileri seviye yol haritası.
+                            </p>
+                            <ul class="card__points">
+                                <li>Pre-engagement belgeleri ve kill-switch planları</li>
+                                <li>Web/API güvenliği, SIEM ve hunting playbook'ları</li>
+                                <li>Cloud/K8s sertleştirme ve policy-as-code</li>
+                            </ul>
+                            <div class="card__actions">
+                                <a class="btn btn--primary btn--sm btn--block" href="blogs/security-engineer-training.html">Blogu oku</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img class="card__media card__media--contain" src="https://microservices.io/i/Microservice_Architecture.png" alt="Mikroservis mimarisi şeması" loading="lazy">
+                        <div class="card__body">
+                            <h3 class="card__title">Mikroservis Mimarisi</h3>
+                            <p class="card__text">
+                                Mikroservislerin ne zaman doğru tercih olduğu, servis sınırlarının
+                                nasıl çizileceği ve entegrasyon desenleri.
+                            </p>
+                            <ul class="card__points">
+                                <li>Monolitten ayrıştırma stratejileri</li>
+                                <li>Servisler arası iletişim desenleri</li>
+                                <li>Dağıtık sistemlerde veri tutarlılığı</li>
+                            </ul>
+                            <div class="card__actions">
+                                <a class="btn btn--primary btn--sm btn--block" href="blogs/blog1.html">Blogu oku</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img class="card__media" src="cmd-komutlari.jpg" alt="Terminal komut rehberi" loading="lazy">
+                        <div class="card__body">
+                            <h3 class="card__title">Windows, macOS ve Linux Komut Rehberi</h3>
+                            <p class="card__text">
+                                Terminal komutlarını tek kaynakta birleştiren kapsamlı rehber;
+                                parametre açıklamaları ve platform karşılaştırmalarıyla.
+                            </p>
+                            <ul class="card__points">
+                                <li>Dosya, izin ve ağ komutları</li>
+                                <li>Paket yöneticileri, otomasyon ve cron</li>
+                                <li>Hata ayıklama, güvenlik ve loglama ipuçları</li>
+                            </ul>
+                            <div class="card__actions">
+                                <a class="btn btn--primary btn--sm btn--block" href="blogs/command-guide.html">Blogu oku</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- İletişim -->
+        <section class="section section--alt" id="contact">
+            <div class="wrap contact reveal">
+                <span class="section__eyebrow">İletişim</span>
+                <h2 class="section__title">Birlikte çalışalım</h2>
+                <p class="section__lead" style="margin-inline: auto;">
+                    Proje, iş birliği veya sadece merhaba demek için yazabilirsiniz.
+                </p>
+
+                <div class="contact__actions">
+                    <a class="btn btn--primary" href="mailto:iremnurgocer99@gmail.com">
+                        <i class="fa-regular fa-envelope" aria-hidden="true"></i> E-posta gönder
+                    </a>
+                    <a class="btn btn--ghost" href="IremNurGocer-CV.pdf" download>
+                        <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> CV indir
+                    </a>
+                </div>
+
+                <h3 style="font-size: 1rem; margin-bottom: 14px;">Beni takip edin</h3>
+                <ul class="socials">
+                    <li>
+                        <a href="https://tr.linkedin.com/in/iremnurgocer" target="_blank" rel="noopener" aria-label="LinkedIn profili">
+                            <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#projects">Projeler</a>
+                    <li>
+                        <a href="https://github.com/iremnurgocer" target="_blank" rel="noopener" aria-label="GitHub profili">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#blog">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">İletişim</a>
+                    <li>
+                        <a href="mailto:iremnurgocer99@gmail.com" aria-label="E-posta gönder">
+                            <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                        </a>
                     </li>
                 </ul>
             </div>
-        </div>
-    </nav>
-    <!-- Hero Section with Parallax Effect -->
-    <section id="hero" class="d-flex flex-column align-items-center justify-content-center text-center parallax">
-        <div class="container">
-            <img src="profile.png" alt="İrem Nur Göçer" class="rounded-circle mb-4 profile-pic">
-            <h1 class="display-4 mb-3">İrem Nur Göçer</h1>
-            <p class="lead mb-5"> Software Developer | AI & Backend Development | Database Developer | Security Engineer</p>
-            <!-- Projeler, Hakkımda, Blog ve İletişim için bağlantı -->
-            <div>
-                <a href="#about" class="btn btn-secondary rounded-pill px-4 py-2">Hakkımda</a>
-                <a href="#projects" class="btn btn-primary rounded-pill px-4 py-2">Projeler</a>
-                <a href="#blog" class="btn btn-secondary rounded-pill px-4 py-2">Blog</a>
-                <a href="#contact" class="btn btn-secondary rounded-pill px-4 py-2">İletişim</a>
-            </div>
-        </div>
-    </section>
-    <!-- About Section with Scroll Animation -->
-    <section id="about" class="p-selection bg-light">
-        <div class="container" data-aos="fade-up">
-            <h2 class="text-center mb-4">Hakkımda</h2>
-            <p class="text-left">
-                Merhaba, ben İrem Nur Göçer. Yazılım Geliştirme Uzmanıyım. Matematik ve Bilgisayar Bilimleri bölümünden derece ile mezun oldum.Backend ve frontend geliştirme, sunucu yönetimi, veritabanı geliştirme, sistem yönetimi ve DevOps konularında deneyim sahibiyim.  Akademik kariyerimde ise yapay zeka algoritmaları ve diferansiyel geometri üzerine çalışıyorum. Yeni teknolojileri araştırmayı ve projelerime dahil etmeyi seviyorum. <b>Node.js, PHP, JS, C# ve Python gibi</b> dillerde projeler ile çalıştım. Projelerimi geliştirirken en güncel teknolojileri kullanmaya özen gösteririm. Hedeflerim arasında Güvenlik açığı olmayan, güncel teknolojilerle temiz ve sürdürülebilir kod yazan bir geliştirici olmak var.
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="wrap footer__inner">
+            <p style="margin:0;">&copy; <span data-year>2026</span> İrem Nur Göçer. Tüm hakları saklıdır.</p>
+            <p style="margin:0;">
+                <a href="https://github.com/iremnurgocer/iremnurgocer.github.io" target="_blank" rel="noopener">Bu sitenin kaynak kodu</a>
             </p>
-
-            <!-- Teknik Bilgiler -->
-            <h3 class="text-left mt-5 mb-4">Teknik Bilgiler</h3>
-            <table class="table table-bordered">
-                <tbody>
-                    <tr>
-                        <td><strong>Programlama Dilleri:</strong></td>
-                        <td>JavaScript, Node.js, PHP, C#, SQL, Python, MATLAB, Maple</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Güvenlik ve Test Araçları:</strong></td>
-                        <td>Burp Suite, Docker, SOAPUI, Git, Postman</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Veritabanları:</strong></td>
-                        <td>MongoDB, MySQL, Oracle, MSSQL</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Bulut ve Sunucu Yönetimi:</strong></td>
-                        <td>Linux, AWS, CI/CD, Cloud Services, Redis, IIS</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Web Teknolojileri:</strong></td>
-                        <td>HTML, CSS, REST API, SOAP</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Diğer Araçlar:</strong></td>
-                        <td>Adobe Photoshop, Adobe Illustrator, Corel Draw</td>
-                    </tr>
-                </tbody>                
-            </table>
-
-            <!-- İş Deneyimleri -->
-            <h3 class="text-left mt-5 mb-4">İş Deneyimleri</h3>
-            <table class="table table-bordered">
-                <tbody>
-                    <tr>
-                        <td><strong>Key Yazılım Çözümleri A.Ş.</strong></td>
-                        <td>Software Developer - PHP (Mar 2023 - Halen)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Mevsimi Gıda Pazarlama Ticaret A.Ş.</strong></td>
-                        <td>Back-end Developer - PHP, Symfony, Laravel (Dec 2022 - Mar 2023)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Jotform Yazılım A.Ş.</strong></td>
-                        <td>Junior Back-end Developer - PHP, JavaScript (Jul 2022 – Aug 2022)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Piton Ar-Ge ve Yazılım</strong></td>
-                        <td>Back-end Developer - C#, .Net (Dec 2021 - Jul 2022)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>FetalIST Bilişim Teknolojileri A.Ş.</strong></td>
-                        <td>Full Stack Intern - Java, AWS (Apr 2021 – Apr 2022)</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <!-- Eğitim Bilgileri -->
-            <h3 class="text-left mt-5 mb-4">Eğitim Bilgileri</h3>
-            <table class="table table-bordered">
-                <tbody>
-                    <tr>
-                        <td><strong>Yüksek Lisans:</strong></td>
-                        <td>Eskişehir Osmangazi Üniversitesi - Matematik ve Bilgisayar Bilimleri (3.7 GNO)<br> Yapay zeka algoritmalarının diferansiyel geometri ile incelenmesi</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Lisans:</strong></td>
-                        <td>Eskişehir Osmangazi Üniversitesi - Matematik ve Bilgisayar Bilimleri (3.12 GNO)</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
-    </section>
-    <!-- Projects Section with Modal Windows -->
-    <section id="projects" class="p-selection">
-        <div class="container">
-            <h2 class="text-center mb-4">Projelerim</h2>
-            <div class="row g-4">
-                <!-- Project: Task Manager -->
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="task-client.png" class="card-img-top" alt="Task Manager Client arayüzü">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">Task Manager Platformu</h5>
-                            <p class="card-text">JWT tabanlı kimlik doğrulaması olan görev yönetim sistemi. React + Ant Design arayüzü, Express.js API ve Sequelize ile PostgreSQL üzerinde çalışır.</p>
-                            <div class="mt-auto">
-                                <a href="https://github.com/iremnurgocer/task-manager-client" class="btn btn-primary w-100 mb-2" target="_blank">Frontend</a>
-                                <a href="https://github.com/iremnurgocer/task-manager-api" class="btn btn-secondary w-100" target="_blank">Backend</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 1 (ChatCore.AI) -->
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="chatcoreai.png" class="card-img-top" alt="ChatCore.AI">
-                        <div class="card-body">
-                            <h5 class="card-title">ChatCore.AI</h5>
-                            <p class="card-text">Kurumsal veriler üzerinde çalışan, FastAPI + Streamlit tabanlı RAG destekli yapay zekâ asistanı. FAISS, PostgreSQL ve Redis ile ölçeklenebilir sohbet deneyimi sunar.</p>
-                            <a href="https://github.com/iremnurgocer/ChatCore.AI" class="btn btn-primary mt-auto" target="_blank">GitHub'da Gör</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 2 -->
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="chatapp.png" class="card-img-top" alt="Gerçek zamanlı sohbet uygulaması">
-                        <div class="card-body">
-                            <h5 class="card-title">CHAT APP</h5>
-                            <p class="card-text">WebSocket ile gerçek zamanlı chat uygulaması</p>
-                            <a href="https://github.com/iremnurgocer/chat-app" class="btn btn-primary mt-auto" target="_blank">GitHub'da Gör</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 3 (Sepet Uygulaması) -->
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="sepet.png" class="card-img-top" alt="Sepet Uygulaması">
-                        <div class="card-body">
-                            <h5 class="card-title">Sepet Uygulaması</h5>
-                            <p class="card-text">MVC pattern ve route yapısı kullanılarak geliştirilen e-ticaret sepet uygulaması.</p>
-                            <a href="https://github.com/iremnurgocer/sepet" class="btn btn-primary mt-auto" target="_blank">GitHub'da Gör</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 4 (QR Generator) -->
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="gr-genarator.png" class="card-img-top" alt="QR Generator Projesi">
-                        <div class="card-body">
-                            <h5 class="card-title">QR Generator</h5>
-                            <p class="card-text">FastAPI tabanlı web uygulaması; metin veya URL’leri anında QR koda dönüştürür, renk/logo özelleştirmeleri ve geçmiş yönetimi sunar.</p>
-                            <a href="https://github.com/iremnurgocer/qr-generator" class="btn btn-primary mt-auto" target="_blank">GitHub'da Gör</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Blog Section as Cards -->
-    <section id="blog" class="p-selection bg-light">
-        <div class="container">
-            <h2 class="text-center mb-4">Bloglar</h2>
-            <div class="row">
-                <!-- Blog 0 -->
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Security operations illustration" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">Security Engineer Eğitim Seti</h5>
-                            <p class="card-text">Tehdit modelleme, pentest, SOC, DevSecOps, bulut ve Kubernetes güvenliğini kapsayan ileri seviye yol haritası. Etik çerçeve, detection engineering ve portföy hazırlığı ile uçtan uca rehber.</p>
-                            <ul class="list-unstyled small text-muted mb-3">
-                                <li>• Pre-engagement belgeleri ve kill-switch planları</li>
-                                <li>• Web/API güvenliği, SIEM ve hunting playbook’ları</li>
-                                <li>• Cloud/K8s sertleştirme, policy-as-code ve KPI’lar</li>
-                            </ul>
-                            <a href="blogs/security-engineer-training.html" class="btn btn-primary">Blogu Oku</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog 1 -->
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="https://microservices.io/i/Microservice_Architecture.png" class="card-img-top" alt="Mikroservis Mimarisi" style="height: 200px; object-fit: contain;">
-                        <div class="card-body">
-                            <h5 class="card-title">Mikroservis Mimarisi</h5>
-                            <p class="card-text">Mikroservis mimarisi hakkında detaylı bilgiler ve nasıl entegre edileceği...</p>
-                            <a href="blogs/blog1.html" class="btn btn-primary">Blogu Oku</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog 2 -->
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img src="cmd-komutlari.png" class="card-img-top" alt="Komut Rehberi">
-                        <div class="card-body">
-                            <h5 class="card-title">Windows, macOS ve Linux Komut Rehberi</h5>
-                            <p class="card-text">Terminal komutlarını tek kaynakta birleştiren kapsamlı rehber; parametre açıklamaları, kısayollar ve platform karşılaştırmalarıyla CLI becerilerini güçlendirir.</p>
-                            <ul class="list-unstyled small text-muted mb-3">
-                                <li>• Dosya, izin ve ağ komutları</li>
-                                <li>• Paket yöneticileri, otomasyon ve cron</li>
-                                <li>• Hata ayıklama, güvenlik ve loglama ipuçları</li>
-                            </ul>
-                            <a href="blogs/command-guide.html" class="btn btn-primary">Blogu Oku</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Contact Section -->
-    <section id="contact" class="p-selection bg-light">
-        <div class="container text-center">
-            <h2 class="mb-4">İletişim</h2>
-            <p>Bana ulaşmak için aşağıdaki butona tıklayarak e-posta gönderebilirsiniz:</p>
-            <div class="d-grid gap-2 d-md-block">
-                <a href="mailto:iremnurgocer99@gmail.com" class="btn btn-primary btn-lg px-4 py-2">E-posta Gönder</a>
-            </div>
-            <div class="mt-5">
-                <h4 class="mb-3">Beni Takip Et:</h4>
-                <a target="_blank" href="https://tr.linkedin.com/in/iremnurgocer" class="text-dark me-3">
-                    <i class="fab fa-linkedin fa-2x"></i>
-                </a>
-                <a target="_blank" href="https://github.com/iremnurgocer" class="text-dark me-3">
-                    <i class="fab fa-github fa-2x"></i>
-                </a>
-            </div>
-        </div>
+    </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Parallax and Scroll Animation Library -->
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Custom JavaScript -->
-    <script>
-        $(document).ready(function() {
-            AOS.init({
-                duration: 1000,
-                easing: 'ease-in-out',
-                once: true
-            });
-            
-            // Parallax effect for hero section
-            $(window).on('scroll', function() {
-                var scrollPos = $(window).scrollTop();
-                $('.parallax').css('background-position', 'center ' + (scrollPos * 0.5) + 'px');
-            });
-        });
-    </script>
-
-<footer class="py-4 bg-dark text-white text-center">
-    <p>&copy; 2024 İrem Nur Göçer. Tüm hakları saklıdır.</p>
-</footer>
-
+    <script src="script.js" defer></script>
 </body>
 </html>

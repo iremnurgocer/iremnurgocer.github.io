@@ -5,213 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Security Engineer seviye eğitim seti: tehdit modelleme, pentest, SOC, DevSecOps, bulut ve Kubernetes güvenliği.">
     <title>Security Engineer Eğitim Seti</title>
-
-    <link href="../styles.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f3f3f3;
-            color: #111111;
-            line-height: 1.65;
-        }
-        main {
-            padding-bottom: 6rem;
-        }
-        .blog-hero {
-            background: linear-gradient(135deg, #121212 0%, #1e2a2f 100%);
-            color: #f5f7fa;
-            border-radius: 24px;
-            padding: 56px 48px;
-            text-align: left;
-            box-shadow: 0 22px 48px rgba(10, 33, 45, 0.35);
-        }
-        .blog-hero h1 {
-            font-weight: 700;
-            margin-bottom: 18px;
-        }
-        .blog-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 18px;
-            margin-top: 24px;
-            font-size: 0.95rem;
-            color: rgba(245, 247, 250, 0.85);
-        }
-        main section {
-            background-color: #ffffff;
-            border-radius: 28px;
-            padding: 48px 52px;
-            box-shadow: 0 26px 52px rgba(13, 31, 44, 0.12);
-            margin-bottom: 72px;
-        }
-        main section:last-of-type {
-            margin-bottom: 0;
-        }
-        .section-title {
-            border-left: 6px solid #17a589;
-            padding-left: 18px;
-            margin-bottom: 28px;
-            font-weight: 700;
-        }
-        h3 { 
-            font-weight: 700;
-            margin-top: 32px;
-            margin-bottom: 12px;
-        }
-        h4 {
-            font-weight: 600;
-            margin-top: 28px;
-            margin-bottom: 8px;
-        }
-        ul, ol {
-            margin-top: 0;
-            margin-bottom: 1.25rem;
-            padding-left: 1.2rem;
-        }
-        li + li {
-            margin-top: 0.4rem;
-        }
-        .callout {
-            background: linear-gradient(135deg, #f1fff9 0%, #ffffff 100%);
-            border-left: 6px solid #28a745;
-            padding: 22px 26px;
-            border-radius: 18px;
-            margin: 36px 0;
-            box-shadow: 0 20px 44px rgba(12, 99, 58, 0.18);
-        }
-        .callout strong {
-            color: inherit; 
-            display: block;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        .blog-hero .callout {
-            color: #111; /* kutu içindeki yazıyı koyu yap */
-            background: #fff7e0; /* kontrast yarat */
-            margin-top: 24px;
-        }
-
-        .warning {
-            background: linear-gradient(135deg, #ffe3c7 0%, #fff8ef 100%);
-            border-left: 6px solid #f39c12;
-        }
-        .blog-hero .warning {
-            color: #000;
-        }
-        .warning-box {
-            background: #fff4e5;
-            border-left: 6px solid #f39c12;
-        }
-
-
-        .section-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-        }
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: #ecf5ff;
-            color: #145388;
-            border-radius: 999px;
-            padding: 8px 16px;
-            font-size: 0.9rem;
-            margin-right: 12px;
-            margin-bottom: 12px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 32px 0;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(22, 29, 36, 0.08);
-        }
-        th, td {
-            border: 1px solid #e3e7ed;
-            padding: 16px 18px;
-            text-align: left;
-            vertical-align: top;
-        }
-        th {
-            background-color: #13293d;
-            color: #f6fbff;
-            letter-spacing: 0.02em;
-        }
-        code {
-            background-color: #eef3f9;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 0.95rem;
-        }
-        pre {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            overflow-x: auto;
-            border: 1px solid #dfe4ea;
-        }
-        .toc {
-            column-count: 2;
-            column-gap: 40px;
-        }
-        .toc ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        .toc li {
-            margin-bottom: 12px;
-        }
-        .toc a {
-            color: #0a3d62;
-            text-decoration: none;
-        }
-        .toc a:hover {
-            color: #1abc9c;
-            text-decoration: underline;
-        }
-        @media (max-width: 992px) {
-            main section {
-                padding: 32px 28px;
-                margin-bottom: 48px;
-            }
-            .blog-hero {
-                padding: 40px 28px;
-            }
-            .toc {
-                column-count: 1;
-            }
-        }
-        @media (max-width: 768px) {
-            .blog-meta {
-                flex-direction: column;
-                gap: 8px;
-            }
-            table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="blog.css">
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="../index.html">İrem Nur Göçer</a>
-    </div>
-</nav>
+<a class="skip-link" href="#main">İçeriğe geç</a>
 
-<main class="container mt-5 pt-5 pb-5">
+<header class="nav">
+    <div class="wrap nav__inner">
+        <a class="nav__brand" href="../index.html">İrem Nur Göçer<span>.</span></a>
+        <nav aria-label="Ana menü">
+            <ul class="nav__links" id="nav-links">
+                <li><a class="nav__link" href="../index.html#blog">Tüm yazılar</a></li>
+                <li><a class="nav__link" href="../index.html#projects">Projeler</a></li>
+                <li><a class="nav__link" href="../index.html#contact">İletişim</a></li>
+            </ul>
+        </nav>
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Koyu temaya geç">
+            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        </button>
+        <button class="icon-btn nav__toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="nav-links" aria-label="Menüyü aç">
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+    </div>
+</header>
+
+<main id="main">
     <header class="blog-hero">
         <h1>Sızma Testi, Güvenlik Mühendisliği ve Savunma Operasyonları</h1>
         <p class="lead mb-4">Security Engineer statüsüne ulaşmak isteyen profesyoneller için tehdit modelleme, pentest, SOC, DevSecOps, Cloud &amp; Kubernetes güvenliği gibi alanları bütünsel olarak kapsayan ileri seviye eğitim seti.</p>
@@ -1128,10 +953,14 @@
     </section>
 </main>
 
-<footer class="py-4 bg-dark text-white text-center">
-    <p>&copy; 2025 İrem Nur Göçer. Tüm hakları saklıdır.</p>
+<footer class="footer">
+    <div class="wrap footer__inner">
+        <p style="margin:0;">&copy; <span data-year>2026</span> İrem Nur Göçer. Tüm hakları saklıdır.</p>
+        <p style="margin:0;"><a href="../index.html#blog">← Diğer yazılar</a></p>
+    </div>
 </footer>
+
+<script src="../script.js" defer></script>
 
 </body>
 </html>
-
