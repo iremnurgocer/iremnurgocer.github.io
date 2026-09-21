@@ -1,4 +1,4 @@
-/* İrem Nur Göçer — site etkileşimleri
+/* İrem Nur Yılmaz — site etkileşimleri
    Tema anahtarı, mobil menü, aktif bölüm takibi ve kaydırma animasyonu. */
 
 (function () {

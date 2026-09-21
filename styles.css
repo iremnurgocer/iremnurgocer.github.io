@@ -1,5 +1,5 @@
 /* ==========================================================================
-   İrem Nur Göçer — kişisel site
+   İrem Nur Yılmaz — kişisel site
    Tasarım sistemi: renkler, tipografi, bileşenler
    ========================================================================== */
 
@@ -257,7 +257,7 @@ img { max-width: 100%; }
 /* --- Hero --- */
 .hero {
     position: relative;
-    padding: 148px 0 96px;
+    padding: 168px 0 112px;
     overflow: hidden;
 }
 
@@ -277,10 +277,7 @@ img { max-width: 100%; }
 .hero__inner {
     position: relative;
     z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 56px;
-    align-items: center;
+    max-width: 62ch;
 }
 
 .hero__status {
@@ -304,8 +301,16 @@ img { max-width: 100%; }
 }
 
 .hero__title {
-    font-size: clamp(2.3rem, 5.6vw, 3.6rem);
-    margin: 0 0 18px;
+    font-size: clamp(2.5rem, 6.4vw, 4.1rem);
+    margin: 0 0 10px;
+}
+
+.hero__role {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+    font-weight: 500;
+    color: var(--accent-strong);
+    margin: 0 0 22px;
 }
 
 .hero__roles {
@@ -334,13 +339,49 @@ img { max-width: 100%; }
 
 .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
-.hero__portrait {
-    width: 240px; height: 240px;
-    border-radius: 28px;
+/* --- Portre (Hakkımda bölümü) --- */
+.about__grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 48px;
+    align-items: start;
+}
+
+.portrait {
+    position: relative;
+    margin: 0;
+}
+
+.portrait__frame {
+    position: relative;
+    display: block;
+}
+
+.portrait img {
+    position: relative;   /* aksan çerçevesinin üstünde kalsın */
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
     object-fit: cover;
-    object-position: center 18%;
+    object-position: center 22%;
+    border-radius: var(--radius);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-lg);
+}
+
+/* Fotoğrafın arkasına hafif bir aksan çerçevesi */
+.portrait__frame::before {
+    content: "";
+    position: absolute;
+    inset: 16px -16px -16px 16px;
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    border-radius: var(--radius);
+}
+
+.portrait figcaption {
+    margin-top: 18px;
+    font-size: .84rem;
+    color: var(--text-muted);
 }
 
 /* --- Kartlar --- */
@@ -581,6 +622,37 @@ img { max-width: 100%; }
     margin-bottom: 36px;
 }
 
+.contact__card {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+.section--alt .contact__card { background: var(--bg); }
+
+.contact__mail {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 8px;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+    font-weight: 600;
+    color: var(--text);
+    word-break: break-all;
+}
+.contact__mail:hover { color: var(--accent-strong); text-decoration: none; }
+.contact__mail i { color: var(--accent); font-size: .8em; }
+
+.contact__note {
+    font-size: .88rem;
+    color: var(--text-muted);
+    margin: 0 0 28px;
+}
+
 .socials {
     display: flex;
     justify-content: center;
@@ -683,13 +755,17 @@ img { max-width: 100%; }
 @media (max-width: 980px) {
     .grid--4 { grid-template-columns: repeat(2, 1fr); }
     .grid--3 { grid-template-columns: repeat(2, 1fr); }
-    .hero__inner { grid-template-columns: 1fr; gap: 36px; }
-    .hero__portrait { width: 176px; height: 176px; }
+    .about__grid { grid-template-columns: 220px 1fr; gap: 32px; }
 }
 
 @media (max-width: 720px) {
     .section { padding: 64px 0; }
-    .hero { padding: 124px 0 72px; }
+    .hero { padding: 132px 0 76px; }
+
+    .about__grid { grid-template-columns: 1fr; gap: 28px; }
+    .portrait { max-width: 260px; }
+    .portrait__frame::before { inset: 12px -12px -12px 12px; }
+    .contact__card { padding: 30px 22px; }
     .grid--2, .grid--3, .grid--4, .skills { grid-template-columns: 1fr; }
 
     .nav__toggle { display: inline-flex; }
@@ -723,4 +799,36 @@ img { max-width: 100%; }
     .nav, .hero__actions, .socials, .contact__actions, .footer { display: none; }
     body { background: #fff; color: #000; }
     .section { padding: 24px 0; page-break-inside: avoid; }
+}
+
+/* --- Sayısal vurgular (Hakkımda) --- */
+.stat {
+    padding: 18px 20px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-sm);
+}
+
+.stat__value {
+    display: block;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    letter-spacing: -.02em;
+    color: var(--accent-strong);
+    line-height: 1.1;
+}
+
+.stat__label {
+    margin: 6px 0 0;
+    font-size: .84rem;
+    color: var(--text-muted);
+}
+
+/* Etiketler kartın son öğesiyse alta yaslansın — kartlar aynı hizada biter */
+.card__body > .card__tags:last-child {
+    margin-top: auto;
+    margin-bottom: 0;
+    padding-top: 14px;
 }
