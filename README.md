@@ -13,6 +13,7 @@ Statik bir site; derleme adımı yok, GitHub Pages doğrudan `main` dalından ya
 | `script.js` | Tema anahtarı, mobil menü, aktif bölüm takibi ve kaydırma animasyonu |
 | `blogs/*.html` | Blog yazıları |
 | `blogs/blog.css` | Blog sayfalarına özel stiller |
+| `covers/*.svg` | Blog yazılarının kapak görselleri (elle çizilmiş SVG şemalar) |
 
 ## Yerelde çalıştırma
 
@@ -30,5 +31,7 @@ Ardından http://localhost:4173 adresini aç.
   `localStorage` içinde saklanır.
 - Alt bilgideki yıl `script.js` tarafından otomatik güncellenir.
 - Sitede indirilebilir CV yok; iletişim tek kanaldan, e-posta üzerinden ilerliyor.
+- Kapak görselleri dış servislerden değil, `covers/` altındaki SVG dosyalarından gelir;
+  renkleri koyu zeminli ve her iki temada da aynı görünür.
 - Depo adı, alan adı ve sosyal hesaplar `iremnurgocer` olarak kalmaya devam ediyor;
   sayfada görünen ad `İrem Nur Yılmaz`.

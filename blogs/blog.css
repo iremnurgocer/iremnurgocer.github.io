@@ -227,3 +227,15 @@ body {
     --bs-list-group-color: var(--text);
     --bs-list-group-border-color: var(--border);
 }
+
+/* --- Yazı kapak görseli --- */
+.post__cover {
+    display: block;
+    width: 100%;
+    aspect-ratio: 40 / 17;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    margin-bottom: 26px;
+    background: #12140e;
+}

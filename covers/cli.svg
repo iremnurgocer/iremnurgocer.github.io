@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420" role="img" aria-label="Terminal penceresi: Windows, macOS ve Linux komut karşılaştırmaları">
+  <rect width="800" height="420" fill="#12140e"/>
+  <circle cx="700" cy="70" r="150" fill="#a9c94a" opacity=".06"/>
+  <text x="48" y="70" font-family="'Space Grotesk',system-ui,sans-serif" font-size="30" font-weight="600" fill="#e9eade">Komut satırı rehberi</text>
+  <text x="48" y="98" font-family="Inter,system-ui,sans-serif" font-size="15" fill="#a2a795">Windows · macOS · Linux karşılaştırmalı</text>
+
+  <g transform="translate(48,136)">
+    <rect width="704" height="244" rx="14" fill="#1b1e16" stroke="#333829"/>
+    <path d="M0 14 a14 14 0 0 1 14 -14 h676 a14 14 0 0 1 14 14 v24 H0 z" fill="#232720"/>
+    <line x1="0" y1="38" x2="704" y2="38" stroke="#333829"/>
+    <g><circle cx="26" cy="19" r="6" fill="#4a4f3d"/><circle cx="48" cy="19" r="6" fill="#4a4f3d"/><circle cx="70" cy="19" r="6" fill="#a9c94a" opacity=".8"/></g>
+
+    <g font-family="ui-monospace,Menlo,monospace" font-size="15">
+      <text x="26" y="78" fill="#a9c94a">$</text><text x="46" y="78" fill="#e9eade">ls -la /var/log</text>
+      <text x="26" y="110" fill="#a2a795" opacity=".8">drwxr-xr-x  12 root  wheel   384 Eyl 21 16:40 .</text>
+      <text x="26" y="136" fill="#a2a795" opacity=".8">-rw-r--r--   1 root  wheel  8213 Eyl 21 16:39 system.log</text>
+
+      <text x="26" y="176" fill="#a9c94a">PS&gt;</text><text x="66" y="176" fill="#e9eade">Get-ChildItem -Force C:\Windows\Logs</text>
+
+      <text x="26" y="216" fill="#a9c94a">$</text><text x="46" y="216" fill="#e9eade">grep -rn "error" . | head</text>
+      <rect x="250" y="203" width="11" height="18" fill="#a9c94a" opacity=".9"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420" role="img" aria-label="Mikroservis mimarisi: API geçidi arkasında bağımsız servisler, kendi veritabanları ve mesaj kuyruğu">
+  <rect width="800" height="420" fill="#12140e"/>
+  <circle cx="120" cy="380" r="160" fill="#a9c94a" opacity=".06"/>
+  <text x="48" y="70" font-family="'Space Grotesk',system-ui,sans-serif" font-size="30" font-weight="600" fill="#e9eade">Mikroservis mimarisi</text>
+  <text x="48" y="98" font-family="Inter,system-ui,sans-serif" font-size="15" fill="#a2a795">Servis sınırları · geçit · olay akışı</text>
+
+  <!-- İstemci -->
+  <g transform="translate(48,196)">
+    <rect width="96" height="62" rx="10" fill="#1b1e16" stroke="#333829"/>
+    <text x="48" y="38" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="14" fill="#a2a795">İstemci</text>
+  </g>
+
+  <!-- Geçit -->
+  <g transform="translate(186,166)">
+    <rect width="76" height="122" rx="12" fill="#232720" stroke="#a9c94a"/>
+    <text x="38" y="58" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="13" fill="#a9c94a">API</text>
+    <text x="38" y="76" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="13" fill="#a9c94a">geçidi</text>
+  </g>
+
+  <!-- Servisler -->
+  <g font-family="Inter,system-ui,sans-serif" font-size="13.5" fill="#e9eade" text-anchor="middle">
+    <g transform="translate(320,140)">
+      <rect width="130" height="58" rx="11" fill="#1b1e16" stroke="#a9c94a" stroke-opacity=".55"/><text x="65" y="35">Sipariş</text>
+      <ellipse cx="185" cy="29" rx="28" ry="9" fill="#232720" stroke="#333829"/>
+      <path d="M157 29 v22 a28 9 0 0 0 56 0 v-22" fill="#1b1e16" stroke="#333829"/>
+    </g>
+    <g transform="translate(320,218)">
+      <rect width="130" height="58" rx="11" fill="#1b1e16" stroke="#a9c94a" stroke-opacity=".55"/><text x="65" y="35">Ödeme</text>
+      <ellipse cx="185" cy="29" rx="28" ry="9" fill="#232720" stroke="#333829"/>
+      <path d="M157 29 v22 a28 9 0 0 0 56 0 v-22" fill="#1b1e16" stroke="#333829"/>
+    </g>
+    <g transform="translate(320,296)">
+      <rect width="130" height="58" rx="11" fill="#1b1e16" stroke="#a9c94a" stroke-opacity=".55"/><text x="65" y="35">Stok</text>
+      <ellipse cx="185" cy="29" rx="28" ry="9" fill="#232720" stroke="#333829"/>
+      <path d="M157 29 v22 a28 9 0 0 0 56 0 v-22" fill="#1b1e16" stroke="#333829"/>
+    </g>
+  </g>
+
+  <!-- Mesaj kuyruğu -->
+  <g transform="translate(600,140)">
+    <rect width="150" height="214" rx="12" fill="#1b1e16" stroke="#333829"/>
+    <text x="75" y="34" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="13" fill="#a2a795">Olay kuyruğu</text>
+    <g fill="#a9c94a">
+      <rect x="24" y="56" width="102" height="26" rx="6" opacity=".75"/>
+      <rect x="24" y="94" width="102" height="26" rx="6" opacity=".55"/>
+      <rect x="24" y="132" width="102" height="26" rx="6" opacity=".4"/>
+      <rect x="24" y="170" width="102" height="26" rx="6" opacity=".25"/>
+    </g>
+  </g>
+
+  <g stroke="#a9c94a" stroke-width="2.5" fill="none" marker-end="url(#a4)">
+    <line x1="148" y1="227" x2="180" y2="227"/>
+    <path d="M266 227 H292 V169 H314"/>
+    <path d="M266 227 H314"/>
+    <path d="M266 227 H292 V325 H314"/>
+  </g>
+  <g stroke="#333829" stroke-width="2" stroke-dasharray="4 6">
+    <line x1="538" y1="169" x2="594" y2="200"/><line x1="538" y1="247" x2="594" y2="247"/><line x1="538" y1="325" x2="594" y2="294"/>
+  </g>
+  <defs>
+    <marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#a9c94a"/>
+    </marker>
+  </defs>
+</svg>

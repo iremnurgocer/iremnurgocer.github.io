@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurumsal RAG: Prototipten Üretime</title>
+    <meta name="description" content="Kurumsal RAG mimarisinde parçalama, hibrit arama, yeniden sıralama, yetkilendirme, değerlendirme ve üretim pratikleri.">
+    <meta name="author" content="İrem Nur Yılmaz">
+
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:title" content="Kurumsal RAG: Prototipten Üretime">
+    <meta property="og:description" content="Kurumsal RAG mimarisinde parçalama, hibrit arama, yeniden sıralama, yetkilendirme, değerlendirme ve üretim pratikleri.">
+    <meta property="og:image" content="https://iremnurgocer.github.io/covers/rag.svg">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%235f7a12'/><text x='50' y='68' font-size='52' font-family='sans-serif' font-weight='600' fill='%23fff' text-anchor='middle'>İY</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">İçeriğe geç</a>
+
+<header class="nav">
+    <div class="wrap nav__inner">
+        <a class="nav__brand" href="../index.html">İrem Nur Yılmaz<span>.</span></a>
+        <nav aria-label="Ana menü">
+            <ul class="nav__links" id="nav-links">
+                <li><a class="nav__link" href="../index.html#blog">Tüm yazılar</a></li>
+                <li><a class="nav__link" href="../index.html#projects">Projeler</a></li>
+                <li><a class="nav__link" href="../index.html#contact">İletişim</a></li>
+            </ul>
+        </nav>
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Koyu temaya geç">
+            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        </button>
+        <button class="icon-btn nav__toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="nav-links" aria-label="Menüyü aç">
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+    </div>
+</header>
+
+<main id="main">
+    <header class="blog-hero">
+        <img class="post__cover" src="../covers/rag.svg" alt="RAG mimarisi şeması: belgeler, parçalama, gömme, vektör deposu ve LLM">
+        <h1>Kurumsal RAG: Prototipten Üretime</h1>
+        <p class="lead">Bir RAG demosu bir haftada kurulur. Üretime alınmış, yetkilendirilmiş, ölçülebilir bir RAG sistemi başka bir iştir. Bu yazı ikisinin arasındaki farkı anlatıyor.</p>
+        <div class="blog-meta">
+            <span><strong>Yazar:</strong> İrem Nur Yılmaz</span>
+            <span><strong>Konu:</strong> RAG · Kurumsal AI</span>
+            <span><strong>Okuma:</strong> ~12 dk</span>
+        </div>
+    </header>
+
+    <section id="icindekiler">
+        <h2 class="section-title">İçindekiler</h2>
+        <div class="toc">
+            <ul>
+                <li><a href="#neden-rag">1. Neden RAG?</a></li>
+                <li><a href="#mimari">2. Mimarinin parçaları</a></li>
+                <li><a href="#parcalama">3. Parçalama stratejileri</a></li>
+                <li><a href="#erisim-kalitesi">4. Erişim kalitesi: hibrit arama ve yeniden sıralama</a></li>
+                <li><a href="#yetkilendirme">5. Yetkilendirme ve veri erişimi</a></li>
+                <li><a href="#degerlendirme">6. Değerlendirme: neyi ölçmeli?</a></li>
+                <li><a href="#uretim">7. Üretime alırken</a></li>
+                <li><a href="#kontrol-listesi">8. Kısa kontrol listesi</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="neden-rag">
+        <h2 class="section-title">1. Neden RAG?</h2>
+
+        <p>
+            Bir dil modelinin kurumsal bir soruyu doğru yanıtlaması için iki şeye ihtiyacı var:
+            dili anlamak ve <strong>o kuruma ait güncel bilgiye</strong> erişmek. Modelin ağırlıkları
+            ilkini verir, ikincisini vermez. Şirket prosedürleri değişir, fiyat listeleri güncellenir,
+            yeni sözleşmeler imzalanır; hiçbiri modelin eğitim verisinde yoktur.
+        </p>
+        <p>
+            İki yol var: modeli yeniden eğitmek ya da soruya cevap verirken doğru belgeleri modelin
+            önüne koymak. İkincisi <strong>RAG</strong> (retrieval-augmented generation). Pratikte
+            neredeyse her zaman doğru başlangıç noktası odur — çünkü ucuzdur, bilgi değiştiğinde
+            sadece indeksi güncellersiniz ve en önemlisi cevabın <em>nereden geldiğini</em>
+            gösterebilirsiniz.
+        </p>
+        <div class="callout">
+            <strong>Kurumsal RAG'in asıl zorluğu erişim değil, yetkilendirmedir</strong>
+            <p>
+                Bir demo hazırlamak bir hafta sürer. Üretime almak, "bu belgeyi bu kullanıcı
+                görebilir mi?" sorusunu her sorguda doğru yanıtlamayı gerektirir. Tasarıma
+                buradan başlamak, sonradan eklemekten çok daha kolaydır.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="mimari">
+        <h2 class="section-title">2. Mimarinin parçaları</h2>
+
+        <p>
+            RAG tek bir bileşen değil, bir hat. Her halkası ayrı ayrı bozulabilir, bu yüzden her
+            halkayı ayrı ayrı ölçebilmek gerekir.
+        </p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr><th>Aşama</th><th>Ne yapar</th><th>Tipik hata</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Toplama (ingest)</td><td>Kaynak sistemlerden belgeleri çeker, metne dönüştürür</td><td>PDF/OCR kayıpları sessizce geçer</td></tr>
+                    <tr><td>Parçalama (chunking)</td><td>Metni anlamlı birimlere böler</td><td>Cümle ortasından bölme, başlık bağlamının kopması</td></tr>
+                    <tr><td>Gömme (embedding)</td><td>Parçaları vektöre çevirir</td><td>Sorgu ve belge için farklı model kullanmak</td></tr>
+                    <tr><td>İndeksleme</td><td>Vektörleri ve meta veriyi saklar</td><td>Yetki bilgisini meta veriye koymamak</td></tr>
+                    <tr><td>Erişim (retrieval)</td><td>Soruya en yakın parçaları bulur</td><td>Yalnızca vektör benzerliğine güvenmek</td></tr>
+                    <tr><td>Yeniden sıralama</td><td>Adayları alaka düzeyine göre sıralar</td><td>Adımı tamamen atlamak</td></tr>
+                    <tr><td>Üretim</td><td>Bağlamla birlikte cevabı yazar</td><td>Kaynak göstermemek</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            Bu hattın en sinsi tarafı şu: kötü bir cevap gördüğünüzde suç genelde modele atılır.
+            Oysa vakaların çoğunda sorun erişimdedir — model, önüne konmayan bir bilgiyi
+            bilemez.
+        </p>
+
+    </section>
+
+    <section id="parcalama">
+        <h2 class="section-title">3. Parçalama stratejileri</h2>
+
+        <p>
+            Parçalama, kalitesi en çok göz ardı edilen adımdır. Sabit uzunlukta bölmek en kolay
+            yoldur ama genellikle en kötü sonucu verir: bir tablonun başlığı bir parçada,
+            satırları başka parçada kalır.
+        </p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr><th>Strateji</th><th>Ne zaman</th><th>Not</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Sabit uzunluk + örtüşme</td><td>Homojen düz metin</td><td>%10–20 örtüşme bağlam kopmasını azaltır</td></tr>
+                    <tr><td>Başlık hiyerarşisine göre</td><td>Prosedür, politika, teknik doküman</td><td>Her parçaya üst başlıkları da ekleyin</td></tr>
+                    <tr><td>Tablo/bölüm farkındalıklı</td><td>Sözleşme, mali tablo, şartname</td><td>Tabloyu bölmeyin; gerekiyorsa metne düzleştirin</td></tr>
+                    <tr><td>Soru–cevap birimi</td><td>SSS, destek kayıtları</td><td>Doğal olarak en yüksek isabeti verir</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            Pratik bir kural: <strong>her parça tek başına okunduğunda anlamlı olmalı.</strong>
+            Bir parçayı bağlamdan kopuk okuyup "bu neyin içinden çıktı?" diyorsanız, model de
+            aynı soruyu soracaktır.
+        </p>
+        <p>Her parçaya üst başlıkları taşıyan basit bir yaklaşım:</p>
+        <pre><code># Başlık yolunu koruyarak bölümleri parçalara ayırır
+def parcala(bolumler, maks_karakter=1200):
+    for bolum in bolumler:
+        onek = " &gt; ".join(bolum.baslik_yolu)          # "İK &gt; İzinler &gt; Yıllık izin"
+        govde = bolum.metin
+        for i in range(0, len(govde), maks_karakter):
+            parca = govde[i:i + maks_karakter]
+            yield {
+                "metin": f"[{onek}]\n{parca}",
+                "kaynak": bolum.kaynak,
+                "yetki_etiketleri": bolum.yetki_etiketleri,   # erişim kontrolü için
+            }</code></pre>
+
+    </section>
+
+    <section id="erisim-kalitesi">
+        <h2 class="section-title">4. Erişim kalitesi: hibrit arama ve yeniden sıralama</h2>
+
+        <p>
+            Vektör araması anlamsal yakınlığı yakalar ama tam eşleşmeleri kaçırır. Kullanıcı bir
+            ürün kodu, madde numarası ya da kısaltma yazdığında anahtar kelime araması çok daha
+            isabetlidir. İkisini birlikte kullanmak — <strong>hibrit arama</strong> — tek başına
+            her birinden belirgin şekilde iyidir.
+        </p>
+        <ul>
+            <li><strong>Vektör araması:</strong> "yıllık izin nasıl hesaplanır" → ilgili prosedür metni</li>
+            <li><strong>Anahtar kelime (BM25):</strong> "madde 7.3" → tam o maddeyi içeren parça</li>
+            <li><strong>Birleştirme:</strong> iki listeyi tek sıralamada topla (ör. reciprocal rank fusion)</li>
+            <li><strong>Yeniden sıralama:</strong> ilk 50 adayı bir cross-encoder ile puanla, ilk 5'i modele ver</li>
+        </ul>
+        <div class="callout">
+            <strong>Az bağlam, çok bağlamdan iyidir</strong>
+            <p>
+                Modele 20 parça vermek cevabı iyileştirmez; alakasız parçalar dikkati dağıtır,
+                maliyeti ve gecikmeyi artırır. Yeniden sıralama sonrası 3–6 parça çoğu senaryo
+                için yeterlidir.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="yetkilendirme">
+        <h2 class="section-title">5. Yetkilendirme ve veri erişimi</h2>
+
+        <p>
+            Kurumsal RAG'i kişisel bir asistandan ayıran şey budur. Aynı soruyu soran iki
+            çalışan farklı cevaplar almalıdır, çünkü farklı belgeleri görme hakları vardır.
+        </p>
+        <p>Üç kural:</p>
+        <ul>
+            <li>
+                <strong>Yetkiyi indeksleme anında yaz.</strong> Her parçaya kaynağındaki erişim
+                etiketlerini (grup, departman, şirket, gizlilik seviyesi) meta veri olarak ekleyin.
+            </li>
+            <li>
+                <strong>Filtrelemeyi erişim sorgusunda yap.</strong> Önce tüm parçaları getirip
+                sonra elemek hem yavaştır hem de sızıntı riskini kod tarafına taşır. Filtre,
+                vektör sorgusunun parçası olmalı.
+            </li>
+            <li>
+                <strong>Kaynak sistemin yetkisini kopyalama, referans al.</strong> Yetkiler
+                değişir. İndeksin tazeliğini izleyin; belge yetkisi daraldığında yeniden
+                indekslemeyi tetikleyin.
+            </li>
+        </ul>
+        <pre><code># Erişim sorgusunda kullanıcı bağlamı her zaman zorunlu parametre olsun
+sonuclar = index.ara(
+    sorgu_vektoru=gom(soru),
+    filtre="sirket eq '{sirket}' and gizlilik le {seviye}".format(
+        sirket=kullanici.sirket, seviye=kullanici.gizlilik_seviyesi
+    ),
+    ust_k=50,
+)</code></pre>
+        <div class="callout warning">
+            <strong>Sızıntı sessizdir</strong>
+            <p>
+                Yetkisiz bir belgeden üretilen cevap hata vermez — sadece yanlış kişiye doğru
+                bilgiyi verir. Bu yüzden yetki filtresini birim testleriyle korumak, cevap
+                kalitesini test etmekten daha kritiktir.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="degerlendirme">
+        <h2 class="section-title">6. Değerlendirme: neyi ölçmeli?</h2>
+
+        <p>
+            "Bana iyi geldi" bir metrik değildir. RAG'de en az iki ayrı şeyi ölçmek gerekir:
+            doğru belgeyi bulabildiniz mi, ve model bulunan belgeye sadık kaldı mı?
+        </p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr><th>Metrik</th><th>Neyi ölçer</th><th>Nasıl toplanır</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Recall@k</td><td>Doğru parça ilk k sonuç içinde mi</td><td>Soru–doğru belge eşleşmeli test seti</td></tr>
+                    <tr><td>Groundedness</td><td>Cevaptaki her iddia bağlamda var mı</td><td>Hakem model + örneklem üzerinde insan denetimi</td></tr>
+                    <tr><td>Cevaplanabilirlik</td><td>Bilgi yoksa model "bilmiyorum" diyebiliyor mu</td><td>Bilerek cevapsız sorular ekleyin</td></tr>
+                    <tr><td>Gecikme (p95)</td><td>Kullanıcının gerçekte beklediği süre</td><td>Uçtan uca izleme, aşama aşama</td></tr>
+                    <tr><td>Sorgu başına maliyet</td><td>Ölçeklenince ne olacağı</td><td>Token + arama + yeniden sıralama</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            Test setini kurumun kendi sorularından oluşturun. 50–100 gerçek soru, binlerce sentetik
+            sorudan daha değerlidir; hangi soruların gerçekten sorulduğunu bilmek, neyi
+            iyileştireceğinizi de söyler.
+        </p>
+
+    </section>
+
+    <section id="uretim">
+        <h2 class="section-title">7. Üretime alırken</h2>
+
+        <ul>
+            <li>
+                <strong>Her cevaba kaynak ekleyin.</strong> Kullanıcı belgeyi açıp doğrulayabilmeli.
+                Güveni en çok artıran tek özellik budur.
+            </li>
+            <li>
+                <strong>İzlemeyi aşama aşama yapın.</strong> Sorgu, getirilen parçalar, seçilen
+                parçalar, üretilen cevap — hepsi loglanmalı. Bir şikâyet geldiğinde hangi halkanın
+                bozulduğunu ancak böyle görürsünüz.
+            </li>
+            <li>
+                <strong>Önbellek koyun.</strong> Kurumsal sorular tekrar eder. Normalleştirilmiş
+                soru üzerinden önbellek, maliyeti ve gecikmeyi ciddi biçimde düşürür.
+            </li>
+            <li>
+                <strong>Geri bildirim toplayın.</strong> Basit bir başparmak yukarı/aşağı bile,
+                düzenli incelendiğinde en iyi iyileştirme kaynağıdır.
+            </li>
+            <li>
+                <strong>Tazelik izleyin.</strong> "Bu indeks en son ne zaman güncellendi?" sorusunun
+                bir panoda cevabı olsun.
+            </li>
+        </ul>
+
+    </section>
+
+    <section id="kontrol-listesi">
+        <h2 class="section-title">8. Kısa kontrol listesi</h2>
+
+        <ul>
+            <li>Parçalar tek başına okunduğunda anlamlı mı?</li>
+            <li>Yetki etiketleri indekste mi, filtre sorgunun parçası mı?</li>
+            <li>Hibrit arama + yeniden sıralama var mı?</li>
+            <li>Modele kaç parça gidiyor — gereğinden fazla mı?</li>
+            <li>Bilgi yoksa model "bilmiyorum" diyebiliyor mu?</li>
+            <li>Cevaplar kaynak gösteriyor mu?</li>
+            <li>Gerçek sorulardan oluşan bir değerlendirme seti var mı?</li>
+            <li>Aşama aşama izleme ve sorgu başına maliyet görünüyor mu?</li>
+        </ul>
+        <p>
+            Bu listedeki her madde, bir demoyu üretime taşırken en az bir kez sorun çıkaran
+            başlıklardan seçildi. Sırayla üzerinden geçmek, sonradan yapılacak büyük bir
+            yeniden yazımdan çok daha ucuz.
+        </p>
+
+    </section>
+
+
+    <div class="post-nav">
+        <a class="btn btn--ghost btn--sm" href="../index.html#blog">← Tüm yazılar</a>
+        <a class="btn btn--primary btn--sm" href="../index.html#contact">Bu konuda konuşalım</a>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="wrap footer__inner">
+        <p style="margin:0;">&copy; <span data-year>2026</span> İrem Nur Yılmaz. Tüm hakları saklıdır.</p>
+        <p style="margin:0;"><a href="../index.html#blog">← Diğer yazılar</a></p>
+    </div>
+</footer>
+
+<script src="../script.js" defer></script>
+
+</body>
+</html>

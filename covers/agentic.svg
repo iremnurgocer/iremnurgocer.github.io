@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420" role="img" aria-label="Agentic AI: planla, araç çağır, gözlemle döngüsü ve yönlendirici ajan altında uzman ajanlar">
+  <rect width="800" height="420" fill="#12140e"/>
+  <circle cx="700" cy="360" r="180" fill="#a9c94a" opacity=".06"/>
+  <text x="48" y="70" font-family="'Space Grotesk',system-ui,sans-serif" font-size="30" font-weight="600" fill="#e9eade">Agentic AI</text>
+  <text x="48" y="98" font-family="Inter,system-ui,sans-serif" font-size="15" fill="#a2a795">Planla · araç çağır · gözlemle · tekrarla</text>
+
+  <!-- Döngü -->
+  <g transform="translate(180,262)">
+    <circle r="92" fill="none" stroke="#333829" stroke-width="2" stroke-dasharray="5 7"/>
+    <g font-family="Inter,system-ui,sans-serif" font-size="13" fill="#12140e" text-anchor="middle">
+      <g><circle cx="0" cy="-92" r="30" fill="#a9c94a"/><text x="0" y="-88">Planla</text></g>
+      <g><circle cx="80" cy="46" r="30" fill="#a9c94a"/><text x="80" y="50">Araç</text></g>
+      <g><circle cx="-80" cy="46" r="30" fill="#a9c94a"/><text x="-80" y="50">Gözlem</text></g>
+    </g>
+    <g stroke="#a9c94a" stroke-width="2.5" fill="none" marker-end="url(#a2)">
+      <path d="M26 -78 A92 92 0 0 1 66 20"/>
+      <path d="M46 62 A92 92 0 0 1 -46 62"/>
+      <path d="M-66 20 A92 92 0 0 1 -26 -78"/>
+    </g>
+  </g>
+  <defs>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#a9c94a"/>
+    </marker>
+  </defs>
+
+  <!-- Yönlendirici + uzman ajanlar -->
+  <g transform="translate(400,150)">
+    <rect x="60" y="0" width="160" height="52" rx="12" fill="#1b1e16" stroke="#a9c94a"/>
+    <text x="140" y="32" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="15" fill="#e9eade">Yönlendirici ajan</text>
+
+    <g stroke="#333829" stroke-width="2" fill="none">
+      <path d="M140 52 V80 H20 V110"/>
+      <path d="M140 52 V80 H140 V110"/>
+      <path d="M140 52 V80 H260 V110"/>
+    </g>
+
+    <g font-family="Inter,system-ui,sans-serif" font-size="12.5" fill="#a2a795" text-anchor="middle">
+      <g><rect x="-30" y="110" width="100" height="46" rx="10" fill="#1b1e16" stroke="#333829"/><text x="20" y="138">Arama</text></g>
+      <g><rect x="90" y="110" width="100" height="46" rx="10" fill="#1b1e16" stroke="#333829"/><text x="140" y="138">Doküman</text></g>
+      <g><rect x="210" y="110" width="100" height="46" rx="10" fill="#1b1e16" stroke="#333829"/><text x="260" y="138">Veritabanı</text></g>
+    </g>
+
+    <rect x="60" y="186" width="160" height="42" rx="10" fill="#232720" stroke="#a9c94a" stroke-opacity=".5"/>
+    <text x="140" y="212" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="13" fill="#a9c94a">İnsan onayı</text>
+    <g stroke="#333829" stroke-width="2" fill="none">
+      <path d="M20 156 V172 H140 V186"/><path d="M140 156 V186"/><path d="M260 156 V172 H140 V186"/>
+    </g>
+  </g>
+</svg>

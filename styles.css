@@ -832,3 +832,14 @@ img { max-width: 100%; }
     margin-bottom: 0;
     padding-top: 14px;
 }
+
+/* --- Kart üst etiketi (blog kategorisi) --- */
+.card__kicker {
+    display: block;
+    margin-bottom: 8px;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+}

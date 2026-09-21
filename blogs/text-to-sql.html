@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doğal Dilden SQL'e: Güvenli Text-to-SQL Mimarisi</title>
+    <meta name="description" content="Şema bağlamı, doğrulama katmanı, satır seviyesi yetki, salt okunur erişim ve Text-to-SQL sistemlerinin değerlendirilmesi.">
+    <meta name="author" content="İrem Nur Yılmaz">
+
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:title" content="Doğal Dilden SQL'e: Güvenli Text-to-SQL Mimarisi">
+    <meta property="og:description" content="Şema bağlamı, doğrulama katmanı, satır seviyesi yetki, salt okunur erişim ve Text-to-SQL sistemlerinin değerlendirilmesi.">
+    <meta property="og:image" content="https://iremnurgocer.github.io/covers/text-to-sql.svg">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%235f7a12'/><text x='50' y='68' font-size='52' font-family='sans-serif' font-weight='600' fill='%23fff' text-anchor='middle'>İY</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">İçeriğe geç</a>
+
+<header class="nav">
+    <div class="wrap nav__inner">
+        <a class="nav__brand" href="../index.html">İrem Nur Yılmaz<span>.</span></a>
+        <nav aria-label="Ana menü">
+            <ul class="nav__links" id="nav-links">
+                <li><a class="nav__link" href="../index.html#blog">Tüm yazılar</a></li>
+                <li><a class="nav__link" href="../index.html#projects">Projeler</a></li>
+                <li><a class="nav__link" href="../index.html#contact">İletişim</a></li>
+            </ul>
+        </nav>
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Koyu temaya geç">
+            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        </button>
+        <button class="icon-btn nav__toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="nav-links" aria-label="Menüyü aç">
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+    </div>
+</header>
+
+<main id="main">
+    <header class="blog-hero">
+        <img class="post__cover" src="../covers/text-to-sql.svg" alt="Text-to-SQL şeması: soru, üretilen SQL, doğrulama katmanı ve salt okunur veritabanı">
+        <h1>Doğal Dilden SQL'e: Güvenli Text-to-SQL Mimarisi</h1>
+        <p class="lead">İş birimlerinin SQL yazmadan veriye ulaşması güzel bir fikir. Onu güvenli ve doğru hâle getiren şey, modelin kendisi değil etrafındaki doğrulama katmanı.</p>
+        <div class="blog-meta">
+            <span><strong>Yazar:</strong> İrem Nur Yılmaz</span>
+            <span><strong>Konu:</strong> LLM · Veri erişimi</span>
+            <span><strong>Okuma:</strong> ~10 dk</span>
+        </div>
+    </header>
+
+    <section id="icindekiler">
+        <h2 class="section-title">İçindekiler</h2>
+        <div class="toc">
+            <ul>
+                <li><a href="#vaat">1. Vaat ve gerçek</a></li>
+                <li><a href="#sema-baglami">2. Şema bağlamı vermek</a></li>
+                <li><a href="#hat">3. Üretim hattı: üret, doğrula, çalıştır</a></li>
+                <li><a href="#guvenlik">4. Veritabanı tarafındaki güvenlik</a></li>
+                <li><a href="#belirsizlik">5. Belirsiz soruları yönetmek</a></li>
+                <li><a href="#degerlendirme">6. Değerlendirme</a></li>
+                <li><a href="#uretim-notlari">7. Üretim notları</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="vaat">
+        <h2 class="section-title">1. Vaat ve gerçek</h2>
+
+        <p>
+            Text-to-SQL'in vaadi basit: iş birimleri veriye ulaşmak için geliştirici sırası
+            beklemesin, sorusunu kendi diliyle sorsun. Gerçekse şu: bir dil modeli sözdizimi
+            doğru ama <em>anlamı yanlış</em> SQL üretmekte oldukça iyidir.
+        </p>
+        <p>
+            "Geçen ay kaç müşteri kazandık?" sorusunun cevabı, "müşteri" ve "kazanmak"
+            tanımlarına bağlıdır. İptal edenler sayılıyor mu? Deneme hesapları dâhil mi?
+            Model bunu bilemez; siz söylemezseniz tahmin eder ve tahmini makul görünür.
+        </p>
+        <div class="callout">
+            <strong>Asıl mesele güvenlik değil, anlam</strong>
+            <p>
+                Güvenliği mühendislikle çözersiniz: salt okunur rol, izin listesi, doğrulama.
+                Anlamı çözmek için şemayı modele <strong>anlatmanız</strong> gerekir — sadece
+                tablo adlarını vermek yetmez.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="sema-baglami">
+        <h2 class="section-title">2. Şema bağlamı vermek</h2>
+
+        <p>
+            Tüm veritabanı şemasını isteme eklemek hem pahalıdır hem işe yaramaz. Üç adımlı bir
+            yaklaşım çok daha iyi sonuç verir:
+        </p>
+        <ul>
+            <li>
+                <strong>Şema seçimi:</strong> soruya göre ilgili tabloları getirin. Tablo ve kolon
+                açıklamalarını gömerek bir arama indeksi kurmak, en etkili tek iyileştirmedir.
+            </li>
+            <li>
+                <strong>Zenginleştirilmiş tanım:</strong> kolon adının yanına ne anlama geldiğini,
+                birimini ve örnek değerlerini yazın.
+            </li>
+            <li>
+                <strong>Örnek sorgular:</strong> kurumun sık sorduğu 10–20 soru ve doğru SQL'leri,
+                modele en iyi öğretme biçimidir.
+            </li>
+        </ul>
+        <pre><code>-- Modele verilen şema bağlamı: ad değil, anlam
+-- tablo: satislar — onaylanmış satış kalemleri (iptaller haric)
+--   tarih         DATE    -- satışın onaylandığı gün
+--   urun_kodu     TEXT    -- örn. 'AX-1042'
+--   adet          INT     -- satılan birim
+--   net_tutar     NUMERIC -- KDV haric, TRY
+--   musteri_id    INT     -- musteriler.id
+-- NOT: iade edilen kalemler bu tabloda yer almaz; iadeler tablosuna bakın.</code></pre>
+        <p>
+            Şu son satır gibi notlar, modelin en sık yaptığı hataları doğrudan önler. Veri
+            ekibinin kafasındaki "herkes bilir" bilgisini yazıya dökmek, bu işin en değerli
+            kısmıdır.
+        </p>
+
+    </section>
+
+    <section id="hat">
+        <h2 class="section-title">3. Üretim hattı: üret, doğrula, çalıştır</h2>
+
+        <p>Modelin ürettiği SQL doğrudan veritabanına gitmemeli. Aradaki katman şunu yapar:</p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead><tr><th>Aşama</th><th>Kontrol</th></tr></thead>
+                <tbody>
+                    <tr><td>Ayrıştırma</td><td>Geçerli SQL mi? Tek ifade mi (noktalı virgülle zincirleme yok)?</td></tr>
+                    <tr><td>İfade türü</td><td>Yalnızca SELECT / WITH. INSERT, UPDATE, DELETE, DDL reddedilir.</td></tr>
+                    <tr><td>Nesne izin listesi</td><td>Yalnızca sunulmaya izinli tablo ve görünümler.</td></tr>
+                    <tr><td>Satır seviyesi yetki</td><td>Kullanıcının göremeyeceği satırlar sorguya filtre olarak eklenir.</td></tr>
+                    <tr><td>Sınırlar</td><td>Zorunlu LIMIT, sorgu zaman aşımı, maliyet tahmini.</td></tr>
+                    <tr><td>Çalıştırma</td><td>Salt okunur bağlantı, ayrı kullanıcı, ayrı kaynak havuzu.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <pre><code>IZINLI_TABLOLAR = {"satislar", "musteriler", "urunler"}
+
+def dogrula(sql, kullanici):
+    agac = sqlglot.parse(sql)
+    if len(agac) != 1:
+        raise Gecersiz("tek ifade bekleniyor")
+
+    ifade = agac[0]
+    if not isinstance(ifade, (exp.Select, exp.With)):
+        raise Gecersiz("yalnızca okuma sorgularına izin var")
+
+    kullanilan = {t.name for t in ifade.find_all(exp.Table)}
+    if not kullanilan &lt;= IZINLI_TABLOLAR:
+        raise Gecersiz(f"izinsiz nesne: {kullanilan - IZINLI_TABLOLAR}")
+
+    ifade = satir_yetkisi_uygula(ifade, kullanici)   # ör. sirket_id = :sirket
+    return ifade.limit(1000).sql()</code></pre>
+        <div class="callout warning">
+            <strong>İzin listesi, yasak listesinden güvenlidir</strong>
+            <p>
+                "DROP geçmesin" diye kara liste yazmak, atlatılmayı bekleyen bir filtredir.
+                Neyin yasak olduğunu değil, <strong>neyin serbest olduğunu</strong> tanımlayın.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="guvenlik">
+        <h2 class="section-title">4. Veritabanı tarafındaki güvenlik</h2>
+
+        <p>
+            Uygulama katmanındaki doğrulama ilk savunma hattıdır, tek hattı değil. Veritabanı da
+            kendini korumalı:
+        </p>
+        <ul>
+            <li><strong>Ayrı bir salt okunur kullanıcı.</strong> Yazma yetkisi hiç verilmemiş olsun.</li>
+            <li><strong>Yalnızca sunulacak görünümlere erişim.</strong> Ham tablolar yerine amaca özel görünümler.</li>
+            <li><strong>Satır seviyesi güvenlik (RLS).</strong> Uygulama filtreyi unutsa bile veritabanı korur.</li>
+            <li><strong>Sorgu zaman aşımı ve kaynak sınırı.</strong> Yanlışlıkla yazılmış bir kartezyen çarpım üretimi düşürmesin.</li>
+            <li><strong>Denetim kaydı.</strong> Hangi kullanıcı, hangi soru, hangi SQL, kaç satır — hepsi loglansın.</li>
+        </ul>
+
+    </section>
+
+    <section id="belirsizlik">
+        <h2 class="section-title">5. Belirsiz soruları yönetmek</h2>
+
+        <p>
+            İyi bir Text-to-SQL sistemi her soruya cevap vermez; bazılarını geri sorar. "Bu ay
+            satışlar nasıl?" sorusunda "bu ay" takvim ayı mı, son 30 gün mü; "satış" adet mi
+            tutar mı belli değildir.
+        </p>
+        <ul>
+            <li>
+                <strong>Netleştirme sorusu sorun.</strong> Tek bir kısa soru, yanlış bir rapordan
+                iyidir.
+            </li>
+            <li>
+                <strong>Varsayımları görünür yapın.</strong> Cevabın yanında "son 30 gün, net tutar
+                üzerinden, iadeler hariç" yazsın.
+            </li>
+            <li>
+                <strong>Üretilen SQL'i gösterin.</strong> Veriyi bilen kullanıcı hatayı saniyeler
+                içinde fark eder; bu, en ucuz doğrulama mekanizmasıdır.
+            </li>
+        </ul>
+
+    </section>
+
+    <section id="degerlendirme">
+        <h2 class="section-title">6. Değerlendirme</h2>
+
+        <p>
+            SQL'i metin olarak karşılaştırmak yanıltıcıdır — aynı sonucu veren iki sorgu çok farklı
+            yazılabilir. Ölçülmesi gereken, <strong>çalıştırma doğruluğu</strong>dur.
+        </p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead><tr><th>Metrik</th><th>Nasıl</th></tr></thead>
+                <tbody>
+                    <tr><td>Çalıştırma doğruluğu</td><td>Üretilen sorgunun sonucu, referans sorgunun sonucuyla aynı mı</td></tr>
+                    <tr><td>Geçerlilik oranı</td><td>Sorgu hatasız çalışıyor mu</td></tr>
+                    <tr><td>Reddetme isabeti</td><td>Cevaplanamaz sorularda sistem doğru şekilde geri soruyor mu</td></tr>
+                    <tr><td>Güvenlik ihlali</td><td>İzin listesi dışına çıkan tek bir örnek bile kabul edilemez</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            Test setini gerçek sorulardan kurun ve içine bilerek belirsiz, bilerek yetkisiz
+            sorular koyun. Sistemin neyi reddettiği, neyi cevapladığı kadar önemlidir.
+        </p>
+
+    </section>
+
+    <section id="uretim-notlari">
+        <h2 class="section-title">7. Üretim notları</h2>
+
+        <ul>
+            <li><strong>Sonuçları önbelleğe alın.</strong> Aynı sorular tekrar eder; normalleştirilmiş soru anahtar olsun.</li>
+            <li><strong>Sık kullanılan sorguları kaydedin.</strong> Doğrulanmış bir sorgu, bir sonraki sefer üretilmeye gerek kalmadan çalışsın.</li>
+            <li><strong>Sonucu görselleştirin.</strong> Tablo iyidir; ama tek satırlık bir sayı ya da basit bir grafik çoğu zaman daha anlaşılır.</li>
+            <li><strong>Şema değişimini izleyin.</strong> Kolon adı değiştiğinde bağlam da güncellenmeli; aksi hâlde sistem sessizce bozulur.</li>
+            <li><strong>Küçük başlayın.</strong> Üç tablo ve on soruyla başlayan bir sistem, tüm veri ambarını açan bir sistemden çok daha hızlı güven kazanır.</li>
+        </ul>
+
+    </section>
+
+
+    <div class="post-nav">
+        <a class="btn btn--ghost btn--sm" href="../index.html#blog">← Tüm yazılar</a>
+        <a class="btn btn--primary btn--sm" href="../index.html#contact">Bu konuda konuşalım</a>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="wrap footer__inner">
+        <p style="margin:0;">&copy; <span data-year>2026</span> İrem Nur Yılmaz. Tüm hakları saklıdır.</p>
+        <p style="margin:0;"><a href="../index.html#blog">← Diğer yazılar</a></p>
+    </div>
+</footer>
+
+<script src="../script.js" defer></script>
+
+</body>
+</html>

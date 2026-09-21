@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI: Ajan Mimarileri ve Çok Ajanlı Sistemler</title>
+    <meta name="description" content="Ajan döngüsü, araç tasarımı, tek ajan ve çok ajanlı mimariler, durum yönetimi, korkuluklar ve değerlendirme.">
+    <meta name="author" content="İrem Nur Yılmaz">
+
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:title" content="Agentic AI: Ajan Mimarileri ve Çok Ajanlı Sistemler">
+    <meta property="og:description" content="Ajan döngüsü, araç tasarımı, tek ajan ve çok ajanlı mimariler, durum yönetimi, korkuluklar ve değerlendirme.">
+    <meta property="og:image" content="https://iremnurgocer.github.io/covers/agentic.svg">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%235f7a12'/><text x='50' y='68' font-size='52' font-family='sans-serif' font-weight='600' fill='%23fff' text-anchor='middle'>İY</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">İçeriğe geç</a>
+
+<header class="nav">
+    <div class="wrap nav__inner">
+        <a class="nav__brand" href="../index.html">İrem Nur Yılmaz<span>.</span></a>
+        <nav aria-label="Ana menü">
+            <ul class="nav__links" id="nav-links">
+                <li><a class="nav__link" href="../index.html#blog">Tüm yazılar</a></li>
+                <li><a class="nav__link" href="../index.html#projects">Projeler</a></li>
+                <li><a class="nav__link" href="../index.html#contact">İletişim</a></li>
+            </ul>
+        </nav>
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Koyu temaya geç">
+            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        </button>
+        <button class="icon-btn nav__toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="nav-links" aria-label="Menüyü aç">
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        </button>
+    </div>
+</header>
+
+<main id="main">
+    <header class="blog-hero">
+        <img class="post__cover" src="../covers/agentic.svg" alt="Agentic AI şeması: planla, araç çağır, gözlemle döngüsü ve yönlendirici ajan">
+        <h1>Agentic AI: Ajan Mimarileri ve Çok Ajanlı Sistemler</h1>
+        <p class="lead">Bir ajanı ajan yapan şey modelin zekâsı değil, etrafına kurduğunuz döngü ve korkuluklardır. Bu yazı üretimde çalışan ajan mimarilerinin neye benzediğini anlatıyor.</p>
+        <div class="blog-meta">
+            <span><strong>Yazar:</strong> İrem Nur Yılmaz</span>
+            <span><strong>Konu:</strong> Agentic AI · Mimari</span>
+            <span><strong>Okuma:</strong> ~11 dk</span>
+        </div>
+    </header>
+
+    <section id="icindekiler">
+        <h2 class="section-title">İçindekiler</h2>
+        <div class="toc">
+            <ul>
+                <li><a href="#ajan-nedir">1. Ajan nedir, ne değildir?</a></li>
+                <li><a href="#dongu">2. Döngü: planla, çağır, gözlemle</a></li>
+                <li><a href="#arac-tasarimi">3. Araç tasarımı</a></li>
+                <li><a href="#tek-vs-cok">4. Tek ajan mı, çok ajan mı?</a></li>
+                <li><a href="#durum-ve-bellek">5. Durum, bellek ve tekrarlanabilirlik</a></li>
+                <li><a href="#korkuluklar">6. Korkuluklar: limit, onay, geri alma</a></li>
+                <li><a href="#degerlendirme">7. Değerlendirme ve izlenebilirlik</a></li>
+                <li><a href="#ne-zaman-kullanmamali">8. Ne zaman ajan kullanmamalı</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="ajan-nedir">
+        <h2 class="section-title">1. Ajan nedir, ne değildir?</h2>
+
+        <p>
+            Bir dil modeline soru sorup cevabını almak bir ajan değildir. Ajanı ajan yapan şey
+            <strong>döngü</strong>: model bir sonraki adıma kendisi karar verir, bir araç çağırır,
+            sonucu görür ve buna göre yeniden karar verir. Görev bitene ya da bütçe dolana kadar
+            bu döngü döner.
+        </p>
+        <p>
+            Bu ayrım pratik bir sonuç doğurur: sabit adımlı bir işi ajanla yapmak gereksiz
+            karmaşıklıktır. "Bu metni özetle, sonra e-postayla gönder" bir iş akışıdır, ajan
+            değil. Ajan, <em>kaç adım gerekeceğini önceden bilmediğiniz</em> işler için vardır.
+        </p>
+        <div class="callout">
+            <strong>Basit soru</strong>
+            <p>
+                Adımları ve sıralarını önceden yazabiliyorsanız, düz bir iş akışı yazın.
+                Ajan, belirsizliğin bedelini ödemeye değdiği yerde kazanır.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="dongu">
+        <h2 class="section-title">2. Döngü: planla, çağır, gözlemle</h2>
+
+        <p>Her ajan çerçevesinin altında aynı üç adım var:</p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead><tr><th>Adım</th><th>Ne olur</th><th>Nerede bozulur</th></tr></thead>
+                <tbody>
+                    <tr><td>Planla</td><td>Model, mevcut duruma bakıp sonraki eylemi seçer</td><td>Belirsiz görev tanımı, eksik bağlam</td></tr>
+                    <tr><td>Çağır</td><td>Seçilen araç, üretilen parametrelerle çalıştırılır</td><td>Kötü araç tanımı, doğrulanmamış parametre</td></tr>
+                    <tr><td>Gözlemle</td><td>Sonuç bağlama eklenir, döngü başa döner</td><td>Devasa çıktı, bağlamın taşması</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            Döngünün gövdesi şaşırtıcı derecede kısadır; işin zorluğu çevresindeki korkuluklardadır.
+        </p>
+        <pre><code>def calistir(gorev, araclar, maks_adim=8, maks_maliyet=0.50):
+    durum = [{"rol": "kullanici", "icerik": gorev}]
+    harcanan = 0.0
+
+    for adim in range(maks_adim):
+        karar, maliyet = model.plan_yap(durum, araclar)
+        harcanan += maliyet
+
+        if karar.bitti or harcanan &gt; maks_maliyet:
+            return karar.cevap, {"adim": adim, "maliyet": harcanan}
+
+        arac = araclar[karar.arac_adi]
+        if arac.onay_gerekir:
+            bekle_insan_onayi(karar)          # geri alınamaz eylemler burada durur
+
+        sonuc = arac.calistir(**karar.parametreler)
+        durum.append({"rol": "arac", "ad": arac.ad, "icerik": kisalt(sonuc)})
+
+    return None, {"hata": "adim_limiti", "maliyet": harcanan}</code></pre>
+
+    </section>
+
+    <section id="arac-tasarimi">
+        <h2 class="section-title">3. Araç tasarımı</h2>
+
+        <p>
+            Bir ajanın kalitesi, büyük ölçüde araçlarının kalitesidir. Model yalnızca kendisine
+            anlatılan şeyi kullanabilir; kötü tanımlanmış bir araç, modelin yanlış kullanacağı
+            bir araçtır.
+        </p>
+        <ul>
+            <li>
+                <strong>Tek iş yapsın.</strong> "veritabaninda_islem_yap" gibi çok amaçlı bir araç
+                yerine "musteri_ara", "siparis_getir" gibi dar araçlar tanımlayın.
+            </li>
+            <li>
+                <strong>Açıklama, dokümantasyon gibi yazılsın.</strong> Ne zaman kullanılacağı,
+                ne zaman kullanılmayacağı ve dönüş biçimi net olsun.
+            </li>
+            <li>
+                <strong>Parametreler kısıtlı olsun.</strong> Serbest metin yerine enum, tarih
+                aralığı yerine tanımlı seçenekler; doğrulaması kolay olan hata yapılması zor olandır.
+            </li>
+            <li>
+                <strong>Çıktı küçük olsun.</strong> 5.000 satırlık bir sonuç bağlamı doldurur.
+                Özetleyin, sayfalayın ya da yalnızca gereken alanları döndürün.
+            </li>
+            <li>
+                <strong>Hatalar konuşsun.</strong> "500 Internal Error" modele hiçbir şey anlatmaz;
+                "tarih_araligi 90 günden uzun olamaz" düzeltilebilir bir mesajdır.
+            </li>
+        </ul>
+
+    </section>
+
+    <section id="tek-vs-cok">
+        <h2 class="section-title">4. Tek ajan mı, çok ajan mı?</h2>
+
+        <p>
+            Çok ajanlı mimariler cazip görünür ama her ajan yeni bir hata kaynağıdır. Pratikte
+            işe yarayan yaklaşım şu sırayla ilerlemek:
+        </p>
+        <ul>
+            <li><strong>Önce tek ajan, az araç.</strong> Çoğu iş burada biter.</li>
+            <li>
+                <strong>Araç sayısı arttığında yönlendirici deseni.</strong> Bir üst ajan görevi
+                sınıflandırır ve uzman bir ajana devreder. Her uzman kendi dar araç setiyle çalışır.
+            </li>
+            <li>
+                <strong>Gerçekten paralelleşen işler için çoklu ajan.</strong> On kaynağı aynı anda
+                taramak gibi bağımsız alt görevlerde kazanç nettir.
+            </li>
+        </ul>
+        <div class="callout warning">
+            <strong>Ajanlar birbiriyle serbestçe konuşmasın</strong>
+            <p>
+                Serbest sohbet eden ajan toplulukları hem öngörülemez hem de hata ayıklaması çok zor
+                olur. Aralarındaki iletişimi tanımlı bir şemaya ve tek yönlü bir akışa bağlayın.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="durum-ve-bellek">
+        <h2 class="section-title">5. Durum, bellek ve tekrarlanabilirlik</h2>
+
+        <p>
+            Ajanlar uzun çalışır, yarıda kesilir, yeniden başlatılır. Bu yüzden durumun nerede
+            tutulduğu mimarinin merkezinde olmalı.
+        </p>
+        <ul>
+            <li>
+                <strong>Adımları kalıcı yazın.</strong> Her araç çağrısı ve sonucu kayıt altında
+                olsun; süreç yarıda kalırsa baştan değil kaldığı yerden devam etsin.
+            </li>
+            <li>
+                <strong>Yan etkili çağrılar idempotent olsun.</strong> Aynı isteği iki kez gönderen
+                bir ajan, iki kayıt oluşturmamalı. İstek anahtarı (idempotency key) kullanın.
+            </li>
+            <li>
+                <strong>Bağlamı özetleyerek taşıyın.</strong> Tüm geçmişi her adımda göndermek hem
+                pahalıdır hem de dikkati dağıtır. Eski adımları sıkıştırın, kararları saklayın.
+            </li>
+        </ul>
+
+    </section>
+
+    <section id="korkuluklar">
+        <h2 class="section-title">6. Korkuluklar: limit, onay, geri alma</h2>
+
+        <p>Üretimdeki bir ajanın en önemli özelliği yapabildikleri değil, yapamadıklarıdır.</p>
+        <div class="table-responsive">
+            <table class="table">
+                <thead><tr><th>Korkuluk</th><th>Neyi engeller</th></tr></thead>
+                <tbody>
+                    <tr><td>Adım ve maliyet limiti</td><td>Sonsuz döngü, kontrolsüz harcama</td></tr>
+                    <tr><td>Araç izin listesi</td><td>Ajanın yetkisi dışındaki sistemlere erişmesi</td></tr>
+                    <tr><td>İnsan onayı</td><td>Geri alınamaz eylemlerin sessizce yapılması</td></tr>
+                    <tr><td>Kullanıcı kimliğiyle çalışma</td><td>Yetki yükselmesi — ajan servis hesabıyla her şeyi görmemeli</td></tr>
+                    <tr><td>Çıktı doğrulama</td><td>Biçimi bozuk ya da beklenmedik yanıtların akışa girmesi</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="callout warning">
+            <strong>Geri alınamaz eylemler daima onaydan geçmeli</strong>
+            <p>
+                E-posta göndermek, kayıt silmek, ödeme başlatmak, dışarıya veri yazmak. Bu
+                sınıftaki her araç, insan onayı bayrağıyla işaretlenmeli — istisnasız.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="degerlendirme">
+        <h2 class="section-title">7. Değerlendirme ve izlenebilirlik</h2>
+
+        <p>
+            Ajanları değerlendirmek klasik model değerlendirmesinden farklıdır: tek bir çıktı değil,
+            bir <em>yörünge</em> değerlendirirsiniz.
+        </p>
+        <ul>
+            <li><strong>Görev başarı oranı:</strong> iş gerçekten bitti mi?</li>
+            <li><strong>Adım verimliliği:</strong> kaç adımda bitti, gereksiz döngü var mı?</li>
+            <li><strong>Araç isabeti:</strong> doğru aracı doğru parametrelerle mi çağırdı?</li>
+            <li><strong>Maliyet ve gecikme:</strong> görev başına ortalama ve p95.</li>
+            <li><strong>Müdahale oranı:</strong> insan kaç kez düzeltmek zorunda kaldı?</li>
+        </ul>
+        <p>
+            Bunları ölçebilmek için her yörüngenin tam kaydı gerekir: hangi adımda ne düşünüldü,
+            hangi araç çağrıldı, ne döndü. İzleme olmadan bir ajanı iyileştirmek, karanlıkta
+            hata ayıklamaktır.
+        </p>
+
+    </section>
+
+    <section id="ne-zaman-kullanmamali">
+        <h2 class="section-title">8. Ne zaman ajan kullanmamalı</h2>
+
+        <ul>
+            <li>Adımlar sabitse — düz bir iş akışı daha ucuz, daha hızlı, daha öngörülebilir.</li>
+            <li>Hata maliyeti çok yüksek ve onay mekanizması kurulamıyorsa.</li>
+            <li>Gecikme kritikse — döngü her turda yeni bir model çağrısı demektir.</li>
+            <li>Araçlar güvenilir değilse — kırılgan API'lerin üzerine kurulan ajan daha da kırılgandır.</li>
+        </ul>
+        <p>
+            Ajanlar, doğru problemde gerçekten güçlü. Ama çoğu kurumsal senaryoda en iyi çözüm
+            "iyi tasarlanmış bir iş akışı + bir iki noktada model" olur. Mimariyi problemin
+            belirsizliğine göre seçmek, teknolojiye göre seçmekten daha iyi sonuç verir.
+        </p>
+
+    </section>
+
+
+    <div class="post-nav">
+        <a class="btn btn--ghost btn--sm" href="../index.html#blog">← Tüm yazılar</a>
+        <a class="btn btn--primary btn--sm" href="../index.html#contact">Bu konuda konuşalım</a>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="wrap footer__inner">
+        <p style="margin:0;">&copy; <span data-year>2026</span> İrem Nur Yılmaz. Tüm hakları saklıdır.</p>
+        <p style="margin:0;"><a href="../index.html#blog">← Diğer yazılar</a></p>
+    </div>
+</footer>
+
+<script src="../script.js" defer></script>
+
+</body>
+</html>

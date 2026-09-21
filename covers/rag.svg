@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420" role="img" aria-label="RAG mimarisi: belgeler parçalanır, gömülür, vektör deposunda aranır ve LLM'e bağlam olarak verilir">
+  <rect width="800" height="420" fill="#12140e"/>
+  <g opacity=".5">
+    <circle cx="640" cy="60" r="170" fill="#a9c94a" opacity=".07"/>
+    <circle cx="120" cy="390" r="150" fill="#a9c94a" opacity=".05"/>
+  </g>
+  <text x="48" y="70" font-family="'Space Grotesk',system-ui,sans-serif" font-size="30" font-weight="600" fill="#e9eade">Kurumsal RAG mimarisi</text>
+  <text x="48" y="98" font-family="Inter,system-ui,sans-serif" font-size="15" fill="#a2a795">Parçalama · gömme · erişim · bağlam</text>
+
+  <!-- Belgeler -->
+  <g transform="translate(48,150)">
+    <rect x="10" y="10" width="76" height="96" rx="7" fill="#1b1e16" stroke="#333829"/>
+    <rect x="5" y="5" width="76" height="96" rx="7" fill="#1b1e16" stroke="#333829"/>
+    <rect x="0" y="0" width="76" height="96" rx="7" fill="#232720" stroke="#a9c94a" stroke-opacity=".5"/>
+    <g stroke="#a2a795" stroke-width="3" stroke-linecap="round" opacity=".7">
+      <line x1="14" y1="24" x2="62" y2="24"/><line x1="14" y1="40" x2="62" y2="40"/>
+      <line x1="14" y1="56" x2="50" y2="56"/><line x1="14" y1="72" x2="58" y2="72"/>
+    </g>
+    <text x="43" y="128" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="13" fill="#a2a795">Belgeler</text>
+  </g>
+
+  <!-- Parçalar / gömme -->
+  <g transform="translate(212,158)">
+    <g fill="#1b1e16" stroke="#a9c94a" stroke-opacity=".45">
+      <rect x="0" y="0" width="34" height="34" rx="6"/><rect x="42" y="0" width="34" height="34" rx="6"/>
+      <rect x="0" y="42" width="34" height="34" rx="6"/><rect x="42" y="42" width="34" height="34" rx="6"/>
+    </g>
+    <g fill="#a9c94a"><circle cx="17" cy="17" r="4"/><circle cx="59" cy="17" r="4"/><circle cx="17" cy="59" r="4"/><circle cx="59" cy="59" r="4"/></g>
+    <text x="38" y="120" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="13" fill="#a2a795">Parça + vektör</text>
+  </g>
+
+  <!-- Vektör deposu -->
+  <g transform="translate(378,150)">
+    <ellipse cx="50" cy="16" rx="50" ry="15" fill="#232720" stroke="#a9c94a" stroke-opacity=".6"/>
+    <path d="M0 16 V80 a50 15 0 0 0 100 0 V16" fill="#1b1e16" stroke="#a9c94a" stroke-opacity=".6"/>
+    <ellipse cx="50" cy="80" rx="50" ry="15" fill="none" stroke="#333829"/>
+    <text x="50" y="128" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="13" fill="#a2a795">Vektör deposu</text>
+  </g>
+
+  <!-- LLM -->
+  <g transform="translate(560,150)">
+    <rect x="0" y="0" width="112" height="96" rx="14" fill="#1b1e16" stroke="#a9c94a"/>
+    <g stroke="#a9c94a" stroke-width="2.5" fill="none">
+      <circle cx="34" cy="34" r="8"/><circle cx="78" cy="34" r="8"/>
+      <circle cx="34" cy="66" r="8"/><circle cx="78" cy="66" r="8"/>
+      <line x1="42" y1="34" x2="70" y2="34"/><line x1="42" y1="66" x2="70" y2="66"/>
+      <line x1="34" y1="42" x2="34" y2="58"/><line x1="78" y1="42" x2="78" y2="58"/>
+      <line x1="40" y1="40" x2="72" y2="60"/>
+    </g>
+    <text x="56" y="128" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="13" fill="#a2a795">LLM + bağlam</text>
+  </g>
+
+  <!-- Oklar -->
+  <g stroke="#a9c94a" stroke-width="2.5" fill="none" marker-end="url(#ar)">
+    <line x1="136" y1="198" x2="200" y2="198"/>
+    <line x1="300" y1="198" x2="366" y2="198"/>
+    <line x1="490" y1="198" x2="548" y2="198"/>
+  </g>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#a9c94a"/>
+    </marker>
+  </defs>
+
+  <!-- Soru → cevap -->
+  <text x="48" y="352" font-family="Inter,system-ui,sans-serif" font-size="14" fill="#a9c94a">Soru</text>
+  <line x1="88" y1="347" x2="560" y2="347" stroke="#333829" stroke-width="2" stroke-dasharray="6 6"/>
+  <text x="616" y="352" font-family="Inter,system-ui,sans-serif" font-size="14" fill="#a9c94a">Kaynaklı cevap</text>
+</svg>
