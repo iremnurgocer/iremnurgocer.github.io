@@ -1,0 +1,244 @@
+/* Vaka çalışması sayfaları (work/*.html). Değişkenler main.css'ten gelir. */
+
+.nav__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: auto;
+    margin-left: 14px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: .88rem;
+    transition: color .2s, background .2s;
+}
+
+.nav__back:hover { color: var(--text); background: var(--surface-2); }
+.nav__back svg { width: 15px; height: 15px; transform: rotate(180deg); }
+.cs-page .brand { margin-right: 0; }
+
+.cs { padding-top: 140px; }
+
+.cs-hero { padding-bottom: clamp(40px, 6vw, 72px); }
+.cs-hero .eyebrow { flex-wrap: wrap; }
+
+.cs-title {
+    margin: 26px 0 22px;
+    max-width: 1000px;
+    font-size: clamp(2.4rem, 6.4vw, 5.6rem);
+    line-height: .98;
+    letter-spacing: -.045em;
+}
+
+.cs-summary {
+    margin: 0;
+    max-width: 720px;
+    font-size: clamp(1.05rem, 1.6vw, 1.28rem);
+    color: var(--muted);
+}
+
+.cs-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    margin: 40px 0 0;
+    border-top: 1px solid var(--line);
+}
+
+.cs-meta div { padding: 16px 20px 0 0; }
+.cs-meta div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+.cs-meta dt { font-family: var(--font-mono); font-size: .72rem; color: var(--faint); margin-bottom: 6px; }
+.cs-meta dd { margin: 0; font-size: .95rem; }
+
+.cs-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+}
+
+.cs-metric {
+    padding: 26px 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background:
+        radial-gradient(120% 90% at 100% 0%, var(--glow), transparent 60%),
+        var(--surface);
+}
+
+.cs-metric__val {
+    display: block;
+    font-size: clamp(2rem, 4vw, 3.1rem);
+    font-weight: 500;
+    letter-spacing: -.04em;
+    line-height: 1;
+}
+
+.cs-metric__lbl { display: block; margin-top: 12px; color: var(--muted); font-size: .88rem; line-height: 1.45; }
+
+.cs-body { padding-block: clamp(56px, 9vw, 120px); }
+
+.cs-sec {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+    padding: 44px 0;
+    border-top: 1px solid var(--line);
+}
+
+.cs-sec__label { position: sticky; top: 110px; align-self: start; }
+.cs-sec__label .mono { color: var(--accent); }
+.cs-sec__label h2 { margin-top: 10px; font-size: 1.5rem; letter-spacing: -.025em; }
+
+.cs-sec__body { min-width: 0; }
+.cs-sec__body > p { margin: 0 0 16px; font-size: 1.08rem; line-height: 1.7; color: var(--muted); max-width: 760px; }
+.cs-sec__body > p.cs-lead { font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.45; letter-spacing: -.015em; color: var(--text); }
+.cs-note { font-size: .9rem !important; color: var(--faint) !important; }
+.cs-subhead { margin: 32px 0 14px; color: var(--faint); }
+
+.cs-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; max-width: 820px; }
+
+.cs-list li {
+    position: relative;
+    padding: 16px 0 16px 30px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+}
+
+.cs-list li::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 25px;
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: rotate(45deg);
+}
+
+.cs-trade { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+
+.cs-trade__item {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    background: var(--surface);
+}
+
+.cs-trade__item .mono { color: var(--accent-3); }
+.cs-trade__item p { margin: 12px 0 0; color: var(--muted); }
+
+/* Mimari: numaralı adımlar, kontrol kapıları kesik çizgili */
+.arch {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 10px;
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: arch;
+}
+
+.arch__node {
+    position: relative;
+    display: grid;
+    gap: 6px;
+    padding: 16px 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+    counter-increment: arch;
+    transition: border-color .4s, background .4s, transform .5s var(--ease-out);
+}
+
+.arch__node::before {
+    content: counter(arch, decimal-leading-zero);
+    font-family: var(--font-mono);
+    font-size: .7rem;
+    color: var(--faint);
+}
+
+.arch__node::after {
+    content: "→";
+    position: absolute;
+    right: -9px;
+    top: 50%;
+    z-index: 1;
+    transform: translateY(-50%);
+    font-size: .8rem;
+    color: var(--faint);
+}
+
+.arch__node:last-child::after { display: none; }
+.arch__label { font-weight: 500; font-size: .95rem; letter-spacing: -.01em; }
+.arch__node small { font-family: var(--font-mono); font-size: .7rem; color: var(--faint); }
+.arch__node.is-guard { border-style: dashed; border-color: color-mix(in srgb, var(--accent-3) 50%, transparent); }
+.arch__node.is-guard small { color: var(--accent-3); }
+
+.arch__node.is-active {
+    border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+    background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+    transform: translateY(-3px);
+}
+
+.arch__node.is-active::before { color: var(--accent); }
+
+.cs-ask {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 56px;
+    padding: clamp(24px, 4vw, 40px);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background:
+        radial-gradient(80% 120% at 0% 0%, var(--glow), transparent 60%),
+        var(--surface);
+}
+
+.cs-ask h2 { font-size: clamp(1.3rem, 2.4vw, 1.8rem); }
+.cs-ask p { margin: 8px 0 0; color: var(--muted); }
+
+.cs-next {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.cs-next__link {
+    display: grid;
+    gap: 10px;
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    transition: border-color .3s, background .3s;
+}
+
+.cs-next__link:hover { border-color: var(--line-2); background: var(--surface); }
+.cs-next__link .mono { color: var(--faint); }
+.cs-next__link strong { font-weight: 500; font-size: 1.15rem; letter-spacing: -.02em; }
+.cs-next__link--right { text-align: right; }
+
+@media (max-width: 900px) {
+    .cs-metrics { grid-template-columns: 1fr 1fr; }
+    .cs-sec { grid-template-columns: 1fr; gap: 16px; padding: 34px 0; }
+    .cs-sec__label { position: static; }
+    .cs-meta { grid-template-columns: 1fr; }
+    .cs-meta div + div { padding-left: 0; border-left: 0; }
+    .arch__node::after { display: none; }
+}
+
+@media (max-width: 640px) {
+    .cs { padding-top: 110px; }
+    .nav__back span { display: none; }
+    .nav__back { margin-left: 4px; padding: 8px 10px; }
+    .cs-next { grid-template-columns: 1fr; }
+    .cs-next__link--right { text-align: left; }
+    .arch { grid-template-columns: 1fr 1fr; }
+}
+
+/* Sayfalar arası yumuşak geçiş (destekleyen tarayıcılarda) */
+@view-transition { navigation: auto; }
+
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .45s; }

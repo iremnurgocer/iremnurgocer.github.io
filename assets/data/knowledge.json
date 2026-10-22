@@ -1,0 +1,857 @@
+{
+  "version": 1,
+  "profile": {
+    "tr": "İrem Nur Yılmaz, Ankara'da yaşayan bir Senior AI Engineer'dır. Ocak 2026'dan beri IC Holding'de kurumsal yapay zeka sistemlerinin tasarımına ve geliştirmesine liderlik ediyor; projeleri problem tanımından üretime kadar yürütüyor. Öncesinde Key Yazılım (Software Engineer / AI Engineer, Mar 2023 - Ara 2025), Mevsimi (Backend Developer), Jotform (Junior Backend Developer), Piton Ar-Ge (Junior Software Developer; legacy ASP.NET modernizasyonuyla %90'a varan performans iyileştirmesi) ve FetalIST (yapay zeka tabanlı klinik karar destek) şirketlerinde çalıştı. Eskişehir Osmangazi Üniversitesi Matematik ve Bilgisayar Bilimleri lisansını bölüm birincisi olarak tamamladı, aynı bölümde yüksek lisans yaptı (tez: yapay zeka algoritmalarının diferansiyel geometri ile incelenmesi). TURABDIN 2025'te Isomap ve Laplace-Beltrami operatörü üzerine iki bildirisi var. Odak alanları: kurumsal RAG, agentic AI, Text-to-SQL, doküman zekası, LLM değerlendirmesi, Azure AI. İlkeleri: her çıktı bir kaynağa bağlı; önce kural, sonra model; yayından önce ölçüm; yetki veri katmanında; gerektiğinde insan onayı; belirsizliği gizlememek. Diller: Türkçe (ana dil), İngilizce (B2+/C1). İletişim: iremnurgocer99@gmail.com, linkedin.com/in/iremnurgocer, github.com/iremnurgocer. İşveren ve müşterilerle ilgili gizli ayrıntılar bilgi tabanında yoktur.",
+    "en": "İrem Nur Yılmaz is a Senior AI Engineer based in Ankara, Türkiye. Since January 2026 she has led the design and development of enterprise AI systems at IC Holding, running projects from problem definition to production. Before that she worked at Key Yazılım (Software Engineer / AI Engineer, Mar 2023 - Dec 2025), Mevsimi (Backend Developer), Jotform (Junior Backend Developer), Piton R&D (Junior Software Developer; up to 90% performance improvement through legacy ASP.NET modernisation) and FetalIST (AI-based clinical decision support). She graduated first in her department in Mathematics and Computer Science at Eskişehir Osmangazi University and completed an M.Sc. in the same field (thesis: analysing AI algorithms through differential geometry). She presented two papers at TURABDIN 2025 on Isomap and the Laplace-Beltrami operator. Focus: enterprise RAG, agentic AI, Text-to-SQL, document intelligence, LLM evaluation, Azure AI. Principles: every output has a source; rules first, then the model; measured before release; permissions in the data layer; human review where it matters; not hiding uncertainty. Languages: Turkish (native), English (B2+/C1). Contact: iremnurgocer99@gmail.com, linkedin.com/in/iremnurgocer, github.com/iremnurgocer. Confidential details about employers and clients are not part of this knowledge base."
+  },
+  "entries": [
+    {
+      "id": "greet",
+      "keys": [
+        "merhaba",
+        "selam",
+        "selamlar",
+        "hey",
+        "hi",
+        "hello",
+        "günaydın",
+        "iyi günler",
+        "good morning",
+        "naber",
+        "nasılsın"
+      ],
+      "tr": "Merhaba! Ben İrem'in sitesindeki asistanım. Deneyimleri, projeleri, teknik yaklaşımı ya da iletişim hakkında sorabilirsiniz. Örneğin: **\"Hangi projelerde çalıştı?\"** ya da **\"RAG sistemlerinde nasıl bir yaklaşım izliyor?\"**",
+      "en": "Hi! I'm the assistant on İrem's site. Ask me about her experience, projects, technical approach or how to get in touch. For example: **\"What has she built?\"** or **\"How does she approach RAG systems?\"**"
+    },
+    {
+      "id": "who",
+      "keys": [
+        "kim",
+        "kimdir",
+        "kendini tanıt",
+        "tanıtır mısın",
+        "özet",
+        "kısaca",
+        "tanıt",
+        "who",
+        "introduce",
+        "intro",
+        "introduction",
+        "summary",
+        "yourself",
+        "herself",
+        "irem",
+        "background",
+        "profil",
+        "profile",
+        "kendinden bahset",
+        "quick intro",
+        "give me an intro"
+      ],
+      "tr": "İrem Nur Yılmaz, Ankara'da yaşayan bir **Senior AI Engineer**. Kurumsal ekipler için üretimde kullanılan yapay zeka sistemleri geliştiriyor.\n\n- 5+ yıl yazılım mühendisliği (backend, entegrasyon, kurumsal yazılım)\n- 14 kurumsal yapay zeka projesi: RAG, agentic AI, Text-to-SQL, doküman zekası\n- Matematik ve Bilgisayar Bilimleri lisansı (bölüm birincisi) ve yüksek lisansı",
+      "en": "İrem Nur Yılmaz is a **Senior AI Engineer** based in Ankara. She builds AI systems that enterprise teams use in production.\n\n- 5+ years of software engineering (backend, integration, enterprise software)\n- 14 enterprise AI projects: RAG, agentic AI, Text-to-SQL, document intelligence\n- B.Sc. (graduated first in the department) and M.Sc. in Mathematics and Computer Science",
+      "links": [
+        "#about"
+      ],
+      "weight": 0.6
+    },
+    {
+      "id": "role",
+      "keys": [
+        "şu an",
+        "şimdi",
+        "nerede çalışıyor",
+        "hangi şirket",
+        "pozisyon",
+        "unvan",
+        "görev",
+        "rol",
+        "ne iş yapıyor",
+        "ne yapıyor",
+        "current",
+        "currently",
+        "where does she work",
+        "job",
+        "role",
+        "title",
+        "position",
+        "company",
+        "employer",
+        "holding",
+        "senior"
+      ],
+      "tr": "Ocak 2026'dan beri **IC Holding**'de **Senior AI Engineer** olarak kurumsal yapay zeka sistemlerinin tasarımına ve geliştirmesine liderlik ediyor.\n\nPratikte bu şu demek: iş problemini tanımlamak, mimariyi tasarlamak, sistemi geliştirmek, değerlendirme setlerini kurmak, Azure üzerinde üretime almak ve IT'ye devretmek.",
+      "en": "Since January 2026 she has been a **Senior AI Engineer** at **IC Holding**, leading the design and development of enterprise AI systems.\n\nIn practice that means: defining the business problem, designing the architecture, building the system, creating the evaluation sets, taking it to production on Azure and handing it over to IT.",
+      "links": [
+        "#experience"
+      ]
+    },
+    {
+      "id": "experience",
+      "keys": [
+        "deneyim",
+        "kariyer",
+        "tecrübe",
+        "önceki",
+        "geçmiş",
+        "çalıştığı yerler",
+        "şirketler",
+        "kaç yıl",
+        "experience",
+        "career",
+        "previous",
+        "history",
+        "worked",
+        "years",
+        "jotform",
+        "piton",
+        "mevsimi",
+        "fetalist",
+        "key yazılım",
+        "cv",
+        "özgeçmiş",
+        "resume"
+      ],
+      "tr": "Kariyer özeti:\n\n- **2026 - bugün** · Senior AI Engineer, IC Holding\n- **2023 - 2025** · Software Engineer / AI Engineer, Key Yazılım\n- **2022 - 2023** · Backend Developer, Mevsimi (e-ticaret entegrasyonları)\n- **2022** · Junior Backend Developer, Jotform\n- **2021 - 2022** · Junior Software Developer, Piton Ar-Ge (legacy modernizasyonuyla %90'a varan performans artışı)\n- **2021 - 2022** · Stajyer → Junior Developer, FetalIST (yapay zeka tabanlı klinik karar destek)\n\nToplamda 5+ yıl; backend ve entegrasyondan kurumsal yapay zeka mühendisliğine uzanan bir yol.",
+      "en": "Career at a glance:\n\n- **2026 - now** · Senior AI Engineer, IC Holding\n- **2023 - 2025** · Software Engineer / AI Engineer, Key Yazılım\n- **2022 - 2023** · Backend Developer, Mevsimi (e-commerce integrations)\n- **2022** · Junior Backend Developer, Jotform\n- **2021 - 2022** · Junior Software Developer, Piton R&D (up to 90% faster via legacy modernisation)\n- **2021 - 2022** · Intern → Junior Developer, FetalIST (AI clinical decision support)\n\n5+ years in total, moving from backend and integration into enterprise AI engineering.",
+      "links": [
+        "#experience"
+      ]
+    },
+    {
+      "id": "projects",
+      "keys": [
+        "proje",
+        "projeler",
+        "neler yaptı",
+        "ne geliştirdi",
+        "portföy",
+        "işler",
+        "örnek",
+        "projects",
+        "portfolio",
+        "what has she built",
+        "built",
+        "neler yaptı",
+        "projelerinden"
+      ],
+      "tr": "Öne çıkan sistemlerden bazıları:\n\n- **Şartname analiz ajanı**: %94-100 recall, sıfır uydurma madde\n- **Karar arşivi asistanı**: kabul testlerinde %99\n- **Kurumsal analitik copilot'u (Text-to-SQL)**: tüm tablolarda satır seviyesi izolasyon\n- **Çok kaynaklı ihale istihbaratı**: kendi kendine kaynak ekleyebilen ajan hattı\n- **Terminoloji duyarlı çeviri**: biçim koruyan DOCX çıktısı\n- **Belge çıkarım servisi**: güven skoru modelden değil OCR'dan\n\nHangisinin detayını görmek istersiniz?",
+      "en": "Some of the highlights:\n\n- **Spec analysis agent**: 94-100% recall, zero invented items\n- **Decision archive assistant**: 99% acceptance\n- **Enterprise analytics copilot (Text-to-SQL)**: row-level isolation on every table\n- **Multi-source tender intelligence**: an agent pipeline that onboards new sources on its own\n- **Terminology-aware translation**: layout-preserving DOCX output\n- **Document extraction service**: confidence from OCR, not from the model\n\nWhich one would you like to dig into?",
+      "links": [
+        "#work"
+      ],
+      "weight": 0.6
+    },
+    {
+      "id": "cs-spec",
+      "keys": [
+        "şartname",
+        "ön yeterlilik",
+        "spec",
+        "specification",
+        "prequalification",
+        "teklif",
+        "bid",
+        "kriter",
+        "criteria",
+        "uydurma",
+        "invented"
+      ],
+      "tr": "**Şartname ve ön yeterlilik analiz ajanı**: uzun şartnameleri yönetici özetine, geçti/kaldı kriterlerine ve puanlama tablosuna dönüştürüyor.\n\n- Belgeler yapı korunarak ayrıştırılıyor, her parça konum taşıyan bir kimlik alıyor\n- Üç uzman ajan paralel çalışıyor; model sayfa numarası değil, parça kimliği ile atıf yapıyor\n- Var olmayan parçaya atıf yapan madde uydurma kabul edilip eleniyor\n\n**Sonuç:** teklif ekibinin manuel özetlerine karşı %94-100 recall ve kesinlik, tüm koşularda sıfır uydurma madde.",
+      "en": "**Prequalification spec analysis agent**: turns long specifications into an executive brief, pass/fail criteria and a scoring table.\n\n- Documents are parsed with structure preserved, and each chunk gets a location-bearing ID\n- Three specialist agents run in parallel; the model cites chunk IDs, never page numbers\n- Items that cite a non-existent chunk are treated as invented and dropped\n\n**Result:** 94-100% recall and precision against the bid team's manual summaries, and zero invented items in every run.",
+      "links": [
+        "case:cs-spec"
+      ]
+    },
+    {
+      "id": "cs-decisions",
+      "keys": [
+        "karar",
+        "kararlar",
+        "decision",
+        "decisions",
+        "uat",
+        "kabul testi",
+        "arşiv",
+        "archive"
+      ],
+      "tr": "**Karar arşivi asistanı**: geniş bir karar arşivi üzerinde doğal dille sorulan sorulara ilgili tüm kararları kaynaklarıyla getiriyor. Burada eksik getirmek en maliyetli hata; sistem bu yüzden recall odaklı.\n\n- İstek yolunda LLM'siz, deterministik sorgu anlama\n- Filtre, tam eşleşme, Türkçe BM25 ve vektör aramayı birleştiren erişim\n- Yetki arama katmanında güvenlik filtresi olarak uygulanıyor, varsayılan kapalı\n\n**Sonuç:** kullanıcı kabul testlerinin %99'u başarılı.",
+      "en": "**Decision archive assistant**: answers natural-language questions over a large decision archive and returns every relevant decision with its source. Missing a decision is the costliest error here, so the system is built for recall.\n\n- Deterministic query understanding, no LLM on the request path\n- Retrieval combining filters, exact match, Turkish BM25 and vector search\n- Authorisation enforced as a search security filter, failing closed\n\n**Result:** 99% of user acceptance tests passed.",
+      "links": [
+        "case:cs-decisions"
+      ]
+    },
+    {
+      "id": "cs-sql",
+      "keys": [
+        "sql",
+        "text-to-sql",
+        "text2sql",
+        "nl2sql",
+        "veritabanı",
+        "database",
+        "analitik",
+        "analytics",
+        "rls",
+        "satır seviyesi",
+        "row-level"
+      ],
+      "tr": "**Kurumsal analitik copilot'u (Text-to-SQL)**: iş kullanıcıları veritabanlarını Türkçe doğal dille, yalnızca rollerinin izin verdiği kadarıyla sorguluyor.\n\n- Rol politikası → yetkiye göre filtrelenmiş şema RAG → SQL üretimi\n- AST doğrulama (tek SELECT, izinli tablolar) → satır seviyesi filtre → EXPLAIN → salt-okunur yürütme\n- Üretici ve doğrulayıcı bağımsız; reddedilen sorgular onarım döngüsüne giriyor\n\n**Sonuç:** satır seviyesi izolasyon **tüm tablolarda**, kapsamlı otomatik test.",
+      "en": "**Enterprise analytics copilot (Text-to-SQL)**: business users query databases in Turkish natural language, strictly within what their role allows.\n\n- Role policy → permission-filtered schema RAG → SQL generation\n- AST validation (single SELECT, authorised tables) → row-level filter → EXPLAIN → read-only execution\n- Independent generator and validator; rejected queries feed a repair loop\n\n**Result:** row-level isolation on **every table**, extensive automated tests.",
+      "links": [
+        "case:cs-sql",
+        "blogs/text-to-sql.html"
+      ]
+    },
+    {
+      "id": "cs-opps",
+      "keys": [
+        "fırsat",
+        "ihale",
+        "tender",
+        "opportunity",
+        "kaynak",
+        "adaptör",
+        "adapter",
+        "portal",
+        "istihbarat",
+        "intelligence"
+      ],
+      "tr": "**Çok kaynaklı ihale fırsat istihbaratı**: uluslararası ihale portallarını her gün tarayıp ilanları topluyor, normalize ediyor, değerlendiriyor ve Türkçeleştiriyor.\n\n- Onlarca kaynak için adaptörler, tek ortak veri modeli\n- Önce kurallar, kalanlar için LLM; LLM kaynağı birebir alıntılamak zorunda\n- Yeni kaynakları keşfedip pilot eden ve onay kapısıyla devreye alan otonom ekleme hattı\n\n**Sonuç:** kayıtların çoğu model çağrısı olmadan sonuçlanıyor.",
+      "en": "**Multi-source tender opportunity intelligence**: scans international tender portals every day and collects, normalises, evaluates and localises the notices.\n\n- Adapters for dozens of sources, one shared model\n- Rules first, LLM for the rest; the LLM must quote the source verbatim\n- An autonomous onboarding pipeline that discovers and pilots new sources behind an approval gate\n\n**Result:** most records are settled without a model call.",
+      "links": [
+        "case:cs-opps"
+      ]
+    },
+    {
+      "id": "cs-translate",
+      "keys": [
+        "çeviri",
+        "terminoloji",
+        "translation",
+        "translate",
+        "terminology",
+        "sözlük",
+        "glossary",
+        "docx",
+        "word"
+      ],
+      "tr": "**Terminoloji duyarlı doküman çeviri platformu**: sözleşme ve teknik dokümanları şirketin onaylı terminolojisiyle çeviriyor, orijinal biçimi koruyarak Word olarak yeniden kuruyor.\n\n- Terim eşlemede tam, sözcüksel ve vektör erişimi; LLM hakem yalnızca bulunan adaylardan seçebiliyor\n- Doküman boyunca her terim için tek karar; bilinmeyen kısaltmalar asla açılmıyor\n- Doğrulamadan geçemeyen doküman asla \"başarılı\" diye teslim edilmiyor\n\n**Sonuç:** terminoloji kayıtları hatasız indekslendi; kalite kontrolü hedefli düzeltmeler yapıyor.",
+      "en": "**Terminology-aware document translation**: translates contracts and technical documents using the company's approved terminology and rebuilds them as Word files with the original layout.\n\n- Exact, lexical and vector term retrieval; the LLM adjudicator may only pick a retrieved candidate\n- One decision per term for the whole document; unknown abbreviations are never expanded\n- A document that fails validation is never delivered as a success\n\n**Result:** terminology records indexed without failures; quality checks make targeted corrections.",
+      "links": [
+        "case:cs-translate"
+      ]
+    },
+    {
+      "id": "cs-supplier",
+      "keys": [
+        "tedarikçi",
+        "vergi levhası",
+        "supplier",
+        "extraction",
+        "çıkarım",
+        "ocr",
+        "belge",
+        "form",
+        "satın alma",
+        "procurement"
+      ],
+      "tr": "**Belge çıkarım servisi**: elle girilen tedarikçi belgelerini yapılandırılmış ve doğrulanmış veriye dönüştürüyor.\n\n- Yerleşim OCR'ı → sıcaklık 0'da katı JSON şeması → her değeri OCR metninde yeniden bulma\n- Model yalnızca etiketliyor; checksum ve kontroller kodda, güven skoru OCR'dan\n- Düşük güven manuel incelemeye gidiyor\n\n**Sonuç:** test setindeki dijital PDF'lerde hatasız çıkarım.",
+      "en": "**Document extraction service**: turns hand-keyed supplier documents into structured, validated data.\n\n- Layout OCR → strict JSON schema at temperature 0 → every value re-located in the OCR text\n- The model only labels; checksums and checks live in code, and confidence comes from OCR\n- Low confidence goes to manual review\n\n**Result:** error-free extraction on the digital PDFs in the test set.",
+      "links": [
+        "case:cs-supplier"
+      ]
+    },
+    {
+      "id": "solutions",
+      "keys": [
+        "diğer projeler",
+        "other projects",
+        "başka",
+        "entegrasyon",
+        "integration",
+        "bilgi asistanı",
+        "knowledge assistant"
+      ],
+      "tr": "Öne çıkan altı vakanın dışında İrem'in çalıştığı diğer konular:\n\n- **Kanıta dayalı değerlendirme ajanları**: her iddia bir kaynağa bağlı, puanlar deterministik koddan, rapor her zaman taslak\n- **Yapılandırılmış veri üzerinde soru-cevap**: LLM SQL yazmıyor ve hesap yapmıyor\n- **Kaynak takip ajanları**: versiyonlu kurallar, eksik alanlar tahmin edilmez\n- **Copilot Studio entegrasyonları**: yönetişimli, salt-okunur erişim\n- **Kurumsal bilgi asistanı**: yetkiye duyarlı RAG\n- **Şirket içi doküman işleme**: buluta çıkamayan veriler için hibrit mimari",
+      "en": "Beyond the six featured case studies, other areas İrem has worked on:\n\n- **Evidence-based assessment agents**: every claim has a source, scores come from deterministic code, reports are always drafts\n- **Q&A over structured data**: the LLM never writes SQL or does arithmetic\n- **Source monitoring agents**: versioned rules, missing fields are never guessed\n- **Copilot Studio integrations**: governed, read-only access\n- **Enterprise knowledge assistant**: permission-aware RAG\n- **On-premises document processing**: a hybrid architecture for data that can't leave the premises",
+      "links": [
+        "#work"
+      ]
+    },
+    {
+      "id": "lab",
+      "keys": [
+        "lab",
+        "laboratuvar",
+        "demo",
+        "demolar",
+        "dene",
+        "denemek",
+        "try",
+        "playground",
+        "canlı",
+        "live",
+        "sql guard",
+        "kanıt kontrolü",
+        "citation guard"
+      ],
+      "tr": "Sitede tarayıcıda çalışan iki canlı demo var:\n\n- **SQL güvenlik katmanı:** Bir rol ve soru seçin ya da SQL'i kendiniz yazın; katman sorgunun tek ifade, salt-okunur ve yetkili tablolarla sınırlı olup olmadığını kontrol edip satır seviyesi filtre ekliyor.\n- **Kanıt kontrolü:** Modelin çıkardığı maddeler kaynak metne karşı doğrulanıyor; var olmayan kaynağa atıf yapan madde eleniyor, birebir bulunamayan alıntı incelemeye düşüyor.\n\nİkisi de İrem'in gerçek projelerindeki güvenlik fikirlerinin sadeleştirilmiş birer örneği.",
+      "en": "The site has two live demos that run in your browser:\n\n- **SQL guard:** pick a role and a question, or write the SQL yourself; the guard checks that it's a single, read-only statement on authorised tables and injects a row-level filter.\n- **Citation guard:** items extracted by a model are checked against the source text; an item citing a missing source is dropped and a quote that can't be found verbatim goes to review.\n\nBoth are simplified versions of safety ideas from İrem's real projects.",
+      "links": [
+        "#lab"
+      ]
+    },
+    {
+      "id": "rag",
+      "keys": [
+        "rag",
+        "retrieval",
+        "erişim",
+        "vektör",
+        "vector",
+        "embedding",
+        "hibrit",
+        "hybrid",
+        "bm25",
+        "ai search",
+        "chunk",
+        "parçalama",
+        "grounded",
+        "kaynaklı"
+      ],
+      "tr": "RAG'de İrem'in yaklaşımı **önce erişimi doğru yapmak**:\n\n- Hibrit arama (BM25 + vektör + filtreler) ve Türkçeye özgü normalizasyon\n- Yetkinin indekse ve arama filtresine yazılması; asla prompta değil\n- Yanıtın yalnızca bulunan kaynaklar üzerinden yazılması, kısaltma varsa bunun açıkça söylenmesi\n- Recall tabanları ve kesinlik tavanlarıyla ölçüm\n\nBu konuda uzun bir yazısı da var: *Kurumsal RAG: prototipten üretime*.",
+      "en": "Her approach to RAG is to **get retrieval right first**:\n\n- Hybrid search (BM25 + vectors + filters) with Turkish-specific normalisation\n- Permissions written into the index and search filters, never into the prompt\n- Answers written only over retrieved sources, with truncation stated explicitly\n- Measurement with recall floors and precision ceilings\n\nShe has also written a long guide on it: *Enterprise RAG: from prototype to production* (in Turkish).",
+      "links": [
+        "case:cs-decisions",
+        "blogs/rag-production.html"
+      ]
+    },
+    {
+      "id": "agents",
+      "keys": [
+        "ajan",
+        "agent",
+        "agents",
+        "agentic",
+        "multi-agent",
+        "çok ajanlı",
+        "orkestrasyon",
+        "orchestration",
+        "tool",
+        "araç"
+      ],
+      "tr": "Agentic AI'da İrem **en basit işe yarayan yapıdan** başlıyor ve ajanı korkuluklarla sınırlıyor:\n\n- Uzmanlaşmış ajanlar (ör. şartname ajanındaki özet, kriter ve puanlama ajanları)\n- Bütçeler (istek, model çağrısı, süre), devre kesiciler, onay kapıları\n- Dış içerik güvenilmeyen girdi olarak çitleniyor (prompt injection'a karşı)\n- Idempotent adımlar, sürdürülebilir orkestrasyon, insana yönlendirme\n\nÖrnek: ihale istihbaratı platformundaki otonom kaynak ekleme hattı.",
+      "en": "In agentic AI she starts with **the simplest structure that works** and limits agents with guardrails:\n\n- Specialised agents (e.g. the brief, criteria and scoring agents in the spec system)\n- Budgets (requests, model calls, time), circuit breakers and approval gates\n- External content fenced as untrusted input against prompt injection\n- Idempotent steps, resumable orchestration and routing to humans\n\nExample: the autonomous source-onboarding pipeline in the tender intelligence platform.",
+      "links": [
+        "case:cs-opps",
+        "blogs/agentic-ai.html"
+      ]
+    },
+    {
+      "id": "eval",
+      "keys": [
+        "değerlendirme",
+        "eval",
+        "evaluation",
+        "metrik",
+        "metric",
+        "ölçüm",
+        "measure",
+        "golden",
+        "test",
+        "halüsinasyon",
+        "hallucination",
+        "doğruluk",
+        "accuracy",
+        "recall",
+        "precision",
+        "kalite",
+        "quality",
+        "evaluate",
+        "evaluating",
+        "evaluates",
+        "benchmark"
+      ],
+      "tr": "Değerlendirme **yayından önce** hazırlanıyor:\n\n- Golden setler ve iş ekibinin kendi çıktılarıyla karşılaştırma\n- UAT'de recall tabanları ve kesinlik tavanları\n- Prompt ve kural değişikliklerinde regresyon karşılaştırması\n- Uydurmanın yapısal olarak engellenmesi: birebir alıntı, kaynak kimliği doğrulama\n- Ölçülmemiş bir şey için açıkça \"ölçülmedi\" yazmak\n\nÖrnekler: şartname ajanında %94-100 recall ve sıfır uydurma, karar arşivi asistanında %99 UAT.",
+      "en": "Evaluation is set up **before release**:\n\n- Golden sets and comparisons against the business team's own outputs\n- Recall floors and precision ceilings in UAT\n- Regression comparisons on prompt and rule changes\n- Structural prevention of hallucination: verbatim quotes and source-ID validation\n- Saying \"not measured\" when something hasn't been measured\n\nExamples: 94-100% recall with zero invented items on the spec agent, 99% UAT on the decision archive assistant.",
+      "links": [
+        "#approach"
+      ]
+    },
+    {
+      "id": "security",
+      "keys": [
+        "güvenlik",
+        "security",
+        "yetki",
+        "yetkilendirme",
+        "authorization",
+        "authorisation",
+        "rbac",
+        "entra",
+        "prompt injection",
+        "gizlilik",
+        "privacy",
+        "kvkk",
+        "gdpr",
+        "pii",
+        "managed identity",
+        "secret"
+      ],
+      "tr": "Güvenlik tasarımın başından itibaren var:\n\n- Yetkilendirme arama filtresinde ve SQL katmanında, varsayılan kapalı (fail-closed)\n- Satır seviyesi güvenlik, Entra ID ve rol tabanlı erişim\n- Saklanan anahtar yok: her yerde managed identity ve Key Vault\n- Prompt injection'a karşı dış içeriğin çitlenmesi, SSRF koruması\n- Kişisel verilerin deterministik maskelenmesi\n\nBackend döneminde SonarQube, Fortify ve Burp Suite ile güvenli yazılım geliştirme deneyimi de var.",
+      "en": "Security is part of the design from the start:\n\n- Authorisation in search filters and the SQL layer, failing closed\n- Row-level security, Entra ID and role-based access\n- No stored secrets: managed identity and Key Vault throughout\n- External content fenced against prompt injection, plus SSRF guards\n- Deterministic masking of personal data\n\nFrom her backend years she also has secure development experience with SonarQube, Fortify and Burp Suite.",
+      "links": [
+        "#approach"
+      ]
+    },
+    {
+      "id": "skills",
+      "keys": [
+        "yetenek",
+        "yetkinlik",
+        "teknoloji",
+        "stack",
+        "skills",
+        "technologies",
+        "tools",
+        "araçlar",
+        "python",
+        "azure",
+        "c#",
+        ".net",
+        "java",
+        "fastapi",
+        "aws",
+        "docker",
+        "programlama",
+        "programming",
+        "language",
+        "copilot studio",
+        "biliyor",
+        "kullandı"
+      ],
+      "tr": "Teknik yetkinlikler:\n\n- **AI:** Enterprise RAG, hibrit arama, agentic iş akışları, Text-to-SQL, doküman zekası/OCR, yapılandırılmış çıkarım, LLM değerlendirmesi, korkuluklar\n- **Azure:** Azure OpenAI, AI Search, Document Intelligence, Translator, Copilot Studio, M365 Agents SDK, Teams botları\n- **Backend:** Python, FastAPI, C#/.NET, Java, Node.js, PHP (Symfony/Laravel), mikroservisler\n- **Bulut & veri:** Azure Functions (Durable), Service Bus, Bicep, Key Vault, App Insights/OpenTelemetry, Docker, AWS, SQL Server, PostgreSQL, MongoDB, Redis",
+      "en": "Technical skills:\n\n- **AI:** enterprise RAG, hybrid search, agentic workflows, Text-to-SQL, document AI/OCR, structured extraction, LLM evaluation, guardrails\n- **Azure:** Azure OpenAI, AI Search, Document Intelligence, Translator, Copilot Studio, M365 Agents SDK, Teams bots\n- **Backend:** Python, FastAPI, C#/.NET, Java, Node.js, PHP (Symfony/Laravel), microservices\n- **Cloud & data:** Azure Functions (Durable), Service Bus, Bicep, Key Vault, App Insights/OpenTelemetry, Docker, AWS, SQL Server, PostgreSQL, MongoDB, Redis",
+      "links": [
+        "#capabilities"
+      ]
+    },
+    {
+      "id": "approach",
+      "keys": [
+        "yaklaşım",
+        "nasıl çalışır",
+        "nasıl çalışıyor",
+        "yöntem",
+        "süreç",
+        "metodoloji",
+        "ilke",
+        "prensip",
+        "approach",
+        "process",
+        "method",
+        "how does she work",
+        "principles",
+        "philosophy"
+      ],
+      "tr": "Her projede benzer adımları izliyor: **keşif → veri ve kaynaklar → mimari → değerlendirme → üretim → iyileştirme**. Model seçimi genellikle en son konuşulan konu.\n\nTemel ilkeleri:\n- Her çıktı bir kaynağa bağlı\n- Önce kural, sonra model\n- Yayından önce ölçüm\n- Yetki veri katmanında, promptta değil\n- Gerektiğinde insan onayı\n- Belirsizliği gizlememek",
+      "en": "She follows similar steps on every project: **discovery → data and sources → architecture → evaluation → production → improvement**. Model choice is usually the last conversation.\n\nCore principles:\n- Every output has a source\n- Rules first, then the model\n- Measured before release\n- Permissions in the data layer, not the prompt\n- Human review where it matters\n- Not hiding uncertainty",
+      "links": [
+        "#approach"
+      ]
+    },
+    {
+      "id": "why",
+      "keys": [
+        "neden",
+        "işe almalı",
+        "neden işe",
+        "güçlü yön",
+        "fark",
+        "farkı",
+        "değer",
+        "why should",
+        "why hire",
+        "strengths",
+        "what makes",
+        "different",
+        "stand out",
+        "unique",
+        "value"
+      ],
+      "tr": "Bunu değerlendirmek size kalmış; sitedeki somut bilgiler şunlar:\n\n- Projelerini problem tanımından üretime ve IT'ye devre kadar kendisi yürütüyor\n- Sonuçları ölçüp raporluyor: ör. karar arşivi asistanında %99 kabul, Text-to-SQL'de tüm tablolarda satır seviyesi izolasyon\n- 5+ yıllık backend geçmişi sayesinde test, izleme ve yetkilendirme gibi konuları baştan tasarıma katıyor\n- Matematik eğitimi ve yapay zeka algoritmaları üzerine akademik çalışmaları var\n\nDetaylar için vaka çalışmalarına bakabilir ya da doğrudan [iletişime geçebilirsiniz](#contact).",
+      "en": "That's for you to judge; here is what the site shows:\n\n- She runs her projects from problem definition through production and handover to IT\n- She measures and reports results: e.g. 99% acceptance on the decision archive assistant, row-level isolation on every table in Text-to-SQL\n- Five-plus years of backend work mean testing, monitoring and authorisation are part of her designs from the start\n- She has a mathematics background and academic work on AI algorithms\n\nSee the case studies for detail, or [get in touch](#contact) directly.",
+      "links": [
+        "#work",
+        "#contact"
+      ]
+    },
+    {
+      "id": "education",
+      "keys": [
+        "eğitim",
+        "üniversite",
+        "okul",
+        "lisans",
+        "yüksek lisans",
+        "master",
+        "degree",
+        "education",
+        "university",
+        "school",
+        "osmangazi",
+        "matematik",
+        "mathematics",
+        "tez",
+        "thesis",
+        "birinci",
+        "first",
+        "study",
+        "studied",
+        "okudu",
+        "mezun",
+        "graduate",
+        "graduated"
+      ],
+      "tr": "Eğitim:\n\n- **Yüksek Lisans**, Matematik ve Bilgisayar Bilimleri, Eskişehir Osmangazi Üniversitesi (2023-2025). Tez: yapay zeka algoritmalarının diferansiyel geometri ile incelenmesi.\n- **Lisans**, Matematik ve Bilgisayar Bilimleri, Eskişehir Osmangazi Üniversitesi (2018-2022), **bölüm birincisi**.",
+      "en": "Education:\n\n- **M.Sc.** in Mathematics and Computer Science, Eskişehir Osmangazi University (2023-2025). Thesis: analysing AI algorithms through differential geometry.\n- **B.Sc.** in Mathematics and Computer Science, Eskişehir Osmangazi University (2018-2022), **graduated first in her department**.",
+      "links": [
+        "#research"
+      ]
+    },
+    {
+      "id": "research",
+      "keys": [
+        "yayın",
+        "bildiri",
+        "makale",
+        "araştırma",
+        "akademik",
+        "publication",
+        "paper",
+        "research",
+        "academic",
+        "isomap",
+        "manifold",
+        "laplace",
+        "geometri",
+        "geometry",
+        "diferansiyel",
+        "differential",
+        "turabdin"
+      ],
+      "tr": "Araştırma ilgisi yapay zeka algoritmalarının **geometrisi**:\n\n- *Isomap'in matematiksel temeli: diferansiyel geometri ve jeodeziklerin rolü*, TURABDIN 2025\n- *Manifold öğrenmede Laplace-Beltrami operatörünün diferansiyel geometrik analizi*, TURABDIN 2025\n- Yüksek lisans tezi: *Yapay zeka algoritmalarının diferansiyel geometri ile incelenmesi* (2025)",
+      "en": "Her research interest is the **geometry** of AI algorithms:\n\n- *The mathematical foundation of Isomap: differential geometry and the role of geodesics*, TURABDIN 2025\n- *A differential-geometric analysis of the Laplace-Beltrami operator in manifold learning*, TURABDIN 2025\n- M.Sc. thesis: *Analysing AI algorithms through differential geometry* (2025)",
+      "links": [
+        "#research"
+      ]
+    },
+    {
+      "id": "certs",
+      "keys": [
+        "sertifika",
+        "sertifikalar",
+        "certification",
+        "certificate",
+        "ai-102",
+        "microsoft",
+        "coursera",
+        "kurs",
+        "course"
+      ],
+      "tr": "Sertifikalar ve eğitimler:\n\n- **Azure AI Engineer Associate (AI-102)**, 2026, devam ediyor\n- Machine Learning, Stanford / Coursera (2023)\n- Python & TensorFlow for Data Science (2024)\n- Microservices Architecture, DevOps Solutions, Secure Software Development (BTK Akademi)\n- Clean Code & SOLID (2024)",
+      "en": "Certifications and training:\n\n- **Azure AI Engineer Associate (AI-102)**, 2026, in progress\n- Machine Learning, Stanford / Coursera (2023)\n- Python & TensorFlow for Data Science (2024)\n- Microservices Architecture, DevOps Solutions, Secure Software Development (BTK Akademi)\n- Clean Code & SOLID (2024)",
+      "links": [
+        "#research"
+      ]
+    },
+    {
+      "id": "languages",
+      "keys": [
+        "ingilizce",
+        "english",
+        "dil biliyor",
+        "languages",
+        "speak",
+        "türkçe",
+        "turkish",
+        "konuşuyor"
+      ],
+      "tr": "Türkçe ana dili; İngilizcesi **B2+ / erken C1** seviyesinde. Teknik dokümantasyon, mimari kayıtlar ve uluslararası kaynaklarla günlük olarak İngilizce çalışıyor.",
+      "en": "Turkish is her native language; her English is **B2+ / early C1**. She works in English daily with technical documentation, architecture records and international sources.",
+      "links": [
+        "#capabilities"
+      ]
+    },
+    {
+      "id": "location",
+      "keys": [
+        "nerede yaşıyor",
+        "konum",
+        "şehir",
+        "ankara",
+        "location",
+        "based",
+        "where is she",
+        "remote",
+        "uzaktan",
+        "hibrit",
+        "relocate",
+        "taşınma"
+      ],
+      "tr": "İrem **Ankara, Türkiye**'de yaşıyor. Çalışma modeli (uzaktan, hibrit, yer değişikliği) gibi konular rolün kendisine bağlı; bunları doğrudan konuşmak için [mesaj bırakabilirsiniz](#contact).",
+      "en": "She is based in **Ankara, Türkiye**. Questions like remote, hybrid or relocation depend on the specific role, so it's best to [leave her a message](#contact) and discuss it directly.",
+      "links": [
+        "mail"
+      ]
+    },
+    {
+      "id": "hire",
+      "keys": [
+        "işe alım",
+        "iş teklifi",
+        "pozisyon için",
+        "müsait",
+        "uygun mu",
+        "freelance",
+        "serbest",
+        "danışmanlık",
+        "consulting",
+        "hire",
+        "hiring",
+        "available",
+        "availability",
+        "open to",
+        "opportunity",
+        "recruiter",
+        "iş birliği",
+        "collaboration",
+        "collaborate",
+        "konuşma",
+        "talk",
+        "speaking"
+      ],
+      "tr": "İrem kurumsal yapay zeka projeleri, teknik iş birlikleri ve konuşma davetleri için yazışmaya açık. Rol, kapsam ve zamanlama gibi detayları en iyi doğrudan konuşursunuz.\n\nBuradaki **Mesaj gönder** sekmesinden doğrudan e-postasına yazabilirsiniz.",
+      "en": "She is open to conversations about enterprise AI projects, technical collaborations and speaking invitations. Details like role, scope and timing are best discussed directly.\n\nYou can write straight to her inbox from the **Send a message** tab here.",
+      "links": [
+        "mail"
+      ]
+    },
+    {
+      "id": "contact",
+      "keys": [
+        "iletişim",
+        "ulaş",
+        "ulaşmak",
+        "mail",
+        "e-posta",
+        "eposta",
+        "email",
+        "contact",
+        "reach",
+        "linkedin",
+        "telefon",
+        "phone",
+        "mesaj",
+        "message",
+        "iletişime geç",
+        "get in touch"
+      ],
+      "tr": "İletişim yolları:\n\n- E-posta: **iremnurgocer99@gmail.com**\n- [LinkedIn](https://linkedin.com/in/iremnurgocer)\n- [GitHub](https://github.com/iremnurgocer)\n\nYa da bu pencerede **Mesaj gönder** sekmesinden doğrudan yazabilirsiniz.",
+      "en": "Ways to reach her:\n\n- Email: **iremnurgocer99@gmail.com**\n- [LinkedIn](https://linkedin.com/in/iremnurgocer)\n- [GitHub](https://github.com/iremnurgocer)\n\nOr write directly from the **Send a message** tab in this window.",
+      "links": [
+        "mail"
+      ]
+    },
+    {
+      "id": "writing",
+      "keys": [
+        "blog",
+        "yazı",
+        "yazılar",
+        "article",
+        "articles",
+        "writing",
+        "post",
+        "rehber",
+        "guide"
+      ],
+      "tr": "İrem'in uzun teknik rehberleri:\n\n- [Kurumsal RAG: prototipten üretime](blogs/rag-production.html)\n- [Agentic AI: ajan mimarileri](blogs/agentic-ai.html)\n- [Güvenli Text-to-SQL mimarisi](blogs/text-to-sql.html)\n- [Security engineer eğitim seti](blogs/security-engineer-training.html)\n- [Mikroservis mimarisi](blogs/blog1.html)",
+      "en": "Her long-form technical guides (in Turkish):\n\n- [Enterprise RAG: from prototype to production](blogs/rag-production.html)\n- [Agentic AI: agent architectures](blogs/agentic-ai.html)\n- [Secure Text-to-SQL architecture](blogs/text-to-sql.html)\n- [Security engineer training set](blogs/security-engineer-training.html)\n- [Microservice architecture](blogs/blog1.html)",
+      "links": [
+        "#writing"
+      ]
+    },
+    {
+      "id": "reading",
+      "keys": [
+        "okuma",
+        "okuma listesi",
+        "öneri",
+        "önerir",
+        "kitap",
+        "kaynak öner",
+        "reading",
+        "recommend",
+        "papers",
+        "makaleler",
+        "what should i read"
+      ],
+      "tr": "Sitede bir okuma listesi var. Başlangıç için:\n\n- *Building Effective Agents* (Anthropic): pratik ajan tasarımı\n- *Retrieval-Augmented Generation* (Lewis vd., 2020): RAG'in temeli\n- *Lost in the Middle* (Liu vd., 2023): uzun bağlamın sınırları\n- *OWASP Top 10 for LLM Applications*: güvenlik kontrol listesi",
+      "en": "The site has a reading list. Good places to start:\n\n- *Building Effective Agents* (Anthropic): practical agent design\n- *Retrieval-Augmented Generation* (Lewis et al., 2020): the foundation of RAG\n- *Lost in the Middle* (Liu et al., 2023): the limits of long context\n- *OWASP Top 10 for LLM Applications*: a security checklist",
+      "links": [
+        "#reading"
+      ]
+    },
+    {
+      "id": "opensource",
+      "keys": [
+        "github",
+        "açık kaynak",
+        "open source",
+        "repo",
+        "kod",
+        "code",
+        "chatcore"
+      ],
+      "tr": "Kurumsal işlerin kaynak kodu gizli, ancak GitHub'da kişisel projeleri var: **ChatCore.AI** (FastAPI, FAISS, Redis ile RAG asistanı), Task Manager (React + Express + JWT), gerçek zamanlı Chat App ve daha fazlası. Profil: [github.com/iremnurgocer](https://github.com/iremnurgocer)",
+      "en": "Her enterprise work is closed-source, but she has personal projects on GitHub: **ChatCore.AI** (a RAG assistant with FastAPI, FAISS and Redis), a Task Manager (React + Express + JWT), a real-time Chat App and more. Profile: [github.com/iremnurgocer](https://github.com/iremnurgocer)",
+      "links": [
+        "#opensource"
+      ]
+    },
+    {
+      "id": "leadership",
+      "keys": [
+        "liderlik",
+        "ekip",
+        "takım",
+        "yönetim",
+        "paydaş",
+        "leadership",
+        "lead",
+        "team",
+        "manage",
+        "stakeholder",
+        "communication",
+        "iletişim becerisi",
+        "adr",
+        "dokümantasyon",
+        "documentation"
+      ],
+      "tr": "Teknik liderlik tarafında İrem:\n\n- İş ekipleriyle problemi ve başarı ölçütünü birlikte tanımlıyor\n- Kararlarını mimari karar kayıtlarıyla (ADR) belgeliyor\n- IT ekiplerine çalıştırma kılavuzu ve devir paketleri hazırlıyor\n- UAT süreçlerini iş birimleriyle yürütüyor",
+      "en": "On the technical leadership side, she:\n\n- Defines the problem and success metric together with business teams\n- Documents decisions in architecture decision records (ADRs)\n- Prepares runbooks and handover packs for IT\n- Runs UAT with the business units",
+      "links": [
+        "#experience"
+      ]
+    },
+    {
+      "id": "salary",
+      "keys": [
+        "maaş",
+        "ücret",
+        "salary",
+        "compensation",
+        "rate",
+        "fiyat",
+        "price",
+        "kaç para",
+        "how much"
+      ],
+      "tr": "Ücret ve koşullar gibi konuları bu asistan yanıtlamıyor; bunları doğrudan İrem'le konuşmanız en doğrusu. **Mesaj gönder** sekmesinden yazabilirsiniz.",
+      "en": "This assistant doesn't discuss compensation or terms; those are best discussed with İrem directly. You can write to her from the **Send a message** tab.",
+      "links": [
+        "mail"
+      ]
+    },
+    {
+      "id": "personal",
+      "keys": [
+        "yaş",
+        "kaç yaşında",
+        "evli",
+        "eş",
+        "çocuk",
+        "aile",
+        "adres",
+        "age",
+        "how old",
+        "married",
+        "husband",
+        "family",
+        "children",
+        "address",
+        "din",
+        "religion",
+        "politika",
+        "politics"
+      ],
+      "tr": "Bu asistan yalnızca İrem'in profesyonel geçmişi hakkında yanıt veriyor; kişisel konulara girmiyor. Deneyimleri, projeleri ya da teknik yaklaşımı hakkında memnuniyetle yardımcı olurum.",
+      "en": "This assistant only covers İrem's professional background, not personal matters. I'm happy to help with her experience, projects or technical approach."
+    },
+    {
+      "id": "site",
+      "keys": [
+        "bu site",
+        "site nasıl",
+        "bu bot",
+        "asistan nasıl",
+        "chatbot",
+        "how was this built",
+        "this site",
+        "this bot",
+        "how do you work",
+        "nasıl çalışıyorsun",
+        "sen kimsin",
+        "who are you"
+      ],
+      "tr": "Bu site derleme adımı olmayan HTML, CSS ve JavaScript ile yazıldı ve GitHub Pages'te yayınlanıyor. Ben sitedeki bilgi tabanı üzerinde çalışan bir asistanım: sorunuzu en ilgili bilgiyle eşleştirip yanıt veriyorum. Sitede olmayan bir şeyi uydurmam; emin olmadığımda bunu söylerim.",
+      "en": "This site is plain HTML, CSS and JavaScript with no build step, hosted on GitHub Pages. I'm an assistant grounded in the site's knowledge base: I match your question to the most relevant information. I won't make up anything that isn't on the site, and I'll say when I'm unsure."
+    },
+    {
+      "id": "thanks",
+      "keys": [
+        "teşekkür",
+        "teşekkürler",
+        "sağol",
+        "sağ ol",
+        "eyvallah",
+        "thanks",
+        "thank you",
+        "thx",
+        "harika",
+        "great",
+        "süper"
+      ],
+      "tr": "Rica ederim! Başka bir sorunuz olursa buradayım. İrem'e bir not bırakmak isterseniz **Mesaj gönder** sekmesini kullanabilirsiniz.",
+      "en": "You're welcome! I'm here if you have more questions. To leave İrem a note, use the **Send a message** tab."
+    }
+  ],
+  "fallback": {
+    "tr": "Bu konuda sitede net bir bilgi bulamadım ve tahmin yürütmek istemem. Sorunuzu İrem'e doğrudan iletmek ister misiniz? **Mesaj gönder** sekmesinden yazabilirsiniz. Ya da şunlardan birini sorabilirsiniz: projeler, deneyim, teknik yaklaşım, eğitim.",
+    "en": "I couldn't find a clear answer to that on the site, and I'd rather not guess. Would you like to send your question to İrem directly? Use the **Send a message** tab. Or ask me about her projects, experience, technical approach or education."
+  },
+  "suggestions": {
+    "tr": [
+      "Kendini kısaca tanıtır mısın?",
+      "Şu anki görevi ne?",
+      "Hangi projelerde çalıştı?",
+      "Neden işe almalıyız?",
+      "RAG'e yaklaşımı nasıl?",
+      "Değerlendirmeyi nasıl yapıyor?",
+      "Eğitimi ve araştırmaları",
+      "Nasıl iletişime geçerim?"
+    ],
+    "en": [
+      "Give me a quick intro",
+      "What is her current role?",
+      "What has she built?",
+      "Why should we hire her?",
+      "How does she approach RAG?",
+      "How does she evaluate systems?",
+      "Education and research",
+      "How can I contact her?"
+    ]
+  }
+}

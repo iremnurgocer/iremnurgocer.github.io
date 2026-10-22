@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>İrem Nur Yılmaz | Senior AI Engineer</title>
+    <meta name="description" content="İrem Nur Yılmaz | Senior AI Engineer. Kanıta dayalı, ölçülebilir ve güvenli kurumsal yapay zeka sistemleri: RAG, agentic AI, Text-to-SQL ve doküman zekası.">
+    <meta name="author" content="İrem Nur Yılmaz">
+    <meta name="theme-color" content="#07080b" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f5f4ef" media="(prefers-color-scheme: light)">
+    <link rel="canonical" href="https://iremnurgocer.github.io/">
+
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="İrem Nur Yılmaz">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:title" content="İrem Nur Yılmaz | Senior AI Engineer">
+    <meta property="og:description" content="Kurumsal yapay zekayı demodan çıkarıp üretime taşıyorum. RAG, agentic AI, Text-to-SQL ve doküman zekası.">
+    <meta property="og:url" content="https://iremnurgocer.github.io/">
+    <meta property="og:image" content="https://iremnurgocer.github.io/assets/img/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://iremnurgocer.github.io/assets/img/og.png">
+
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- Tema ve dil, ilk boyamadan önce uygulanır (yanıp sönmeyi önler). -->
+    <script>
+        (function () {
+            var d = document.documentElement, t = null, l = null;
+            try { t = localStorage.getItem('ing-theme'); l = localStorage.getItem('ing-lang'); } catch (e) {}
+            var q = /[?&]lang=(tr|en)\b/.exec(location.search);
+            if (q) l = q[1];
+            if (!t) t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            if (!l) l = /^tr\b/i.test(navigator.language || '') ? 'tr' : 'en';
+            d.setAttribute('data-theme', t);
+            d.setAttribute('lang', l);
+            d.classList.add('js');
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="assets/css/main.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "mainEntity": {
+            "@type": "Person",
+            "name": "İrem Nur Yılmaz",
+            "alternateName": "İrem Nur Göçer",
+            "jobTitle": "Senior AI Engineer",
+            "url": "https://iremnurgocer.github.io/",
+            "image": "https://iremnurgocer.github.io/assets/img/portrait.webp",
+            "email": "mailto:iremnurgocer99@gmail.com",
+            "address": { "@type": "PostalAddress", "addressLocality": "Ankara", "addressCountry": "TR" },
+            "alumniOf": { "@type": "CollegeOrUniversity", "name": "Eskişehir Osmangazi Üniversitesi" },
+            "knowsAbout": ["Generative AI", "Retrieval-Augmented Generation", "Agentic AI", "Text-to-SQL", "Document AI", "LLM Evaluation", "Azure AI", "Backend Architecture"],
+            "knowsLanguage": ["tr", "en"],
+            "sameAs": ["https://github.com/iremnurgocer", "https://linkedin.com/in/iremnurgocer"]
+        }
+    }
+    </script>
+</head>
+<body>
+
+<!-- Simge seti -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+        <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6"/></symbol>
+        <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+        <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1-4.6A8 8 0 1 1 21 12Z"/></symbol>
+        <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2"/></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6.5A2.5 2.5 0 0 0 4 4.5v15A2.5 2.5 0 0 0 6.5 22h11a2.5 2.5 0 0 0 2.5-2.5V8Z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></symbol>
+        <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-7"/></symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+        <symbol id="i-user" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1"/><path d="m16 11 2 2 4-4"/></symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M12 8v5M12 16h.01"/></symbol>
+        <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+        <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+        <symbol id="i-hash" viewBox="0 0 24 24"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></symbol>
+        <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5a14 14 0 0 1 0 19 14 14 0 0 1 0-19Z"/></symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+        <symbol id="i-github" viewBox="0 0 24 24"><path class="fill" d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></symbol>
+        <symbol id="i-linkedin" viewBox="0 0 24 24"><path class="fill" d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+    </defs>
+</svg>
+
+<a class="skip-link" href="#main"><span lang="tr">İçeriğe geç</span><span lang="en">Skip to content</span></a>
+
+<!-- Açılış efekti: oturum başına bir kez -->
+<div class="intro" data-intro hidden aria-hidden="true">
+    <div class="intro__inner">
+        <div class="intro__name">
+            <span style="animation-delay:.05s">İrem</span>&nbsp;<span style="animation-delay:.12s">Nur</span>&nbsp;<span class="serif" style="animation-delay:.2s">Yılmaz</span>
+        </div>
+        <div class="intro__bar"></div>
+        <div class="intro__meta mono">Senior AI Engineer · Ankara</div>
+    </div>
+</div>
+
+<div class="progress" data-progress aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Gezinme -->
+<header class="nav" data-nav>
+    <div class="nav__bar">
+        <a class="brand" href="#top" aria-label="İrem Nur Yılmaz">
+            <span class="brand__mark" aria-hidden="true">İ</span>
+            <span class="brand__name">İrem Nur Yılmaz</span>
+        </a>
+
+        <nav aria-label="Ana menü / Main">
+            <ul class="nav__links">
+                <li><a class="nav__link" href="#about"><span lang="tr">Hakkımda</span><span lang="en">About</span></a></li>
+                <li><a class="nav__link" href="#approach"><span lang="tr">Yaklaşım</span><span lang="en">Approach</span></a></li>
+                <li><a class="nav__link" href="#work"><span lang="tr">İşler</span><span lang="en">Work</span></a></li>
+                <li><a class="nav__link" href="#lab"><span lang="tr">Lab</span><span lang="en">Lab</span></a></li>
+                <li><a class="nav__link" href="#experience"><span lang="tr">Deneyim</span><span lang="en">Experience</span></a></li>
+                <li><a class="nav__link" href="#writing"><span lang="tr">Yazılar</span><span lang="en">Writing</span></a></li>
+                <li><a class="nav__link" href="#reading"><span lang="tr">Okuma</span><span lang="en">Reading</span></a></li>
+                <li><a class="nav__link" href="#contact"><span lang="tr">İletişim</span><span lang="en">Contact</span></a></li>
+            </ul>
+        </nav>
+
+        <div class="nav__tools">
+            <button class="search-btn" type="button" data-palette-open>
+                <svg class="i"><use href="#i-search"/></svg>
+                <span class="search-btn__label"><span lang="tr">Ara</span><span lang="en">Search</span></span>
+                <span class="kbd" data-kbd>⌘K</span>
+            </button>
+            <div class="lang-switch" role="group" aria-label="Dil / Language">
+                <button type="button" data-lang-set="tr" aria-pressed="true">TR</button>
+                <button type="button" data-lang-set="en" aria-pressed="false">EN</button>
+            </div>
+            <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Tema / Theme">
+                <svg class="i i-moon"><use href="#i-moon"/></svg>
+                <svg class="i i-sun"><use href="#i-sun"/></svg>
+            </button>
+            <button class="icon-btn nav__menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sheet" aria-label="Menü / Menu">
+                <svg class="i"><use href="#i-menu"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="sheet" id="sheet" data-sheet>
+    <ul class="sheet__links">
+        <li><a href="#about"><span><span lang="tr">Hakkımda</span><span lang="en">About</span></span><span class="mono">01</span></a></li>
+        <li><a href="#approach"><span><span lang="tr">Yaklaşım</span><span lang="en">Approach</span></span><span class="mono">02</span></a></li>
+        <li><a href="#work"><span><span lang="tr">Seçili işler</span><span lang="en">Selected work</span></span><span class="mono">03</span></a></li>
+        <li><a href="#lab"><span><span lang="tr">Laboratuvar</span><span lang="en">Lab</span></span><span class="mono">04</span></a></li>
+        <li><a href="#experience"><span><span lang="tr">Deneyim</span><span lang="en">Experience</span></span><span class="mono">06</span></a></li>
+        <li><a href="#writing"><span><span lang="tr">Yazılar</span><span lang="en">Writing</span></span><span class="mono">08</span></a></li>
+        <li><a href="#reading"><span><span lang="tr">Okuma listesi</span><span lang="en">Reading list</span></span><span class="mono">09</span></a></li>
+        <li><a href="#contact"><span><span lang="tr">İletişim</span><span lang="en">Contact</span></span><span class="mono">11</span></a></li>
+    </ul>
+    <div class="sheet__foot">
+        <button class="btn btn--primary" type="button" data-chat-open>
+            <svg class="i"><use href="#i-chat"/></svg>
+            <span lang="tr">Asistana sor</span><span lang="en">Ask the assistant</span>
+        </button>
+        <a class="icon-btn" href="https://github.com/iremnurgocer" target="_blank" rel="noopener" aria-label="GitHub"><svg class="i"><use href="#i-github"/></svg></a>
+        <a class="icon-btn" href="https://linkedin.com/in/iremnurgocer" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="i"><use href="#i-linkedin"/></svg></a>
+    </div>
+</div>
+
+<main id="main">
+
+    <!-- ============ GİRİŞ ============ -->
+    <section class="hero" id="top" data-hero>
+        <canvas class="hero__canvas" data-flow aria-hidden="true"></canvas>
+        <canvas class="hero__canvas hero__gl" data-gl aria-hidden="true"></canvas>
+        <div class="hero__veil" aria-hidden="true"></div>
+        <div class="hero__fade" aria-hidden="true"></div>
+
+        <div class="wrap">
+            <div class="hero__status hero__fadeup">
+                <img class="hero__avatar" src="assets/img/portrait.webp" alt="" width="30" height="30">
+                <span class="pulse" aria-hidden="true"></span>
+                <span>
+                    <span lang="tr">Senior AI Engineer · Ankara, Türkiye</span>
+                    <span lang="en">Senior AI Engineer · Ankara, Türkiye</span>
+                </span>
+            </div>
+
+            <h1 class="hero__title">
+                <span lang="tr">
+                    <span class="line-mask"><span>Kurumsal yapay zekayı</span></span>
+                    <span class="line-mask"><span>demodan çıkarıp</span></span>
+                    <span class="line-mask"><span><span class="serif grad-text">üretime</span> taşıyorum.</span></span>
+                </span>
+                <span lang="en">
+                    <span class="line-mask"><span>I take enterprise AI</span></span>
+                    <span class="line-mask"><span>out of the demo and</span></span>
+                    <span class="line-mask"><span>into <span class="serif grad-text">production.</span></span></span>
+                </span>
+            </h1>
+
+            <div class="hero__grid">
+                <div>
+                    <p class="hero__lead">
+                        <span lang="tr">Ben <strong>İrem Nur Yılmaz</strong>. Kurumsal ekipler için üretimde kullanılan yapay zeka sistemleri geliştiriyorum: RAG, agentic iş akışları, Text-to-SQL ve doküman zekası.</span>
+                        <span lang="en">I'm <strong>İrem Nur Yılmaz</strong>. I build AI systems that enterprise teams use in production: RAG, agentic workflows, Text-to-SQL and document intelligence.</span>
+                    </p>
+                    <div class="hero__ctas hero__fadeup">
+                        <a class="btn btn--primary" href="#work">
+                            <span lang="tr">Seçili işler</span><span lang="en">Selected work</span>
+                            <svg class="i arrow"><use href="#i-arrow"/></svg>
+                        </a>
+                        <button class="btn btn--ghost" type="button" data-chat-open>
+                            <span class="orb orb--sm" aria-hidden="true" style="width:20px;height:20px"></span>
+                            <span lang="tr">Asistana sor</span><span lang="en">Ask the assistant</span>
+                        </button>
+                    </div>
+                </div>
+
+                <dl class="hero__meta hero__fadeup">
+                    <div><dt><span lang="tr">Odak</span><span lang="en">Focus</span></dt><dd>
+                        <span class="rotator" data-rotator>
+                            <span class="is-on">Enterprise RAG</span>
+                            <span>Agentic AI</span>
+                            <span>Text-to-SQL</span>
+                            <span>Document AI</span>
+                            <span>LLM Evaluation</span>
+                        </span>
+                    </dd></div>
+                    <div><dt><span lang="tr">Platform</span><span lang="en">Platform</span></dt><dd>Azure AI · Python · .NET</dd></div>
+                    <div><dt><span lang="tr">Deneyim</span><span lang="en">Experience</span></dt><dd><span lang="tr">5+ yıl yazılım mühendisliği</span><span lang="en">5+ yrs software engineering</span></dd></div>
+                    <div><dt><span lang="tr">Temel</span><span lang="en">Foundation</span></dt><dd><span lang="tr">Matematik &amp; Bilg. Bil. (Y.L.)</span><span lang="en">M.Sc. Mathematics &amp; CS</span></dd></div>
+                </dl>
+            </div>
+        </div>
+
+        <div class="scroll-cue mono" aria-hidden="true">
+            <span lang="tr">Kaydır</span><span lang="en">Scroll</span>
+            <span class="scroll-cue__line"></span>
+        </div>
+    </section>
+
+    <!-- Alan şeridi -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+            <div class="marquee__group">
+                <span lang="tr">İhale istihbaratı</span><span lang="en">Tender intelligence</span><span class="marquee__dot"></span>
+                <span class="serif" lang="tr">Finans &amp; vergi</span><span class="serif" lang="en">Finance &amp; tax</span><span class="marquee__dot"></span>
+                <span lang="tr">Doküman zekası</span><span lang="en">Document intelligence</span><span class="marquee__dot"></span>
+                <span class="serif" lang="tr">Satın alma</span><span class="serif" lang="en">Procurement</span><span class="marquee__dot"></span>
+                <span lang="tr">İnsan kaynakları</span><span lang="en">Human resources</span><span class="marquee__dot"></span>
+                <span class="serif" lang="tr">Kurumsal analitik</span><span class="serif" lang="en">Enterprise analytics</span><span class="marquee__dot"></span>
+                <span lang="tr">Çeviri &amp; terminoloji</span><span lang="en">Translation &amp; terminology</span><span class="marquee__dot"></span>
+            </div>
+            <div class="marquee__group">
+                <span lang="tr">İhale istihbaratı</span><span lang="en">Tender intelligence</span><span class="marquee__dot"></span>
+                <span class="serif" lang="tr">Finans &amp; vergi</span><span class="serif" lang="en">Finance &amp; tax</span><span class="marquee__dot"></span>
+                <span lang="tr">Doküman zekası</span><span lang="en">Document intelligence</span><span class="marquee__dot"></span>
+                <span class="serif" lang="tr">Satın alma</span><span class="serif" lang="en">Procurement</span><span class="marquee__dot"></span>
+                <span lang="tr">İnsan kaynakları</span><span lang="en">Human resources</span><span class="marquee__dot"></span>
+                <span class="serif" lang="tr">Kurumsal analitik</span><span class="serif" lang="en">Enterprise analytics</span><span class="marquee__dot"></span>
+                <span lang="tr">Çeviri &amp; terminoloji</span><span lang="en">Translation &amp; terminology</span><span class="marquee__dot"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ HAKKIMDA ============ -->
+    <section class="section" id="about" data-search-section>
+        <div class="wrap about">
+            <figure class="portrait reveal">
+                <div class="portrait__frame">
+                    <img src="assets/img/portrait.webp" alt="İrem Nur Yılmaz" width="507" height="600" loading="eager">
+                    <span class="portrait__tag"><span class="pulse" aria-hidden="true"></span>Ankara · TR / EN</span>
+                </div>
+                <figcaption class="mono"><span>İrem Nur Yılmaz</span><span>Senior AI Engineer</span></figcaption>
+            </figure>
+
+            <div class="about__text">
+                <div class="section-head" style="margin-bottom:28px">
+                    <span class="eyebrow"><span class="eyebrow__num">01</span><span class="eyebrow__line"></span><span lang="tr">Hakkımda</span><span lang="en">About</span></span>
+                </div>
+
+                <p class="about__big split" lang="tr">Matematik ve bilgisayar bilimleri eğitimi almış bir yazılım mühendisiyim. Bugün kurumsal yapay zeka sistemleri geliştiriyorum.</p>
+                <p class="about__big split" lang="en">I'm a software engineer with a background in mathematics and computer science. Today I build enterprise AI systems.</p>
+
+                <p class="reveal" lang="tr">Şu an kurumsal ekipler için yapay zeka sistemleri geliştiriyorum. Bir projede genellikle problemi iş ekibiyle birlikte tanımlamaktan başlayıp mimariyi, geliştirmeyi, değerlendirmeyi, Azure'a dağıtımı ve IT'ye devri üstleniyorum.</p>
+                <p class="reveal" lang="en">I currently build AI systems for enterprise teams. On a typical project I start by defining the problem with the business team, then take on the architecture, development, evaluation, deployment on Azure and handover to IT.</p>
+
+                <p class="reveal" lang="tr">Öncesinde beş yılı aşkın süre backend ve entegrasyon tarafında çalıştım: legacy modernizasyonu, e-ticaret entegrasyonları, klinik karar destek ve akıllı ulaşım sistemleri. Bu yüzden LLM içeren sistemlere de diğer yazılımlara baktığım gibi bakıyorum: test edilmeli, izlenmeli ve yetkileri sınırlanmalı.</p>
+                <p class="reveal" lang="en">Before that I spent five-plus years in backend and integration work: legacy modernisation, e-commerce integrations, clinical decision support and intelligent transport systems. So I look at systems with LLMs the same way I look at any other software: they need tests, monitoring and limited permissions.</p>
+
+                <div class="stats reveal">
+                    <div class="stat">
+                        <span class="stat__num"><span data-count="14">14</span></span>
+                        <span class="stat__label"><span lang="tr">Kurumsal yapay zeka projesi</span><span lang="en">Enterprise AI projects</span></span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__num"><span data-count="2">2</span></span>
+                        <span class="stat__label"><span lang="tr">Akademik bildiri (TURABDIN 2025)</span><span lang="en">Academic papers (TURABDIN 2025)</span></span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__num"><span data-count="0">0</span></span>
+                        <span class="stat__label"><span lang="tr">Şartname ajanının değerlendirme koşularında uydurma madde</span><span lang="en">Invented items across the spec agent's evaluation runs</span></span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__num"><span data-count="5">5</span><span class="serif">+</span></span>
+                        <span class="stat__label"><span lang="tr">Yıl yazılım mühendisliği deneyimi</span><span lang="en">Years of software engineering</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ YAKLAŞIM ============ -->
+    <section class="section" id="approach" data-search-section style="padding-top:0">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="eyebrow"><span class="eyebrow__num">02</span><span class="eyebrow__line"></span><span lang="tr">Yaklaşım</span><span lang="en">Approach</span></span>
+                <h2 class="section-title split" lang="tr">Nasıl <span class="serif">çalışıyorum</span></h2>
+                <h2 class="section-title split" lang="en">How I <span class="serif">work</span></h2>
+                <p class="section-lead reveal">
+                    <span lang="tr">Model seçimi genellikle en son konuşulan konu oluyor. Önce problemi, verinin nereden geldiğini ve başarının nasıl ölçüleceğini netleştiriyorum.</span>
+                    <span lang="en">Model choice is usually the last conversation. First I pin down the problem, where the data comes from and how success will be measured.</span>
+                </p>
+            </div>
+
+            <div class="method-wrap" data-method>
+            <div class="method__rail" aria-hidden="true"><span></span></div>
+            <ol class="method">
+                <li class="step reveal" style="--d:.0s">
+                    <span class="step__dot">01</span>
+                    <h3><span lang="tr">Keşif</span><span lang="en">Discover</span></h3>
+                    <p><span lang="tr">İş ekibiyle problemi, maliyetli hatayı ve başarı ölçütünü birlikte tanımlıyorum.</span><span lang="en">Define the problem, the costly failure mode and the success metric with the business team.</span></p>
+                </li>
+                <li class="step reveal" style="--d:.06s">
+                    <span class="step__dot">02</span>
+                    <h3><span lang="tr">Kanıt &amp; veri</span><span lang="en">Evidence &amp; data</span></h3>
+                    <p><span lang="tr">Kaynakları, yetkileri ve "doğru cevap"ın neye dayandığını haritalıyorum.</span><span lang="en">Map the sources, the permissions and what a correct answer must be grounded in.</span></p>
+                </li>
+                <li class="step reveal" style="--d:.12s">
+                    <span class="step__dot">03</span>
+                    <h3><span lang="tr">Mimari</span><span lang="en">Architecture</span></h3>
+                    <p><span lang="tr">Önce kural ve kod; model yalnızca değer kattığı yerde.</span><span lang="en">Rules and code first; the model only where it adds value.</span></p>
+                </li>
+                <li class="step reveal" style="--d:.18s">
+                    <span class="step__dot">04</span>
+                    <h3><span lang="tr">Değerlendirme</span><span lang="en">Evaluation</span></h3>
+                    <p><span lang="tr">Golden set, UAT ve regresyon karşılaştırmaları yayından önce hazır oluyor.</span><span lang="en">Golden sets, UAT and regression comparisons exist before anything ships.</span></p>
+                </li>
+                <li class="step reveal" style="--d:.24s">
+                    <span class="step__dot">05</span>
+                    <h3><span lang="tr">Üretim</span><span lang="en">Production</span></h3>
+                    <p><span lang="tr">Azure serverless, IaC, managed identity, izleme ve IT'ye devir.</span><span lang="en">Azure serverless, IaC, managed identity, monitoring and handover to IT.</span></p>
+                </li>
+                <li class="step reveal" style="--d:.3s">
+                    <span class="step__dot">06</span>
+                    <h3><span lang="tr">İyileştirme</span><span lang="en">Improve</span></h3>
+                    <p><span lang="tr">Geri bildirim, inceleme kuyrukları ve insan onaylı örneklerle sistem zamanla iyileşir.</span><span lang="en">Feedback loops, review queues and human-approved examples improve the system over time.</span></p>
+                </li>
+            </ol>
+            </div>
+
+            <div class="principles">
+                <div class="principle spot reveal">
+                    <span class="principle__icon"><svg class="i"><use href="#i-file"/></svg></span>
+                    <h3><span lang="tr">Her çıktı bir kaynağa bağlı</span><span lang="en">Every output has a source</span></h3>
+                    <p><span lang="tr">Her bulgu birebir alıntıya ya da kaynak kimliğine bağlanır. Doğrulanamayan çıktı elenir veya incelemeye düşer.</span><span lang="en">Every finding is tied to a verbatim quote or a source ID. Anything unverifiable is dropped or routed to review.</span></p>
+                </div>
+                <div class="principle spot reveal" style="--d:.06s">
+                    <span class="principle__icon"><svg class="i"><use href="#i-code"/></svg></span>
+                    <h3><span lang="tr">Önce kural, sonra model</span><span lang="en">Rules first, then the model</span></h3>
+                    <p><span lang="tr">Kurallar, SQL ve aritmetik kodda yapılır. LLM çıkarım, yargı ya da sunum yapar; çıktısı her zaman denetlenir.</span><span lang="en">Rules, SQL and arithmetic live in code. The LLM extracts, judges or presents, and its output is always checked.</span></p>
+                </div>
+                <div class="principle spot reveal" style="--d:.12s">
+                    <span class="principle__icon"><svg class="i"><use href="#i-chart"/></svg></span>
+                    <h3><span lang="tr">Yayından önce ölçüm</span><span lang="en">Measured before release</span></h3>
+                    <p><span lang="tr">Golden set ve kabul testleri yayından önce hazır olur. Ölçülmemiş bir şey için "ölçülmedi" yazılır.</span><span lang="en">Golden sets and acceptance tests exist before release. Anything that hasn't been measured is labelled as such.</span></p>
+                </div>
+                <div class="principle spot reveal">
+                    <span class="principle__icon"><svg class="i"><use href="#i-lock"/></svg></span>
+                    <h3><span lang="tr">Yetki veri katmanında</span><span lang="en">Permissions in the data layer</span></h3>
+                    <p><span lang="tr">Erişim kontrolü arama filtresinde ve SQL katmanında uygulanır; varsayılan davranış her zaman kapalıdır (fail-closed).</span><span lang="en">Access control is enforced in search filters and the SQL layer, never in the prompt, and it always fails closed.</span></p>
+                </div>
+                <div class="principle spot reveal" style="--d:.06s">
+                    <span class="principle__icon"><svg class="i"><use href="#i-user"/></svg></span>
+                    <h3><span lang="tr">Gerektiğinde insan onayı</span><span lang="en">Human review where it matters</span></h3>
+                    <p><span lang="tr">Taslak çıktılar, düşük güvende manuel inceleme ve insanın onayladığı örneklerle öğrenen sistemler.</span><span lang="en">Draft outputs, manual review on low confidence, and systems that learn from human-approved examples.</span></p>
+                </div>
+                <div class="principle spot reveal" style="--d:.12s">
+                    <span class="principle__icon"><svg class="i"><use href="#i-shield"/></svg></span>
+                    <h3><span lang="tr">Belirsizliği gizlememek</span><span lang="en">Not hiding uncertainty</span></h3>
+                    <p><span lang="tr">Bilinmeyen bir alan "bilinmiyor" olarak kalır; eksik bir cevap eksik olduğunu belirtir.</span><span lang="en">An unknown field stays unknown, and an incomplete answer says it is incomplete.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SEÇİLİ İŞLER ============ -->
+    <section class="section" id="work" data-search-section style="padding-top:0">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="eyebrow"><span class="eyebrow__num">03</span><span class="eyebrow__line"></span><span lang="tr">Seçili işler</span><span lang="en">Selected work</span></span>
+                <h2 class="section-title split" lang="tr">Seçili <span class="serif">projeler</span></h2>
+                <h2 class="section-title split" lang="en">Selected <span class="serif">projects</span></h2>
+                <p class="section-lead reveal">
+                    <span lang="tr">Uçtan uca tasarlayıp geliştirdiğim sistemlerden bir seçki. Gizlilik nedeniyle kurum, müşteri ve sistem adlarını yazmadım.</span>
+                    <span lang="en">A selection of systems I designed and built end to end. Organisation, client and system names are left out for confidentiality.</span>
+                </p>
+            </div>
+
+            <div class="work">
+
+                <!-- Vaka 1 -->
+                <article class="case spot reveal" data-flow-card data-search-item data-search-kind="work">
+                    <div class="case__body">
+                        <div class="case__top mono"><span class="case__domain"><span lang="tr">İhale · Doküman zekası</span><span lang="en">Bids · Document AI</span></span><span>01</span></div>
+                        <h3 style="view-transition-name: case-spec-analysis-agent"><span lang="tr">Şartname &amp; ön yeterlilik analiz ajanı</span><span lang="en">Prequalification spec analysis agent</span></h3>
+                        <p class="case__summary">
+                            <span lang="tr">Uzun şartnameleri yönetici özetine, geçti/kaldı kriterlerine ve puanlama tablosuna dönüştüren; her maddeyi kaynağındaki hükme bağlayan çok ajanlı çıkarım sistemi.</span>
+                            <span lang="en">A multi-agent extraction system that turns long specifications into an executive brief, pass/fail criteria and a scoring table, tying every item to the clause it came from.</span>
+                        </p>
+                        <ul class="case__facts">
+                            <li><span lang="tr">Ekibin manuel özetlerine karşı <strong>%94-100 recall</strong> ve kesinlik</span><span lang="en"><strong>94-100% recall</strong> and precision against the team's manual summaries</span></li>
+                            <li><span lang="tr">Tüm değerlendirme koşularında <strong>sıfır uydurma madde</strong>, %100 kaynak ve madde doğruluğu</span><span lang="en"><strong>Zero invented items</strong> in every evaluation run, 100% source and clause accuracy</span></li>
+                            <li><span lang="tr">Golden set, prompt regresyonlarını üretime çıkmadan yakaladı</span><span lang="en">The golden-set harness caught prompt regressions before they shipped</span></li>
+                        </ul>
+                        <div class="case__foot">
+                            <div class="chips"><span class="chip">Python</span><span class="chip">Azure Functions</span><span class="chip">Azure OpenAI</span><span class="chip">Bicep</span></div>
+                            <a class="link-arrow" href="work/spec-analysis-agent.html" data-case-link><span lang="tr">Vaka çalışması</span><span lang="en">Case study</span><svg class="i"><use href="#i-arrow"/></svg></a>
+                        </div>
+                    </div>
+                    <div class="case__visual">
+                        <ol class="flow">
+                            <li><span><span lang="tr">Yapı koruyan ayrıştırma</span><span lang="en">Structure-preserving parsing</span></span><small>PDF · DOCX · XLSX</small></li>
+                            <li><span><span lang="tr">Kaynak kimlikli parçalama</span><span lang="en">Source-addressed chunking</span></span><small>chunk-id</small></li>
+                            <li><span><span lang="tr">3 uzman ajan</span><span lang="en">3 specialist agents</span></span><small>brief · pass/fail · score</small></li>
+                            <li class="is-guard"><span><span lang="tr">Atıf doğrulama</span><span lang="en">Citation guard</span></span><small>guard</small></li>
+                            <li><span><span lang="tr">Tüketen sisteme API</span><span lang="en">API to consuming system</span></span><small>async · 202</small></li>
+                        </ol>
+                    </div>
+                </article>
+
+                <!-- Vaka 2 -->
+                <article class="case spot reveal" data-flow-card data-search-item data-search-kind="work">
+                    <div class="case__body">
+                        <div class="case__top mono"><span class="case__domain"><span lang="tr">Enterprise RAG</span><span lang="en">Enterprise RAG</span></span><span>02</span></div>
+                        <h3 style="view-transition-name: case-decision-archive-assistant"><span lang="tr">Karar arşivi asistanı</span><span lang="en">Decision archive assistant</span></h3>
+                        <p class="case__summary">
+                            <span lang="tr">Geniş bir karar arşivi üzerinde doğal dille soru sorulduğunda ilgili tüm kararları kaynaklarıyla getiren asistan. Burada en pahalı hata eksik getirmek; sistem bu yüzden recall odaklı tasarlandı.</span>
+                            <span lang="en">An assistant that answers natural-language questions over a large decision archive and returns every relevant decision with its source. Missing a decision is the costliest error here, so the system is built for recall.</span>
+                        </p>
+                        <ul class="case__facts">
+                            <li><span lang="tr">Kullanıcı kabul testlerinin <strong>%99'u</strong> başarılı</span><span lang="en"><strong>99%</strong> of user acceptance tests passed</span></li>
+                            <li><span lang="tr">İstek yolunda LLM'siz, deterministik sorgu anlama</span><span lang="en">Deterministic query understanding, no LLM on the request path</span></li>
+                            <li><span lang="tr">Yetki, arama katmanında güvenlik filtresi olarak uygulanıyor; varsayılan davranış kapalı (fail-closed)</span><span lang="en">Authorisation enforced as a security filter in search, failing closed</span></li>
+                        </ul>
+                        <div class="case__foot">
+                            <div class="chips"><span class="chip">Azure AI Search</span><span class="chip">Azure OpenAI</span><span class="chip">Teams</span><span class="chip">OpenTelemetry</span></div>
+                            <a class="link-arrow" href="work/decision-archive-assistant.html" data-case-link><span lang="tr">Vaka çalışması</span><span lang="en">Case study</span><svg class="i"><use href="#i-arrow"/></svg></a>
+                        </div>
+                    </div>
+                    <div class="case__visual">
+                        <ol class="flow">
+                            <li><span><span lang="tr">İçerik adresli içe alma</span><span lang="en">Content-addressed ingestion</span></span><small>OCR fallback</small></li>
+                            <li><span><span lang="tr">Deterministik sorgu anlama</span><span lang="en">Deterministic query parsing</span></span><small>no LLM</small></li>
+                            <li><span><span lang="tr">Çok stratejili erişim</span><span lang="en">Multi-strategy retrieval</span></span><small>BM25 · kNN · filter</small></li>
+                            <li class="is-guard"><span><span lang="tr">İlgililik kapısı</span><span lang="en">Relevance gate</span></span><small>dedup · gate</small></li>
+                            <li><span><span lang="tr">Kaynaklı yanıt</span><span lang="en">Grounded answer</span></span><small>Teams</small></li>
+                        </ol>
+                    </div>
+                </article>
+
+                <!-- Vaka 3 -->
+                <article class="case spot reveal" data-flow-card data-search-item data-search-kind="work">
+                    <div class="case__body">
+                        <div class="case__top mono"><span class="case__domain"><span lang="tr">Analitik · Text-to-SQL</span><span lang="en">Analytics · Text-to-SQL</span></span><span>03</span></div>
+                        <h3 style="view-transition-name: case-analytics-copilot"><span lang="tr">Kurumsal analitik copilot'u</span><span lang="en">Enterprise analytics copilot</span></h3>
+                        <p class="case__summary">
+                            <span lang="tr">İş kullanıcılarının operasyonel veritabanlarını Türkçe doğal dille, yalnızca kendi rollerinin izin verdiği kadarıyla sorgulamasını sağlayan güvenli Text-to-SQL platformu.</span>
+                            <span lang="en">A secure Text-to-SQL platform that lets business users query operational databases in Turkish natural language, strictly within what their role allows.</span>
+                        </p>
+                        <ul class="case__facts">
+                            <li><span lang="tr">Satır seviyesi izolasyon <strong>tüm tablolarda</strong></span><span lang="en">Row-level isolation on <strong>every table</strong></span></li>
+                            <li><span lang="tr">Birbirinden bağımsız üretici ve doğrulayıcı; reddedilen her sorgu onarım döngüsüne giriyor</span><span lang="en">Independent generator and validator; every rejection feeds a repair loop</span></li>
+                            <li><span lang="tr">Kapsamlı otomatik test ve golden konuşma değerlendirmesi</span><span lang="en">Extensive automated tests and golden-conversation evaluation</span></li>
+                        </ul>
+                        <div class="case__foot">
+                            <div class="chips"><span class="chip">FastAPI</span><span class="chip">sqlglot</span><span class="chip">ASP.NET Core</span><span class="chip">React</span></div>
+                            <a class="link-arrow" href="work/analytics-copilot.html" data-case-link><span lang="tr">Vaka çalışması</span><span lang="en">Case study</span><svg class="i"><use href="#i-arrow"/></svg></a>
+                        </div>
+                    </div>
+                    <div class="case__visual">
+                        <ol class="flow">
+                            <li><span><span lang="tr">Rol politikası</span><span lang="en">Role policy</span></span><small>fail-closed</small></li>
+                            <li><span><span lang="tr">Yetkiye göre şema RAG</span><span lang="en">Permission-aware schema RAG</span></span><small>embed · keyword</small></li>
+                            <li><span><span lang="tr">SQL üretimi</span><span lang="en">SQL generation</span></span><small>LLM</small></li>
+                            <li class="is-guard"><span><span lang="tr">AST doğrulama + RLS</span><span lang="en">AST validation + RLS</span></span><small>SELECT only</small></li>
+                            <li><span><span lang="tr">Salt-okunur yürütme</span><span lang="en">Read-only execution</span></span><small>EXPLAIN · audit</small></li>
+                        </ol>
+                    </div>
+                </article>
+
+                <!-- Vaka 4 -->
+                <article class="case spot reveal" data-flow-card data-search-item data-search-kind="work">
+                    <div class="case__body">
+                        <div class="case__top mono"><span class="case__domain"><span lang="tr">Agentic AI</span><span lang="en">Agentic AI</span></span><span>04</span></div>
+                        <h3 style="view-transition-name: case-tender-intelligence"><span lang="tr">Çok kaynaklı ihale fırsat istihbaratı</span><span lang="en">Multi-source tender opportunity intelligence</span></h3>
+                        <p class="case__summary">
+                            <span lang="tr">Uluslararası ihale portallarını her gün tarayıp ilanları toplayan, normalize eden, değerlendiren ve Türkçeleştiren platform. Yeni kaynakları kendi kendine ekleyebiliyor.</span>
+                            <span lang="en">A platform that scans international tender portals every day and collects, normalises, evaluates and localises the notices. It can onboard new sources on its own.</span>
+                        </p>
+                        <ul class="case__facts">
+                            <li><span lang="tr"><strong>Onlarca kaynak</strong> için adaptörler, tek ortak veri modeli</span><span lang="en">Adapters for <strong>dozens of sources</strong>, one shared model</span></li>
+                            <li><span lang="tr">Önce kural motoru: kayıtların <strong>çoğu model çağrısı olmadan</strong> sonuçlanıyor</span><span lang="en">Rules first: <strong>most records</strong> are settled without a model call</span></li>
+                            <li><span lang="tr">LLM kaynaktan birebir alıntı yapmak zorunda; doğrulanamayan alıntı "inceleme gerekli"ye düşüyor</span><span lang="en">The LLM must quote verbatim; unverifiable quotes downgrade to "needs review"</span></li>
+                        </ul>
+                        <div class="case__foot">
+                            <div class="chips"><span class="chip">Python</span><span class="chip">Azure SQL</span><span class="chip">Azure Translator</span><span class="chip">Managed Identity</span></div>
+                            <a class="link-arrow" href="work/tender-intelligence.html" data-case-link><span lang="tr">Vaka çalışması</span><span lang="en">Case study</span><svg class="i"><use href="#i-arrow"/></svg></a>
+                        </div>
+                    </div>
+                    <div class="case__visual">
+                        <ol class="flow">
+                            <li><span><span lang="tr">Kaynak adaptörleri</span><span lang="en">Source adapters</span></span><small>timer</small></li>
+                            <li><span><span lang="tr">Kimlik + içerik hash</span><span lang="en">Identity + content hash</span></span><small>dedup · version</small></li>
+                            <li><span><span lang="tr">Kural motoru</span><span lang="en">Rule engine</span></span><small>first</small></li>
+                            <li class="is-guard"><span><span lang="tr">LLM + alıntı doğrulama</span><span lang="en">LLM + quote check</span></span><small>verbatim</small></li>
+                            <li><span><span lang="tr">Türkçe akış</span><span lang="en">Localised feed</span></span><small>read-only</small></li>
+                        </ol>
+                    </div>
+                </article>
+
+                <!-- Vaka 5 -->
+                <article class="case spot reveal" data-flow-card data-search-item data-search-kind="work">
+                    <div class="case__body">
+                        <div class="case__top mono"><span class="case__domain"><span lang="tr">Hukuk &amp; teknik · Çeviri</span><span lang="en">Legal &amp; technical · Translation</span></span><span>05</span></div>
+                        <h3 style="view-transition-name: case-document-translation"><span lang="tr">Terminoloji duyarlı doküman çeviri platformu</span><span lang="en">Terminology-aware document translation</span></h3>
+                        <p class="case__summary">
+                            <span lang="tr">Sözleşme ve teknik dokümanları kurumsal terminolojiye sadık kalarak çeviren ve özgün biçimini koruyarak düzenlenebilir Word çıktısı olarak yeniden kuran platform.</span>
+                            <span lang="en">A platform that translates contracts and technical documents using the company's approved terminology and rebuilds them as editable Word files with the original layout.</span>
+                        </p>
+                        <ul class="case__facts">
+                            <li><span lang="tr">Doküman boyunca her terim için <strong>tek ve tutarlı</strong> karar</span><span lang="en">One <strong>consistent</strong> decision per term across a document</span></li>
+                            <li><span lang="tr">Önce deterministik ön eleme, sonra <strong>hedefli</strong> LLM kalite kontrolü</span><span lang="en">Deterministic triage first, then <strong>targeted</strong> LLM quality checks</span></li>
+                            <li><span lang="tr">Doğrulamadan geçemeyen doküman asla "başarılı" diye teslim edilmiyor</span><span lang="en">A document that fails validation is never delivered as a success</span></li>
+                        </ul>
+                        <div class="case__foot">
+                            <div class="chips"><span class="chip">Durable Functions</span><span class="chip">Document Intelligence</span><span class="chip">AI Search</span><span class="chip">OOXML</span></div>
+                            <a class="link-arrow" href="work/document-translation.html" data-case-link><span lang="tr">Vaka çalışması</span><span lang="en">Case study</span><svg class="i"><use href="#i-arrow"/></svg></a>
+                        </div>
+                    </div>
+                    <div class="case__visual">
+                        <ol class="flow">
+                            <li><span><span lang="tr">Yerleşim analizi</span><span lang="en">Layout analysis</span></span><small>21 classes</small></li>
+                            <li><span><span lang="tr">Terim eşleme</span><span lang="en">Term mapping</span></span><small>exact · lexical · vector</small></li>
+                            <li><span><span lang="tr">Sözlük bağlı çeviri</span><span lang="en">Glossary-bound translation</span></span><small>translator</small></li>
+                            <li class="is-guard"><span><span lang="tr">Seçici LLM QA</span><span lang="en">Selective LLM QA</span></span><small>triage</small></li>
+                            <li><span><span lang="tr">Biçim koruyan DOCX</span><span lang="en">Layout-preserving DOCX</span></span><small>validation gate</small></li>
+                        </ol>
+                    </div>
+                </article>
+
+                <!-- Vaka 6 -->
+                <article class="case spot reveal" data-flow-card data-search-item data-search-kind="work">
+                    <div class="case__body">
+                        <div class="case__top mono"><span class="case__domain"><span lang="tr">Belge çıkarımı</span><span lang="en">Document extraction</span></span><span>06</span></div>
+                        <h3 style="view-transition-name: case-supplier-extraction"><span lang="tr">Tedarikçi belge çıkarım servisi</span><span lang="en">Supplier document extraction service</span></h3>
+                        <p class="case__summary">
+                            <span lang="tr">Elle yeniden yazılan tedarikçi vergi levhalarını yapılandırılmış ve doğrulanmış veriye dönüştüren mikroservis. Model yalnızca etiketliyor; kontroller ve güven skoru kodda.</span>
+                            <span lang="en">A microservice that turns hand-keyed supplier tax certificates into structured, validated data. The model only labels; checks and confidence live in code.</span>
+                        </p>
+                        <ul class="case__facts">
+                            <li><span lang="tr">Test setindeki dijital PDF'lerde <strong>hatasız</strong> çıkarım</span><span lang="en"><strong>Error-free</strong> extraction on the digital PDFs in the test set</span></li>
+                            <li><span lang="tr">Her değer OCR metninde yeniden bulunuyor ve checksum ile doğrulanıyor</span><span lang="en">Every value is re-located in the OCR text and verified with a checksum</span></li>
+                            <li><span lang="tr">Güven skoru modelden değil, OCR kelime skorlarından</span><span lang="en">Confidence comes from OCR word scores, never from the model</span></li>
+                        </ul>
+                        <div class="case__foot">
+                            <div class="chips"><span class="chip">Document Intelligence</span><span class="chip">Azure OpenAI</span><span class="chip">Entra ID</span></div>
+                            <a class="link-arrow" href="work/supplier-extraction.html" data-case-link><span lang="tr">Vaka çalışması</span><span lang="en">Case study</span><svg class="i"><use href="#i-arrow"/></svg></a>
+                        </div>
+                    </div>
+                    <div class="case__visual">
+                        <ol class="flow">
+                            <li><span><span lang="tr">Güvenli yükleme</span><span lang="en">Safe upload</span></span><small>magic-byte · sha256</small></li>
+                            <li><span><span lang="tr">Yerleşim OCR</span><span lang="en">Layout OCR</span></span><small>words + scores</small></li>
+                            <li><span><span lang="tr">Katı şema çıkarımı</span><span lang="en">Strict-schema extraction</span></span><small>temp 0</small></li>
+                            <li class="is-guard"><span><span lang="tr">OCR'da yeniden bulma + checksum</span><span lang="en">Re-locate in OCR + checksum</span></span><small>guard</small></li>
+                            <li><span><span lang="tr">Alan bazlı güven</span><span lang="en">Per-field confidence</span></span><small>review routing</small></li>
+                        </ol>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Diğer çözümler -->
+            <div class="section-head" style="margin:clamp(72px,9vw,120px) 0 0">
+                <h3 class="section-title" style="font-size:clamp(1.6rem,3vw,2.3rem)"><span lang="tr">Diğer projeler</span><span lang="en">Other projects</span></h3>
+            </div>
+            <div class="solutions">
+                <div class="solution reveal" data-search-item data-search-kind="work"><span class="mono">07</span><div><h4><span lang="tr">Kanıta dayalı değerlendirme ajanları</span><span lang="en">Evidence-based assessment agents</span></h4><p><span lang="tr">Belgeleri ve web kaynaklarını bir rubriğe göre değerlendiren ajanlar. Her iddia bir kaynağa bağlanıyor, puanlar deterministik koddan geliyor, rapor her zaman taslak olarak işaretleniyor.</span><span lang="en">Agents that review documents and web sources against a rubric. Every claim links to a source, scores come from deterministic code and reports are always marked as drafts.</span></p></div></div>
+                <div class="solution reveal" data-search-item data-search-kind="work"><span class="mono">08</span><div><h4><span lang="tr">Yapılandırılmış veri üzerinde soru-cevap</span><span lang="en">Q&A over structured data</span></h4><p><span lang="tr">Kesin rakam gerektiren sorular için: LLM SQL yazmıyor ve hesap yapmıyor; tipli bir sorgu planı, deterministik sorgular ve rakamlarla doğrulanan yanıtlar.</span><span lang="en">For questions that need exact numbers: the LLM doesn't write SQL or do arithmetic; a typed query plan, deterministic queries and answers checked against the numbers.</span></p></div></div>
+                <div class="solution reveal" data-search-item data-search-kind="work"><span class="mono">09</span><div><h4><span lang="tr">Kaynak takip ajanları</span><span lang="en">Source monitoring agents</span></h4><p><span lang="tr">Haber ve açık veri kaynaklarını düzenli tarayıp versiyonlu kurallarla filtreleyen, eksik alanları tahmin etmek yerine raporlayan hatlar.</span><span lang="en">Pipelines that regularly scan news and open-data sources, filter them with versioned rules and report missing fields instead of guessing.</span></p></div></div>
+                <div class="solution reveal" data-search-item data-search-kind="work"><span class="mono">10</span><div><h4><span lang="tr">Copilot Studio entegrasyonları</span><span lang="en">Copilot Studio integrations</span></h4><p><span lang="tr">Kurumsal sistemlere yönetişimli, salt-okunur erişim sağlayan ve yapılandırmayla genişleyen entegrasyon katmanları.</span><span lang="en">Integration layers that give governed, read-only access to enterprise systems and grow through configuration rather than code.</span></p></div></div>
+                <div class="solution reveal" data-search-item data-search-kind="work"><span class="mono">11</span><div><h4><span lang="tr">Kurumsal bilgi asistanı</span><span lang="en">Enterprise knowledge assistant</span></h4><p><span lang="tr">Prosedür ve politika dokümanları üzerinde, kullanıcının yetkilerine duyarlı RAG tabanlı soru-cevap.</span><span lang="en">Permission-aware RAG over procedure and policy documents.</span></p></div></div>
+                <div class="solution reveal" data-search-item data-search-kind="work"><span class="mono">12</span><div><h4><span lang="tr">Şirket içi doküman işleme</span><span lang="en">On-premises document processing</span></h4><p><span lang="tr">Buluta taşınamayan dosya ve e-postaları şirket içinde işleyen hibrit mimari; içerik hash'iyle tekilleştirme ve kaynak izi.</span><span lang="en">A hybrid architecture for files and emails that can't leave the premises; content-hash dedup with full provenance.</span></p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ LABORATUVAR ============ -->
+    <section class="section" id="lab" data-search-section style="padding-top:0">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="eyebrow"><span class="eyebrow__num">04</span><span class="eyebrow__line"></span><span lang="tr">Laboratuvar</span><span lang="en">Lab</span></span>
+                <h2 class="section-title split" lang="tr">İki küçük <span class="serif">demo</span></h2>
+                <h2 class="section-title split" lang="en">Two small <span class="serif">demos</span></h2>
+                <p class="section-lead reveal">
+                    <span lang="tr">Projelerimde kullandığım iki kontrolün sadeleştirilmiş, tarayıcıda çalışan birer örneği. Girdiyi değiştirip sonucu görebilirsiniz; hiçbir veri bir yere gönderilmez.</span>
+                    <span lang="en">Simplified, in-browser versions of two checks I use in my projects. Change the input and see the result; nothing is sent anywhere.</span>
+                </p>
+            </div>
+
+            <div class="lab reveal" data-lab>
+                <div class="lab__tabs" role="tablist">
+                    <button type="button" role="tab" aria-selected="true" data-lab-tab="sql">
+                        <span class="mono">01</span>
+                        <span><strong><span lang="tr">SQL güvenlik katmanı</span><span lang="en">SQL guard</span></strong>
+                        <small><span lang="tr">Model sorguyu yazar, katman karar verir</span><span lang="en">The model writes the query, the guard decides</span></small></span>
+                    </button>
+                    <button type="button" role="tab" aria-selected="false" data-lab-tab="cite">
+                        <span class="mono">02</span>
+                        <span><strong><span lang="tr">Kanıt kontrolü</span><span lang="en">Citation guard</span></strong>
+                        <small><span lang="tr">Kaynağı olmayan madde geçemez</span><span lang="en">No source, no item</span></small></span>
+                    </button>
+                </div>
+
+                <div class="lab__panel" data-lab-panel="sql">
+                    <div class="lab__grid">
+                        <div class="lab__col">
+                            <div class="lab__row">
+                                <label class="field"><span><span lang="tr">Kullanıcı rolü</span><span lang="en">User role</span></span><select data-sql-role></select></label>
+                                <label class="field"><span><span lang="tr">Örnek soru</span><span lang="en">Sample question</span></span><select data-sql-sample></select></label>
+                            </div>
+                            <label class="field">
+                                <span><span lang="tr">Modelin ürettiği SQL (düzenleyebilirsiniz)</span><span lang="en">SQL produced by the model (editable)</span></span>
+                                <textarea class="lab__code" data-sql-editor spellcheck="false" rows="8"></textarea>
+                            </label>
+                            <ul class="lab__checks" data-sql-checks aria-live="polite"></ul>
+                        </div>
+                        <div class="lab__col">
+                            <div class="lab__outhead">
+                                <span class="mono"><span lang="tr">Çalıştırılacak sorgu</span><span lang="en">Query to execute</span></span>
+                                <span class="lab__verdict" data-sql-verdict></span>
+                            </div>
+                            <pre class="lab__out" data-sql-out></pre>
+                            <p class="lab__note"><span lang="tr">Gerçek sistemde doğrulama SQL'in sözdizimi ağacı (AST) üzerinde yapılır; ayrıca iş kuralı kontrolleri, EXPLAIN kuru çalıştırması ve denetim kaydı vardır.</span><span lang="en">In the real system validation runs on the SQL syntax tree (AST), alongside business-rule checks, an EXPLAIN dry run and an audit log.</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab__panel" data-lab-panel="cite" hidden>
+                    <div class="lab__grid">
+                        <div class="lab__col">
+                            <span class="mono lab__label"><span lang="tr">Kaynak belge (örnek şartname)</span><span lang="en">Source document (sample specification)</span></span>
+                            <div class="lab__doc" data-cite-doc></div>
+                        </div>
+                        <div class="lab__col">
+                            <div class="lab__outhead">
+                                <span class="mono"><span lang="tr">Modelin çıkardığı maddeler</span><span lang="en">Items extracted by the model</span></span>
+                                <div class="lab__actions">
+                                    <button class="btn btn--sm btn--ghost" type="button" data-cite-reset><span lang="tr">Sıfırla</span><span lang="en">Reset</span></button>
+                                    <button class="btn btn--sm btn--primary" type="button" data-cite-run><span lang="tr">Kontrolü çalıştır</span><span lang="en">Run the check</span></button>
+                                </div>
+                            </div>
+                            <ul class="lab__cites" data-cite-items></ul>
+                            <p class="lab__summary" data-cite-summary aria-live="polite"></p>
+                            <p class="lab__note"><span lang="tr">Bir alıntıyı değiştirip kontrolü tekrar çalıştırabilirsiniz.</span><span lang="en">Edit a quote and run the check again.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ YETKİNLİKLER ============ -->
+    <section class="section" id="capabilities" data-search-section style="padding-top:0">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="eyebrow"><span class="eyebrow__num">05</span><span class="eyebrow__line"></span><span lang="tr">Yetkinlikler</span><span lang="en">Capabilities</span></span>
+                <h2 class="section-title split" lang="tr">Kullandığım <span class="serif">teknolojiler</span></h2>
+                <h2 class="section-title split" lang="en">Tools I <span class="serif">work with</span></h2>
+            </div>
+
+            <div class="bento">
+                <div class="cell cell--wide cell--feature spot reveal">
+                    <div class="cell__head"><h3><span lang="tr">Yapay zeka mühendisliği</span><span lang="en">AI engineering</span></h3></div>
+                    <p><span lang="tr">Üretken yapay zeka sistemlerini tasarlamak, değerlendirmek ve güvenli hale getirmek.</span><span lang="en">Designing, evaluating and securing generative AI systems.</span></p>
+                    <div class="tags">
+                        <span class="tag">Enterprise RAG</span><span class="tag">Hybrid search</span><span class="tag">Agentic workflows</span><span class="tag">Multi-agent</span><span class="tag">Text-to-SQL</span><span class="tag">Document AI · OCR</span><span class="tag">Structured extraction</span><span class="tag">Prompt engineering</span><span class="tag">LLM evaluation</span><span class="tag">Guardrails</span><span class="tag">Prompt-injection defence</span><span class="tag">Human-in-the-loop</span>
+                    </div>
+                </div>
+                <div class="cell spot reveal" style="--d:.06s">
+                    <div class="cell__head"><h3>Microsoft &amp; Azure AI</h3></div>
+                    <div class="tags">
+                        <span class="tag">Azure OpenAI</span><span class="tag">AI Search</span><span class="tag">Document Intelligence</span><span class="tag">Translator</span><span class="tag">Copilot Studio</span><span class="tag">M365 Agents SDK</span><span class="tag">Teams bots</span>
+                    </div>
+                </div>
+                <div class="cell cell--half spot reveal">
+                    <div class="cell__head"><h3><span lang="tr">Backend &amp; mimari</span><span lang="en">Backend &amp; architecture</span></h3></div>
+                    <div class="tags">
+                        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">C# · .NET</span><span class="tag">Java</span><span class="tag">Node.js</span><span class="tag">PHP · Symfony · Laravel</span><span class="tag">REST · SOAP</span><span class="tag">Microservices</span><span class="tag">Ports &amp; adapters</span><span class="tag">Event-driven</span><span class="tag">Idempotency</span>
+                    </div>
+                </div>
+                <div class="cell cell--half spot reveal" style="--d:.06s">
+                    <div class="cell__head"><h3><span lang="tr">Bulut, DevOps &amp; veri</span><span lang="en">Cloud, DevOps &amp; data</span></h3></div>
+                    <div class="tags">
+                        <span class="tag">Azure Functions · Durable</span><span class="tag">Service Bus</span><span class="tag">Bicep · IaC</span><span class="tag">Key Vault · Managed Identity</span><span class="tag">App Insights · OpenTelemetry</span><span class="tag">Docker</span><span class="tag">CI/CD</span><span class="tag">AWS</span><span class="tag">SQL Server · PostgreSQL</span><span class="tag">MongoDB · Redis</span>
+                    </div>
+                </div>
+                <div class="cell spot reveal">
+                    <div class="cell__head"><h3><span lang="tr">Güvenlik &amp; kalite</span><span lang="en">Security &amp; quality</span></h3></div>
+                    <div class="tags">
+                        <span class="tag">Entra ID · RBAC</span><span class="tag">Row-level security</span><span class="tag">STRIDE</span><span class="tag">SonarQube · Fortify</span><span class="tag">Burp Suite</span><span class="tag">pytest · mypy</span>
+                    </div>
+                </div>
+                <div class="cell spot reveal" style="--d:.06s">
+                    <div class="cell__head"><h3><span lang="tr">Çalışma biçimi</span><span lang="en">Ways of working</span></h3></div>
+                    <div class="tags">
+                        <span class="tag tag--muted"><span lang="tr">Problem keşfi</span><span lang="en">Problem discovery</span></span><span class="tag tag--muted">ADRs</span><span class="tag tag--muted"><span lang="tr">Teknik liderlik</span><span lang="en">Technical leadership</span></span><span class="tag tag--muted"><span lang="tr">Devir paketleri</span><span lang="en">Handover packs</span></span><span class="tag tag--muted"><span lang="tr">Paydaş yönetimi</span><span lang="en">Stakeholder management</span></span>
+                    </div>
+                </div>
+                <div class="cell spot reveal" style="--d:.12s">
+                    <div class="cell__head"><h3><span lang="tr">Diller</span><span lang="en">Languages</span></h3></div>
+                    <div class="tags">
+                        <span class="tag"><span lang="tr">Türkçe · ana dil</span><span lang="en">Turkish · native</span></span><span class="tag"><span lang="tr">İngilizce · B2+ / C1</span><span lang="en">English · B2+ / C1</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ DENEYİM ============ -->
+    <section class="section" id="experience" data-search-section style="padding-top:0">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="eyebrow"><span class="eyebrow__num">06</span><span class="eyebrow__line"></span><span lang="tr">Deneyim</span><span lang="en">Experience</span></span>
+                <h2 class="section-title split" lang="tr">Backend'den <span class="serif">yapay zeka</span> mühendisliğine.</h2>
+                <h2 class="section-title split" lang="en">From backend to <span class="serif">AI engineering.</span></h2>
+            </div>
+
+            <div class="timeline-wrap" data-timeline>
+            <div class="timeline__rail" aria-hidden="true"><span></span></div>
+            <ol class="timeline">
+
+                <li class="job is-current reveal" data-search-item data-search-kind="experience">
+                    <div class="job__when mono"><span lang="tr">Oca 2026 - Bugün</span><span lang="en">Jan 2026 - Present</span><br><span class="chip"><span lang="tr">Şu an</span><span lang="en">Current</span></span></div>
+                    <div>
+                        <h3>Senior AI Engineer</h3>
+                        <p class="job__org">IC Holding · Ankara</p>
+                        <p><span lang="tr">Kurumsal yapay zeka sistemlerinin tasarımına ve geliştirmesine, problem tanımından üretime kadar liderlik ediyorum.</span><span lang="en">I lead the design and development of enterprise AI systems, from problem definition to production.</span></p>
+                        <ul>
+                            <li><span lang="tr">İhale istihbaratı, doküman zekası, Text-to-SQL, karar destek ve çeviri alanlarında 14 proje</span><span lang="en">14 projects across tender intelligence, document AI, Text-to-SQL, decision support and translation</span></li>
+                            <li><span lang="tr">Azure serverless mimari, Bicep ile altyapı, saklanan anahtarlar yerine managed identity</span><span lang="en">Azure serverless architecture, Bicep infrastructure, managed identity instead of stored secrets</span></li>
+                            <li><span lang="tr">Golden set, UAT ve regresyon değerlendirmeleri; mimari karar kayıtları ve IT'ye devir paketleri</span><span lang="en">Golden-set, UAT and regression evaluation; architecture decision records and handover packs for IT</span></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="job reveal" data-search-item data-search-kind="experience">
+                    <div class="job__when mono"><span lang="tr">Mar 2023 - Ara 2025</span><span lang="en">Mar 2023 - Dec 2025</span></div>
+                    <div>
+                        <h3>Software Engineer · AI Engineer</h3>
+                        <p class="job__org">Key Yazılım Çözümleri · Ankara</p>
+                        <p><span lang="tr">Yazılım mühendisliği işlerimin yanında şirketin yeni yapay zeka girişimlerinde AI mühendisi olarak çalıştım: kullanım senaryosu keşfi, çözüm mimarisi, prototipleme ve değerlendirme.</span><span lang="en">Alongside my software engineering work, I took the AI engineering role in the company's new AI initiatives: use-case discovery, solution architecture, prototyping and evaluation.</span></p>
+                    </div>
+                </li>
+
+                <li class="job reveal" data-search-item data-search-kind="experience">
+                    <div class="job__when mono"><span lang="tr">Eki 2022 - Mar 2023</span><span lang="en">Oct 2022 - Mar 2023</span></div>
+                    <div>
+                        <h3>Backend Developer</h3>
+                        <p class="job__org">Mevsimi · Ankara</p>
+                        <p><span lang="tr">Web, mobil ve ulusal e-ticaret kanallarını entegre eden REST API'ler; Symfony/Laravel backend'leri, ödeme ve lojistik entegrasyonları, çok mağazalı operasyon yönetimi.</span><span lang="en">REST APIs integrating web, mobile and national e-commerce channels; Symfony/Laravel backends, payment and logistics integrations, multi-store operations.</span></p>
+                    </div>
+                </li>
+
+                <li class="job reveal" data-search-item data-search-kind="experience">
+                    <div class="job__when mono"><span lang="tr">Tem 2022 - Ağu 2022</span><span lang="en">Jul 2022 - Aug 2022</span></div>
+                    <div>
+                        <h3>Junior Backend Developer</h3>
+                        <p class="job__org">Jotform · Ankara</p>
+                        <p><span lang="tr">PHP backend bileşenleri ve JavaScript arayüz özellikleri; destek taleplerini filtreleyip doğru ekiplere yönlendiren mesaj yönlendirme özelliği.</span><span lang="en">PHP backend components and JavaScript UI features; a routing feature that filters support requests and sends them to the right teams.</span></p>
+                    </div>
+                </li>
+
+                <li class="job reveal" data-search-item data-search-kind="experience">
+                    <div class="job__when mono"><span lang="tr">Ara 2021 - Tem 2022</span><span lang="en">Dec 2021 - Jul 2022</span></div>
+                    <div>
+                        <h3>Junior Software Developer</h3>
+                        <p class="job__org">Piton Ar-Ge · Eskişehir</p>
+                        <p><span lang="tr">Legacy ASP.NET uygulamalarının modern çatılara taşınması ve mimari modernizasyonla <strong>%90'a varan performans iyileştirmesi</strong>; akıllı ulaşım ve coğrafi bilgi sistemleri ürününün uçtan uca geliştirilmesi.</span><span lang="en">Migrated legacy ASP.NET applications to modern frameworks, with <strong>up to 90% performance improvement</strong>; end-to-end development of an intelligent transport and GIS product.</span></p>
+                    </div>
+                </li>
+
+                <li class="job reveal" data-search-item data-search-kind="experience">
+                    <div class="job__when mono"><span lang="tr">Nis 2021 - Nis 2022</span><span lang="en">Apr 2021 - Apr 2022</span></div>
+                    <div>
+                        <h3><span lang="tr">Stajyer → Junior Software Developer</span><span lang="en">Intern → Junior Software Developer</span></h3>
+                        <p class="job__org">FetalIST · Ankara</p>
+                        <p><span lang="tr">Kişiselleştirilmiş hasta verisiyle gebelik risklerinin erken tespitine odaklanan yapay zeka tabanlı klinik karar destek platformu; Java backend, API'ler ve AWS altyapısı.</span><span lang="en">An AI-based clinical decision support platform for early detection of pregnancy risks from personalised patient data; Java backend, APIs and AWS infrastructure.</span></p>
+                    </div>
+                </li>
+            </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ EĞİTİM & ARAŞTIRMA ============ -->
+    <section class="section" id="research" data-search-section style="padding-top:0">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="eyebrow"><span class="eyebrow__num">07</span><span class="eyebrow__line"></span><span lang="tr">Eğitim &amp; araştırma</span><span lang="en">Education &amp; research</span></span>
+                <h2 class="section-title split" lang="tr">Algoritmaların <span class="serif">geometrisi</span> üzerine.</h2>
+                <h2 class="section-title split" lang="en">On the <span class="serif">geometry</span> of algorithms.</h2>
+            </div>
+
+            <div class="academic">
+                <div class="card reveal">
+                    <span class="card__label mono"><span lang="tr">Eğitim</span><span lang="en">Education</span></span>
+                    <div class="degree">
+                        <span class="mono">2023 - 2025</span>
+                        <h3><span lang="tr">Yüksek Lisans · Matematik ve Bilgisayar Bilimleri</span><span lang="en">M.Sc. · Mathematics and Computer Science</span></h3>
+                        <p><span lang="tr">Eskişehir Osmangazi Üniversitesi. Tez: Yapay zeka algoritmalarının diferansiyel geometri ile incelenmesi.</span><span lang="en">Eskişehir Osmangazi University. Thesis: analysing AI algorithms through differential geometry.</span></p>
+                    </div>
+                    <div class="degree">
+                        <span class="mono">2018 - 2022</span>
+                        <h3><span lang="tr">Lisans · Matematik ve Bilgisayar Bilimleri</span><span lang="en">B.Sc. · Mathematics and Computer Science</span></h3>
+                        <p><span lang="tr">Eskişehir Osmangazi Üniversitesi.</span><span lang="en">Eskişehir Osmangazi University.</span></p>
+                        <span class="badge-first"><span lang="tr">Bölüm birincisi</span><span lang="en">Graduated first in the department</span></span>
+                    </div>
+                </div>
+
+                <div class="card reveal" style="--d:.06s">
+                    <span class="card__label mono"><span lang="tr">Yayınlar</span><span lang="en">Publications</span></span>
+                    <ul class="pubs">
+                        <li class="pub" data-search-item data-search-kind="research">
+                            <span class="mono"><span lang="tr">Bildiri · TURABDIN Kongresi 2025</span><span lang="en">Paper · TURABDIN Congress 2025</span></span>
+                            <h3><span lang="tr">Isomap'in matematiksel temeli: diferansiyel geometri ve jeodeziklerin rolü</span><span lang="en">The mathematical foundation of Isomap: differential geometry and the role of geodesics</span></h3>
+                        </li>
+                        <li class="pub" data-search-item data-search-kind="research">
+                            <span class="mono"><span lang="tr">Bildiri · TURABDIN Kongresi 2025</span><span lang="en">Paper · TURABDIN Congress 2025</span></span>
+                            <h3><span lang="tr">Manifold öğrenmede Laplace-Beltrami operatörünün diferansiyel geometrik analizi</span><span lang="en">A differential-geometric analysis of the Laplace-Beltrami operator in manifold learning</span></h3>
+                        </li>
+                        <li class="pub" data-search-item data-search-kind="research">
+                            <span class="mono"><span lang="tr">Yüksek lisans tezi · 2025</span><span lang="en">Master's thesis · 2025</span></span>
+                            <h3><span lang="tr">Yapay zeka algoritmalarının diferansiyel geometri ile incelenmesi</span><span lang="en">Analysing AI algorithms through differential geometry</span></h3>
+                            <p><span lang="tr">Matematiksel modelleme ve Python ile uygulama.</span><span lang="en">Mathematical modelling with a Python implementation.</span></p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card certs reveal">
+                    <div class="certs__head"><span class="card__label mono" style="margin:0"><span lang="tr">Sertifikalar &amp; eğitimler</span><span lang="en">Certifications &amp; training</span></span></div>
+                    <div class="cert cert--live"><strong>Azure AI Engineer Associate (AI-102)</strong><span>Microsoft · <span lang="tr">2026, devam ediyor</span><span lang="en">2026, in progress</span></span></div>
+                    <div class="cert"><strong>Machine Learning</strong><span>Stanford · Coursera · 2023</span></div>
+                    <div class="cert"><strong>Python &amp; TensorFlow for Data Science</strong><span>Udemy · 2024</span></div>
+                    <div class="cert"><strong>Microservices Architecture</strong><span>BTK Akademi · 2024</span></div>
+                    <div class="cert"><strong>Clean Code &amp; SOLID</strong><span>Udemy · 2024</span></div>
+                    <div class="cert"><strong>DevOps Solutions</strong><span>BTK Akademi · 2024</span></div>
+                    <div class="cert"><strong>Secure Software Development</strong><span>BTK Akademi · 2023</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ YAZILAR ============ -->
+    <section class="section" id="writing" data-search-section style="padding-top:0">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="eyebrow"><span class="eyebrow__num">08</span><span class="eyebrow__line"></span><span lang="tr">Yazılar</span><span lang="en">Writing</span></span>
+                <h2 class="section-title split" lang="tr">Teknik <span class="serif">yazılar</span></h2>
+                <h2 class="section-title split" lang="en">Technical <span class="serif">writing</span></h2>
+                <p class="section-lead reveal">
+                    <span lang="tr">Çalıştığım konular üzerine yazdığım uzun teknik rehberler.</span>
+                    <span lang="en">Long-form technical guides on the topics I work on. The articles are in Turkish.</span>
+                </p>
+            </div>
+
+            <div class="posts">
+                <a class="post post--lead reveal" href="blogs/rag-production.html" data-search-item data-search-kind="writing">
+                    <div class="post__cover"><img src="covers/rag.svg" alt="" loading="lazy"></div>
+                    <div class="post__body">
+                        <span class="mono">RAG · <span lang="tr">Kurumsal AI</span><span lang="en">Enterprise AI</span></span>
+                        <h3><span lang="tr">Kurumsal RAG: prototipten üretime</span><span lang="en">Enterprise RAG: from prototype to production</span></h3>
+                        <p><span lang="tr">Bir RAG demosu bir haftada kurulur; yetkilendirilmiş ve ölçülebilir bir RAG sistemi bambaşka bir iştir. Parçalama, hibrit arama, yetkiyi indekse yazmak ve groundedness ölçümü.</span><span lang="en">A RAG demo takes a week; an authorised, measurable RAG system is a different job. Chunking, hybrid search, permissions in the index and measuring groundedness.</span></p>
+                        <div class="post__foot"><span><span lang="tr">~12 dk okuma</span><span lang="en">~12 min · Turkish</span></span><svg class="i" width="16" height="16"><use href="#i-arrow-ur"/></svg></div>
+                    </div>
+                </a>
+                <a class="post reveal" href="blogs/agentic-ai.html" style="--d:.06s" data-search-item data-search-kind="writing">
+                    <div class="post__cover"><img src="covers/agentic.svg" alt="" loading="lazy"></div>
+                    <div class="post__body">
+                        <span class="mono">Agentic AI</span>
+                        <h3><span lang="tr">Agentic AI: ajan mimarileri ve çok ajanlı sistemler</span><span lang="en">Agentic AI: agent architectures and multi-agent systems</span></h3>
+                        <p><span lang="tr">Bir ajanı ajan yapan modelin zekası değil, etrafına kurduğunuz döngü ve korkuluklar.</span><span lang="en">What makes an agent is not the model's intelligence but the loop and guardrails around it.</span></p>
+                        <div class="post__foot"><span><span lang="tr">Rehber</span><span lang="en">Guide · Turkish</span></span><svg class="i" width="16" height="16"><use href="#i-arrow-ur"/></svg></div>
+                    </div>
+                </a>
+                <a class="post reveal" href="blogs/text-to-sql.html" data-search-item data-search-kind="writing">
+                    <div class="post__cover"><img src="covers/text-to-sql.svg" alt="" loading="lazy"></div>
+                    <div class="post__body">
+                        <span class="mono">LLM · <span lang="tr">Veri erişimi</span><span lang="en">Data access</span></span>
+                        <h3><span lang="tr">Doğal dilden SQL'e: güvenli Text-to-SQL mimarisi</span><span lang="en">Natural language to SQL: a secure Text-to-SQL architecture</span></h3>
+                        <p><span lang="tr">Text-to-SQL'i güvenli ve doğru yapan modelin kendisi değil, etrafındaki doğrulama katmanı.</span><span lang="en">What makes Text-to-SQL safe and correct is not the model, but the validation layer around it.</span></p>
+                        <div class="post__foot"><span><span lang="tr">Rehber</span><span lang="en">Guide · Turkish</span></span><svg class="i" width="16" height="16"><use href="#i-arrow-ur"/></svg></div>
+                    </div>
+                </a>
+                <a class="post reveal" href="blogs/security-engineer-training.html" style="--d:.06s" data-search-item data-search-kind="writing">
+                    <div class="post__cover"><img src="covers/security.svg" alt="" loading="lazy"></div>
+                    <div class="post__body">
+                        <span class="mono"><span lang="tr">Güvenlik</span><span lang="en">Security</span></span>
+                        <h3><span lang="tr">Security engineer eğitim seti</span><span lang="en">Security engineer training set</span></h3>
+                        <p><span lang="tr">Tehdit modelleme, pentest, SOC, DevSecOps, bulut ve Kubernetes güvenliği için ileri seviye yol haritası.</span><span lang="en">An advanced roadmap for threat modelling, pentesting, SOC, DevSecOps, cloud and Kubernetes security.</span></p>
+                        <div class="post__foot"><span><span lang="tr">Eğitim seti</span><span lang="en">Curriculum · Turkish</span></span><svg class="i" width="16" height="16"><use href="#i-arrow-ur"/></svg></div>
+                    </div>
+                </a>
+                <a class="post reveal" href="blogs/blog1.html" style="--d:.12s" data-search-item data-search-kind="writing">
+                    <div class="post__cover"><img src="covers/microservices.svg" alt="" loading="lazy"></div>
+                    <div class="post__body">
+                        <span class="mono"><span lang="tr">Mimari</span><span lang="en">Architecture</span></span>
+                        <h3><span lang="tr">Mikroservis mimarisi</span><span lang="en">Microservice architecture</span></h3>
+                        <p><span lang="tr">Mikroservisler ne zaman doğru tercih, servis sınırları nasıl çizilir, dağıtık sistemlerde veri tutarlılığı.</span><span lang="en">When microservices are the right call, how to draw service boundaries, and data consistency in distributed systems.</span></p>
+                        <div class="post__foot"><span><span lang="tr">Rehber</span><span lang="en">Guide · Turkish</span></span><svg class="i" width="16" height="16"><use href="#i-arrow-ur"/></svg></div>
+                    </div>
+                </a>
+                <a class="post reveal" href="blogs/command-guide.html" data-search-item data-search-kind="writing">
+                    <div class="post__cover"><img src="covers/cli.svg" alt="" loading="lazy"></div>
+                    <div class="post__body">
+                        <span class="mono"><span lang="tr">Rehber</span><span lang="en">Reference</span></span>
+                        <h3><span lang="tr">Windows, macOS ve Linux komut rehberi</span><span lang="en">Windows, macOS and Linux command guide</span></h3>
+                        <p><span lang="tr">Terminal komutlarını parametre açıklamaları ve platform karşılaştırmalarıyla tek kaynakta toplayan rehber.</span><span lang="en">Terminal commands in one place, with parameter notes and cross-platform comparisons.</span></p>
+                        <div class="post__foot"><span><span lang="tr">Başvuru</span><span lang="en">Reference · Turkish</span></span><svg class="i" width="16" height="16"><use href="#i-arrow-ur"/></svg></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ OKUMA LİSTESİ ============ -->
+    <section class="section" id="reading" data-search-section style="padding-top:0">
+        <div class="wrap">
+            <div class="section-head">
+                <span class="eyebrow"><span class="eyebrow__num">09</span><span class="eyebrow__line"></span><span lang="tr">Okuma listesi</span><span lang="en">Reading list</span></span>
+                <h2 class="section-title split" lang="tr">Alanı <span class="serif">şekillendiren</span> çalışmalar.</h2>
+                <h2 class="section-title split" lang="en">The work that <span class="serif">shaped</span> the field.</h2>
+                <p class="section-lead reveal">
+                    <span lang="tr">Bu alanda sık başvurduğum makale ve yazılar, her birinin yanında kısa bir notla.</span>
+                    <span lang="en">Papers and essays I often come back to, each with a short note.</span>
+                </p>
+            </div>
+
+            <div class="filters reveal" role="group" aria-label="Kategori / Category" data-filters></div>
+            <ul class="reading" data-reading></ul>
+        </div>
+    </section>
+
+    <!-- ============ AÇIK KAYNAK ============ -->
+    <section class="section section--tight" id="opensource" data-search-section style="padding-top:0">
+        <div class="wrap">
+            <div class="section-head" style="margin-bottom:36px">
+                <span class="eyebrow"><span class="eyebrow__num">10</span><span class="eyebrow__line"></span><span lang="tr">Açık kaynak</span><span lang="en">Open source</span></span>
+            </div>
+            <div class="repos">
+                <a class="repo reveal" href="https://github.com/iremnurgocer/ChatCore.AI" target="_blank" rel="noopener" data-search-item data-search-kind="opensource">
+                    <div class="repo__head"><svg class="i"><use href="#i-github"/></svg><svg class="i"><use href="#i-arrow-ur"/></svg></div>
+                    <h3>ChatCore.AI</h3>
+                    <p><span lang="tr">Kurumsal veriler üzerinde RAG destekli asistan; vektör arama ve önbellek katmanı.</span><span lang="en">A RAG assistant over enterprise data, with vector search and a caching layer.</span></p>
+                    <div class="tags"><span class="tag tag--muted">FastAPI</span><span class="tag tag--muted">FAISS</span><span class="tag tag--muted">Redis</span></div>
+                </a>
+                <a class="repo reveal" href="https://github.com/iremnurgocer/task-manager-api" target="_blank" rel="noopener" style="--d:.06s" data-search-item data-search-kind="opensource">
+                    <div class="repo__head"><svg class="i"><use href="#i-github"/></svg><svg class="i"><use href="#i-arrow-ur"/></svg></div>
+                    <h3>Task Manager</h3>
+                    <p><span lang="tr">JWT kimlik doğrulamalı görev yönetimi; React arayüzü, Express API, Sequelize + PostgreSQL.</span><span lang="en">JWT-authenticated task management; React UI, Express API, Sequelize + PostgreSQL.</span></p>
+                    <div class="tags"><span class="tag tag--muted">React</span><span class="tag tag--muted">Express</span><span class="tag tag--muted">JWT</span></div>
+                </a>
+                <a class="repo reveal" href="https://github.com/iremnurgocer/chat-app" target="_blank" rel="noopener" style="--d:.12s" data-search-item data-search-kind="opensource">
+                    <div class="repo__head"><svg class="i"><use href="#i-github"/></svg><svg class="i"><use href="#i-arrow-ur"/></svg></div>
+                    <h3>Chat App</h3>
+                    <p><span lang="tr">WebSocket üzerinde odalara ayrılmış gerçek zamanlı mesajlaşma.</span><span lang="en">Real-time, room-based messaging over WebSockets.</span></p>
+                    <div class="tags"><span class="tag tag--muted">Node.js</span><span class="tag tag--muted">WebSocket</span></div>
+                </a>
+                <a class="repo reveal" href="https://github.com/iremnurgocer?tab=repositories" target="_blank" rel="noopener" style="--d:.18s">
+                    <div class="repo__head"><svg class="i"><use href="#i-folder"/></svg><svg class="i"><use href="#i-arrow-ur"/></svg></div>
+                    <h3><span lang="tr">Tüm depolar</span><span lang="en">All repositories</span></h3>
+                    <p><span lang="tr">QR Generator, Sepet ve diğer deneysel projeler GitHub profilimde.</span><span lang="en">QR Generator, a PHP cart app and other experiments on my GitHub profile.</span></p>
+                    <div class="tags"><span class="tag tag--muted">github.com/iremnurgocer</span></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ İLETİŞİM ============ -->
+    <section class="contact" id="contact" data-search-section>
+        <div class="contact__glow" aria-hidden="true"></div>
+        <div class="wrap">
+            <span class="eyebrow"><span class="eyebrow__num">11</span><span class="eyebrow__line"></span><span lang="tr">İletişim</span><span lang="en">Contact</span></span>
+            <h2 class="contact__title split" lang="tr" style="margin-top:22px">Bana <span class="serif grad-text">yazın.</span></h2>
+            <h2 class="contact__title split" lang="en" style="margin-top:22px">Get in <span class="serif grad-text">touch.</span></h2>
+
+            <div class="contact__grid">
+                <div class="contact__aside reveal">
+                    <p><span lang="tr">Yapay zeka projeleri, iş birlikleri ya da etkinlik davetleri için yazabilirsiniz. Genellikle birkaç gün içinde dönüş yapıyorum.</span><span lang="en">Feel free to write about AI projects, collaborations or event invitations. I usually reply within a few days.</span></p>
+                    <div class="hero__ctas" style="margin-top:0">
+                        <button class="btn btn--primary" type="button" data-chat-open>
+                            <span class="orb orb--sm" aria-hidden="true" style="width:20px;height:20px"></span>
+                            <span lang="tr">Asistana sor</span><span lang="en">Ask the assistant</span>
+                        </button>
+                    </div>
+                    <ul class="contact__links">
+                        <li><button type="button" data-copy-email><span>iremnurgocer99@gmail.com</span><span class="mono"><span lang="tr">Kopyala</span><span lang="en">Copy</span></span></button></li>
+                        <li><a href="https://linkedin.com/in/iremnurgocer" target="_blank" rel="noopener"><span>LinkedIn</span><svg class="i"><use href="#i-arrow-ur"/></svg></a></li>
+                        <li><a href="https://github.com/iremnurgocer" target="_blank" rel="noopener"><span>GitHub</span><svg class="i"><use href="#i-arrow-ur"/></svg></a></li>
+                    </ul>
+                </div>
+
+                <form class="form reveal" data-mail-form novalidate style="--d:.08s">
+                    <div class="form__row">
+                        <div class="field">
+                            <label for="cf-name"><span lang="tr">Adınız</span><span lang="en">Your name</span></label>
+                            <input id="cf-name" name="name" type="text" autocomplete="name" required maxlength="120">
+                        </div>
+                        <div class="field">
+                            <label for="cf-email"><span lang="tr">E-posta</span><span lang="en">Email</span></label>
+                            <input id="cf-email" name="email" type="email" autocomplete="email" required maxlength="160">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="cf-topic"><span lang="tr">Konu</span><span lang="en">Topic</span></label>
+                        <select id="cf-topic" name="topic" data-topic-select></select>
+                    </div>
+                    <div class="field">
+                        <label for="cf-msg"><span lang="tr">Mesajınız</span><span lang="en">Your message</span></label>
+                        <textarea id="cf-msg" name="message" required maxlength="4000"></textarea>
+                    </div>
+                    <input class="form__hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <div class="form__foot">
+                        <p class="form__note"><span lang="tr">Bilgileriniz yalnızca size dönüş yapmak için kullanılır.</span><span lang="en">Your details are only used to reply to you.</span></p>
+                        <button class="btn btn--primary" type="submit">
+                            <span lang="tr">Gönder</span><span lang="en">Send</span>
+                            <svg class="i arrow"><use href="#i-arrow"/></svg>
+                        </button>
+                    </div>
+                    <p class="form__status" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="wrap">
+        <div class="footer__inner">
+            <span>© <span data-year>2026</span> İrem Nur Yılmaz</span>
+            <div class="footer__links">
+                <a href="https://github.com/iremnurgocer" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://linkedin.com/in/iremnurgocer" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://github.com/iremnurgocer/iremnurgocer.github.io" target="_blank" rel="noopener"><span lang="tr">Kaynak kod</span><span lang="en">Source</span></a>
+                <button class="sound-btn" type="button" data-sound-toggle aria-pressed="false"><span lang="tr" data-sound-state>Ses: kapalı</span><span lang="en" data-sound-state>Sound: off</span></button>
+                <a href="#top"><span lang="tr">Başa dön ↑</span><span lang="en">Back to top ↑</span></a>
+            </div>
+        </div>
+        <div class="footer__word" aria-hidden="true">İrem Nur Yılmaz</div>
+    </div>
+</footer>
+
+<!-- ============ KOMUT PALETİ ============ -->
+<dialog class="palette" data-palette aria-label="Ara / Search">
+    <div class="palette__input">
+        <svg class="i"><use href="#i-search"/></svg>
+        <input type="text" data-palette-input autocomplete="off" spellcheck="false" aria-controls="palette-list" aria-autocomplete="list">
+        <span class="kbd">esc</span>
+    </div>
+    <ul class="palette__list" id="palette-list" role="listbox" data-palette-list></ul>
+    <div class="palette__foot">
+        <span><span class="kbd">↑</span><span class="kbd">↓</span><span lang="tr">gezin</span><span lang="en">navigate</span></span>
+        <span><span class="kbd">↵</span><span lang="tr">aç</span><span lang="en">open</span></span>
+        <span><span class="kbd">?</span><span lang="tr">asistana sor</span><span lang="en">ask the assistant</span></span>
+    </div>
+</dialog>
+
+<!-- ============ SOHBET ASİSTANI ============ -->
+<button class="chat-launch" type="button" data-chat-open data-chat-launch aria-controls="chat">
+    <span class="orb" aria-hidden="true"></span>
+    <span lang="tr">Bana sor</span><span lang="en">Ask me</span>
+</button>
+
+<section class="chat" id="chat" data-chat role="dialog" aria-modal="false" aria-labelledby="chat-title" aria-hidden="true">
+    <div class="chat__head">
+        <span class="orb orb--sm" aria-hidden="true"></span>
+        <div class="chat__who">
+            <strong id="chat-title"><span lang="tr">İrem'in asistanı</span><span lang="en">İrem's assistant</span></strong>
+            <span><span class="pulse" aria-hidden="true"></span><span data-chat-mode-label><span lang="tr">Deneyim ve projeler hakkında yanıt verir</span><span lang="en">Answers about experience and projects</span></span></span>
+        </div>
+        <button class="icon-btn" type="button" data-chat-reset aria-label="Yeni sohbet / New chat" title="Yeni sohbet / New chat"><svg class="i"><use href="#i-hash"/></svg></button>
+        <button class="icon-btn" type="button" data-chat-close aria-label="Kapat / Close"><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+
+    <div class="chat__tabs" role="tablist">
+        <button type="button" role="tab" aria-selected="true" aria-controls="chat-ask" id="tab-ask" data-chat-tab="ask"><span lang="tr">Soru sor</span><span lang="en">Ask</span></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="chat-mail" id="tab-mail" data-chat-tab="mail"><span lang="tr">Mesaj gönder</span><span lang="en">Send a message</span></button>
+    </div>
+
+    <div class="chat__panel" id="chat-ask" role="tabpanel" aria-labelledby="tab-ask">
+        <div class="chat__log" data-chat-log aria-live="polite"></div>
+        <div class="chat__suggest" data-chat-suggest></div>
+        <form class="chat__form" data-chat-form>
+            <label class="sr-only" for="chat-input"><span lang="tr">Sorunuz</span><span lang="en">Your question</span></label>
+            <textarea id="chat-input" rows="1" data-chat-input maxlength="600"></textarea>
+            <button class="chat__send" type="submit" data-chat-send disabled aria-label="Gönder / Send"><svg class="i"><use href="#i-send"/></svg></button>
+        </form>
+        <p class="chat__fine"><span lang="tr">Yanıtlar yalnızca bu sitedeki bilgilere dayanır.</span><span lang="en">Answers are grounded only in the content of this site.</span></p>
+    </div>
+
+    <div class="chat__panel chat__mail" id="chat-mail" role="tabpanel" aria-labelledby="tab-mail" hidden>
+        <form class="form" data-mail-form novalidate>
+            <div class="form__row">
+                <div class="field">
+                    <label for="cm-name"><span lang="tr">Adınız</span><span lang="en">Your name</span></label>
+                    <input id="cm-name" name="name" type="text" autocomplete="name" required maxlength="120">
+                </div>
+                <div class="field">
+                    <label for="cm-email"><span lang="tr">E-posta</span><span lang="en">Email</span></label>
+                    <input id="cm-email" name="email" type="email" autocomplete="email" required maxlength="160">
+                </div>
+            </div>
+            <div class="field">
+                <label for="cm-topic"><span lang="tr">Konu</span><span lang="en">Topic</span></label>
+                <select id="cm-topic" name="topic" data-topic-select></select>
+            </div>
+            <div class="field">
+                <label for="cm-msg"><span lang="tr">Mesajınız</span><span lang="en">Your message</span></label>
+                <textarea id="cm-msg" name="message" required maxlength="4000"></textarea>
+            </div>
+            <input class="form__hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="form__foot">
+                <p class="form__note"><span lang="tr">Doğrudan İrem'in e-postasına iletilir.</span><span lang="en">Delivered straight to İrem's inbox.</span></p>
+                <button class="btn btn--primary btn--sm" type="submit"><span lang="tr">Gönder</span><span lang="en">Send</span><svg class="i arrow"><use href="#i-arrow"/></svg></button>
+            </div>
+            <p class="form__status" role="status" aria-live="polite"></p>
+        </form>
+    </div>
+</section>
+
+<div class="toast" data-toast role="status" aria-live="polite"></div>
+
+<script src="assets/js/config.js" defer></script>
+<script src="assets/data/reading.js" defer></script>
+<script src="assets/js/hero3d.js" defer></script>
+<script src="assets/js/flow.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/palette.js" defer></script>
+<script src="assets/js/chat.js" defer></script>
+<script src="assets/js/lab.js" defer></script>
+<script src="assets/js/fx.js" defer></script>
+</body>
+</html>

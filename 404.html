@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sayfa bulunamadı · İrem Nur Yılmaz</title>
+    <meta name="robots" content="noindex">
+    <script>
+        (function () {
+            var d = document.documentElement, t = null, l = null;
+            try { t = localStorage.getItem('ing-theme'); l = localStorage.getItem('ing-lang'); } catch (e) {}
+            d.setAttribute('data-theme', t || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+            d.setAttribute('lang', l || (/^tr\b/i.test(navigator.language || '') ? 'tr' : 'en'));
+        })();
+    </script>
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <style>
+        .nf { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 32px 16px; }
+        .nf__code { font-size: clamp(6rem, 22vw, 14rem); line-height: .9; letter-spacing: -.06em; }
+        .nf p { color: var(--muted); max-width: 440px; margin: 18px auto 30px; }
+    </style>
+</head>
+<body>
+    <main class="nf">
+        <div>
+            <div class="nf__code">4<span class="serif grad-text">0</span>4</div>
+            <p>
+                <span lang="tr">Aradığınız sayfa bulunamadı.</span>
+                <span lang="en">The page you're looking for doesn't exist.</span>
+            </p>
+            <a class="btn btn--primary" href="/">
+                <span lang="tr">Ana sayfaya dön</span><span lang="en">Back to home</span>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "İrem Nur Yılmaz | Senior AI Engineer",
+  "short_name": "İrem Nur Yılmaz",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07080b",
+  "theme_color": "#07080b",
+  "icons": [
+    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

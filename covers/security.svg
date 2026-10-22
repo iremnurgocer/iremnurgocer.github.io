@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420" role="img" aria-label="Güvenlik mühendisliği: keşif, saldırı yüzeyi, tespit ve müdahale katmanları">
+  <rect width="800" height="420" fill="#12140e"/>
+  <circle cx="680" cy="80" r="170" fill="#a9c94a" opacity=".06"/>
+  <text x="48" y="70" font-family="'Space Grotesk',system-ui,sans-serif" font-size="30" font-weight="600" fill="#e9eade">Güvenlik mühendisliği</text>
+  <text x="48" y="98" font-family="Inter,system-ui,sans-serif" font-size="15" fill="#a2a795">Tehdit modelleme · pentest · tespit · müdahale</text>
+
+  <!-- Katmanlı kalkan -->
+  <g transform="translate(150,255)">
+    <path d="M0 -105 l86 38 v66 c0 56 -36 92 -86 111 c-50 -19 -86 -55 -86 -111 v-66 z" fill="#1b1e16" stroke="#a9c94a" stroke-width="2.5"/>
+    <path d="M0 -76 l58 26 v48 c0 39 -25 64 -58 78 c-33 -14 -58 -39 -58 -78 v-48 z" fill="none" stroke="#a9c94a" stroke-opacity=".5" stroke-width="2"/>
+    <path d="M0 -47 l30 13 v30 c0 23 -13 38 -30 46 c-17 -8 -30 -23 -30 -46 v-30 z" fill="#a9c94a" fill-opacity=".18" stroke="#a9c94a" stroke-width="2"/>
+  </g>
+
+  <!-- Katman etiketleri -->
+  <g font-family="Inter,system-ui,sans-serif" font-size="14" fill="#a2a795">
+    <g><rect x="330" y="150" width="252" height="46" rx="10" fill="#1b1e16" stroke="#333829"/><circle cx="356" cy="173" r="5" fill="#a9c94a"/><text x="374" y="178">Tehdit modelleme ve kapsam</text></g>
+    <g><rect x="330" y="206" width="252" height="46" rx="10" fill="#1b1e16" stroke="#333829"/><circle cx="356" cy="229" r="5" fill="#a9c94a"/><text x="374" y="234">Web / API saldırı yüzeyi</text></g>
+    <g><rect x="330" y="262" width="252" height="46" rx="10" fill="#1b1e16" stroke="#333829"/><circle cx="356" cy="285" r="5" fill="#a9c94a"/><text x="374" y="290">SIEM, tespit ve hunting</text></g>
+    <g><rect x="330" y="318" width="252" height="46" rx="10" fill="#232720" stroke="#a9c94a" stroke-opacity=".5"/><circle cx="356" cy="341" r="5" fill="#a9c94a"/><text x="374" y="346" fill="#a9c94a">Olay müdahalesi</text></g>
+  </g>
+
+  <!-- Bağlantı çizgileri -->
+  <g stroke="#333829" stroke-width="2" stroke-dasharray="4 6">
+    <line x1="248" y1="173" x2="326" y2="173"/><line x1="248" y1="229" x2="326" y2="229"/>
+    <line x1="248" y1="285" x2="326" y2="285"/><line x1="248" y1="341" x2="326" y2="341"/>
+  </g>
+
+  <!-- Log akışı -->
+  <g transform="translate(618,150)" font-family="ui-monospace,Menlo,monospace" font-size="11.5" fill="#a2a795">
+    <rect width="134" height="214" rx="10" fill="#1b1e16" stroke="#333829"/>
+    <g fill="#a9c94a" opacity=".85">
+      <rect x="14" y="22" width="70" height="7" rx="3.5"/><rect x="14" y="48" width="98" height="7" rx="3.5" opacity=".55"/>
+      <rect x="14" y="74" width="54" height="7" rx="3.5" opacity=".75"/><rect x="14" y="100" width="88" height="7" rx="3.5" opacity=".4"/>
+      <rect x="14" y="126" width="74" height="7" rx="3.5" opacity=".7"/><rect x="14" y="152" width="102" height="7" rx="3.5" opacity=".5"/>
+      <rect x="14" y="178" width="60" height="7" rx="3.5" opacity=".65"/>
+    </g>
+  </g>
+</svg>

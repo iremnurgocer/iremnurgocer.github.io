@@ -1,0 +1,13 @@
+name = "iremnurgocer-chat"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# Sohbetin çalışacağı sitenin adresi (CORS). Yerel test için virgülle ekleyin.
+ALLOWED_ORIGINS = "https://iremnurgocer.github.io,http://127.0.0.1:4175,http://localhost:4175"
+# Bilgi tabanı: sitenin kendi JSON dosyası. Tek kaynak orada.
+KNOWLEDGE_URL = "https://iremnurgocer.github.io/assets/data/knowledge.json"
+
+# Gizli anahtar wrangler.toml'a yazılmaz:
+#   npx wrangler secret put ANTHROPIC_API_KEY
