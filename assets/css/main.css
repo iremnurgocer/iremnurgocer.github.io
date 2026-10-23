@@ -1927,6 +1927,8 @@ h1, h2, h3, h4 {
 
 .footer a:hover { color: var(--text); }
 .footer__links { display: flex; gap: 18px; flex-wrap: wrap; }
+/* Dokunmatik ekranda en az 24px dokunma alanı (WCAG 2.5.8); yerleşim değişmez. */
+.footer__links a, .footer__links button { padding-block: 6px; margin-block: -6px; }
 
 .footer__word {
     margin-top: 40px;
