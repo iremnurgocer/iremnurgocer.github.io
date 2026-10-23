@@ -325,7 +325,9 @@
         panel.inert = true;
         if (launch) launch.classList.remove('is-hidden');
         SITE.lockScroll(false);
-        if (lastFocus && lastFocus.focus) lastFocus.focus();
+        /* Safari tıklanan düğmeye odak vermez; o durumda başlatma düğmesine dön. */
+        var back = lastFocus && lastFocus !== document.body ? lastFocus : launch;
+        if (back && back.focus) back.focus();
     }
 
     function reset() {
@@ -362,6 +364,18 @@
 
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && isOpen && !document.querySelector('dialog[open]')) close();
+    });
+
+    /* Telefonda panel tüm ekranı kaplar; Tab arkadaki sayfaya kaçmasın. */
+    panel.addEventListener('keydown', function (e) {
+        if (e.key !== 'Tab' || window.innerWidth > 640) return;
+        var items = Array.prototype.filter.call(panel.querySelectorAll('a[href], button, input, select, textarea'), function (el) {
+            return !el.disabled && el.tabIndex > -1 && el.getClientRects().length;
+        });
+        if (!items.length) return;
+        var first = items[0], last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     });
 
     form.addEventListener('submit', function (e) {
