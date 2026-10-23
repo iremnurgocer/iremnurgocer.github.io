@@ -40,8 +40,12 @@ Derleme adımı olmayan statik bir site (HTML, CSS ve sade JavaScript). GitHub P
 | `assets/data/knowledge.json` | Asistanın bilgi tabanı (iki dilli). Asistanın bildiklerini buradan düzenleyin. |
 | `assets/data/reading.js` | Okuma listesi |
 | `assets/img/` | Portre, Open Graph görseli, simgeler |
-| `blogs/*.html`, `styles.css`, `blogs/blog.css`, `script.js` | Blog yazıları ve stilleri |
-| `covers/*.svg` | Blog kapak görselleri |
+| `assets/css/blog.css`, `assets/js/blog.js` | Blog sayfası stilleri ve içindekiler |
+| `tools/blog_posts.py` | **Blog künyeleri** (başlık, özet, kapak; iki dilli) |
+| `tools/blogs/<slug>.tr.html`, `.en.html` | **Blog gövdeleri** (Türkçe ve İngilizce) |
+| `tools/build_blogs.py` | `blogs/*.html` sayfalarını üretir |
+| `blogs/*.html` | Üretilmiş blog sayfaları (elle düzenlemeyin) |
+| `covers/*.svg`, `covers/*.en.svg` | Blog kapak görselleri (Türkçe ve İngilizce) |
 | `worker/` | İsteğe bağlı yapay zeka sohbeti için Cloudflare Worker |
 
 ## Yerelde çalıştırma
@@ -55,6 +59,6 @@ Ardından http://localhost:4175 adresini açın.
 ## İçerik güncelleme
 
 - **Vaka sayfaları:** `tools/cases.py` dosyasını düzenleyip `python3 tools/build_cases.py` çalıştırın. Yeni bir vaka eklediyseniz `index.html` içindeki `#work` bölümüne kartını, `assets/js/main.js` içindeki `CASE_SLUGS`'a kimliğini, `sitemap.xml`'e adresini ekleyin. Asistanın da bilmesi için `knowledge.json`'a bir kayıt ekleyin.
-- **Yeni yazı:** `blogs/` altına sayfayı ekleyin, `#writing` bölümüne kartını koyun, `sitemap.xml`'i güncelleyin.
+- **Blog yazıları:** gövdeyi `tools/blogs/<slug>.tr.html` ve `tools/blogs/<slug>.en.html` dosyalarında düzenleyip `python3 tools/build_blogs.py` çalıştırın. Yeni yazı için `tools/blog_posts.py`'a künyesini ekleyin, `#writing` bölümüne kartını koyun, `sitemap.xml`'i ve `knowledge.json`'daki `writing` kaydını güncelleyin.
 - **Okuma listesi:** `assets/data/reading.js` dosyasına kayıt ekleyin.
 - Gizlilik gereği müşteri, kurum ve iç sistem adları sitede yer almaz.

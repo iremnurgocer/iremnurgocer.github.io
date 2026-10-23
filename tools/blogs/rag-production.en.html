@@ -1,0 +1,216 @@
+<h2 id="neden-rag">1. Why RAG?</h2>
+
+<p>
+For a language model to answer a business question correctly, it needs two things:
+to understand language and to have access to <strong>current information belonging to that organisation</strong>.
+The model's weights provide the first, not the second. Company procedures change, price lists
+are updated, new contracts are signed; none of this is in the model's training data.
+</p>
+<p>
+There are two options: retrain the model, or put the right documents in front of the model
+when it answers the question. The second is <strong>RAG</strong> (retrieval-augmented generation). In practice
+it is almost always the right starting point - it is cheap, when information changes you
+only update the index, and, most importantly, you can show <em>where the answer came from</em>.
+</p>
+<div class="callout">
+<strong>The real challenge in enterprise RAG is not retrieval but authorisation</strong>
+<p>
+Building a demo takes a week. Taking it to production means correctly answering the question
+"can this user see this document?" on every query. Starting the design
+here is much easier than adding it later.
+</p>
+</div>
+
+<h2 id="mimari">2. The parts of the architecture</h2>
+
+<p>
+RAG is not a single component but a pipeline. Each link can fail on its own, so you need
+to be able to measure each link on its own.
+</p>
+<table>
+<thead>
+<tr><th>Stage</th><th>What it does</th><th>Typical mistake</th></tr>
+</thead>
+<tbody>
+<tr><td>Ingestion</td><td>Pulls documents from source systems and converts them to text</td><td>PDF/OCR losses go unnoticed</td></tr>
+<tr><td>Chunking</td><td>Splits text into meaningful units</td><td>Splitting mid-sentence, losing heading context</td></tr>
+<tr><td>Embedding</td><td>Converts chunks into vectors</td><td>Using different models for queries and documents</td></tr>
+<tr><td>Indexing</td><td>Stores vectors and metadata</td><td>Not putting permission information into the metadata</td></tr>
+<tr><td>Retrieval</td><td>Finds the chunks closest to the question</td><td>Relying on vector similarity alone</td></tr>
+<tr><td>Reranking</td><td>Orders candidates by relevance</td><td>Skipping the step entirely</td></tr>
+<tr><td>Generation</td><td>Writes the answer using the context</td><td>Not citing sources</td></tr>
+</tbody>
+</table>
+<p>
+The most insidious part of this pipeline is this: when you see a bad answer, the model usually gets the blame.
+Yet in most cases the problem lies in retrieval - the model cannot know information
+that was never put in front of it.
+</p>
+
+<h2 id="parcalama">3. Chunking strategies</h2>
+
+<p>
+Chunking is the step whose quality is most often overlooked. Fixed-length splitting is the easiest
+approach but usually gives the worst results: a table's header ends up in one chunk
+and its rows in another.
+</p>
+<table>
+<thead>
+<tr><th>Strategy</th><th>When</th><th>Note</th></tr>
+</thead>
+<tbody>
+<tr><td>Fixed length + overlap</td><td>Homogeneous plain text</td><td>10-20% overlap reduces loss of context</td></tr>
+<tr><td>By heading hierarchy</td><td>Procedures, policies, technical documentation</td><td>Add the parent headings to each chunk</td></tr>
+<tr><td>Table/section aware</td><td>Contracts, financial statements, specifications</td><td>Do not split tables; flatten them into text if needed</td></tr>
+<tr><td>Question-answer unit</td><td>FAQs, support tickets</td><td>Naturally gives the highest hit rate</td></tr>
+</tbody>
+</table>
+<p>
+A practical rule: <strong>every chunk should make sense when read on its own.</strong>
+If you read a chunk out of context and ask "where did this come from?", the model
+will ask the same question.
+</p>
+<p>A simple approach that carries the parent headings into each chunk:</p>
+<pre><code># Başlık yolunu koruyarak bölümleri parçalara ayırır
+def parcala(bolumler, maks_karakter=1200):
+    for bolum in bolumler:
+        onek = " &gt; ".join(bolum.baslik_yolu)          # "İK &gt; İzinler &gt; Yıllık izin"
+        govde = bolum.metin
+        for i in range(0, len(govde), maks_karakter):
+            parca = govde[i:i + maks_karakter]
+            yield {
+                "metin": f"[{onek}]\n{parca}",
+                "kaynak": bolum.kaynak,
+                "yetki_etiketleri": bolum.yetki_etiketleri,   # erişim kontrolü için
+            }</code></pre>
+
+<h2 id="erisim-kalitesi">4. Retrieval quality: hybrid search and reranking</h2>
+
+<p>
+Vector search captures semantic similarity but misses exact matches. When a user types a
+product code, clause number or abbreviation, keyword search is far more
+accurate. Using both together - <strong>hybrid search</strong> - is clearly better
+than either on its own.
+</p>
+<ul>
+<li><strong>Vector search:</strong> "how is annual leave calculated" → the relevant procedure text</li>
+<li><strong>Keyword (BM25):</strong> "clause 7.3" → the chunk containing exactly that clause</li>
+<li><strong>Fusion:</strong> combine the two lists into a single ranking (e.g. reciprocal rank fusion)</li>
+<li><strong>Reranking:</strong> score the top 50 candidates with a cross-encoder and pass the top 5 to the model</li>
+</ul>
+<div class="callout">
+<strong>Less context beats more context</strong>
+<p>
+Giving the model 20 chunks does not improve the answer; irrelevant chunks distract it
+and increase cost and latency. After reranking, 3-6 chunks are enough for most
+scenarios.
+</p>
+</div>
+
+<h2 id="yetkilendirme">5. Authorisation and data access</h2>
+
+<p>
+This is what separates enterprise RAG from a personal assistant. Two employees asking
+the same question should get different answers, because they have the right to see different documents.
+</p>
+<p>Three rules:</p>
+<ul>
+<li>
+<strong>Write permissions at indexing time.</strong> Add the access labels from each chunk's
+source (group, department, company, confidentiality level) as metadata.
+</li>
+<li>
+<strong>Filter in the retrieval query.</strong> Fetching all chunks first and
+filtering afterwards is slow and moves the leakage risk into application code. The filter
+should be part of the vector query.
+</li>
+<li>
+<strong>Reference the source system's permissions rather than copying them.</strong> Permissions
+change. Monitor index freshness; when a document's permissions are narrowed, trigger
+re-indexing.
+</li>
+</ul>
+<pre><code># Erişim sorgusunda kullanıcı bağlamı her zaman zorunlu parametre olsun
+sonuclar = index.ara(
+    sorgu_vektoru=gom(soru),
+    filtre="sirket eq '{sirket}' and gizlilik le {seviye}".format(
+        sirket=kullanici.sirket, seviye=kullanici.gizlilik_seviyesi
+    ),
+    ust_k=50,
+)</code></pre>
+<div class="callout callout--warn">
+<strong>Leaks are silent</strong>
+<p>
+An answer generated from an unauthorised document raises no error - it simply gives the right
+information to the wrong person. That is why protecting the permission filter with unit tests matters
+more than testing answer quality.
+</p>
+</div>
+
+<h2 id="degerlendirme">6. Evaluation: what to measure?</h2>
+
+<p>
+"It looked good to me" is not a metric. In RAG you need to measure at least two separate things:
+did you find the right document, and did the model stay faithful to the document it found?
+</p>
+<table>
+<thead>
+<tr><th>Metric</th><th>What it measures</th><th>How to collect it</th></tr>
+</thead>
+<tbody>
+<tr><td>Recall@k</td><td>Whether the right chunk is in the top k results</td><td>Test set pairing questions with correct documents</td></tr>
+<tr><td>Groundedness</td><td>Whether every claim in the answer is in the context</td><td>Judge model + human review on a sample</td></tr>
+<tr><td>Answerability</td><td>Whether the model can say "I don't know" when the information is missing</td><td>Deliberately include unanswerable questions</td></tr>
+<tr><td>Latency (p95)</td><td>How long the user actually waits</td><td>End-to-end tracing, stage by stage</td></tr>
+<tr><td>Cost per query</td><td>What happens at scale</td><td>Tokens + search + reranking</td></tr>
+</tbody>
+</table>
+<p>
+Build the test set from the organisation's own questions. 50-100 real questions are worth more than thousands
+of synthetic ones; knowing which questions are actually asked also tells you what
+to improve.
+</p>
+
+<h2 id="uretim">7. Going to production</h2>
+
+<ul>
+<li>
+<strong>Add sources to every answer.</strong> Users should be able to open the document and verify it.
+This is the single feature that builds trust the most.
+</li>
+<li>
+<strong>Trace stage by stage.</strong> The query, retrieved chunks, selected
+chunks and generated answer - all of them should be logged. When a complaint comes in, this is the only way
+to see which link broke.
+</li>
+<li>
+<strong>Add a cache.</strong> Business questions repeat. Caching on the normalised
+question significantly reduces cost and latency.
+</li>
+<li>
+<strong>Collect feedback.</strong> Even a simple thumbs up/down, when reviewed
+regularly, is the best source of improvements.
+</li>
+<li>
+<strong>Monitor freshness.</strong> The question "when was this index last updated?" should have
+an answer on a dashboard.
+</li>
+</ul>
+
+<h2 id="kontrol-listesi">8. Short checklist</h2>
+
+<ul>
+<li>Do chunks make sense when read on their own?</li>
+<li>Are permission labels in the index, and is the filter part of the query?</li>
+<li>Is there hybrid search + reranking?</li>
+<li>How many chunks go to the model - more than necessary?</li>
+<li>Can the model say "I don't know" when the information is missing?</li>
+<li>Do answers cite sources?</li>
+<li>Is there an evaluation set built from real questions?</li>
+<li>Are stage-by-stage tracing and cost per query visible?</li>
+</ul>
+<p>
+Every item on this list was chosen from issues that caused problems at least once when moving
+a demo to production. Going through them in order is much cheaper than a large
+rewrite later on.
+</p>

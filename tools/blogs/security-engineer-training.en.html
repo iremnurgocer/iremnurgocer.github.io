@@ -1,0 +1,859 @@
+<div class="callout callout--warn">
+<strong>Warning</strong>
+<p>The test steps in this material must only be carried out in authorised or isolated lab environments. Any action performed on live systems without written permission is a criminal offence.</p>
+</div>
+<h2 id="onsoz">Foreword</h2>
+<p>This resource offers end-to-end guidance for professionals who want to become security engineers or penetration testers, from theory to practice and from ethical foundations to advanced threat modelling. Alongside understanding attack surfaces, it covers detection, defence, incident response, automation and building a sustainable security culture.</p>
+<p>The content is based on NIST, PTES, OWASP, MITRE ATT&amp;CK, CIS Benchmarks and Cloud Security Alliance standards. Each section explains step by step how to identify and prioritise real-world security problems, how to secure systems and how to respond during an incident. The aim is not just "breaking in", but developing specialists who can design resilient, observable and sustainable systems.</p>
+
+<h2 id="bolum-1">Section 1 - Introduction, Ethics and Legal Framework</h2>
+<div class="callout">
+<strong>Module Competencies</strong>
+<ul>
+<li>Preparing penetration testing contracts (SoW), authorisation and NDA documents.</li>
+<li>Assessing pre-engagement risks and creating a test plan with rollback procedures.</li>
+<li>Carrying out passive/active reconnaissance strategies in line with PTES/NIST standards.</li>
+<li>Producing advanced PoCs on surfaces such as web, API, cloud and K8s, and prioritising them with CVSS plus business impact.</li>
+<li>Doing detection engineering on SIEM/EDR and reporting findings to C-level &amp; engineering teams.</li>
+</ul>
+</div>
+
+<h3>1.1 Pre-Engagement Documents</h3>
+<p>Professional engagements start with documents that clarify scope, responsibilities and communication flow.</p>
+<ul>
+<li><strong>Statement of Work (SoW):</strong> Contains IP/URL lists, test windows, technical scope, and communication and responsibility clauses.</li>
+<li><strong>Authorization Letter:</strong> Defines authorised signatures, the test team's identity details, whitelisted IPs and emergency stop procedures.</li>
+<li><strong>Non-Disclosure Agreement (NDA):</strong> Sets out data privacy obligations, retention processes and sharing restrictions.</li>
+<li><strong>Rules of Engagement (RoE):</strong> Lists prohibited techniques, log retention methods and data handling rules.</li>
+</ul>
+
+<h3>1.2 Risk and Rollback Planning</h3>
+<ul>
+<li>Impact on live systems, downtime scenarios and business continuity plans should be assessed.</li>
+<li>Snapshot/backup plans and kill-switch procedures should be set up in advance.</li>
+<li>SOC/IR teams should be informed for the duration of the test, and coordination channels should be defined.</li>
+</ul>
+
+<h3>1.3 Reconnaissance</h3>
+<h4>Passive OSINT</h4>
+<ul>
+<li>DNS records, certificate logs, public code repositories, public cloud asset scans.</li>
+<li>Example: <code>dig +short ANY example.com</code>, wildcard queries via <code>crt.sh</code>.</li>
+</ul>
+<h4>Active Reconnaissance</h4>
+<ul>
+<li><code>nmap</code>, <code>masscan</code> (lab only), <code>httprobe</code>, <code>whatweb</code> within agreed rate limits.</li>
+<li>Analysis focused on service signatures, TLS certificates and API discovery (OpenAPI, Swagger).</li>
+</ul>
+
+<h3>1.4 Vulnerability Analysis</h3>
+<p>Automated scans (Burp, ZAP, Nessus) are only a starting point; manual verification and context analysis are essential. Findings in automated reports must always be triaged for false positives.</p>
+
+<h3>1.5 Exploitation &amp; Post-Exploitation</h3>
+<ul>
+<li>PoCs should be "read-only" and data masking should be applied.</li>
+<li>Privilege escalation or a persistent foothold should not be established without approval.</li>
+<li>Every step, the tool versions used and their outputs should be provable in the report.</li>
+</ul>
+
+<h3>1.6 Reporting and Prioritisation</h3>
+<p>Findings are prioritised using CVSS v3.1 and business impact weightings. Each finding should include a summary, technical detail, PoC, remediation steps, verification and the responsible team.</p>
+
+<h3>1.7 Detection Engineering &amp; SIEM Rules</h3>
+<ul>
+<li>A detection rule should be written for every critical finding (e.g. brute-force, SSRF, token abuse).</li>
+<li>Rules should be analysed for false positives / false negatives and linked to a playbook.</li>
+</ul>
+
+<h3>1.8 Verification and Regression Tests</h3>
+<ul>
+<li>PoCs are run again after the fix; they are expected to fail.</li>
+<li>Relevant regression tests are added to CI pipelines.</li>
+<li>Audit trails and artefacts are retained.</li>
+</ul>
+
+<h3>1.9 Lab Tasks</h3>
+<ul>
+<li>Building an asset inventory and threat modelling.</li>
+<li>Detecting IDOR, fixing it and writing a regression test.</li>
+<li>Preparing an SSRF OOB PoC and a mitigation plan.</li>
+</ul>
+
+<h2 id="bolum-2">Section 2 - System Fundamentals, IoCs and Protection</h2>
+<p>This section covers recognising normal system behaviour, spotting indicators of compromise (IoCs) and the defensive steps to take during an incident.</p>
+
+<h3>2.1 Recognising "Normal" Behaviour</h3>
+<ul>
+<li>Baseline values should be established for CPU, memory and network traffic.</li>
+<li>Who connects to which services should be recorded.</li>
+<li>Monitoring plans should be set up with tools such as HTOP, iftop, netstat and sysmon.</li>
+</ul>
+
+<h3>2.2 Indicators of Compromise (IoC)</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Symptom</th>
+<th>Prevention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Network</td>
+<td>Port scans, brute-force, DDoS</td>
+<td>Firewall rate limit, fail2ban, WAF/CDN</td>
+</tr>
+<tr>
+<td>Application</td>
+<td>SQLi, XSS, API abuse logs</td>
+<td>Input validation, WAF policies</td>
+</tr>
+<tr>
+<td>System</td>
+<td>New users, unexpected processes</td>
+<td>Integrity monitoring (AIDE), EDR/IDS</td>
+</tr>
+</tbody>
+</table>
+
+<h3>2.3 Linux / Server Security</h3>
+<ul>
+<li>Keeping sudo access to a minimum and disabling unnecessary services.</li>
+<li>Enabling tools such as Fail2ban, Wazuh and Suricata.</li>
+<li>Analysing logs regularly and setting up automatic notifications.</li>
+</ul>
+
+<h3>2.4 HTTP / Web Server Defence</h3>
+<ul>
+<li><code>server_tokens off</code>, security headers and TLS hardening in Apache/Nginx settings.</li>
+<li>Anomaly detection at the WAF or reverse proxy layer.</li>
+</ul>
+
+<h3>2.5 Real Incident Scenarios</h3>
+<ul>
+<li><strong>SSH brute-force:</strong> Fail2ban, IP blocking, key-based authentication.</li>
+<li><strong>SQL injection attempt:</strong> WAF rule, endpoint isolation, log review.</li>
+<li><strong>Unexpected outbound traffic:</strong> Network isolation, process analysis, IDS logs.</li>
+</ul>
+
+<h3>2.6 Incident Response Mini Playbook</h3>
+<div class="section-grid">
+<div><strong>Detection:</strong> Anomaly log or IDS alert.</div>
+<div><strong>Containment:</strong> Service isolation, firewall rule.</div>
+<div><strong>Analysis:</strong> Review of processes, logs and connections.</div>
+<div><strong>Eradication:</strong> Terminating malicious processes.</div>
+<div><strong>Recovery:</strong> Clean backup, applying patches.</div>
+<div><strong>Monitoring:</strong> Close monitoring for the next 72 hours.</div>
+</div>
+
+<h3>2.7 Proactive Security</h3>
+<ul>
+<li>Baseline scripts, hash checks, automated patch management.</li>
+<li>User awareness training, log correlation and alert thresholds.</li>
+</ul>
+
+<h3>2.8 Lab Tasks</h3>
+<ul>
+<li>Analysing normal/abnormal traffic.</li>
+<li>Writing and verifying a Fail2ban rule.</li>
+<li>Incident simulation and reporting.</li>
+</ul>
+
+<h2 id="bolum-3">Section 3 - Web and Application Layer Security</h2>
+<p>This section covers OWASP Top 10 focused vulnerabilities, incident detection, log analysis and defensive practices.</p>
+
+<h3>3.1 Application Architecture</h3>
+<p>Analyse the risks along the Client → Application Server → Database → External Services chain: XSS, CSRF, authentication, misconfiguration, injection and so on.</p>
+
+<h3>3.2 Common Attack Categories and Symptoms</h3>
+<ul>
+<li><strong>SQL Injection:</strong> <code>' OR 1=1</code> patterns in logs or a rise in 500 errors.</li>
+<li><strong>XSS:</strong> Parameters containing <code>&lt;script&gt;</code>, a broken interface.</li>
+<li><strong>Broken Auth:</strong> Repeated failed logins, unexpected sessions.</li>
+<li><strong>CSRF:</strong> POST requests with missing tokens.</li>
+<li><strong>SSRF:</strong> Outbound traffic to internal IPs.</li>
+</ul>
+
+<h3>3.3 Incident Detection and Log Analysis</h3>
+<p>Identify anomalies by correlating web server logs, application logs and WAF records. Create regex or query-based alerts in the SIEM.</p>
+
+<h3>3.4 Secure Coding Principles</h3>
+<ul>
+<li>Input validation and an allow-list approach.</li>
+<li>Context-aware output encoding.</li>
+<li>Server-side authorisation checks.</li>
+<li>Secure password storage (bcrypt, Argon2).</li>
+<li>API security policies, CORS and rate limiting.</li>
+</ul>
+
+<h3>3.5 Defence and Tools</h3>
+<ul>
+<li>WAF (ModSecurity, Cloud WAF) rules.</li>
+<li>Static analysis tools such as SonarQube and OWASP Dependency-Check.</li>
+<li>Scheduled DAST scans with ZAP/Burp.</li>
+</ul>
+
+<h3>3.6 Realistic Incident Examples</h3>
+<ul>
+<li>On an SQLi attempt, temporarily disabling the endpoint and analysing the logs.</li>
+<li>On an XSS alert, tightening CSP policies and verifying input encoding.</li>
+<li>On authorisation breaches, revoking tokens, checking roles and strengthening the WAF.</li>
+</ul>
+
+<h3>3.7 Incident Response</h3>
+<ol>
+<li>Detection: Alert or user report.</li>
+<li>Containment: Restrict the endpoint or user.</li>
+<li>Analysis: Log and code review.</li>
+<li>Eradication: Patch and configuration fix.</li>
+<li>Verification: Re-running the PoC should fail.</li>
+<li>Reporting: Timeline and measures taken.</li>
+</ol>
+
+<h3>3.8 Lab Tasks</h3>
+<ul>
+<li>Recording traffic and detecting attacks on OWASP Juice Shop.</li>
+<li>Writing a WAF rule and observing its effect.</li>
+</ul>
+
+<h2 id="bolum-4">Section 4 - Application and API Security (In Depth)</h2>
+<p>Authentication, authorisation, input/output security, SSRF, deserialization, CORS/CSRF, rate limiting and logging in modern web and API architectures are examined in line with MITRE ATT&amp;CK.</p>
+
+<h3>4.1 Architectural Foundations</h3>
+<p>Identify classes of flaws along the Client → Reverse Proxy/WAF → Application → Identity Provider → Data &amp; External Services chain.</p>
+
+<h3>4.2 Authentication, Sessions and Authorisation</h3>
+<ul>
+<li>Cookie policies (HttpOnly, Secure, SameSite) and server-side session management.</li>
+<li>Protection against techniques such as JWT alg none bypass and kid manipulation.</li>
+<li>Password policies, MFA, brute-force rate limiting.</li>
+<li>Server-side authorisation checks (preventing IDOR/BOLA).</li>
+</ul>
+
+<h3>4.3 Input/Output Security</h3>
+<ul>
+<li>Context-aware encoding, CSP and template engine hardening against XSS.</li>
+<li>Parameterised queries and safe ORM APIs against SQL/NoSQL/LDAP injection.</li>
+<li>Safe use of placeholders against template injection risks.</li>
+</ul>
+
+<h3>4.4 Resource Protection</h3>
+<p>Rate limiting, token bucket algorithms, idempotency keys and log correlation for abuse detection.</p>
+
+<h3>4.5 File Upload &amp; Path Traversal</h3>
+<ul>
+<li>Allow-listed MIME types/extensions, AV scanning, isolated storage folders.</li>
+<li>For path traversal: normalisation, chroot/jail, ID → file mapping.</li>
+</ul>
+
+<h3>4.6 SSRF</h3>
+<p>Allow-lists, egress filtering, metadata service protections (IMDSv2), blocking redirects.</p>
+
+<h3>4.7 Insecure Deserialization</h3>
+<p>Schema-based formats such as JSON, rejecting unknown types, using up-to-date libraries.</p>
+
+<h3>4.8 CORS &amp; CSRF</h3>
+<ul>
+<li>CORS allow-list, avoiding the wildcard + credentials combination.</li>
+<li>CSRF tokens, SameSite cookies, Origin/Referer validation.</li>
+</ul>
+
+<h3>4.9 Secure HTTP Headers</h3>
+<p>Enforce the HSTS, CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy and Permissions-Policy headers.</p>
+
+<h3>4.10 API Security</h3>
+<ul>
+<li>OAuth2/OIDC Authorization Code + PKCE, exact matching of redirect URIs.</li>
+<li>Minimal scope, deny-by-default, consistent error codes and resource-level authorisation checks.</li>
+</ul>
+
+<h3>4.11 Logging &amp; Correlation</h3>
+<p>Logs enriched with PII masking and fields such as request-id, tenant-id and latency should be combined with correlation rules in the SIEM.</p>
+
+<h3>4.12 Incident Response Playbook</h3>
+<ol>
+<li>Detection → WAF/SIEM alert.</li>
+<li>Containment → Restrict the endpoint, apply a WAF rule.</li>
+<li>Collection → Logs, config, release hash.</li>
+<li>Analysis → Root cause, impact analysis.</li>
+<li>Remediation → Patch, config fix.</li>
+<li>Verification → Regression test, PoC rejected.</li>
+<li>Improvement → Automation, pipeline update.</li>
+</ol>
+
+<h3>4.13 Labs</h3>
+<ul>
+<li>Applying secure headers &amp; CSP.</li>
+<li>Rate limit rule and SIEM correlation.</li>
+<li>File upload quarantine &amp; AV scanning.</li>
+<li>Testing the OAuth2/OIDC PKCE flow.</li>
+</ul>
+
+<h3>4.14 Security Gates</h3>
+<ul>
+<li>Adding SAST, SCA, DAST and secret scanning to the CI/CD pipeline.</li>
+<li>Not allowing a release until it passes the "security stage".</li>
+</ul>
+
+<h3>4.15 Quick Audit Checklist</h3>
+<ul>
+<li>Cookie policies, JWT validation, IDOR checks.</li>
+<li>Prepared statements, XSS protections, SSRF guards.</li>
+<li>CORS/CSRF, rate limiting, logging, WAF &amp; SIEM integration.</li>
+</ul>
+
+<h3>4.16 Review Questions</h3>
+<ul>
+<li>IR order of steps for IDOR and rate limit vulnerabilities.</li>
+<li>Risks of JWT kid manipulation.</li>
+<li>The difference between CSP nonce and strict-dynamic.</li>
+<li>Detecting MIME spoofing.</li>
+<li>Blocking SSRF at the network and application layers.</li>
+<li>OAuth2 redirect URI risks.</li>
+<li>Interpreting 500/401/429 correlation in the SIEM.</li>
+</ul>
+
+<h2 id="bolum-5">Section 5 - Pentest Methodology &amp; Tools</h2>
+<p>End-to-end test planning with a PTES/NIST-aligned methodology, safe intensity management, WAF/SIEM correlation and reporting.</p>
+
+<h3>5.1 Methodology Steps</h3>
+<ol>
+<li>Pre-engagement</li>
+<li>Reconnaissance (passive &amp; active)</li>
+<li>Surface mapping</li>
+<li>Targeted testing</li>
+<li>Reporting &amp; prioritisation</li>
+<li>Remediation &amp; re-verification</li>
+</ol>
+
+<h3>5.2 Toolchain</h3>
+<ul>
+<li>Network: nmap, testssl.sh, ffuf, nikto (low rate), masscan (lab only).</li>
+<li>Web/API: Burp Suite, ZAP, Postman/Insomnia.</li>
+<li>Cloud/K8s: ScoutSuite, Prowler, kube-bench, kube-hunter.</li>
+<li>Detection: Wazuh, Zeek, Suricata, Elastic/Splunk.</li>
+</ul>
+
+<h3>5.3 Reconnaissance and Surface Mapping</h3>
+<ul>
+<li>Building a domain and certificate inventory through passive reconnaissance.</li>
+<li>Port/service scanning at agreed rates during active reconnaissance.</li>
+<li>Correlating reconnaissance with SOC/SIEM logs.</li>
+</ul>
+
+<h3>5.4 Web/API Testing Flow</h3>
+<ol>
+<li>Proxy &amp; session recording.</li>
+<li>Endpoint mapping.</li>
+<li>Safe parameter validation with Repeater.</li>
+<li>Limited use of Intruder.</li>
+<li>Out-of-band tests (Collaborator).</li>
+</ol>
+
+<h3>5.5 Infrastructure &amp; TLS Checks</h3>
+<p>Verification of the TLS profile, SSH security, HTTP headers and configuration.</p>
+
+<h3>5.6 WAF Tuning</h3>
+<ul>
+<li>Canary endpoints, moving from detect-only → block, false positive management.</li>
+<li>Correlation and reporting in the SIEM.</li>
+</ul>
+
+<h3>5.7 Incident Drill</h3>
+<p>Practise containment, log collection, corrective controls and the post-mortem process with a "scan detected" scenario.</p>
+
+<h3>5.8 Labs</h3>
+<ul>
+<li>Network reconnaissance &amp; surface inventory.</li>
+<li>Manual verification with Burp.</li>
+<li>Hardening TLS and security headers.</li>
+<li>WAF rule lifecycle.</li>
+</ul>
+
+<h3>5.9 Reporting</h3>
+<p>A report format combining evidence, business impact and a roadmap. Prioritisation using CVSS and business impact multipliers.</p>
+
+<h3>5.10 Automation</h3>
+<ul>
+<li>SAST, SCA, DAST and secret scanning in CI/CD.</li>
+<li>SBOM generation and supply-chain checks.</li>
+</ul>
+
+<h3>5.11 Quick Checklist</h3>
+<ul>
+<li>Verify the SoW, authorisation and kill switch.</li>
+<li>Make sure reconnaissance was low-noise.</li>
+<li>Were WAF/SIEM correlations monitored?</li>
+<li>Is the evidence masked and reproducible?</li>
+</ul>
+
+<h3>5.12 Review</h3>
+<ul>
+<li>A low-noise nmap strategy in production.</li>
+<li>Metrics for moving a WAF from detect-only → block.</li>
+<li>The advantages of using small sets instead of large Intruder sets.</li>
+<li>Pros and cons of adding TLS headers at the reverse proxy.</li>
+<li>IDS correlation scenarios.</li>
+<li>An example of a finding with a high CVSS score but low business impact.</li>
+</ul>
+
+<h2 id="bolum-6">Section 6 - System and Network Security</h2>
+<p>In-depth material on Linux &amp; Windows hardening, Active Directory security, network segmentation, forensics and patch management.</p>
+
+<h3>6.1 Linux Hardening</h3>
+<ul>
+<li>Applying CIS Benchmarks, automatic security updates.</li>
+<li>SSH hardening (PasswordAuthentication no, PermitRootLogin no).</li>
+<li>SUID/SGID scans, integrity checking with AIDE/Tripwire.</li>
+<li>Monitoring critical files and syscalls with auditd rules.</li>
+</ul>
+
+<h3>6.2 Windows &amp; Active Directory</h3>
+<ul>
+<li>Rolling out a WSUS/Intune patch policy.</li>
+<li>LAPS, SMB/NTLM hardening, Sysmon + Defender integration.</li>
+<li>Tiered admin model, mandatory MFA, LDAP signing.</li>
+<li>Analysing Event IDs (4624, 4625, 4720, 4672) and sample SIEM rules.</li>
+</ul>
+
+<h3>6.3 Network Security and Segmentation</h3>
+<ul>
+<li>Separating Management/Production/Database networks.</li>
+<li>Egress filtering, blocking the metadata IP.</li>
+<li>IDS/IPS (Zeek, Suricata), NetFlow/VPC Flow logs.</li>
+</ul>
+
+<h3>6.4 Forensics</h3>
+<ul>
+<li>Volatile data collection (ps, netstat, lsof), disk imaging, hashing.</li>
+<li>Network evidence (pcap, DNS logs), building a timeline.</li>
+</ul>
+
+<h3>6.5 Patch &amp; Vulnerability Management</h3>
+<p>Risk-based patch planning, SBOM and CVE tracking, automation pipelines.</p>
+
+<h3>6.6 Detection Engineering</h3>
+<ul>
+<li>Linux brute-force detection, lateral movement correlation.</li>
+<li>AIDE change + process execution scenarios.</li>
+</ul>
+
+<h3>6.7 Playbook Examples</h3>
+<ul>
+<li><strong>SSH brute-force:</strong> Fail2ban, IP blocking, key rotation.</li>
+<li><strong>Suspected AD compromise:</strong> Account lockout, KRBTGT rotation, Defender for Identity analysis.</li>
+</ul>
+
+<h3>6.8 Labs</h3>
+<ul>
+<li>Linux hardening &amp; AIDE/Auditd integration.</li>
+<li>Windows &amp; Sysmon configuration.</li>
+<li>AD hygiene and detection exercise.</li>
+<li>Writing Zeek/Suricata rules.</li>
+</ul>
+
+<h3>6.9 KPIs</h3>
+<ul>
+<li>MTTD &lt; 4 hours, MTTR &lt; 72 hours.</li>
+<li>Patch compliance, false positive rate.</li>
+</ul>
+
+<h3>6.10 Resources</h3>
+<ul>
+<li>CIS Benchmarks, Red Hat AIDE documentation.</li>
+<li>Microsoft Defender for Identity guides.</li>
+<li>NIST SP 800-40, Zeek/Suricata community resources.</li>
+</ul>
+
+<h3>6.11 Quick Wins</h3>
+<ul>
+<li>Disable SSH password login.</li>
+<li>Deploy AIDE and take a baseline.</li>
+<li>Install Sysmon and forward its logs to the SIEM.</li>
+<li>Egress allowlisting.</li>
+<li>Create a Fail2ban rule.</li>
+</ul>
+
+<h2 id="bolum-7">Section 7 - Cloud Security &amp; Kubernetes</h2>
+<p>IAM, metadata, object storage, Kubernetes hardening, cloud posture management and forensics processes.</p>
+
+<h3>7.1 IAM</h3>
+<ul>
+<li>Least privilege, mandatory MFA, use of temporary credentials.</li>
+<li>Secret scanning, service control policies.</li>
+<li>CloudTrail &amp; SIEM correlation.</li>
+</ul>
+
+<h3>7.2 Instance Metadata (IMDS)</h3>
+<ul>
+<li>Enforcing IMDSv2, egress control, application-level allowlisting.</li>
+<li>Metadata access logs and SIEM rules.</li>
+</ul>
+
+<h3>7.3 Object Storage Security</h3>
+<ul>
+<li>Account-level public access block.</li>
+<li>Bucket policy hardening, encryption, data classification with Macie.</li>
+</ul>
+
+<h3>7.4 Kubernetes Security</h3>
+<ul>
+<li>Pod Security Admission, RBAC hardening, NetworkPolicy.</li>
+<li>Admission controller (OPA Gatekeeper), image scanning, etcd encryption.</li>
+<li>Kubelet auth, audit log correlation.</li>
+</ul>
+
+<h3>7.5 Cloud Posture Management</h3>
+<p>Continuous scanning and automation with tools such as Prowler and ScoutSuite.</p>
+
+<h3>7.6 Cloud Forensics</h3>
+<ul>
+<li>Taking snapshots, preserving CloudTrail logs, building a timeline.</li>
+</ul>
+
+<h3>7.7 Egress &amp; Data Exfil Detection</h3>
+<ul>
+<li>High-entropy DNS, beaconing behaviour, DLP policies.</li>
+</ul>
+
+<h3>7.8 Playbooks</h3>
+<ul>
+<li>Public S3 bucket, suspicious IAM key usage, Kubernetes ClusterRoleBinding, IMDS access.</li>
+</ul>
+
+<h3>7.9 Policy-as-Code</h3>
+<p>Guardrail automation with OPA/Rego, Terraform Sentinel and AWS Config.</p>
+
+<h3>7.10 SIEM Rules</h3>
+<ul>
+<li>IAM anomaly, IMDS access, public bucket writes, K8s RBAC creation.</li>
+</ul>
+
+<h3>7.11 Labs</h3>
+<ul>
+<li>Cloud audit, IMDSv2 rollout plan, K8s hardening, S3 public access exercise.</li>
+</ul>
+
+<h3>7.12 Quick Wins</h3>
+<ul>
+<li>Public S3 access block, removing IAM wildcard permissions.</li>
+<li>IMDSv2 enforcement, PodSecurity admission.</li>
+<li>Daily posture scanning.</li>
+</ul>
+
+<h3>7.13 KPIs</h3>
+<ul>
+<li>Critical cloud misconfiguration remediation time &lt; 72 hours.</li>
+<li>Public bucket rate 0, IMDSv1 disabled, CIS K8s compliance ≥ 95%.</li>
+</ul>
+
+<h2 id="bolum-8">Section 8 - Security Engineering &amp; Secure SDLC</h2>
+<p>Threat modelling, secure design, SAST/DAST, CI/CD security, policy-as-code and DevSecOps practices.</p>
+
+<h3>8.1 Secure SDLC Phases</h3>
+<ol>
+<li>Requirements &amp; Threat Modelling</li>
+<li>Design &amp; Risk Analysis</li>
+<li>Coding &amp; SAST</li>
+<li>Testing &amp; DAST/IAST</li>
+<li>Deployment &amp; Configuration</li>
+<li>Continuous monitoring &amp; feedback</li>
+</ol>
+
+<h3>8.2 Threat Modelling</h3>
+<p>Combine frameworks such as STRIDE and PASTA with data flow diagrams. Produce a mitigation plan for each threat.</p>
+
+<h3>8.3 Secure Design Principles</h3>
+<ul>
+<li>Least privilege, fail secure, defence in depth, secure defaults.</li>
+<li>Audit &amp; logging, separation of duties, never trusting client input.</li>
+</ul>
+
+<h3>8.4 Coding &amp; SAST</h3>
+<ul>
+<li>SonarQube, CodeQL, Semgrep, Bandit.</li>
+<li>Dependency-Check, Snyk, secret scanning.</li>
+</ul>
+
+<h3>8.5 DAST &amp; IAST</h3>
+<p>ZAP/Burp scans in the test environment, agent-based IAST solutions.</p>
+
+<h3>8.6 CI/CD Security Stages</h3>
+<ul>
+<li>Pre-commit secret/lint checks.</li>
+<li>SAST + SCA in the build stage.</li>
+<li>DAST in the test stage.</li>
+<li>Signed artefacts and SBOM in the deploy stage.</li>
+</ul>
+
+<h3>8.7 Policy-as-Code</h3>
+<p>Managing security policies as code with OPA/Rego, Terraform Sentinel and AWS Config Rules.</p>
+
+<h3>8.8 Threat Model &amp; Secure Code Review Lab</h3>
+<ul>
+<li>Building a STRIDE table.</li>
+<li>Bandit/Dependency-Check scan and a fix PR.</li>
+<li>Implementing a CI security stage.</li>
+</ul>
+
+<h3>8.9 Incident Simulation</h3>
+<p>Scenario of an API key leak on a CI runner: revocation, log analysis, use of Vault, pipeline update.</p>
+
+<h3>8.10 KPIs</h3>
+<ul>
+<li>SAST/SCA per build: 100%.</li>
+<li>Average vulnerability remediation time &lt; 7 days.</li>
+<li>Threat model updated for every major release.</li>
+</ul>
+
+<h3>8.11 Resources</h3>
+<ul>
+<li>OWASP SAMM &amp; ASVS, Microsoft SDL, NIST SSDF.</li>
+<li>Semgrep, SonarQube, OPA/Sentinel documentation.</li>
+</ul>
+
+<h2 id="bolum-9">Section 9 - Operational Security &amp; Incident Response</h2>
+<p>SOC processes, SIEM, EDR, detection engineering, hunting, SOAR, playbook management and RCA.</p>
+
+<h3>9.1 Incident Response Lifecycle</h3>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Description</th>
+<th>Tools</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Preparation</td>
+<td>Plans, procedures, inventory</td>
+<td>IR plans, SIEM, SOAR</td>
+</tr>
+<tr>
+<td>Detection</td>
+<td>Alert/anomaly detection</td>
+<td>SIEM, EDR, IDS</td>
+</tr>
+<tr>
+<td>Containment</td>
+<td>Stopping the spread</td>
+<td>Firewall, SOAR, EDR isolate</td>
+</tr>
+<tr>
+<td>Eradication</td>
+<td>Removing the malicious element</td>
+<td>EDR, patch</td>
+</tr>
+<tr>
+<td>Recovery</td>
+<td>System restoration</td>
+<td>Backup, restore</td>
+</tr>
+<tr>
+<td>Lessons Learned</td>
+<td>Process improvement</td>
+<td>Report, RCA</td>
+</tr>
+</tbody>
+</table>
+
+<h3>9.2 SOC Components</h3>
+<ul>
+<li>Tier-1 analysts, Tier-2 incident responders, Tier-3 threat hunters.</li>
+<li>SOC manager and IR lead, process management and reporting.</li>
+</ul>
+
+<h3>9.3 SIEM</h3>
+<ul>
+<li>Log collection, correlation, visualisation, reporting.</li>
+<li>Windows Event, syslog, firewall, WAF, VPN, CloudTrail and DNS logs.</li>
+<li>The target alert time is &lt; 2 minutes.</li>
+</ul>
+
+<h3>9.4 EDR/NDR/SOAR Integration</h3>
+<ul>
+<li>Host behaviour monitoring with EDR, network analysis with NDR, automation with SOAR.</li>
+<li>EDR alert → SIEM correlation → SOAR isolation action.</li>
+</ul>
+
+<h3>9.5 Detection Engineering</h3>
+<ul>
+<li>Signature, behaviour, anomaly and hunt queries.</li>
+<li>Sigma, YARA, KQL and MITRE ATT&amp;CK-aligned rules.</li>
+</ul>
+
+<h3>9.6 Threat Hunting</h3>
+<ul>
+<li>Hypothesis-, intelligence- or behaviour-driven hunting.</li>
+<li>EDR telemetry, DNS/proxy logs, CloudTrail, auth logs.</li>
+<li>Hunting findings should be turned into SIEM rules.</li>
+</ul>
+
+<h3>9.7 Playbooks</h3>
+<ul>
+<li>Scenarios such as credential leaks, malicious macros and suspicious network traffic.</li>
+</ul>
+
+<h3>9.8 Incident Reporting &amp; RCA</h3>
+<p>The summary, impact analysis, root cause, timeline, corrective actions and lessons learned should all be documented.</p>
+
+<h3>9.9 KPIs</h3>
+<ul>
+<li>MTTD &lt; 4h, MTTR &lt; 24h.</li>
+<li>Alert accuracy rate &gt; 90%, false alarm rate &lt; 10%.</li>
+<li>Playbook automation rate &gt; 60%.</li>
+</ul>
+
+<h3>9.10 Labs</h3>
+<ul>
+<li>Creating a SIEM rule.</li>
+<li>EDR alert analysis.</li>
+<li>Threat hunting exercise.</li>
+</ul>
+
+<h3>9.11 Best Practices</h3>
+<ul>
+<li>Log integrity (hash &amp; WORM storage).</li>
+<li>Reducing alert fatigue, triage guides.</li>
+<li>Regular tabletop exercises.</li>
+</ul>
+
+<h2 id="bolum-10">Section 10 - Portfolio, Projects and Interview Preparation</h2>
+<p>Security engineering career roadmap, portfolio contents, sample projects, interview simulations and a KPI plan.</p>
+
+<h3>10.1 Goals</h3>
+<ul>
+<li>Building a technical portfolio, answering interview questions in a structured way.</li>
+<li>Updating your CV, GitHub and LinkedIn profiles with a security focus.</li>
+</ul>
+
+<h3>10.2 Career Roadmap</h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Focus</th>
+<th>Skills</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Junior</td>
+<td>Log analysis, vulnerability scanning</td>
+<td>Wireshark, nmap, basic SIEM</td>
+</tr>
+<tr>
+<td>Mid-Level</td>
+<td>Incident analysis, automation</td>
+<td>SIEM rule writing, EDR, Python</td>
+</tr>
+<tr>
+<td>Senior</td>
+<td>Security architecture, leadership</td>
+<td>Threat modelling, IR management, Cloud/K8s</td>
+</tr>
+</tbody>
+</table>
+
+<h3>10.3 Portfolio Contents</h3>
+<ul>
+<li>CV, technical report, report template, lab/code, demo/presentation, certifications.</li>
+</ul>
+
+<h3>10.4 Sample Portfolio Projects</h3>
+<ul>
+<li><strong>Web Security Lab:</strong> Finding vulnerabilities in OWASP Juice Shop and proposing defences.</li>
+<li><strong>Cloud Security Audit:</strong> Prowler/ScoutSuite scan and remediation.</li>
+<li><strong>SOC/IR Analysis:</strong> SIEM rule, incident report, lessons learned.</li>
+</ul>
+
+<h3>10.5 Interview Preparation</h3>
+<ul>
+<li>A technical question bank covering network, web, cloud, SOC and DevSecOps topics.</li>
+<li>Behavioural questions (problem solving, handling stress, team communication).</li>
+</ul>
+
+<h3>10.6 Interview Simulation</h3>
+<p>A structured answer to the scenario "detect an unusual session within 30 minutes", covering log review, containment, evidence collection and lessons learned.</p>
+
+<h3>10.7 Portfolio Presentation</h3>
+<p>A short presentation covering your projects, report screenshots, future plans and contact details.</p>
+
+<h3>10.8 KPI Timeline</h3>
+<ul>
+<li>Month 1: Portfolio 1.</li>
+<li>Month 2: SAST/DAST pipeline.</li>
+<li>Month 3: SIEM rule set.</li>
+<li>Month 4: IR report template.</li>
+<li>Month 6: Three projects and a LinkedIn portfolio.</li>
+</ul>
+
+<h3>10.9 Resources</h3>
+<ul>
+<li>OWASP SAMM &amp; ASVS, NIST Workforce Framework.</li>
+<li>MITRE ATT&amp;CK, LinkedIn Learning, TryHackMe/HackTheBox.</li>
+<li>AWS Skill Builder, Awesome Security Engineer lists.</li>
+</ul>
+
+<h2 id="ekler">Appendices &amp; Playbook Set</h2>
+<h3>Playbooks &amp; Runbooks</h3>
+<ul>
+<li>Playbook A - Public S3 Bucket Found.</li>
+<li>Playbook B - Suspicious IAM Key Usage.</li>
+<li>Playbook C - Kubernetes ClusterRoleBinding Anomaly.</li>
+<li>Playbook D - IMDS Access Detected.</li>
+</ul>
+
+<h3>Lab Setup Guide</h3>
+<ul>
+<li>Prowler &amp; ScoutSuite environment.</li>
+<li>Minikube cluster hardening.</li>
+<li>IMDSv2 verification.</li>
+<li>S3 public access simulation.</li>
+</ul>
+
+<h3>Sample OPA/Gatekeeper Constraints</h3>
+<ul>
+<li>Blocking privileged containers.</li>
+<li>Blocking hostPath usage.</li>
+<li>Preventing containers from running as root.</li>
+<li>Restricting image sources.</li>
+</ul>
+
+<h3>Automation Flow</h3>
+<p>Security stage pipeline, SOAR triggers, auto-remediation flows.</p>
+
+<h3>Assessment &amp; Portfolio Deliverable Examples</h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Output</th>
+<th>Deliverable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IAM Audit</td>
+<td>List of risky policies</td>
+<td>Report + plan</td>
+</tr>
+<tr>
+<td>K8s Hardening</td>
+<td>Constraint &amp; benchmark report</td>
+<td>YAML + results</td>
+</tr>
+<tr>
+<td>IMDSv2 Implementation</td>
+<td>AWS CLI output</td>
+<td>Script + screenshot</td>
+</tr>
+<tr>
+<td>S3 Lockdown Exercise</td>
+<td>Before/after policy state</td>
+<td>JSON + log</td>
+</tr>
+</tbody>
+</table>

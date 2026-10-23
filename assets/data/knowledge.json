@@ -677,8 +677,8 @@
         "rehber",
         "guide"
       ],
-      "tr": "İrem'in uzun teknik rehberleri:\n\n- [Kurumsal RAG: prototipten üretime](blogs/rag-production.html)\n- [Agentic AI: ajan mimarileri](blogs/agentic-ai.html)\n- [Güvenli Text-to-SQL mimarisi](blogs/text-to-sql.html)\n- [Security engineer eğitim seti](blogs/security-engineer-training.html)\n- [Mikroservis mimarisi](blogs/blog1.html)",
-      "en": "Her long-form technical guides (in Turkish):\n\n- [Enterprise RAG: from prototype to production](blogs/rag-production.html)\n- [Agentic AI: agent architectures](blogs/agentic-ai.html)\n- [Secure Text-to-SQL architecture](blogs/text-to-sql.html)\n- [Security engineer training set](blogs/security-engineer-training.html)\n- [Microservice architecture](blogs/blog1.html)",
+      "tr": "İrem'in uzun teknik yazıları (Türkçe ve İngilizce):\n\n- [Kurumsal RAG: prototipten üretime](blogs/rag-production.html)\n- [Agentic AI: ajan mimarileri ve çok ajanlı sistemler](blogs/agentic-ai.html)\n- [Doğal dilden SQL'e: güvenli Text-to-SQL mimarisi](blogs/text-to-sql.html)\n- [Sızma testi, güvenlik mühendisliği ve savunma operasyonları](blogs/security-engineer-training.html)\n- [Mikroservis mimarisi: inceleme ve entegrasyon yöntemleri](blogs/blog1.html)\n- [Windows, macOS ve Linux için komut rehberi](blogs/command-guide.html)",
+      "en": "Her long-form technical articles (in English and Turkish):\n\n- [Enterprise RAG: from prototype to production](blogs/rag-production.html)\n- [Agentic AI: agent architectures and multi-agent systems](blogs/agentic-ai.html)\n- [Natural language to SQL: a secure Text-to-SQL architecture](blogs/text-to-sql.html)\n- [Penetration testing, security engineering and defensive operations](blogs/security-engineer-training.html)\n- [Microservice architecture: an overview and integration methods](blogs/blog1.html)\n- [A command guide for Windows, macOS and Linux](blogs/command-guide.html)",
       "links": [
         "#writing"
       ]

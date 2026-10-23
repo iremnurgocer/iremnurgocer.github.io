@@ -1,174 +1,459 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark" data-title-tr="Mikroservis mimarisi: inceleme ve entegrasyon yöntemleri | İrem Nur Yılmaz" data-title-en="Microservice architecture: an overview and integration methods | İrem Nur Yılmaz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mikroservis Mimarisi hakkında teknik detaylı blog yazısı.">
-    <title>Mikroservis Mimarisi - Detaylı İnceleme</title>
-
-    <!-- Stil Dosyası ve Bootstrap Bağlantısı -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Mikroservis mimarisi: inceleme ve entegrasyon yöntemleri | İrem Nur Yılmaz</title>
+    <meta name="description" content="Mikroservis mimarisi, monolitik mimariyle karşılaştırma, API gateway, mesajlaşma, veri yönetimi, avantajlar ve zorluklar.">
+    <meta name="author" content="İrem Nur Yılmaz">
+    <link rel="canonical" href="https://iremnurgocer.github.io/blogs/blog1.html">
+    <link rel="alternate" hreflang="tr" href="https://iremnurgocer.github.io/blogs/blog1.html?lang=tr">
+    <link rel="alternate" hreflang="en" href="https://iremnurgocer.github.io/blogs/blog1.html?lang=en">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Mikroservis mimarisi: inceleme ve entegrasyon yöntemleri | İrem Nur Yılmaz">
+    <meta property="og:description" content="Mikroservis mimarisi, monolitik mimariyle karşılaştırma, API gateway, mesajlaşma, veri yönetimi, avantajlar ve zorluklar.">
+    <meta property="og:url" content="https://iremnurgocer.github.io/blogs/blog1.html">
+    <meta property="og:image" content="https://iremnurgocer.github.io/assets/img/og.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+    <script>
+        (function () {
+            var d = document.documentElement, t = null, l = null;
+            try { t = localStorage.getItem('ing-theme'); l = localStorage.getItem('ing-lang'); } catch (e) {}
+            var q = /[?&]lang=(tr|en)\b/.exec(location.search);
+            if (q) l = q[1];
+            if (!t) t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            if (!l) l = /^tr\b/i.test(navigator.language || '') ? 'tr' : 'en';
+            d.setAttribute('data-theme', t);
+            d.setAttribute('lang', l);
+            d.classList.add('js');
+            document.title = d.getAttribute('data-title-' + l) || document.title;
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="blog.css">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/case.css">
+    <link rel="stylesheet" href="../assets/css/blog.css">
 </head>
-<body>
+<body class="cs-page bl-page">
 
-    <!-- Navbar -->
-    <a class="skip-link" href="#main">İçeriğe geç</a>
+<!-- Simge seti -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+        <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6"/></symbol>
+        <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+        <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1-4.6A8 8 0 1 1 21 12Z"/></symbol>
+        <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2"/></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6.5A2.5 2.5 0 0 0 4 4.5v15A2.5 2.5 0 0 0 6.5 22h11a2.5 2.5 0 0 0 2.5-2.5V8Z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></symbol>
+        <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-7"/></symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+        <symbol id="i-user" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1"/><path d="m16 11 2 2 4-4"/></symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M12 8v5M12 16h.01"/></symbol>
+        <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+        <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+        <symbol id="i-hash" viewBox="0 0 24 24"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></symbol>
+        <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5a14 14 0 0 1 0 19 14 14 0 0 1 0-19Z"/></symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+        <symbol id="i-github" viewBox="0 0 24 24"><path class="fill" d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></symbol>
+        <symbol id="i-linkedin" viewBox="0 0 24 24"><path class="fill" d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+    </defs>
+</svg>
 
-<header class="nav">
-    <div class="wrap nav__inner">
-        <a class="nav__brand" href="../index.html">İrem Nur Yılmaz<span>.</span></a>
-        <nav aria-label="Ana menü">
-            <ul class="nav__links" id="nav-links">
-                <li><a class="nav__link" href="../index.html#blog">Tüm yazılar</a></li>
-                <li><a class="nav__link" href="../index.html#projects">Projeler</a></li>
-                <li><a class="nav__link" href="../index.html#contact">İletişim</a></li>
-            </ul>
-        </nav>
-        <button class="icon-btn" type="button" data-theme-toggle aria-label="Koyu temaya geç">
-            <i class="fa-solid fa-moon" aria-hidden="true"></i>
-        </button>
-        <button class="icon-btn nav__toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="nav-links" aria-label="Menüyü aç">
-            <i class="fa-solid fa-bars" aria-hidden="true"></i>
-        </button>
+<a class="skip-link" href="#main"><span lang="tr">İçeriğe geç</span><span lang="en">Skip to content</span></a>
+<div class="progress" data-progress aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav is-scrolled" data-nav>
+    <div class="nav__bar">
+        <a class="brand" href="../" aria-label="İrem Nur Yılmaz">
+            <span class="brand__mark" aria-hidden="true">İ</span>
+            <span class="brand__name">İrem Nur Yılmaz</span>
+        </a>
+        <a class="nav__back" href="../#writing"><svg class="i"><use href="#i-arrow"/></svg><span lang="tr">Tüm yazılar</span><span lang="en">All writing</span></a>
+        <div class="nav__tools">
+            <button class="search-btn" type="button" data-palette-open>
+                <svg class="i"><use href="#i-search"/></svg>
+                <span class="search-btn__label"><span lang="tr">Ara</span><span lang="en">Search</span></span>
+                <span class="kbd" data-kbd>⌘K</span>
+            </button>
+            <div class="lang-switch" role="group" aria-label="Dil / Language">
+                <button type="button" data-lang-set="tr" aria-pressed="true">TR</button>
+                <button type="button" data-lang-set="en" aria-pressed="false">EN</button>
+            </div>
+            <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Tema / Theme">
+                <svg class="i i-moon"><use href="#i-moon"/></svg>
+                <svg class="i i-sun"><use href="#i-sun"/></svg>
+            </button>
+        </div>
     </div>
 </header>
 
-    <!-- Blog İçerik -->
-    <main id="main">
-    <section>
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <!-- Blog Resmi -->
-                <img class="post__cover" src="../covers/microservices.svg" alt="Mikroservis mimarisi şeması">
-                
-                <!-- Blog Başlığı -->
-                <h1 class="mb-4">Mikroservis Mimarisi: Detaylı İnceleme ve Entegrasyon Yöntemleri</h1>
+<main id="main" class="bl">
+    <header class="bl-hero wrap">
+        <span class="eyebrow"><span class="eyebrow__num">05</span><span class="eyebrow__line"></span><span lang="tr">Yazı</span><span lang="en">Writing</span><span class="eyebrow__line"></span><span lang="tr">Mimari</span><span lang="en">Architecture</span></span>
+        <h1 class="bl-title"><span lang="tr">Mikroservis mimarisi: inceleme ve entegrasyon yöntemleri</span><span lang="en">Microservice architecture: an overview and integration methods</span></h1>
+        <p class="bl-lead"><span lang="tr">Mikroservislerin ne olduğu, monolitik mimariden nasıl ayrıldığı, entegrasyonda kullanılan teknolojiler ve dağıtık yapının getirdiği zorluklar.</span><span lang="en">What microservices are, how they differ from a monolith, the technologies used to integrate them and the problems a distributed system brings.</span></p>
+        <dl class="cs-meta bl-meta">
+            <div><dt><span lang="tr">Yazar</span><span lang="en">Author</span></dt><dd>İrem Nur Yılmaz</dd></div>
+            <div><dt><span lang="tr">Tür</span><span lang="en">Type</span></dt><dd><span lang="tr">Rehber</span><span lang="en">Guide</span></dd></div>
+            <div><dt><span lang="tr">Okuma</span><span lang="en">Reading</span></dt><dd><span lang="tr">~4 dk</span><span lang="en">~4 min</span></dd></div>
+        </dl>
+        <figure class="bl-cover">
+            <img lang="tr" src="../covers/microservices.svg" alt="" width="800" height="420">
+            <img lang="en" src="../covers/microservices.en.svg" alt="" width="800" height="420">
+        </figure>
+    </header>
 
-                <!-- İçindekiler Bölümü -->
-                <h2 class="mb-4">İçindekiler</h2>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="#mikroservis-nedir" class="custom-link">Mikroservis Mimarisi Nedir?</a></li>
-                    <li class="list-group-item"><a href="#monolitik-karsilastirma" class="custom-link">Mikroservis ile Monolitik Mimari Karşılaştırması</a></li>
-                    <li class="list-group-item"><a href="#entegrasyon" class="custom-link">Mikroservis Entegrasyonu: Kullanılan Teknolojiler ve Yöntemler</a></li>
-                    <li class="list-group-item"><a href="#avantajlar-dezavantajlar" class="custom-link">Mikroservislerin Avantajları ve Dezavantajları</a></li>
-                    <li class="list-group-item"><a href="#zorluklar-cozumler" class="custom-link">Zorluklar ve Çözümler</a></li>
-                    <li class="list-group-item"><a href="#sonuc" class="custom-link">Sonuç</a></li>
-                </ul>
+    <div class="wrap bl-layout">
+        <aside class="bl-toc" aria-label="İçindekiler / Contents">
+            <details open data-toc>
+                <summary class="mono"><span lang="tr">İçindekiler</span><span lang="en">Contents</span></summary>
+                <ol lang="tr">
+<li><a href="#mikroservis-nedir">Mikroservis Mimarisi Nedir?</a></li>
+<li><a href="#monolitik-karsilastirma">Mikroservis Mimarisi ile Monolitik Mimari Karşılaştırması</a></li>
+<li><a href="#entegrasyon">Mikroservis Entegrasyonu: Kullanılan Teknolojiler ve Yöntemler</a></li>
+<li><a href="#avantajlar-dezavantajlar">Mikroservislerin Avantajları ve Dezavantajları</a></li>
+<li><a href="#zorluklar-cozumler">Zorluklar ve Çözümler</a></li>
+<li><a href="#sonuc">Sonuç</a></li>
+                </ol>
+                <ol lang="en">
+<li><a href="#en-mikroservis-nedir">What Is Microservice Architecture?</a></li>
+<li><a href="#en-monolitik-karsilastirma">Microservice Architecture Compared with Monolithic Architecture</a></li>
+<li><a href="#en-entegrasyon">Microservice Integration: Technologies and Methods</a></li>
+<li><a href="#en-avantajlar-dezavantajlar">Advantages and Disadvantages of Microservices</a></li>
+<li><a href="#en-zorluklar-cozumler">Challenges and Solutions</a></li>
+<li><a href="#en-sonuc">Conclusion</a></li>
+                </ol>
+            </details>
+        </aside>
 
-                <!-- Blog İçeriği -->
-                <h2 id="mikroservis-nedir">Mikroservis Mimarisi Nedir?</h2>
-                <p>
-                    <strong>Mikroservis mimarisi</strong>, yazılım dünyasında son yılların en büyük devrimlerinden biridir. Özellikle monolitik uygulamaların yönetim ve bakım zorluklarına karşı geliştirilmiş bu mimari yaklaşım, yazılım projelerinde esneklik, ölçeklenebilirlik ve modülerlik sağlar. Bu yazıda, mikroservis mimarisinin ne olduğunu, nasıl entegre edileceğini, kullanılan teknolojileri, avantaj ve dezavantajlarını, zorlukları ve çözümlerini detaylı bir şekilde inceleyeceğiz.
-                </p>
+        <article class="prose">
+<div lang="tr">
+<h2 id="mikroservis-nedir">Mikroservis Mimarisi Nedir?</h2>
+<p>
+<strong>Mikroservis mimarisi</strong>, yazılım dünyasında son yılların en büyük devrimlerinden biridir. Özellikle monolitik uygulamaların yönetim ve bakım zorluklarına karşı geliştirilmiş bu mimari yaklaşım, yazılım projelerinde esneklik, ölçeklenebilirlik ve modülerlik sağlar. Bu yazıda, mikroservis mimarisinin ne olduğunu, nasıl entegre edileceğini, kullanılan teknolojileri, avantaj ve dezavantajlarını, zorlukları ve çözümlerini detaylı bir şekilde inceleyeceğiz.
+</p>
 
-                <h2 id="monolitik-karsilastirma">Mikroservis Mimarisi ile Monolitik Mimari Karşılaştırması</h2>
-                <p>
-                    Mikroservis mimarisi, bir uygulamanın daha küçük ve bağımsız servislerden oluştuğu bir yazılım mimarisi tarzıdır. Her mikroservis, belirli bir işlevi yerine getiren ve diğer servislerden bağımsız olarak geliştirilebilen bir modüldür. Bu yapı, uygulamaların bağımsız bir şekilde geliştirilmesine, dağıtılmasına ve yönetilmesine olanak tanır. Mikroservisler, genellikle RESTful API'ler, gRPC veya mesajlaşma sistemleri (örneğin Kafka veya RabbitMQ) aracılığıyla birbirleriyle iletişim kurarlar.
-                </p>
+<p>
+Mikroservis mimarisi, bir uygulamanın daha küçük ve bağımsız servislerden oluştuğu bir yazılım mimarisi tarzıdır. Her mikroservis, belirli bir işlevi yerine getiren ve diğer servislerden bağımsız olarak geliştirilebilen bir modüldür. Bu yapı, uygulamaların bağımsız bir şekilde geliştirilmesine, dağıtılmasına ve yönetilmesine olanak tanır. Mikroservisler, genellikle RESTful API'ler, gRPC veya mesajlaşma sistemleri (örneğin Kafka veya RabbitMQ) aracılığıyla birbirleriyle iletişim kurarlar.
+</p>
 
-                <img src="https://microservices.io/i/Microservice_Architecture.png" class="img-fluid mt-4 mb-4" alt="Mikroservis Mimarisi">
-                <p class="text-center">Mikroservis Mimarisi Yapısı. Kaynak: <a rel="noopener" target="_blank" href="https://microservices.io" class="custom-link">Microservices.io</a></p>
-                
-                <h2>Mikroservis Mimarisi ile Monolitik Mimari Karşılaştırması</h2>
-                <p>
-                    Mikroservis mimarisi, monolitik mimariden birçok açıdan ayrılır. Monolitik mimari, tüm uygulamanın tek bir kod tabanı içerisinde yer aldığı bir yapıdır. Bu, küçük projeler için uygun olabilir, ancak uygulama büyüdükçe ve yeni özellikler eklendikçe yönetimi zorlaşır. Monolitik uygulamalarda bir hata tüm sistemi etkileyebilirken, mikroservis mimarisinde bir servisin çökmesi diğer servisleri etkilemez.
-                </p>
-                <p>
-                    Monolitik mimaride her güncelleme tüm uygulamanın tekrar dağıtılmasını gerektirir. Bu da büyük projelerde zaman alıcı ve hataya açık olabilir. Mikroservis mimarisi ise her servisin bağımsız olarak dağıtılmasına olanak tanır, böylece sadece güncellenen servis dağıtılır.
-                </p>
+<figure><img src="https://microservices.io/i/Microservice_Architecture.png" alt="Mikroservis Mimarisi" loading="lazy"><figcaption>Mikroservis Mimarisi Yapısı. Kaynak: <a rel="noopener" target="_blank" href="https://microservices.io">Microservices.io</a></figcaption></figure>
 
-                <h2 id="entegrasyon">Mikroservis Entegrasyonu: Kullanılan Teknolojiler ve Yöntemler</h2>
-                <p>
-                    Mikroservis mimarisi, birden fazla teknoloji ve aracı bir araya getirerek en iyi sonuçları verir. İşte mikroservis mimarisinde sıkça kullanılan bazı teknolojiler ve entegrasyon yöntemleri:
-                </p>
+<h2 id="monolitik-karsilastirma">Mikroservis Mimarisi ile Monolitik Mimari Karşılaştırması</h2>
+<p>
+Mikroservis mimarisi, monolitik mimariden birçok açıdan ayrılır. Monolitik mimari, tüm uygulamanın tek bir kod tabanı içerisinde yer aldığı bir yapıdır. Bu, küçük projeler için uygun olabilir, ancak uygulama büyüdükçe ve yeni özellikler eklendikçe yönetimi zorlaşır. Monolitik uygulamalarda bir hata tüm sistemi etkileyebilirken, mikroservis mimarisinde bir servisin çökmesi diğer servisleri etkilemez.
+</p>
+<p>
+Monolitik mimaride her güncelleme tüm uygulamanın tekrar dağıtılmasını gerektirir. Bu da büyük projelerde zaman alıcı ve hataya açık olabilir. Mikroservis mimarisi ise her servisin bağımsız olarak dağıtılmasına olanak tanır, böylece sadece güncellenen servis dağıtılır.
+</p>
 
-                <h3>1. API Gateway</h3>
-                <p>
-                    Mikroservislerin yönetiminde API Gateway büyük bir rol oynar. İstemcilerden gelen tüm istekler API Gateway üzerinden mikroservislere yönlendirilir. API Gateway, kimlik doğrulama, yük dengeleme ve istek yönlendirme gibi işlevler sağlar. Popüler API Gateway araçları arasında <strong>Kong</strong>, <strong>NGINX</strong> ve <strong>Amazon API Gateway</strong> bulunmaktadır.
-                </p>
+<h2 id="entegrasyon">Mikroservis Entegrasyonu: Kullanılan Teknolojiler ve Yöntemler</h2>
+<p>
+Mikroservis mimarisi, birden fazla teknoloji ve aracı bir araya getirerek en iyi sonuçları verir. İşte mikroservis mimarisinde sıkça kullanılan bazı teknolojiler ve entegrasyon yöntemleri:
+</p>
 
-                <img src="https://learn.microsoft.com/en-us/azure/architecture/microservices/images/gateway.png" class="img-fluid mt-4 mb-4" alt="API Gateway ile Mikroservis Yönetimi">
-                <p class="text-center">API Gateway ile Mikroservis Yönetimi. Kaynak: <a rel="noopener" target="_blank" href="https://learn.microsoft.com/en-us/azure/architecture/microservices/design/gateway" class="custom-link">microsoft</a></p>
+<h3>1. API Gateway</h3>
+<p>
+Mikroservislerin yönetiminde API Gateway büyük bir rol oynar. İstemcilerden gelen tüm istekler API Gateway üzerinden mikroservislere yönlendirilir. API Gateway, kimlik doğrulama, yük dengeleme ve istek yönlendirme gibi işlevler sağlar. Popüler API Gateway araçları arasında <strong>Kong</strong>, <strong>NGINX</strong> ve <strong>Amazon API Gateway</strong> bulunmaktadır.
+</p>
 
-                <h3>2. İletişim Protokolleri</h3>
-                <p>
-                    Mikroservisler arası iletişim, genellikle HTTP tabanlı REST servisleri veya <strong>gRPC</strong> gibi yüksek performanslı protokoller kullanılarak gerçekleştirilir. REST, yaygın kullanılan bir protokol olmakla birlikte, gRPC daha yüksek performans sağlar ve düşük gecikme süresi gerektiren projeler için tercih edilir.
-                </p>
+<figure><img src="https://learn.microsoft.com/en-us/azure/architecture/microservices/images/gateway.png" alt="API Gateway ile Mikroservis Yönetimi" loading="lazy"><figcaption>API Gateway ile Mikroservis Yönetimi. Kaynak: <a rel="noopener" target="_blank" href="https://learn.microsoft.com/en-us/azure/architecture/microservices/design/gateway">Microsoft</a></figcaption></figure>
 
-                <h3>3. Mesajlaşma Sistemleri</h3>
-                <p>
-                    Mikroservisler arası iletişimi daha etkili ve asenkron hale getirmek için mesajlaşma sistemleri kullanılır. <strong>RabbitMQ</strong> ve <strong>Apache Kafka</strong>, mikroservisler arasında veri alışverişini sağlamak için kullanılan en popüler mesajlaşma sistemlerindendir. Kafka, büyük miktarda verinin düşük gecikme ile aktarılmasını sağlayan yüksek performanslı bir platform sunar.
-                </p>
+<h3>2. İletişim Protokolleri</h3>
+<p>
+Mikroservisler arası iletişim, genellikle HTTP tabanlı REST servisleri veya <strong>gRPC</strong> gibi yüksek performanslı protokoller kullanılarak gerçekleştirilir. REST, yaygın kullanılan bir protokol olmakla birlikte, gRPC daha yüksek performans sağlar ve düşük gecikme süresi gerektiren projeler için tercih edilir.
+</p>
 
-                <a rel="noopener" target="_blank" href="https://kafka.apache.org/quickstart"><img src="https://kafka.apache.org/images/what_is_kafka.png" class="img-fluid mt-4 mb-4" alt="Apache Kafka Yapısı"></a>
-                <p class="text-center">Apache Kafka ile Mikroservis Mesajlaşma. Kaynak: <a rel="noopener" target="_blank" href="https://kafka.apache.org" class="custom-link">Apache Kafka</a></p>
+<h3>3. Mesajlaşma Sistemleri</h3>
+<p>
+Mikroservisler arası iletişimi daha etkili ve asenkron hale getirmek için mesajlaşma sistemleri kullanılır. <strong>RabbitMQ</strong> ve <strong>Apache Kafka</strong>, mikroservisler arasında veri alışverişini sağlamak için kullanılan en popüler mesajlaşma sistemlerindendir. Kafka, büyük miktarda verinin düşük gecikme ile aktarılmasını sağlayan yüksek performanslı bir platform sunar.
+</p>
 
-                <h3>4. Veri Yönetimi</h3>
-                <p>
-                    Her mikroservis kendi veri tabanına sahip olabilir, bu da dağıtık veri yönetimini gerektirir. Mikroservisler genellikle SQL ve NoSQL veri tabanları kullanarak verilerini yönetirler. <strong>MySQL</strong> ve <strong>PostgreSQL</strong>, mikroservisler için yaygın kullanılan SQL veri tabanlarıdır. Öte yandan, <strong>MongoDB</strong> ve <strong>Cassandra</strong> gibi NoSQL veri tabanları da mikroservis mimarisinde sıkça tercih edilir.
-                </p>
+<figure><img src="https://kafka.apache.org/images/what_is_kafka.png" alt="Apache Kafka Yapısı" loading="lazy"><figcaption>Apache Kafka ile Mikroservis Mesajlaşma. Kaynak: <a rel="noopener" target="_blank" href="https://kafka.apache.org">Apache Kafka</a></figcaption></figure>
 
-                <h2 id="avantajlar-dezavantajlar">Mikroservislerin Avantajları ve Dezavantajları</h2>
-                <p>
-                    Mikroservis mimarisi, birçok avantaj sunmasına rağmen bazı dezavantajları da beraberinde getirir. İşte bu mimarinin avantajları ve zorlukları:
-                </p>
+<h3>4. Veri Yönetimi</h3>
+<p>
+Her mikroservis kendi veri tabanına sahip olabilir, bu da dağıtık veri yönetimini gerektirir. Mikroservisler genellikle SQL ve NoSQL veri tabanları kullanarak verilerini yönetirler. <strong>MySQL</strong> ve <strong>PostgreSQL</strong>, mikroservisler için yaygın kullanılan SQL veri tabanlarıdır. Öte yandan, <strong>MongoDB</strong> ve <strong>Cassandra</strong> gibi NoSQL veri tabanları da mikroservis mimarisinde sıkça tercih edilir.
+</p>
 
-                <h3>Avantajları</h3>
-                <ul>
-                    <li><strong>Bağımsız Geliştirme ve Dağıtım:</strong> Mikroservisler bağımsız olarak geliştirilip dağıtılabilir.</li>
-                    <li><strong>Ölçeklenebilirlik:</strong> Her mikroservis bağımsız olarak ölçeklenebilir.</li>
-                    <li><strong>Arıza Yalıtımı:</strong> Bir mikroservisin çökmesi diğer servisleri etkilemez.</li>
-                    <li><strong>Farklı Teknolojilerin Kullanımı:</strong> Her mikroservis farklı bir teknoloji ile geliştirilebilir.</li>
-                </ul>
+<h2 id="avantajlar-dezavantajlar">Mikroservislerin Avantajları ve Dezavantajları</h2>
+<p>
+Mikroservis mimarisi, birçok avantaj sunmasına rağmen bazı dezavantajları da beraberinde getirir. İşte bu mimarinin avantajları ve zorlukları:
+</p>
 
-                <h3>Dezavantajları</h3>
-                <ul>
-                    <li><strong>Karmaşıklık:</strong> Mikroservisler dağıtık bir yapı oluşturduğundan, yönetimi ve izlenmesi zordur.</li>
-                    <li><strong>Dağıtık Veri Yönetimi:</strong> Veritabanı tutarlılığı ve yönetimi daha zor olabilir.</li>
-                    <li><strong>Performans Maliyeti:</strong> Mikroservisler arası iletişim, monolitik yapılara göre daha yavaş olabilir.</li>
-                </ul>
+<h3>Avantajları</h3>
+<ul>
+<li><strong>Bağımsız Geliştirme ve Dağıtım:</strong> Mikroservisler bağımsız olarak geliştirilip dağıtılabilir.</li>
+<li><strong>Ölçeklenebilirlik:</strong> Her mikroservis bağımsız olarak ölçeklenebilir.</li>
+<li><strong>Arıza Yalıtımı:</strong> Bir mikroservisin çökmesi diğer servisleri etkilemez.</li>
+<li><strong>Farklı Teknolojilerin Kullanımı:</strong> Her mikroservis farklı bir teknoloji ile geliştirilebilir.</li>
+</ul>
 
-                <h2 id="zorluklar-cozumler">Zorluklar ve Çözümler</h2>
-                <p>
-                    Mikroservis mimarisini uygularken karşılaşılan bazı zorluklar ve bunları çözmek için kullanılan araçlar şunlardır:
-                </p>
-                <ul>
-                    <li><strong>Servis Keşfi:</strong> Mikroservislerin birbirini bulması için <strong>Consul</strong> veya <strong>Eureka</strong> gibi servis keşif araçları kullanılabilir.</li>
-                    <li><strong>İzleme ve Yönetim:</strong> Mikroservisler dağıtık olduğundan izleme ve hata ayıklama zor olabilir. Bu nedenle <strong>Prometheus</strong> ve <strong>Grafana</strong> gibi izleme araçları kullanılmalıdır.</li>
-                    <li><strong>Veri Tutarlılığı:</strong> Dağıtık veri yönetimi sorunları için Event Sourcing ve CQRS desenleri kullanılabilir.</li>
-                </ul>
+<h3>Dezavantajları</h3>
+<ul>
+<li><strong>Karmaşıklık:</strong> Mikroservisler dağıtık bir yapı oluşturduğundan, yönetimi ve izlenmesi zordur.</li>
+<li><strong>Dağıtık Veri Yönetimi:</strong> Veritabanı tutarlılığı ve yönetimi daha zor olabilir.</li>
+<li><strong>Performans Maliyeti:</strong> Mikroservisler arası iletişim, monolitik yapılara göre daha yavaş olabilir.</li>
+</ul>
 
-                <h2 id="sonuc">Sonuç</h2>
-                <p>
-                    Mikroservis mimarisi, büyük ölçekli uygulamalar için modern ve esnek bir çözüm sunar. Ancak, bu mimarinin başarılı bir şekilde uygulanabilmesi için doğru araçların kullanılması ve zorlukların dikkatle yönetilmesi gerekmektedir. Mikroservis mimarisinin sağladığı esneklik, ölçeklenebilirlik ve bağımsızlık, günümüz yazılım dünyasında önemli bir yer edinmesini sağlamaktadır.
-                </p>
+<h2 id="zorluklar-cozumler">Zorluklar ve Çözümler</h2>
+<p>
+Mikroservis mimarisini uygularken karşılaşılan bazı zorluklar ve bunları çözmek için kullanılan araçlar şunlardır:
+</p>
+<ul>
+<li><strong>Servis Keşfi:</strong> Mikroservislerin birbirini bulması için <strong>Consul</strong> veya <strong>Eureka</strong> gibi servis keşif araçları kullanılabilir.</li>
+<li><strong>İzleme ve Yönetim:</strong> Mikroservisler dağıtık olduğundan izleme ve hata ayıklama zor olabilir. Bu nedenle <strong>Prometheus</strong> ve <strong>Grafana</strong> gibi izleme araçları kullanılmalıdır.</li>
+<li><strong>Veri Tutarlılığı:</strong> Dağıtık veri yönetimi sorunları için Event Sourcing ve CQRS desenleri kullanılabilir.</li>
+</ul>
 
-                <!-- Kaynaklar -->
-                <h3 class="mt-5">Kaynaklar:</h3>
-                <ul class="list-unstyled">
-                    <li><a rel="noopener" target="_blank" href="https://martinfowler.com/articles/microservices.html" class="custom-link">Martin Fowler - Microservices</a></li>
-                    <li><a rel="noopener" target="_blank" href="https://microservices.io" class="custom-link">Microservices.io</a></li>
-                    <li><a rel="noopener" target="_blank" href="https://kafka.apache.org" class="custom-link">Apache Kafka</a></li>
-                </ul>
+<h2 id="sonuc">Sonuç</h2>
+<p>
+Mikroservis mimarisi, büyük ölçekli uygulamalar için modern ve esnek bir çözüm sunar. Ancak, bu mimarinin başarılı bir şekilde uygulanabilmesi için doğru araçların kullanılması ve zorlukların dikkatle yönetilmesi gerekmektedir. Mikroservis mimarisinin sağladığı esneklik, ölçeklenebilirlik ve bağımsızlık, günümüz yazılım dünyasında önemli bir yer edinmesini sağlamaktadır.
+</p>
+
+<h3>Kaynaklar</h3>
+<ul>
+<li><a rel="noopener" target="_blank" href="https://martinfowler.com/articles/microservices.html">Martin Fowler - Microservices</a></li>
+<li><a rel="noopener" target="_blank" href="https://microservices.io">Microservices.io</a></li>
+<li><a rel="noopener" target="_blank" href="https://kafka.apache.org">Apache Kafka</a></li>
+</ul>
+</div>
+<div lang="en">
+<h2 id="en-mikroservis-nedir">What Is Microservice Architecture?</h2>
+<p>
+<strong>Microservice architecture</strong> is one of the most significant shifts in software development in recent years. Developed in response to the difficulty of managing and maintaining monolithic applications, this architectural approach brings flexibility, scalability and modularity to software projects. In this article we look in detail at what microservice architecture is, how to integrate it, the technologies used, its advantages and disadvantages, and its challenges and their solutions.
+</p>
+
+<p>
+Microservice architecture is a style of software architecture in which an application is made up of smaller, independent services. Each microservice is a module that performs a specific function and can be developed independently of the other services. This structure allows applications to be developed, deployed and managed independently. Microservices usually communicate with each other through RESTful APIs, gRPC or messaging systems (for example Kafka or RabbitMQ).
+</p>
+
+<figure><img src="https://microservices.io/i/Microservice_Architecture.png" alt="Microservice Architecture" loading="lazy"><figcaption>Structure of a Microservice Architecture. Source: <a rel="noopener" target="_blank" href="https://microservices.io">Microservices.io</a></figcaption></figure>
+
+<h2 id="en-monolitik-karsilastirma">Microservice Architecture Compared with Monolithic Architecture</h2>
+<p>
+Microservice architecture differs from monolithic architecture in many respects. In a monolithic architecture the whole application lives in a single codebase. This can suit small projects, but it becomes harder to manage as the application grows and new features are added. In a monolithic application a single fault can affect the whole system, whereas in a microservice architecture the failure of one service does not affect the others.
+</p>
+<p>
+In a monolithic architecture every update requires the whole application to be redeployed. In large projects this can be time-consuming and error-prone. Microservice architecture, by contrast, allows each service to be deployed independently, so only the updated service is deployed.
+</p>
+
+<h2 id="en-entegrasyon">Microservice Integration: Technologies and Methods</h2>
+<p>
+Microservice architecture works best when several technologies and tools are combined. Here are some of the technologies and integration methods commonly used in microservice architecture:
+</p>
+
+<h3>1. API Gateway</h3>
+<p>
+An API Gateway plays a major role in managing microservices. All requests from clients are routed to the microservices through the API Gateway. The API Gateway provides functions such as authentication, load balancing and request routing. Popular API Gateway tools include <strong>Kong</strong>, <strong>NGINX</strong> and <strong>Amazon API Gateway</strong>.
+</p>
+
+<figure><img src="https://learn.microsoft.com/en-us/azure/architecture/microservices/images/gateway.png" alt="Managing Microservices with an API Gateway" loading="lazy"><figcaption>Managing Microservices with an API Gateway. Source: <a rel="noopener" target="_blank" href="https://learn.microsoft.com/en-us/azure/architecture/microservices/design/gateway">Microsoft</a></figcaption></figure>
+
+<h3>2. Communication Protocols</h3>
+<p>
+Communication between microservices is usually carried out using HTTP-based REST services or high-performance protocols such as <strong>gRPC</strong>. REST is widely used, but gRPC offers higher performance and is preferred for projects that need low latency.
+</p>
+
+<h3>3. Messaging Systems</h3>
+<p>
+Messaging systems are used to make communication between microservices more efficient and asynchronous. <strong>RabbitMQ</strong> and <strong>Apache Kafka</strong> are among the most popular messaging systems for exchanging data between microservices. Kafka provides a high-performance platform for moving large volumes of data with low latency.
+</p>
+
+<figure><img src="https://kafka.apache.org/images/what_is_kafka.png" alt="Apache Kafka Structure" loading="lazy"><figcaption>Microservice Messaging with Apache Kafka. Source: <a rel="noopener" target="_blank" href="https://kafka.apache.org">Apache Kafka</a></figcaption></figure>
+
+<h3>4. Data Management</h3>
+<p>
+Each microservice can have its own database, which requires distributed data management. Microservices usually manage their data using SQL and NoSQL databases. <strong>MySQL</strong> and <strong>PostgreSQL</strong> are commonly used SQL databases for microservices. NoSQL databases such as <strong>MongoDB</strong> and <strong>Cassandra</strong> are also frequently chosen in microservice architectures.
+</p>
+
+<h2 id="en-avantajlar-dezavantajlar">Advantages and Disadvantages of Microservices</h2>
+<p>
+Although microservice architecture offers many advantages, it also comes with some disadvantages. Here are the advantages and challenges of this architecture:
+</p>
+
+<h3>Advantages</h3>
+<ul>
+<li><strong>Independent Development and Deployment:</strong> Microservices can be developed and deployed independently.</li>
+<li><strong>Scalability:</strong> Each microservice can be scaled independently.</li>
+<li><strong>Fault Isolation:</strong> The failure of one microservice does not affect the other services.</li>
+<li><strong>Use of Different Technologies:</strong> Each microservice can be developed with a different technology.</li>
+</ul>
+
+<h3>Disadvantages</h3>
+<ul>
+<li><strong>Complexity:</strong> Because microservices form a distributed system, they are hard to manage and monitor.</li>
+<li><strong>Distributed Data Management:</strong> Database consistency and management can be more difficult.</li>
+<li><strong>Performance Cost:</strong> Communication between microservices can be slower than in monolithic systems.</li>
+</ul>
+
+<h2 id="en-zorluklar-cozumler">Challenges and Solutions</h2>
+<p>
+Some of the challenges encountered when implementing a microservice architecture, and the tools used to address them, are:
+</p>
+<ul>
+<li><strong>Service Discovery:</strong> Service discovery tools such as <strong>Consul</strong> or <strong>Eureka</strong> can be used so that microservices can find each other.</li>
+<li><strong>Monitoring and Management:</strong> Because microservices are distributed, monitoring and debugging can be difficult. Monitoring tools such as <strong>Prometheus</strong> and <strong>Grafana</strong> should therefore be used.</li>
+<li><strong>Data Consistency:</strong> The Event Sourcing and CQRS patterns can be used for distributed data management problems.</li>
+</ul>
+
+<h2 id="en-sonuc">Conclusion</h2>
+<p>
+Microservice architecture offers a modern, flexible solution for large-scale applications. However, implementing it successfully requires the right tools and careful management of its challenges. The flexibility, scalability and independence it provides have given microservice architecture an important place in software development today.
+</p>
+
+<h3>References</h3>
+<ul>
+<li><a rel="noopener" target="_blank" href="https://martinfowler.com/articles/microservices.html">Martin Fowler - Microservices</a></li>
+<li><a rel="noopener" target="_blank" href="https://microservices.io">Microservices.io</a></li>
+<li><a rel="noopener" target="_blank" href="https://kafka.apache.org">Apache Kafka</a></li>
+</ul>
+</div>
+        </article>
+    </div>
+
+    <div class="wrap bl-end">
+        <aside class="cs-ask">
+            <div>
+                <h2><span lang="tr">Bu konu hakkında bir sorunuz mu var?</span><span lang="en">Have a question about this topic?</span></h2>
+                <p><span lang="tr">Asistana sorabilir ya da doğrudan bana yazabilirsiniz.</span><span lang="en">Ask the assistant or write to me directly.</span></p>
+            </div>
+            <div class="hero__ctas" style="margin:0">
+                <button class="btn btn--primary" type="button" data-chat-ask-tr="&quot;Mikroservis mimarisi: inceleme ve entegrasyon yöntemleri&quot; yazısını özetler misin?" data-chat-ask-en="Can you summarise the article &quot;Microservice architecture: an overview and integration methods&quot;?">
+                    <span class="orb orb--sm" aria-hidden="true" style="width:20px;height:20px"></span>
+                    <span lang="tr">Asistana sor</span><span lang="en">Ask the assistant</span>
+                </button>
+                <button class="btn btn--ghost" type="button" data-chat-mail><span lang="tr">Mesaj gönder</span><span lang="en">Send a message</span></button>
+            </div>
+        </aside>
+
+        <nav class="cs-next" aria-label="Diğer yazılar / Other articles">
+            <a href="security-engineer-training.html" class="cs-next__link">
+                <span class="mono">← <span lang="tr">Önceki</span><span lang="en">Previous</span></span>
+                <strong lang="tr">Sızma testi, güvenlik mühendisliği ve savunma operasyonları</strong><strong lang="en">Penetration testing, security engineering and defensive operations</strong>
+            </a>
+            <a href="command-guide.html" class="cs-next__link cs-next__link--right">
+                <span class="mono"><span lang="tr">Sonraki</span><span lang="en">Next</span> →</span>
+                <strong lang="tr">Windows, macOS ve Linux için komut rehberi</strong><strong lang="en">A command guide for Windows, macOS and Linux</strong>
+            </a>
+        </nav>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="wrap">
+        <div class="footer__inner">
+            <span>© <span data-year>2026</span> İrem Nur Yılmaz</span>
+            <div class="footer__links">
+                <a href="../"><span lang="tr">Ana sayfa</span><span lang="en">Home</span></a>
+                <a href="https://github.com/iremnurgocer" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://linkedin.com/in/iremnurgocer" target="_blank" rel="noopener">LinkedIn</a>
+                <button class="sound-btn" type="button" data-sound-toggle aria-pressed="false"><span lang="tr" data-sound-state>Ses: kapalı</span><span lang="en" data-sound-state>Sound: off</span></button>
             </div>
         </div>
-    </section>
-
-</main>
-<footer class="footer">
-    <div class="wrap footer__inner">
-        <p style="margin:0;">&copy; <span data-year>2026</span> İrem Nur Yılmaz. Tüm hakları saklıdır.</p>
-        <p style="margin:0;"><a href="../index.html#blog">← Diğer yazılar</a></p>
     </div>
 </footer>
 
-<script src="../script.js" defer></script>
+<!-- ============ KOMUT PALETİ ============ -->
+<dialog class="palette" data-palette aria-label="Ara / Search">
+    <div class="palette__input">
+        <svg class="i"><use href="#i-search"/></svg>
+        <input type="text" data-palette-input autocomplete="off" spellcheck="false" aria-controls="palette-list" aria-autocomplete="list">
+        <span class="kbd">esc</span>
+    </div>
+    <ul class="palette__list" id="palette-list" role="listbox" data-palette-list></ul>
+    <div class="palette__foot">
+        <span><span class="kbd">↑</span><span class="kbd">↓</span><span lang="tr">gezin</span><span lang="en">navigate</span></span>
+        <span><span class="kbd">↵</span><span lang="tr">aç</span><span lang="en">open</span></span>
+        <span><span class="kbd">?</span><span lang="tr">asistana sor</span><span lang="en">ask the assistant</span></span>
+    </div>
+</dialog>
 
+
+<!-- ============ SOHBET ASİSTANI ============ -->
+<button class="chat-launch" type="button" data-chat-open data-chat-launch aria-controls="chat">
+    <span class="orb" aria-hidden="true"></span>
+    <span lang="tr">Bana sor</span><span lang="en">Ask me</span>
+</button>
+
+<section class="chat" id="chat" data-chat role="dialog" aria-modal="false" aria-labelledby="chat-title" aria-hidden="true">
+    <div class="chat__head">
+        <span class="orb orb--sm" aria-hidden="true"></span>
+        <div class="chat__who">
+            <strong id="chat-title"><span lang="tr">İrem'in asistanı</span><span lang="en">İrem's assistant</span></strong>
+            <span><span class="pulse" aria-hidden="true"></span><span data-chat-mode-label><span lang="tr">Deneyim ve projeler hakkında yanıt verir</span><span lang="en">Answers about experience and projects</span></span></span>
+        </div>
+        <button class="icon-btn" type="button" data-chat-reset aria-label="Yeni sohbet / New chat" title="Yeni sohbet / New chat"><svg class="i"><use href="#i-hash"/></svg></button>
+        <button class="icon-btn" type="button" data-chat-close aria-label="Kapat / Close"><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+
+    <div class="chat__tabs" role="tablist">
+        <button type="button" role="tab" aria-selected="true" aria-controls="chat-ask" id="tab-ask" data-chat-tab="ask"><span lang="tr">Soru sor</span><span lang="en">Ask</span></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="chat-mail" id="tab-mail" data-chat-tab="mail"><span lang="tr">Mesaj gönder</span><span lang="en">Send a message</span></button>
+    </div>
+
+    <div class="chat__panel" id="chat-ask" role="tabpanel" aria-labelledby="tab-ask">
+        <div class="chat__log" data-chat-log aria-live="polite"></div>
+        <div class="chat__suggest" data-chat-suggest></div>
+        <form class="chat__form" data-chat-form>
+            <label class="sr-only" for="chat-input"><span lang="tr">Sorunuz</span><span lang="en">Your question</span></label>
+            <textarea id="chat-input" rows="1" data-chat-input maxlength="600"></textarea>
+            <button class="chat__send" type="submit" data-chat-send disabled aria-label="Gönder / Send"><svg class="i"><use href="#i-send"/></svg></button>
+        </form>
+        <p class="chat__fine"><span lang="tr">Yanıtlar yalnızca bu sitedeki bilgilere dayanır.</span><span lang="en">Answers are grounded only in the content of this site.</span></p>
+    </div>
+
+    <div class="chat__panel chat__mail" id="chat-mail" role="tabpanel" aria-labelledby="tab-mail" hidden>
+        <form class="form" data-mail-form novalidate>
+            <div class="form__row">
+                <div class="field">
+                    <label for="cm-name"><span lang="tr">Adınız</span><span lang="en">Your name</span></label>
+                    <input id="cm-name" name="name" type="text" autocomplete="name" required maxlength="120">
+                </div>
+                <div class="field">
+                    <label for="cm-email"><span lang="tr">E-posta</span><span lang="en">Email</span></label>
+                    <input id="cm-email" name="email" type="email" autocomplete="email" required maxlength="160">
+                </div>
+            </div>
+            <div class="field">
+                <label for="cm-topic"><span lang="tr">Konu</span><span lang="en">Topic</span></label>
+                <select id="cm-topic" name="topic" data-topic-select></select>
+            </div>
+            <div class="field">
+                <label for="cm-msg"><span lang="tr">Mesajınız</span><span lang="en">Your message</span></label>
+                <textarea id="cm-msg" name="message" required maxlength="4000"></textarea>
+            </div>
+            <input class="form__hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="form__foot">
+                <p class="form__note"><span lang="tr">Doğrudan İrem'in e-postasına iletilir.</span><span lang="en">Delivered straight to İrem's inbox.</span></p>
+                <button class="btn btn--primary btn--sm" type="submit"><span lang="tr">Gönder</span><span lang="en">Send</span><svg class="i arrow"><use href="#i-arrow"/></svg></button>
+            </div>
+            <p class="form__status" role="status" aria-live="polite"></p>
+        </form>
+    </div>
+</section>
+
+<div class="toast" data-toast role="status" aria-live="polite"></div>
+
+<script src="../assets/js/config.js" defer></script>
+<script src="../assets/js/main.js" defer></script>
+<script src="../assets/js/palette.js" defer></script>
+<script src="../assets/js/chat.js" defer></script>
+<script src="../assets/js/fx.js" defer></script>
+<script src="../assets/js/blog.js" defer></script>
 </body>
 </html>

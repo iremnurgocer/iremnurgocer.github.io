@@ -39,7 +39,7 @@
         $$('[data-lang-set]').forEach(function (b) {
             b.setAttribute('aria-pressed', String(b.getAttribute('data-lang-set') === lang));
         });
-        document.title = lang === 'en' ? 'İrem Nur Yılmaz | Senior AI Engineer' : 'İrem Nur Yılmaz | Senior AI Engineer';
+        document.title = root.getAttribute('data-title-' + lang) || 'İrem Nur Yılmaz | Senior AI Engineer';
         fillTopics();
         renderFilters();
         window.dispatchEvent(new CustomEvent('lang:change', { detail: lang }));

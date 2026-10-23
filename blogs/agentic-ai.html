@@ -1,120 +1,187 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark" data-title-tr="Agentic AI: ajan mimarileri ve çok ajanlı sistemler | İrem Nur Yılmaz" data-title-en="Agentic AI: agent architectures and multi-agent systems | İrem Nur Yılmaz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agentic AI: Ajan Mimarileri ve Çok Ajanlı Sistemler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Agentic AI: ajan mimarileri ve çok ajanlı sistemler | İrem Nur Yılmaz</title>
     <meta name="description" content="Ajan döngüsü, araç tasarımı, tek ajan ve çok ajanlı mimariler, durum yönetimi, korkuluklar ve değerlendirme.">
     <meta name="author" content="İrem Nur Yılmaz">
-
+    <link rel="canonical" href="https://iremnurgocer.github.io/blogs/agentic-ai.html">
+    <link rel="alternate" hreflang="tr" href="https://iremnurgocer.github.io/blogs/agentic-ai.html?lang=tr">
+    <link rel="alternate" hreflang="en" href="https://iremnurgocer.github.io/blogs/agentic-ai.html?lang=en">
     <meta property="og:type" content="article">
-    <meta property="og:locale" content="tr_TR">
-    <meta property="og:title" content="Agentic AI: Ajan Mimarileri ve Çok Ajanlı Sistemler">
+    <meta property="og:title" content="Agentic AI: ajan mimarileri ve çok ajanlı sistemler | İrem Nur Yılmaz">
     <meta property="og:description" content="Ajan döngüsü, araç tasarımı, tek ajan ve çok ajanlı mimariler, durum yönetimi, korkuluklar ve değerlendirme.">
-    <meta property="og:image" content="https://iremnurgocer.github.io/covers/agentic.svg">
-
+    <meta property="og:url" content="https://iremnurgocer.github.io/blogs/agentic-ai.html">
+    <meta property="og:image" content="https://iremnurgocer.github.io/assets/img/og.png">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
-
+    <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+    <script>
+        (function () {
+            var d = document.documentElement, t = null, l = null;
+            try { t = localStorage.getItem('ing-theme'); l = localStorage.getItem('ing-lang'); } catch (e) {}
+            var q = /[?&]lang=(tr|en)\b/.exec(location.search);
+            if (q) l = q[1];
+            if (!t) t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            if (!l) l = /^tr\b/i.test(navigator.language || '') ? 'tr' : 'en';
+            d.setAttribute('data-theme', t);
+            d.setAttribute('lang', l);
+            d.classList.add('js');
+            document.title = d.getAttribute('data-title-' + l) || document.title;
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="blog.css">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/case.css">
+    <link rel="stylesheet" href="../assets/css/blog.css">
 </head>
-<body>
+<body class="cs-page bl-page">
 
-<a class="skip-link" href="#main">İçeriğe geç</a>
+<!-- Simge seti -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+        <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6"/></symbol>
+        <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+        <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1-4.6A8 8 0 1 1 21 12Z"/></symbol>
+        <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2"/></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6.5A2.5 2.5 0 0 0 4 4.5v15A2.5 2.5 0 0 0 6.5 22h11a2.5 2.5 0 0 0 2.5-2.5V8Z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></symbol>
+        <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-7"/></symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+        <symbol id="i-user" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1"/><path d="m16 11 2 2 4-4"/></symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M12 8v5M12 16h.01"/></symbol>
+        <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+        <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+        <symbol id="i-hash" viewBox="0 0 24 24"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></symbol>
+        <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5a14 14 0 0 1 0 19 14 14 0 0 1 0-19Z"/></symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+        <symbol id="i-github" viewBox="0 0 24 24"><path class="fill" d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></symbol>
+        <symbol id="i-linkedin" viewBox="0 0 24 24"><path class="fill" d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+    </defs>
+</svg>
 
-<header class="nav">
-    <div class="wrap nav__inner">
-        <a class="nav__brand" href="../index.html">İrem Nur Yılmaz<span>.</span></a>
-        <nav aria-label="Ana menü">
-            <ul class="nav__links" id="nav-links">
-                <li><a class="nav__link" href="../index.html#blog">Tüm yazılar</a></li>
-                <li><a class="nav__link" href="../index.html#projects">Projeler</a></li>
-                <li><a class="nav__link" href="../index.html#contact">İletişim</a></li>
-            </ul>
-        </nav>
-        <button class="icon-btn" type="button" data-theme-toggle aria-label="Koyu temaya geç">
-            <i class="fa-solid fa-moon" aria-hidden="true"></i>
-        </button>
-        <button class="icon-btn nav__toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="nav-links" aria-label="Menüyü aç">
-            <i class="fa-solid fa-bars" aria-hidden="true"></i>
-        </button>
+<a class="skip-link" href="#main"><span lang="tr">İçeriğe geç</span><span lang="en">Skip to content</span></a>
+<div class="progress" data-progress aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav is-scrolled" data-nav>
+    <div class="nav__bar">
+        <a class="brand" href="../" aria-label="İrem Nur Yılmaz">
+            <span class="brand__mark" aria-hidden="true">İ</span>
+            <span class="brand__name">İrem Nur Yılmaz</span>
+        </a>
+        <a class="nav__back" href="../#writing"><svg class="i"><use href="#i-arrow"/></svg><span lang="tr">Tüm yazılar</span><span lang="en">All writing</span></a>
+        <div class="nav__tools">
+            <button class="search-btn" type="button" data-palette-open>
+                <svg class="i"><use href="#i-search"/></svg>
+                <span class="search-btn__label"><span lang="tr">Ara</span><span lang="en">Search</span></span>
+                <span class="kbd" data-kbd>⌘K</span>
+            </button>
+            <div class="lang-switch" role="group" aria-label="Dil / Language">
+                <button type="button" data-lang-set="tr" aria-pressed="true">TR</button>
+                <button type="button" data-lang-set="en" aria-pressed="false">EN</button>
+            </div>
+            <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Tema / Theme">
+                <svg class="i i-moon"><use href="#i-moon"/></svg>
+                <svg class="i i-sun"><use href="#i-sun"/></svg>
+            </button>
+        </div>
     </div>
 </header>
 
-<main id="main">
-    <header class="blog-hero">
-        <img class="post__cover" src="../covers/agentic.svg" alt="Agentic AI şeması: planla, araç çağır, gözlemle döngüsü ve yönlendirici ajan">
-        <h1>Agentic AI: Ajan Mimarileri ve Çok Ajanlı Sistemler</h1>
-        <p class="lead">Bir ajanı ajan yapan şey modelin zekası değil, etrafına kurduğunuz döngü ve korkuluklardır. Bu yazı üretimde çalışan ajan mimarilerinin neye benzediğini anlatıyor.</p>
-        <div class="blog-meta">
-            <span><strong>Yazar:</strong> İrem Nur Yılmaz</span>
-            <span><strong>Konu:</strong> Agentic AI · Mimari</span>
-            <span><strong>Okuma:</strong> ~11 dk</span>
-        </div>
+<main id="main" class="bl">
+    <header class="bl-hero wrap">
+        <span class="eyebrow"><span class="eyebrow__num">02</span><span class="eyebrow__line"></span><span lang="tr">Yazı</span><span lang="en">Writing</span><span class="eyebrow__line"></span><span lang="tr">Agentic AI · Mimari</span><span lang="en">Agentic AI · Architecture</span></span>
+        <h1 class="bl-title"><span lang="tr">Agentic AI: ajan mimarileri ve çok ajanlı sistemler</span><span lang="en">Agentic AI: agent architectures and multi-agent systems</span></h1>
+        <p class="bl-lead"><span lang="tr">Bir ajanı ajan yapan şey modelin zekası değil, etrafına kurduğunuz döngü ve korkuluklardır. Bu yazı üretimde çalışan ajan mimarilerinin neye benzediğini anlatıyor.</span><span lang="en">What makes an agent is not the model&#x27;s intelligence but the loop and guardrails you build around it. This article describes what agent architectures look like in production.</span></p>
+        <dl class="cs-meta bl-meta">
+            <div><dt><span lang="tr">Yazar</span><span lang="en">Author</span></dt><dd>İrem Nur Yılmaz</dd></div>
+            <div><dt><span lang="tr">Tür</span><span lang="en">Type</span></dt><dd><span lang="tr">Rehber</span><span lang="en">Guide</span></dd></div>
+            <div><dt><span lang="tr">Okuma</span><span lang="en">Reading</span></dt><dd><span lang="tr">~6 dk</span><span lang="en">~6 min</span></dd></div>
+        </dl>
+        <figure class="bl-cover">
+            <img lang="tr" src="../covers/agentic.svg" alt="" width="800" height="420">
+            <img lang="en" src="../covers/agentic.en.svg" alt="" width="800" height="420">
+        </figure>
     </header>
 
-    <section id="icindekiler">
-        <h2 class="section-title">İçindekiler</h2>
-        <div class="toc">
-            <ul>
-                <li><a href="#ajan-nedir">1. Ajan nedir, ne değildir?</a></li>
-                <li><a href="#dongu">2. Döngü: planla, çağır, gözlemle</a></li>
-                <li><a href="#arac-tasarimi">3. Araç tasarımı</a></li>
-                <li><a href="#tek-vs-cok">4. Tek ajan mı, çok ajan mı?</a></li>
-                <li><a href="#durum-ve-bellek">5. Durum, bellek ve tekrarlanabilirlik</a></li>
-                <li><a href="#korkuluklar">6. Korkuluklar: limit, onay, geri alma</a></li>
-                <li><a href="#degerlendirme">7. Değerlendirme ve izlenebilirlik</a></li>
-                <li><a href="#ne-zaman-kullanmamali">8. Ne zaman ajan kullanmamalı</a></li>
-            </ul>
-        </div>
-    </section>
+    <div class="wrap bl-layout">
+        <aside class="bl-toc" aria-label="İçindekiler / Contents">
+            <details open data-toc>
+                <summary class="mono"><span lang="tr">İçindekiler</span><span lang="en">Contents</span></summary>
+                <ol lang="tr">
+<li><a href="#ajan-nedir">1. Ajan nedir, ne değildir?</a></li>
+<li><a href="#dongu">2. Döngü: planla, çağır, gözlemle</a></li>
+<li><a href="#arac-tasarimi">3. Araç tasarımı</a></li>
+<li><a href="#tek-vs-cok">4. Tek ajan mı, çok ajan mı?</a></li>
+<li><a href="#durum-ve-bellek">5. Durum, bellek ve tekrarlanabilirlik</a></li>
+<li><a href="#korkuluklar">6. Korkuluklar: limit, onay, geri alma</a></li>
+<li><a href="#degerlendirme">7. Değerlendirme ve izlenebilirlik</a></li>
+<li><a href="#ne-zaman-kullanmamali">8. Ne zaman ajan kullanmamalı</a></li>
+                </ol>
+                <ol lang="en">
+<li><a href="#en-ajan-nedir">1. What an agent is, and what it is not</a></li>
+<li><a href="#en-dongu">2. The loop: plan, call, observe</a></li>
+<li><a href="#en-arac-tasarimi">3. Tool design</a></li>
+<li><a href="#en-tek-vs-cok">4. One agent or many?</a></li>
+<li><a href="#en-durum-ve-bellek">5. State, memory and reproducibility</a></li>
+<li><a href="#en-korkuluklar">6. Guardrails: limits, approval, rollback</a></li>
+<li><a href="#en-degerlendirme">7. Evaluation and observability</a></li>
+<li><a href="#en-ne-zaman-kullanmamali">8. When not to use an agent</a></li>
+                </ol>
+            </details>
+        </aside>
 
-    <section id="ajan-nedir">
-        <h2 class="section-title">1. Ajan nedir, ne değildir?</h2>
+        <article class="prose">
+<div lang="tr">
+<h2 id="ajan-nedir">1. Ajan nedir, ne değildir?</h2>
 
-        <p>
-            Bir dil modeline soru sorup cevabını almak bir ajan değildir. Ajanı ajan yapan şey
-            <strong>döngü</strong>: model bir sonraki adıma kendisi karar verir, bir araç çağırır,
-            sonucu görür ve buna göre yeniden karar verir. Görev bitene ya da bütçe dolana kadar
-            bu döngü döner.
-        </p>
-        <p>
-            Bu ayrım pratik bir sonuç doğurur: sabit adımlı bir işi ajanla yapmak gereksiz
-            karmaşıklıktır. "Bu metni özetle, sonra e-postayla gönder" bir iş akışıdır, ajan
-            değil. Ajan, <em>kaç adım gerekeceğini önceden bilmediğiniz</em> işler için vardır.
-        </p>
-        <div class="callout">
-            <strong>Basit soru</strong>
-            <p>
-                Adımları ve sıralarını önceden yazabiliyorsanız, düz bir iş akışı yazın.
-                Ajan, belirsizliğin bedelini ödemeye değdiği yerde kazanır.
-            </p>
-        </div>
+<p>
+Bir dil modeline soru sorup cevabını almak bir ajan değildir. Ajanı ajan yapan şey
+<strong>döngü</strong>: model bir sonraki adıma kendisi karar verir, bir araç çağırır,
+sonucu görür ve buna göre yeniden karar verir. Görev bitene ya da bütçe dolana kadar
+bu döngü döner.
+</p>
+<p>
+Bu ayrım pratik bir sonuç doğurur: sabit adımlı bir işi ajanla yapmak gereksiz
+karmaşıklıktır. "Bu metni özetle, sonra e-postayla gönder" bir iş akışıdır, ajan
+değil. Ajan, <em>kaç adım gerekeceğini önceden bilmediğiniz</em> işler için vardır.
+</p>
+<div class="callout">
+<strong>Basit soru</strong>
+<p>
+Adımları ve sıralarını önceden yazabiliyorsanız, düz bir iş akışı yazın.
+Ajan, belirsizliğin bedelini ödemeye değdiği yerde kazanır.
+</p>
+</div>
 
-    </section>
+<h2 id="dongu">2. Döngü: planla, çağır, gözlemle</h2>
 
-    <section id="dongu">
-        <h2 class="section-title">2. Döngü: planla, çağır, gözlemle</h2>
-
-        <p>Her ajan çerçevesinin altında aynı üç adım var:</p>
-        <div class="table-responsive">
-            <table class="table">
-                <thead><tr><th>Adım</th><th>Ne olur</th><th>Nerede bozulur</th></tr></thead>
-                <tbody>
-                    <tr><td>Planla</td><td>Model, mevcut duruma bakıp sonraki eylemi seçer</td><td>Belirsiz görev tanımı, eksik bağlam</td></tr>
-                    <tr><td>Çağır</td><td>Seçilen araç, üretilen parametrelerle çalıştırılır</td><td>Kötü araç tanımı, doğrulanmamış parametre</td></tr>
-                    <tr><td>Gözlemle</td><td>Sonuç bağlama eklenir, döngü başa döner</td><td>Devasa çıktı, bağlamın taşması</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <p>
-            Döngünün gövdesi şaşırtıcı derecede kısadır; işin zorluğu çevresindeki korkuluklardadır.
-        </p>
-        <pre><code>def calistir(gorev, araclar, maks_adim=8, maks_maliyet=0.50):
+<p>Her ajan çerçevesinin altında aynı üç adım var:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Adım</th><th>Ne olur</th><th>Nerede bozulur</th></tr></thead>
+<tbody>
+<tr><td>Planla</td><td>Model, mevcut duruma bakıp sonraki eylemi seçer</td><td>Belirsiz görev tanımı, eksik bağlam</td></tr>
+<tr><td>Çağır</td><td>Seçilen araç, üretilen parametrelerle çalıştırılır</td><td>Kötü araç tanımı, doğrulanmamış parametre</td></tr>
+<tr><td>Gözlemle</td><td>Sonuç bağlama eklenir, döngü başa döner</td><td>Devasa çıktı, bağlamın taşması</td></tr>
+</tbody>
+</table></div>
+<p>
+Döngünün gövdesi şaşırtıcı derecede kısadır; işin zorluğu çevresindeki korkuluklardadır.
+</p>
+<pre><code>def calistir(gorev, araclar, maks_adim=8, maks_maliyet=0.50):
     durum = [{"rol": "kullanici", "icerik": gorev}]
     harcanan = 0.0
 
@@ -134,173 +201,453 @@
 
     return None, {"hata": "adim_limiti", "maliyet": harcanan}</code></pre>
 
-    </section>
+<h2 id="arac-tasarimi">3. Araç tasarımı</h2>
 
-    <section id="arac-tasarimi">
-        <h2 class="section-title">3. Araç tasarımı</h2>
+<p>
+Bir ajanın kalitesi, büyük ölçüde araçlarının kalitesidir. Model yalnızca kendisine
+anlatılan şeyi kullanabilir; kötü tanımlanmış bir araç, modelin yanlış kullanacağı
+bir araçtır.
+</p>
+<ul>
+<li>
+<strong>Tek iş yapsın.</strong> "veritabaninda_islem_yap" gibi çok amaçlı bir araç
+yerine "musteri_ara", "siparis_getir" gibi dar araçlar tanımlayın.
+</li>
+<li>
+<strong>Açıklama, dokümantasyon gibi yazılsın.</strong> Ne zaman kullanılacağı,
+ne zaman kullanılmayacağı ve dönüş biçimi net olsun.
+</li>
+<li>
+<strong>Parametreler kısıtlı olsun.</strong> Serbest metin yerine enum, tarih
+aralığı yerine tanımlı seçenekler; doğrulaması kolay olan hata yapılması zor olandır.
+</li>
+<li>
+<strong>Çıktı küçük olsun.</strong> 5.000 satırlık bir sonuç bağlamı doldurur.
+Özetleyin, sayfalayın ya da yalnızca gereken alanları döndürün.
+</li>
+<li>
+<strong>Hatalar konuşsun.</strong> "500 Internal Error" modele hiçbir şey anlatmaz;
+"tarih_araligi 90 günden uzun olamaz" düzeltilebilir bir mesajdır.
+</li>
+</ul>
 
-        <p>
-            Bir ajanın kalitesi, büyük ölçüde araçlarının kalitesidir. Model yalnızca kendisine
-            anlatılan şeyi kullanabilir; kötü tanımlanmış bir araç, modelin yanlış kullanacağı
-            bir araçtır.
-        </p>
-        <ul>
-            <li>
-                <strong>Tek iş yapsın.</strong> "veritabaninda_islem_yap" gibi çok amaçlı bir araç
-                yerine "musteri_ara", "siparis_getir" gibi dar araçlar tanımlayın.
-            </li>
-            <li>
-                <strong>Açıklama, dokümantasyon gibi yazılsın.</strong> Ne zaman kullanılacağı,
-                ne zaman kullanılmayacağı ve dönüş biçimi net olsun.
-            </li>
-            <li>
-                <strong>Parametreler kısıtlı olsun.</strong> Serbest metin yerine enum, tarih
-                aralığı yerine tanımlı seçenekler; doğrulaması kolay olan hata yapılması zor olandır.
-            </li>
-            <li>
-                <strong>Çıktı küçük olsun.</strong> 5.000 satırlık bir sonuç bağlamı doldurur.
-                Özetleyin, sayfalayın ya da yalnızca gereken alanları döndürün.
-            </li>
-            <li>
-                <strong>Hatalar konuşsun.</strong> "500 Internal Error" modele hiçbir şey anlatmaz;
-                "tarih_araligi 90 günden uzun olamaz" düzeltilebilir bir mesajdır.
-            </li>
-        </ul>
+<h2 id="tek-vs-cok">4. Tek ajan mı, çok ajan mı?</h2>
 
-    </section>
+<p>
+Çok ajanlı mimariler cazip görünür ama her ajan yeni bir hata kaynağıdır. Pratikte
+işe yarayan yaklaşım şu sırayla ilerlemek:
+</p>
+<ul>
+<li><strong>Önce tek ajan, az araç.</strong> Çoğu iş burada biter.</li>
+<li>
+<strong>Araç sayısı arttığında yönlendirici deseni.</strong> Bir üst ajan görevi
+sınıflandırır ve uzman bir ajana devreder. Her uzman kendi dar araç setiyle çalışır.
+</li>
+<li>
+<strong>Gerçekten paralelleşen işler için çoklu ajan.</strong> On kaynağı aynı anda
+taramak gibi bağımsız alt görevlerde kazanç nettir.
+</li>
+</ul>
+<div class="callout callout--warn">
+<strong>Ajanlar birbiriyle serbestçe konuşmasın</strong>
+<p>
+Serbest sohbet eden ajan toplulukları hem öngörülemez hem de hata ayıklaması çok zor
+olur. Aralarındaki iletişimi tanımlı bir şemaya ve tek yönlü bir akışa bağlayın.
+</p>
+</div>
 
-    <section id="tek-vs-cok">
-        <h2 class="section-title">4. Tek ajan mı, çok ajan mı?</h2>
+<h2 id="durum-ve-bellek">5. Durum, bellek ve tekrarlanabilirlik</h2>
 
-        <p>
-            Çok ajanlı mimariler cazip görünür ama her ajan yeni bir hata kaynağıdır. Pratikte
-            işe yarayan yaklaşım şu sırayla ilerlemek:
-        </p>
-        <ul>
-            <li><strong>Önce tek ajan, az araç.</strong> Çoğu iş burada biter.</li>
-            <li>
-                <strong>Araç sayısı arttığında yönlendirici deseni.</strong> Bir üst ajan görevi
-                sınıflandırır ve uzman bir ajana devreder. Her uzman kendi dar araç setiyle çalışır.
-            </li>
-            <li>
-                <strong>Gerçekten paralelleşen işler için çoklu ajan.</strong> On kaynağı aynı anda
-                taramak gibi bağımsız alt görevlerde kazanç nettir.
-            </li>
-        </ul>
-        <div class="callout warning">
-            <strong>Ajanlar birbiriyle serbestçe konuşmasın</strong>
-            <p>
-                Serbest sohbet eden ajan toplulukları hem öngörülemez hem de hata ayıklaması çok zor
-                olur. Aralarındaki iletişimi tanımlı bir şemaya ve tek yönlü bir akışa bağlayın.
-            </p>
-        </div>
+<p>
+Ajanlar uzun çalışır, yarıda kesilir, yeniden başlatılır. Bu yüzden durumun nerede
+tutulduğu mimarinin merkezinde olmalı.
+</p>
+<ul>
+<li>
+<strong>Adımları kalıcı yazın.</strong> Her araç çağrısı ve sonucu kayıt altında
+olsun; süreç yarıda kalırsa baştan değil kaldığı yerden devam etsin.
+</li>
+<li>
+<strong>Yan etkili çağrılar idempotent olsun.</strong> Aynı isteği iki kez gönderen
+bir ajan, iki kayıt oluşturmamalı. İstek anahtarı (idempotency key) kullanın.
+</li>
+<li>
+<strong>Bağlamı özetleyerek taşıyın.</strong> Tüm geçmişi her adımda göndermek hem
+pahalıdır hem de dikkati dağıtır. Eski adımları sıkıştırın, kararları saklayın.
+</li>
+</ul>
 
-    </section>
+<h2 id="korkuluklar">6. Korkuluklar: limit, onay, geri alma</h2>
 
-    <section id="durum-ve-bellek">
-        <h2 class="section-title">5. Durum, bellek ve tekrarlanabilirlik</h2>
+<p>Üretimdeki bir ajanın en önemli özelliği yapabildikleri değil, yapamadıklarıdır.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Korkuluk</th><th>Neyi engeller</th></tr></thead>
+<tbody>
+<tr><td>Adım ve maliyet limiti</td><td>Sonsuz döngü, kontrolsüz harcama</td></tr>
+<tr><td>Araç izin listesi</td><td>Ajanın yetkisi dışındaki sistemlere erişmesi</td></tr>
+<tr><td>İnsan onayı</td><td>Geri alınamaz eylemlerin sessizce yapılması</td></tr>
+<tr><td>Kullanıcı kimliğiyle çalışma</td><td>Yetki yükselmesi - ajan servis hesabıyla her şeyi görmemeli</td></tr>
+<tr><td>Çıktı doğrulama</td><td>Biçimi bozuk ya da beklenmedik yanıtların akışa girmesi</td></tr>
+</tbody>
+</table></div>
+<div class="callout callout--warn">
+<strong>Geri alınamaz eylemler daima onaydan geçmeli</strong>
+<p>
+E-posta göndermek, kayıt silmek, ödeme başlatmak, dışarıya veri yazmak. Bu
+sınıftaki her araç, insan onayı bayrağıyla işaretlenmeli - istisnasız.
+</p>
+</div>
 
-        <p>
-            Ajanlar uzun çalışır, yarıda kesilir, yeniden başlatılır. Bu yüzden durumun nerede
-            tutulduğu mimarinin merkezinde olmalı.
-        </p>
-        <ul>
-            <li>
-                <strong>Adımları kalıcı yazın.</strong> Her araç çağrısı ve sonucu kayıt altında
-                olsun; süreç yarıda kalırsa baştan değil kaldığı yerden devam etsin.
-            </li>
-            <li>
-                <strong>Yan etkili çağrılar idempotent olsun.</strong> Aynı isteği iki kez gönderen
-                bir ajan, iki kayıt oluşturmamalı. İstek anahtarı (idempotency key) kullanın.
-            </li>
-            <li>
-                <strong>Bağlamı özetleyerek taşıyın.</strong> Tüm geçmişi her adımda göndermek hem
-                pahalıdır hem de dikkati dağıtır. Eski adımları sıkıştırın, kararları saklayın.
-            </li>
-        </ul>
+<h2 id="degerlendirme">7. Değerlendirme ve izlenebilirlik</h2>
 
-    </section>
+<p>
+Ajanları değerlendirmek klasik model değerlendirmesinden farklıdır: tek bir çıktı değil,
+bir <em>yörünge</em> değerlendirirsiniz.
+</p>
+<ul>
+<li><strong>Görev başarı oranı:</strong> iş gerçekten bitti mi?</li>
+<li><strong>Adım verimliliği:</strong> kaç adımda bitti, gereksiz döngü var mı?</li>
+<li><strong>Araç isabeti:</strong> doğru aracı doğru parametrelerle mi çağırdı?</li>
+<li><strong>Maliyet ve gecikme:</strong> görev başına ortalama ve p95.</li>
+<li><strong>Müdahale oranı:</strong> insan kaç kez düzeltmek zorunda kaldı?</li>
+</ul>
+<p>
+Bunları ölçebilmek için her yörüngenin tam kaydı gerekir: hangi adımda ne düşünüldü,
+hangi araç çağrıldı, ne döndü. İzleme olmadan bir ajanı iyileştirmek, karanlıkta
+hata ayıklamaktır.
+</p>
 
-    <section id="korkuluklar">
-        <h2 class="section-title">6. Korkuluklar: limit, onay, geri alma</h2>
+<h2 id="ne-zaman-kullanmamali">8. Ne zaman ajan kullanmamalı</h2>
 
-        <p>Üretimdeki bir ajanın en önemli özelliği yapabildikleri değil, yapamadıklarıdır.</p>
-        <div class="table-responsive">
-            <table class="table">
-                <thead><tr><th>Korkuluk</th><th>Neyi engeller</th></tr></thead>
-                <tbody>
-                    <tr><td>Adım ve maliyet limiti</td><td>Sonsuz döngü, kontrolsüz harcama</td></tr>
-                    <tr><td>Araç izin listesi</td><td>Ajanın yetkisi dışındaki sistemlere erişmesi</td></tr>
-                    <tr><td>İnsan onayı</td><td>Geri alınamaz eylemlerin sessizce yapılması</td></tr>
-                    <tr><td>Kullanıcı kimliğiyle çalışma</td><td>Yetki yükselmesi - ajan servis hesabıyla her şeyi görmemeli</td></tr>
-                    <tr><td>Çıktı doğrulama</td><td>Biçimi bozuk ya da beklenmedik yanıtların akışa girmesi</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="callout warning">
-            <strong>Geri alınamaz eylemler daima onaydan geçmeli</strong>
-            <p>
-                E-posta göndermek, kayıt silmek, ödeme başlatmak, dışarıya veri yazmak. Bu
-                sınıftaki her araç, insan onayı bayrağıyla işaretlenmeli - istisnasız.
-            </p>
-        </div>
+<ul>
+<li>Adımlar sabitse - düz bir iş akışı daha ucuz, daha hızlı, daha öngörülebilir.</li>
+<li>Hata maliyeti çok yüksek ve onay mekanizması kurulamıyorsa.</li>
+<li>Gecikme kritikse - döngü her turda yeni bir model çağrısı demektir.</li>
+<li>Araçlar güvenilir değilse - kırılgan API'lerin üzerine kurulan ajan daha da kırılgandır.</li>
+</ul>
+<p>
+Ajanlar, doğru problemde gerçekten güçlü. Ama çoğu kurumsal senaryoda en iyi çözüm
+"iyi tasarlanmış bir iş akışı + bir iki noktada model" olur. Mimariyi problemin
+belirsizliğine göre seçmek, teknolojiye göre seçmekten daha iyi sonuç verir.
+</p>
+</div>
+<div lang="en">
+<h2 id="en-ajan-nedir">1. What an agent is, and what it is not</h2>
 
-    </section>
+<p>
+Asking a language model a question and getting an answer is not an agent. What makes an
+agent an agent is the <strong>loop</strong>: the model decides the next step itself, calls a tool,
+sees the result and decides again based on it. The loop keeps running until the task is
+done or the budget runs out.
+</p>
+<p>
+This distinction has a practical consequence: using an agent for a job with fixed steps is
+unnecessary complexity. "Summarise this text, then send it by email" is a workflow, not an
+agent. Agents exist for jobs where <em>you do not know in advance how many steps will be needed</em>.
+</p>
+<div class="callout">
+<strong>A simple question</strong>
+<p>
+If you can write down the steps and their order in advance, write a plain workflow.
+An agent wins where the uncertainty is worth paying for.
+</p>
+</div>
 
-    <section id="degerlendirme">
-        <h2 class="section-title">7. Değerlendirme ve izlenebilirlik</h2>
+<h2 id="en-dongu">2. The loop: plan, call, observe</h2>
 
-        <p>
-            Ajanları değerlendirmek klasik model değerlendirmesinden farklıdır: tek bir çıktı değil,
-            bir <em>yörünge</em> değerlendirirsiniz.
-        </p>
-        <ul>
-            <li><strong>Görev başarı oranı:</strong> iş gerçekten bitti mi?</li>
-            <li><strong>Adım verimliliği:</strong> kaç adımda bitti, gereksiz döngü var mı?</li>
-            <li><strong>Araç isabeti:</strong> doğru aracı doğru parametrelerle mi çağırdı?</li>
-            <li><strong>Maliyet ve gecikme:</strong> görev başına ortalama ve p95.</li>
-            <li><strong>Müdahale oranı:</strong> insan kaç kez düzeltmek zorunda kaldı?</li>
-        </ul>
-        <p>
-            Bunları ölçebilmek için her yörüngenin tam kaydı gerekir: hangi adımda ne düşünüldü,
-            hangi araç çağrıldı, ne döndü. İzleme olmadan bir ajanı iyileştirmek, karanlıkta
-            hata ayıklamaktır.
-        </p>
+<p>Underneath every agent framework are the same three steps:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Step</th><th>What happens</th><th>Where it breaks</th></tr></thead>
+<tbody>
+<tr><td>Plan</td><td>The model looks at the current state and chooses the next action</td><td>Vague task definition, missing context</td></tr>
+<tr><td>Call</td><td>The chosen tool runs with the generated parameters</td><td>Poor tool definition, unvalidated parameters</td></tr>
+<tr><td>Observe</td><td>The result is added to the context and the loop starts again</td><td>Huge outputs, context overflow</td></tr>
+</tbody>
+</table></div>
+<p>
+The body of the loop is surprisingly short; the hard part is the guardrails around it.
+</p>
+<pre><code>def calistir(gorev, araclar, maks_adim=8, maks_maliyet=0.50):
+    durum = [{"rol": "kullanici", "icerik": gorev}]
+    harcanan = 0.0
 
-    </section>
+    for adim in range(maks_adim):
+        karar, maliyet = model.plan_yap(durum, araclar)
+        harcanan += maliyet
 
-    <section id="ne-zaman-kullanmamali">
-        <h2 class="section-title">8. Ne zaman ajan kullanmamalı</h2>
+        if karar.bitti or harcanan &gt; maks_maliyet:
+            return karar.cevap, {"adim": adim, "maliyet": harcanan}
 
-        <ul>
-            <li>Adımlar sabitse - düz bir iş akışı daha ucuz, daha hızlı, daha öngörülebilir.</li>
-            <li>Hata maliyeti çok yüksek ve onay mekanizması kurulamıyorsa.</li>
-            <li>Gecikme kritikse - döngü her turda yeni bir model çağrısı demektir.</li>
-            <li>Araçlar güvenilir değilse - kırılgan API'lerin üzerine kurulan ajan daha da kırılgandır.</li>
-        </ul>
-        <p>
-            Ajanlar, doğru problemde gerçekten güçlü. Ama çoğu kurumsal senaryoda en iyi çözüm
-            "iyi tasarlanmış bir iş akışı + bir iki noktada model" olur. Mimariyi problemin
-            belirsizliğine göre seçmek, teknolojiye göre seçmekten daha iyi sonuç verir.
-        </p>
+        arac = araclar[karar.arac_adi]
+        if arac.onay_gerekir:
+            bekle_insan_onayi(karar)          # geri alınamaz eylemler burada durur
 
-    </section>
+        sonuc = arac.calistir(**karar.parametreler)
+        durum.append({"rol": "arac", "ad": arac.ad, "icerik": kisalt(sonuc)})
 
+    return None, {"hata": "adim_limiti", "maliyet": harcanan}</code></pre>
 
-    <div class="post-nav">
-        <a class="btn btn--ghost btn--sm" href="../index.html#blog">← Tüm yazılar</a>
-        <a class="btn btn--primary btn--sm" href="../index.html#contact">Bu konuda konuşalım</a>
+<h2 id="en-arac-tasarimi">3. Tool design</h2>
+
+<p>
+The quality of an agent is largely the quality of its tools. The model can only use what
+it has been told about; a poorly defined tool is a tool the model will use
+incorrectly.
+</p>
+<ul>
+<li>
+<strong>Each tool should do one thing.</strong> Instead of a multi-purpose tool such as "veritabaninda_islem_yap",
+define narrow tools such as "musteri_ara" and "siparis_getir".
+</li>
+<li>
+<strong>Write descriptions like documentation.</strong> Make it clear when the tool should be used,
+when it should not, and what format it returns.
+</li>
+<li>
+<strong>Constrain parameters.</strong> Use enums instead of free text and defined options instead
+of date ranges; what is easy to validate is hard to get wrong.
+</li>
+<li>
+<strong>Keep outputs small.</strong> A 5,000-line result fills the context.
+Summarise, paginate or return only the fields that are needed.
+</li>
+<li>
+<strong>Make errors informative.</strong> "500 Internal Error" tells the model nothing;
+"tarih_araligi cannot be longer than 90 days" is a message it can act on.
+</li>
+</ul>
+
+<h2 id="en-tek-vs-cok">4. One agent or many?</h2>
+
+<p>
+Multi-agent architectures look attractive, but every agent is a new source of errors. In
+practice, the approach that works is to progress in this order:
+</p>
+<ul>
+<li><strong>Start with a single agent and few tools.</strong> Most jobs end here.</li>
+<li>
+<strong>Use the router pattern when the number of tools grows.</strong> A top-level agent
+classifies the task and hands it to a specialist agent. Each specialist works with its own narrow set of tools.
+</li>
+<li>
+<strong>Use multiple agents for work that genuinely runs in parallel.</strong> For independent
+subtasks, such as searching ten sources at once, the gain is clear.
+</li>
+</ul>
+<div class="callout callout--warn">
+<strong>Do not let agents talk to each other freely</strong>
+<p>
+Groups of agents that chat freely are both unpredictable and very hard to
+debug. Tie their communication to a defined schema and a one-way flow.
+</p>
+</div>
+
+<h2 id="en-durum-ve-bellek">5. State, memory and reproducibility</h2>
+
+<p>
+Agents run for a long time, get interrupted and are restarted. That is why where state
+is kept should be at the centre of the architecture.
+</p>
+<ul>
+<li>
+<strong>Persist every step.</strong> Record each tool call and its result;
+if the process stops halfway, it should resume where it left off rather than start again.
+</li>
+<li>
+<strong>Make calls with side effects idempotent.</strong> An agent that sends the same request
+twice should not create two records. Use an idempotency key.
+</li>
+<li>
+<strong>Carry context forward in summarised form.</strong> Sending the full history at every step is
+both expensive and distracting. Compress older steps and keep the decisions.
+</li>
+</ul>
+
+<h2 id="en-korkuluklar">6. Guardrails: limits, approval, rollback</h2>
+
+<p>The most important property of an agent in production is not what it can do, but what it cannot do.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Guardrail</th><th>What it prevents</th></tr></thead>
+<tbody>
+<tr><td>Step and cost limits</td><td>Infinite loops, uncontrolled spending</td></tr>
+<tr><td>Tool allowlist</td><td>The agent reaching systems outside its authority</td></tr>
+<tr><td>Human approval</td><td>Irreversible actions being carried out silently</td></tr>
+<tr><td>Running under the user's identity</td><td>Privilege escalation - the agent should not see everything through a service account</td></tr>
+<tr><td>Output validation</td><td>Malformed or unexpected responses entering the flow</td></tr>
+</tbody>
+</table></div>
+<div class="callout callout--warn">
+<strong>Irreversible actions must always go through approval</strong>
+<p>
+Sending email, deleting records, initiating payments, writing data to external systems. Every
+tool in this category must be marked with a human approval flag - without exception.
+</p>
+</div>
+
+<h2 id="en-degerlendirme">7. Evaluation and observability</h2>
+
+<p>
+Evaluating agents differs from classic model evaluation: you are not evaluating a single output,
+but a <em>trajectory</em>.
+</p>
+<ul>
+<li><strong>Task success rate:</strong> was the job actually finished?</li>
+<li><strong>Step efficiency:</strong> how many steps did it take, and were there unnecessary loops?</li>
+<li><strong>Tool accuracy:</strong> did it call the right tool with the right parameters?</li>
+<li><strong>Cost and latency:</strong> average and p95 per task.</li>
+<li><strong>Intervention rate:</strong> how often did a human have to correct it?</li>
+</ul>
+<p>
+To measure these you need a full record of every trajectory: what was reasoned at each step,
+which tool was called and what came back. Improving an agent without tracing is
+debugging in the dark.
+</p>
+
+<h2 id="en-ne-zaman-kullanmamali">8. When not to use an agent</h2>
+
+<ul>
+<li>When the steps are fixed - a plain workflow is cheaper, faster and more predictable.</li>
+<li>When the cost of an error is very high and no approval mechanism can be put in place.</li>
+<li>When latency is critical - every turn of the loop means a new model call.</li>
+<li>When the tools are unreliable - an agent built on fragile APIs is even more fragile.</li>
+</ul>
+<p>
+Agents are genuinely powerful on the right problem. But in most enterprise scenarios the best solution
+is "a well-designed workflow + a model at one or two points". Choosing the architecture to fit the
+uncertainty of the problem gives better results than choosing it to fit the technology.
+</p>
+</div>
+        </article>
+    </div>
+
+    <div class="wrap bl-end">
+        <aside class="cs-ask">
+            <div>
+                <h2><span lang="tr">Bu konu hakkında bir sorunuz mu var?</span><span lang="en">Have a question about this topic?</span></h2>
+                <p><span lang="tr">Asistana sorabilir ya da doğrudan bana yazabilirsiniz.</span><span lang="en">Ask the assistant or write to me directly.</span></p>
+            </div>
+            <div class="hero__ctas" style="margin:0">
+                <button class="btn btn--primary" type="button" data-chat-ask-tr="&quot;Agentic AI: ajan mimarileri ve çok ajanlı sistemler&quot; yazısını özetler misin?" data-chat-ask-en="Can you summarise the article &quot;Agentic AI: agent architectures and multi-agent systems&quot;?">
+                    <span class="orb orb--sm" aria-hidden="true" style="width:20px;height:20px"></span>
+                    <span lang="tr">Asistana sor</span><span lang="en">Ask the assistant</span>
+                </button>
+                <button class="btn btn--ghost" type="button" data-chat-mail><span lang="tr">Mesaj gönder</span><span lang="en">Send a message</span></button>
+            </div>
+        </aside>
+
+        <nav class="cs-next" aria-label="Diğer yazılar / Other articles">
+            <a href="rag-production.html" class="cs-next__link">
+                <span class="mono">← <span lang="tr">Önceki</span><span lang="en">Previous</span></span>
+                <strong lang="tr">Kurumsal RAG: prototipten üretime</strong><strong lang="en">Enterprise RAG: from prototype to production</strong>
+            </a>
+            <a href="text-to-sql.html" class="cs-next__link cs-next__link--right">
+                <span class="mono"><span lang="tr">Sonraki</span><span lang="en">Next</span> →</span>
+                <strong lang="tr">Doğal dilden SQL&#x27;e: güvenli Text-to-SQL mimarisi</strong><strong lang="en">Natural language to SQL: a secure Text-to-SQL architecture</strong>
+            </a>
+        </nav>
     </div>
 </main>
 
 <footer class="footer">
-    <div class="wrap footer__inner">
-        <p style="margin:0;">&copy; <span data-year>2026</span> İrem Nur Yılmaz. Tüm hakları saklıdır.</p>
-        <p style="margin:0;"><a href="../index.html#blog">← Diğer yazılar</a></p>
+    <div class="wrap">
+        <div class="footer__inner">
+            <span>© <span data-year>2026</span> İrem Nur Yılmaz</span>
+            <div class="footer__links">
+                <a href="../"><span lang="tr">Ana sayfa</span><span lang="en">Home</span></a>
+                <a href="https://github.com/iremnurgocer" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://linkedin.com/in/iremnurgocer" target="_blank" rel="noopener">LinkedIn</a>
+                <button class="sound-btn" type="button" data-sound-toggle aria-pressed="false"><span lang="tr" data-sound-state>Ses: kapalı</span><span lang="en" data-sound-state>Sound: off</span></button>
+            </div>
+        </div>
     </div>
 </footer>
 
-<script src="../script.js" defer></script>
+<!-- ============ KOMUT PALETİ ============ -->
+<dialog class="palette" data-palette aria-label="Ara / Search">
+    <div class="palette__input">
+        <svg class="i"><use href="#i-search"/></svg>
+        <input type="text" data-palette-input autocomplete="off" spellcheck="false" aria-controls="palette-list" aria-autocomplete="list">
+        <span class="kbd">esc</span>
+    </div>
+    <ul class="palette__list" id="palette-list" role="listbox" data-palette-list></ul>
+    <div class="palette__foot">
+        <span><span class="kbd">↑</span><span class="kbd">↓</span><span lang="tr">gezin</span><span lang="en">navigate</span></span>
+        <span><span class="kbd">↵</span><span lang="tr">aç</span><span lang="en">open</span></span>
+        <span><span class="kbd">?</span><span lang="tr">asistana sor</span><span lang="en">ask the assistant</span></span>
+    </div>
+</dialog>
 
+
+<!-- ============ SOHBET ASİSTANI ============ -->
+<button class="chat-launch" type="button" data-chat-open data-chat-launch aria-controls="chat">
+    <span class="orb" aria-hidden="true"></span>
+    <span lang="tr">Bana sor</span><span lang="en">Ask me</span>
+</button>
+
+<section class="chat" id="chat" data-chat role="dialog" aria-modal="false" aria-labelledby="chat-title" aria-hidden="true">
+    <div class="chat__head">
+        <span class="orb orb--sm" aria-hidden="true"></span>
+        <div class="chat__who">
+            <strong id="chat-title"><span lang="tr">İrem'in asistanı</span><span lang="en">İrem's assistant</span></strong>
+            <span><span class="pulse" aria-hidden="true"></span><span data-chat-mode-label><span lang="tr">Deneyim ve projeler hakkında yanıt verir</span><span lang="en">Answers about experience and projects</span></span></span>
+        </div>
+        <button class="icon-btn" type="button" data-chat-reset aria-label="Yeni sohbet / New chat" title="Yeni sohbet / New chat"><svg class="i"><use href="#i-hash"/></svg></button>
+        <button class="icon-btn" type="button" data-chat-close aria-label="Kapat / Close"><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+
+    <div class="chat__tabs" role="tablist">
+        <button type="button" role="tab" aria-selected="true" aria-controls="chat-ask" id="tab-ask" data-chat-tab="ask"><span lang="tr">Soru sor</span><span lang="en">Ask</span></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="chat-mail" id="tab-mail" data-chat-tab="mail"><span lang="tr">Mesaj gönder</span><span lang="en">Send a message</span></button>
+    </div>
+
+    <div class="chat__panel" id="chat-ask" role="tabpanel" aria-labelledby="tab-ask">
+        <div class="chat__log" data-chat-log aria-live="polite"></div>
+        <div class="chat__suggest" data-chat-suggest></div>
+        <form class="chat__form" data-chat-form>
+            <label class="sr-only" for="chat-input"><span lang="tr">Sorunuz</span><span lang="en">Your question</span></label>
+            <textarea id="chat-input" rows="1" data-chat-input maxlength="600"></textarea>
+            <button class="chat__send" type="submit" data-chat-send disabled aria-label="Gönder / Send"><svg class="i"><use href="#i-send"/></svg></button>
+        </form>
+        <p class="chat__fine"><span lang="tr">Yanıtlar yalnızca bu sitedeki bilgilere dayanır.</span><span lang="en">Answers are grounded only in the content of this site.</span></p>
+    </div>
+
+    <div class="chat__panel chat__mail" id="chat-mail" role="tabpanel" aria-labelledby="tab-mail" hidden>
+        <form class="form" data-mail-form novalidate>
+            <div class="form__row">
+                <div class="field">
+                    <label for="cm-name"><span lang="tr">Adınız</span><span lang="en">Your name</span></label>
+                    <input id="cm-name" name="name" type="text" autocomplete="name" required maxlength="120">
+                </div>
+                <div class="field">
+                    <label for="cm-email"><span lang="tr">E-posta</span><span lang="en">Email</span></label>
+                    <input id="cm-email" name="email" type="email" autocomplete="email" required maxlength="160">
+                </div>
+            </div>
+            <div class="field">
+                <label for="cm-topic"><span lang="tr">Konu</span><span lang="en">Topic</span></label>
+                <select id="cm-topic" name="topic" data-topic-select></select>
+            </div>
+            <div class="field">
+                <label for="cm-msg"><span lang="tr">Mesajınız</span><span lang="en">Your message</span></label>
+                <textarea id="cm-msg" name="message" required maxlength="4000"></textarea>
+            </div>
+            <input class="form__hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="form__foot">
+                <p class="form__note"><span lang="tr">Doğrudan İrem'in e-postasına iletilir.</span><span lang="en">Delivered straight to İrem's inbox.</span></p>
+                <button class="btn btn--primary btn--sm" type="submit"><span lang="tr">Gönder</span><span lang="en">Send</span><svg class="i arrow"><use href="#i-arrow"/></svg></button>
+            </div>
+            <p class="form__status" role="status" aria-live="polite"></p>
+        </form>
+    </div>
+</section>
+
+<div class="toast" data-toast role="status" aria-live="polite"></div>
+
+<script src="../assets/js/config.js" defer></script>
+<script src="../assets/js/main.js" defer></script>
+<script src="../assets/js/palette.js" defer></script>
+<script src="../assets/js/chat.js" defer></script>
+<script src="../assets/js/fx.js" defer></script>
+<script src="../assets/js/blog.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,184 @@
+<h2 id="ajan-nedir">1. What an agent is, and what it is not</h2>
+
+<p>
+Asking a language model a question and getting an answer is not an agent. What makes an
+agent an agent is the <strong>loop</strong>: the model decides the next step itself, calls a tool,
+sees the result and decides again based on it. The loop keeps running until the task is
+done or the budget runs out.
+</p>
+<p>
+This distinction has a practical consequence: using an agent for a job with fixed steps is
+unnecessary complexity. "Summarise this text, then send it by email" is a workflow, not an
+agent. Agents exist for jobs where <em>you do not know in advance how many steps will be needed</em>.
+</p>
+<div class="callout">
+<strong>A simple question</strong>
+<p>
+If you can write down the steps and their order in advance, write a plain workflow.
+An agent wins where the uncertainty is worth paying for.
+</p>
+</div>
+
+<h2 id="dongu">2. The loop: plan, call, observe</h2>
+
+<p>Underneath every agent framework are the same three steps:</p>
+<table>
+<thead><tr><th>Step</th><th>What happens</th><th>Where it breaks</th></tr></thead>
+<tbody>
+<tr><td>Plan</td><td>The model looks at the current state and chooses the next action</td><td>Vague task definition, missing context</td></tr>
+<tr><td>Call</td><td>The chosen tool runs with the generated parameters</td><td>Poor tool definition, unvalidated parameters</td></tr>
+<tr><td>Observe</td><td>The result is added to the context and the loop starts again</td><td>Huge outputs, context overflow</td></tr>
+</tbody>
+</table>
+<p>
+The body of the loop is surprisingly short; the hard part is the guardrails around it.
+</p>
+<pre><code>def calistir(gorev, araclar, maks_adim=8, maks_maliyet=0.50):
+    durum = [{"rol": "kullanici", "icerik": gorev}]
+    harcanan = 0.0
+
+    for adim in range(maks_adim):
+        karar, maliyet = model.plan_yap(durum, araclar)
+        harcanan += maliyet
+
+        if karar.bitti or harcanan &gt; maks_maliyet:
+            return karar.cevap, {"adim": adim, "maliyet": harcanan}
+
+        arac = araclar[karar.arac_adi]
+        if arac.onay_gerekir:
+            bekle_insan_onayi(karar)          # geri alınamaz eylemler burada durur
+
+        sonuc = arac.calistir(**karar.parametreler)
+        durum.append({"rol": "arac", "ad": arac.ad, "icerik": kisalt(sonuc)})
+
+    return None, {"hata": "adim_limiti", "maliyet": harcanan}</code></pre>
+
+<h2 id="arac-tasarimi">3. Tool design</h2>
+
+<p>
+The quality of an agent is largely the quality of its tools. The model can only use what
+it has been told about; a poorly defined tool is a tool the model will use
+incorrectly.
+</p>
+<ul>
+<li>
+<strong>Each tool should do one thing.</strong> Instead of a multi-purpose tool such as "veritabaninda_islem_yap",
+define narrow tools such as "musteri_ara" and "siparis_getir".
+</li>
+<li>
+<strong>Write descriptions like documentation.</strong> Make it clear when the tool should be used,
+when it should not, and what format it returns.
+</li>
+<li>
+<strong>Constrain parameters.</strong> Use enums instead of free text and defined options instead
+of date ranges; what is easy to validate is hard to get wrong.
+</li>
+<li>
+<strong>Keep outputs small.</strong> A 5,000-line result fills the context.
+Summarise, paginate or return only the fields that are needed.
+</li>
+<li>
+<strong>Make errors informative.</strong> "500 Internal Error" tells the model nothing;
+"tarih_araligi cannot be longer than 90 days" is a message it can act on.
+</li>
+</ul>
+
+<h2 id="tek-vs-cok">4. One agent or many?</h2>
+
+<p>
+Multi-agent architectures look attractive, but every agent is a new source of errors. In
+practice, the approach that works is to progress in this order:
+</p>
+<ul>
+<li><strong>Start with a single agent and few tools.</strong> Most jobs end here.</li>
+<li>
+<strong>Use the router pattern when the number of tools grows.</strong> A top-level agent
+classifies the task and hands it to a specialist agent. Each specialist works with its own narrow set of tools.
+</li>
+<li>
+<strong>Use multiple agents for work that genuinely runs in parallel.</strong> For independent
+subtasks, such as searching ten sources at once, the gain is clear.
+</li>
+</ul>
+<div class="callout callout--warn">
+<strong>Do not let agents talk to each other freely</strong>
+<p>
+Groups of agents that chat freely are both unpredictable and very hard to
+debug. Tie their communication to a defined schema and a one-way flow.
+</p>
+</div>
+
+<h2 id="durum-ve-bellek">5. State, memory and reproducibility</h2>
+
+<p>
+Agents run for a long time, get interrupted and are restarted. That is why where state
+is kept should be at the centre of the architecture.
+</p>
+<ul>
+<li>
+<strong>Persist every step.</strong> Record each tool call and its result;
+if the process stops halfway, it should resume where it left off rather than start again.
+</li>
+<li>
+<strong>Make calls with side effects idempotent.</strong> An agent that sends the same request
+twice should not create two records. Use an idempotency key.
+</li>
+<li>
+<strong>Carry context forward in summarised form.</strong> Sending the full history at every step is
+both expensive and distracting. Compress older steps and keep the decisions.
+</li>
+</ul>
+
+<h2 id="korkuluklar">6. Guardrails: limits, approval, rollback</h2>
+
+<p>The most important property of an agent in production is not what it can do, but what it cannot do.</p>
+<table>
+<thead><tr><th>Guardrail</th><th>What it prevents</th></tr></thead>
+<tbody>
+<tr><td>Step and cost limits</td><td>Infinite loops, uncontrolled spending</td></tr>
+<tr><td>Tool allowlist</td><td>The agent reaching systems outside its authority</td></tr>
+<tr><td>Human approval</td><td>Irreversible actions being carried out silently</td></tr>
+<tr><td>Running under the user's identity</td><td>Privilege escalation - the agent should not see everything through a service account</td></tr>
+<tr><td>Output validation</td><td>Malformed or unexpected responses entering the flow</td></tr>
+</tbody>
+</table>
+<div class="callout callout--warn">
+<strong>Irreversible actions must always go through approval</strong>
+<p>
+Sending email, deleting records, initiating payments, writing data to external systems. Every
+tool in this category must be marked with a human approval flag - without exception.
+</p>
+</div>
+
+<h2 id="degerlendirme">7. Evaluation and observability</h2>
+
+<p>
+Evaluating agents differs from classic model evaluation: you are not evaluating a single output,
+but a <em>trajectory</em>.
+</p>
+<ul>
+<li><strong>Task success rate:</strong> was the job actually finished?</li>
+<li><strong>Step efficiency:</strong> how many steps did it take, and were there unnecessary loops?</li>
+<li><strong>Tool accuracy:</strong> did it call the right tool with the right parameters?</li>
+<li><strong>Cost and latency:</strong> average and p95 per task.</li>
+<li><strong>Intervention rate:</strong> how often did a human have to correct it?</li>
+</ul>
+<p>
+To measure these you need a full record of every trajectory: what was reasoned at each step,
+which tool was called and what came back. Improving an agent without tracing is
+debugging in the dark.
+</p>
+
+<h2 id="ne-zaman-kullanmamali">8. When not to use an agent</h2>
+
+<ul>
+<li>When the steps are fixed - a plain workflow is cheaper, faster and more predictable.</li>
+<li>When the cost of an error is very high and no approval mechanism can be put in place.</li>
+<li>When latency is critical - every turn of the loop means a new model call.</li>
+<li>When the tools are unreliable - an agent built on fragile APIs is even more fragile.</li>
+</ul>
+<p>
+Agents are genuinely powerful on the right problem. But in most enterprise scenarios the best solution
+is "a well-designed workflow + a model at one or two points". Choosing the architecture to fit the
+uncertainty of the problem gives better results than choosing it to fit the technology.
+</p>

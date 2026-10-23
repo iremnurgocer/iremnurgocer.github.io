@@ -8,8 +8,8 @@
   <g transform="translate(48,140)">
     <rect width="250" height="66" rx="14" fill="#1b1e16" stroke="#333829"/>
     <path d="M28 66 l0 18 l20 -18 z" fill="#1b1e16" stroke="#333829"/>
-    <text x="20" y="32" font-family="Inter,system-ui,sans-serif" font-size="14" fill="#e9eade">“Geçen çeyrekte en çok</text>
-    <text x="20" y="52" font-family="Inter,system-ui,sans-serif" font-size="14" fill="#e9eade">satan 5 ürün hangisi?”</text>
+    <text x="20" y="32" font-family="Inter,system-ui,sans-serif" font-size="14" fill="#e9eade">"Geçen çeyrekte en çok</text>
+    <text x="20" y="52" font-family="Inter,system-ui,sans-serif" font-size="14" fill="#e9eade">satan 5 ürün hangisi?"</text>
   </g>
 
   <!-- SQL kutusu -->
