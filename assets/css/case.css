@@ -227,7 +227,7 @@
 .cs-next__link--right { text-align: right; }
 
 @media (max-width: 900px) {
-    .cs-metrics { grid-template-columns: 1fr 1fr; }
+    .cs-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .cs-sec { grid-template-columns: 1fr; gap: 16px; padding: 34px 0; }
     .cs-sec__label { position: static; }
     .cs-meta { grid-template-columns: 1fr; }
@@ -242,6 +242,9 @@
     .cs-next { grid-template-columns: 1fr; }
     .cs-next__link--right { text-align: left; }
     .arch { grid-template-columns: 1fr 1fr; }
+    /* Dar ekranda "%94-100" gibi değerler Firefox'ta kırılmıyor ve sayfayı taşırıyordu. */
+    .cs-metric { padding: 20px 16px; }
+    .cs-metric__val { font-size: 1.75rem; }
 }
 
 /* Sayfalar arası yumuşak geçiş (destekleyen tarayıcılarda) */
