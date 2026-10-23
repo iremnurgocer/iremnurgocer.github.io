@@ -112,7 +112,7 @@
         if (nav) {
             nav.classList.toggle('is-scrolled', y > 24);
             var down = y > lastY && y > 480;
-            nav.classList.toggle('is-hidden', down && !sheetOpen);
+            nav.classList.toggle('is-hidden', down && !sheetOpen && !nav.contains(document.activeElement));
         }
         lastY = y;
         updateRails();
@@ -122,6 +122,9 @@
     window.addEventListener('scroll', function () {
         if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
     }, { passive: true });
+
+    /* Klavyeyle menüye gelindiğinde gizli gezinme çubuğu geri gelsin. */
+    if (nav) nav.addEventListener('focusin', function () { nav.classList.remove('is-hidden'); });
 
     /* Mobil menü */
     var sheet = $('[data-sheet]');

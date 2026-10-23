@@ -179,6 +179,12 @@
     transform: translateY(-3px);
 }
 
+/* color-mix() desteklemeyen tarayıcılar için düz renkler (bkz. main.css). */
+@supports not (color: color-mix(in srgb, red 50%, blue)) {
+    .arch__node.is-guard { border-color: var(--accent-3); }
+    .arch__node.is-active { border-color: var(--accent); background: var(--surface-2); }
+}
+
 .arch__node.is-active::before { color: var(--accent); }
 
 .cs-ask {

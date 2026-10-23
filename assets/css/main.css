@@ -30,7 +30,8 @@
     --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
     --wrap: 1200px;
-    --gutter: clamp(16px, 4vw, 40px);
+    /* Yatay telefonda çentik alanına taşmasın. */
+    --gutter: max(clamp(16px, 4vw, 40px), env(safe-area-inset-left), env(safe-area-inset-right));
     --r-lg: 22px;
     --r: 16px;
     --r-sm: 10px;
@@ -597,6 +598,7 @@ h1, h2, h3, h4 {
 /* --- Giriş (hero) --- */
 .hero {
     position: relative;
+    min-height: 100vh; /* svh desteklemeyen eski Safari için */
     min-height: 100svh;
     display: grid;
     align-items: end;
@@ -1872,6 +1874,17 @@ h1, h2, h3, h4 {
 
 .field textarea { min-height: 132px; resize: vertical; }
 
+/* Safari yerel açılır menü çiziyor (dolgu, kenar ve odak halkası kayboluyor); her tarayıcıda aynı görünüm. */
+.field select {
+    -webkit-appearance: none;
+    appearance: none;
+    padding-right: 38px;
+    background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position: calc(100% - 20px) 50%, calc(100% - 15px) 50%;
+    background-size: 5px 5px;
+    background-repeat: no-repeat;
+}
+
 .field input:focus, .field textarea:focus, .field select:focus {
     outline: none;
     border-color: var(--accent);
@@ -2139,6 +2152,7 @@ h1, h2, h3, h4 {
     display: flex;
     flex-direction: column;
     width: min(420px, calc(100vw - 24px));
+    height: min(680px, calc(100vh - 44px));
     height: min(680px, calc(100svh - 44px));
     border: 1px solid var(--line-2);
     border-radius: 24px;
@@ -2357,6 +2371,8 @@ h1, h2, h3, h4 {
 }
 
 .js .reveal.is-visible { opacity: 1; transform: none; filter: none; }
+/* Klavyeyle odaklanan öğe, kaydırma efekti yetişmese de hemen görünsün. */
+.js .reveal:focus-within { opacity: 1; transform: none; filter: none; transition-delay: 0s; }
 
 /* Başlıklarda kelime kelime açılma */
 .js .split .w {
@@ -2452,13 +2468,35 @@ h1, h2, h3, h4 {
     .chat {
         right: 0; bottom: 0;
         width: 100vw;
+        height: 100vh;
         height: 100svh;
         border-radius: 0;
         border: 0;
+        /* Çentik ve ana ekran çubuğu altında kalmasın. */
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
     .palette { margin-top: 8px; }
     .scroll-cue { display: none; }
     .stat__label { font-size: .8rem; }
+}
+
+/* --- color-mix() desteklemeyen tarayıcılar (Safari 16.1 ve öncesi, Firefox 112 ve öncesi) ---
+   İçinde var() olduğu için bu bildirimler hesaplama anında geçersiz sayılır ve
+   değer tamamen düşer; en çok görünen yerler için düz renkli karşılıklar. */
+@supports not (color: color-mix(in srgb, red 50%, blue)) {
+    .hero__veil { background: linear-gradient(90deg, var(--bg) 0%, var(--bg) 18%, transparent 60%); }
+    .chip { background: var(--surface-2); }
+    .badge-first { background: var(--surface-2); }
+    .flow li { background: var(--surface); }
+    .flow li.is-active { border-color: var(--accent); background: var(--surface-2); }
+    .lab__out mark, .chunk mark { background: var(--glow); }
+    .lab__checks .ok .dot, .lab__checks .bad .dot { background: var(--surface-2); }
+    .lab__checks .bad, .cite.is-review { border-color: var(--accent-3); }
+    .cite.is-ok { border-color: var(--accent-2); }
+    .cite.is-drop { border-color: #ff6b6b; }
+    .job__when .chip { border-color: var(--line-2); }
+    .cursor-ring { border-color: var(--muted); }
+    .cursor-ring.is-link { background: var(--glow); border-color: transparent; }
 }
 
 /* --- Hareket azaltma tercihi --- */
