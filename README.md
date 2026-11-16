@@ -51,26 +51,41 @@ Derleme adımı olmayan statik bir site (HTML, CSS ve sade JavaScript). GitHub P
 
 ## Kış teması
 
-Gezinmedeki kar tanesi düğmesi kar efektini açıp kapatır; tercih `localStorage`
-(`ing-winter`) içinde saklanır.
+Gezinmedeki kar tanesi düğmesi sahneyi açıp kapatır; tercih `localStorage`
+(`ing-winter`) içinde saklanır. Tercih yoksa tema **15 Kasım - 10 Ocak** arasında
+kendiliğinden açılır (`inSeason`).
 
-- **Sezon penceresi:** tercih yoksa tema **15 Kasım - 10 Ocak** arasında
-  kendiliğinden açılır, dışında kapalıdır. Pencereyi değiştirmek için
-  `assets/js/winter.js` içindeki `inSeason` fonksiyonunu düzenleyin.
-- **Kar:** tek bir `<canvas>` üzerinde çizilir, dış kütüphane yoktur. Taneler
-  imleçten kaçar; yere biriken kar fareyle küreyebilir ve yeniden birikir.
-  Renkler `winter.css` içindeki `--flake`, `--pile-top`, `--pile-bottom`
-  değişkenlerinden gelir ve temaya göre değişir.
-- **Süsler:** çam ağacı ve kardan adam sol altta durur. 1480px üstünde içerik
-  sütununun dışındaki boşluğa yerleşir; altında köşe süsüne küçülür, 560px
-  altında ağaç gizlenir. Ana sayfada giriş bölümü ekrandayken süsler çekilir ki
-  hero'daki düğmelerin önünü kapatmasınlar.
-- **Kardan adam:** tıklayınca el sallar ve bulunduğunuz bölüme göre iki dilde
-  bir şey söyler (`BOLUM` sözlüğü). Balondaki düğme mevcut sohbet asistanını
-  (`window.ChatUI`) açar.
-- **Erişilebilirlik:** `prefers-reduced-motion` açıksa animasyon çalışmaz,
-  sekme arka plandayken çizim durur, katman `pointer-events: none` olduğu için
-  sayfanın tıklanabilirliğini etkilemez.
+**Kar.** Tek bir `<canvas>`, dış kütüphane yok. Taneler derinlik katmanlarına
+ayrılmış: uzaktakiler küçük, yavaş ve soluk, yakındakiler büyük ve hızlı. Yavaş
+salınan bir rüzgâr alanı hepsini sürüklüyor; imleci hızlı hareket ettirmek
+rüzgâra ekleniyor, yakın taneler daha çok savruluyor (paralaks).
+
+**Örtü.** Ekranın altında biriken kar kare başına `BUYUME` kadar kalınlaşır —
+bilerek çok yavaş. Tavan sabit değil: ortada `ORTA_MAX`, kenarlara doğru
+`KENAR_MAX`'a çıkıyor, yani kar rüzgârın yığdığı gibi köşelerde toplanıyor.
+Fareyle üstünden geçince küreniyor, sonra yeniden doluyor.
+
+**Ağaç.** `agacSVG()` ile prosedürel üretiliyor: her kat, alt kenarı testere
+dişli bir çan; katlar üst üste binince iğne yapraklı siluet çıkıyor. Dal
+uçlarında kar şeridi, aralarında yanıp sönen ışıklar, tepede yıldız. Sağ alt
+köşede, sohbet düğmesinin solunda durur; 15-32 saniyede bir kendi kendine
+silkelenip dallarındaki karı döker, tıklayınca da aynısını yapar.
+
+**Kardan adam.** Alt şeritte kendi başına yaşayan bir karakter. Durum makinesi
+(`smGuncelle`): bekler, sağa sola yürür, eğilip kar topu yapıp atar, bazen
+kayıp düşer. Düştüğünde şapkası fiziğiyle uçup yere konar; kalkar, şapkanın
+yanına yürür, eğilip alır, takar ve üstündeki karı silkeler. Tıklayınca el
+sallar ve bulunduğunuz bölüme göre iki dilde bir şey söyler; balondaki düğme
+sohbet asistanını (`window.ChatUI`) açar.
+
+**Giriş bölümü.** `.winter-frost` katmanı köşelerden içeri soğuk bir ışık
+veriyor ve fareyle hafifçe kayıyor; mevcut hero sahnesinin üstüne biniyor,
+onun yerini almıyor.
+
+**Erişilebilirlik ve başarım.** `prefers-reduced-motion` açıkken kar ve karakter
+durur, sahne sabit kalır. Sekme arka plandayken çizim durur. Katman
+`pointer-events: none`; yalnızca ağaç ve kardan adam tıklanabilir, sayfanın
+geri kalanı etkilenmez.
 
 ## Yerelde çalıştırma
 

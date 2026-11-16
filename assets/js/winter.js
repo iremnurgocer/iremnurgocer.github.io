@@ -1,13 +1,15 @@
-/* Kış / yılbaşı teması — kar motoru, biriken kar, çam ağacı ve kardan adam.
+/* Kış / yılbaşı sahnesi.
 
-   Dış bağımlılık yok: tek bir <canvas> ve enjekte edilen iki SVG.
-   Katman pointer-events: none olduğu için sayfanın tıklanabilirliğini bozmaz;
-   fare etkileşimi window üzerinden dinlenir. Kardan adam ve ağaç, katmandaki
-   tek etkileşimli öğelerdir.
+   Üç parça:
+     1. Kar motoru  — derinlikli tane katmanları, rüzgâr alanı, ekranın altında
+                      çok yavaş oluşan ve kenarlara doğru yığılan kar örtüsü.
+     2. Çam ağacı   — prosedürel üretilen, tüylü siluetli bir ladin. Arada bir
+                      kendi kendine silkelenip dallarındaki karı döker.
+     3. Kardan adam — kendi başına dolaşan, kar topu oynayan, bazen kayıp düşen,
+                      şapkasını yerden alıp tekrar takan küçük bir karakter.
 
-   Sezon penceresi: 15 Kasım - 10 Ocak arası varsayılan olarak açık. Dışında
-   kapalı; kullanıcı gezinmedeki kar tanesi düğmesiyle her zaman değiştirebilir
-   ve tercihi localStorage'da saklanır. */
+   Dış kütüphane yok. Katman pointer-events: none; yalnızca ağaç ve kardan adam
+   tıklanabilir. Sezon penceresi: 15 Kasım - 10 Ocak (bkz. inSeason).           */
 
 (function () {
     'use strict';
@@ -30,90 +32,188 @@
     var enabled = stored === null ? inSeason(new Date()) : stored === 'on';
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* ---------------------------------------------------------------- SVG */
+    function rnd(a, b) { return a + Math.random() * (b - a); }
 
-    var TREE_SVG = [
-        '<svg class="winter-tree" viewBox="0 0 112 176" aria-hidden="true" focusable="false">',
-        '  <rect x="49" y="144" width="14" height="26" rx="3" fill="#4a3524"/>',
-        '  <path d="M56 80 L100 150 Q102 156 95 156 H17 Q10 156 12 150 Z" fill="var(--tree-1)"/>',
-        '  <path d="M56 80 L100 150 Q102 156 95 156 H56 Z" fill="var(--tree-2)"/>',
-        '  <path d="M56 44 L91 112 Q93 118 86 118 H26 Q19 118 21 112 Z" fill="var(--tree-2)"/>',
-        '  <path d="M56 44 L91 112 Q93 118 86 118 H56 Z" fill="var(--tree-3)"/>',
-        '  <path d="M56 12 L83 76 Q85 82 78 82 H34 Q27 82 29 76 Z" fill="var(--tree-3)"/>',
-        '  <path d="M56 12 L83 76 Q85 82 78 82 H56 Z" fill="var(--tree-4)"/>',
-        /* dallarda biriken kar */
-        '  <path d="M36 80 Q46 72 56 80 Q66 72 78 80 Q66 86 56 82 Q46 86 36 80 Z" fill="var(--snow)" opacity=".92"/>',
-        '  <path d="M26 116 Q41 107 56 116 Q71 107 87 116 Q71 123 56 118 Q41 123 26 116 Z" fill="var(--snow)" opacity=".86"/>',
-        '  <path d="M14 154 Q35 144 56 154 Q77 144 98 154 Q77 161 56 156 Q35 161 14 154 Z" fill="var(--snow)" opacity=".8"/>',
-        /* ışıklar — sitenin aksan renkleri */
-        '  <circle class="bulb" cx="47" cy="38" r="3.1" fill="#5ee3c9"/>',
-        '  <circle class="bulb" cx="66" cy="58" r="3.1" fill="#ffb37d"/>',
-        '  <circle class="bulb" cx="42" cy="64" r="3.1" fill="#9aa8ff"/>',
-        '  <circle class="bulb" cx="74" cy="98" r="3.1" fill="#5ee3c9"/>',
-        '  <circle class="bulb" cx="37" cy="102" r="3.1" fill="#c9524a"/>',
-        '  <circle class="bulb" cx="56" cy="104" r="3.1" fill="#ffb37d"/>',
-        '  <circle class="bulb" cx="82" cy="138" r="3.3" fill="#9aa8ff"/>',
-        '  <circle class="bulb" cx="30" cy="140" r="3.3" fill="#5ee3c9"/>',
-        '  <circle class="bulb" cx="56" cy="138" r="3.3" fill="#c9524a"/>',
-        '  <path class="star" d="M56 0 L60.5 11 L72 12 L63 19.5 L65.8 31 L56 24.6 L46.2 31 L49 19.5 L40 12 L51.5 11 Z" fill="var(--accent-3)"/>',
-        '</svg>'
-    ].join('');
+    /* ====================================================================
+       Çam ağacı — prosedürel siluet.
+       Her kat, alt kenarı testere dişli bir çan biçimi; katlar üst üste
+       binince iğne yapraklı bir ladin silueti çıkıyor.
+       ==================================================================== */
 
-    var SNOWMAN_SVG = [
-        '<button class="winter-snowman" type="button" aria-describedby="winter-bubble">',
-        '  <span class="sr-only">' + SITE.t('Kardan adamla konuş', 'Talk to the snowman') + '</span>',
-        '  <svg viewBox="0 0 104 148" aria-hidden="true" focusable="false">',
-        '    <g stroke="#6b4b2e" stroke-width="3.4" stroke-linecap="round" fill="none">',
-        '      <path d="M30 80 L8 64 M16 70 L10 58 M14 68 L4 69"/>',
-        '      <g class="arm-right"><path d="M74 80 L96 66 M88 70 L94 58 M90 70 L100 70"/></g>',
-        '    </g>',
-        '    <circle cx="52" cy="112" r="30" fill="var(--snow)"/>',
-        '    <ellipse cx="52" cy="124" rx="26" ry="16" fill="var(--snow-2)" opacity=".55"/>',
-        '    <circle cx="52" cy="76" r="23" fill="var(--snow)"/>',
-        '    <ellipse cx="52" cy="86" rx="19" ry="11" fill="var(--snow-2)" opacity=".45"/>',
-        '    <circle cx="52" cy="100" r="2.7" fill="var(--coal)"/>',
-        '    <circle cx="52" cy="112" r="2.7" fill="var(--coal)"/>',
-        '    <circle cx="52" cy="124" r="2.7" fill="var(--coal)"/>',
-        '    <circle cx="52" cy="42" r="18" fill="var(--snow)"/>',
-        /* atkı */
-        '    <path d="M34 56 Q52 66 70 56 L70 63 Q52 73 34 63 Z" fill="var(--scarf)"/>',
-        '    <path d="M64 62 L72 86 L64 88 L58 64 Z" fill="var(--scarf)"/>',
-        '    <path d="M64 86 L72 86 L72 92 L64 92 Z" fill="var(--scarf-dark)"/>',
-        /* gözler ve kapaklar */
-        '    <circle cx="45" cy="38" r="2.5" fill="var(--coal)"/>',
-        '    <circle cx="59" cy="38" r="2.5" fill="var(--coal)"/>',
-        '    <rect class="eyelid" x="42" y="34" width="6" height="6" rx="2" fill="var(--snow)"/>',
-        '    <rect class="eyelid right" x="56" y="34" width="6" height="6" rx="2" fill="var(--snow)"/>',
-        '    <path d="M52 43 L68 47 L52 49 Z" fill="var(--carrot)"/>',
-        '    <g fill="var(--coal)">',
-        '      <circle cx="44" cy="50" r="1.4"/><circle cx="48" cy="52" r="1.4"/>',
-        '      <circle cx="52" cy="53" r="1.4"/><circle cx="56" cy="52" r="1.4"/>',
-        '      <circle cx="60" cy="50" r="1.4"/>',
-        '    </g>',
-        /* şapka */
-        '    <path d="M33 26 Q52 20 71 26 L69 30.5 Q52 25 35 30.5 Z" fill="#1d2029"/>',
-        '    <path d="M39 26 L39 9 Q52 5 65 9 L65 26 Z" fill="#272b36"/>',
-        '    <rect x="38" y="17" width="28" height="6" fill="#5ee3c9"/>',
-        '  </svg>',
-        '</button>'
-    ].join('');
+    function agacSVG() {
+        var VW = 128, VH = 200;
+        var cx = VW / 2;
+        var katSayisi = 8;
+        var tepe = 20, taban = 168;
+        var govde = [], kar = [], isik = [];
 
-    /* ------------------------------------------------- Katmanı oluştur */
+        /* Katın alt kenarı: ortada yukarıda, uçlarda aşağıda (dallar sarkar) */
+        function altY(y, drop, t) {
+            return y + drop * (0.3 + 0.7 * Math.abs(t * 2 - 1));
+        }
+
+        for (var i = 0; i < katSayisi; i++) {
+            var p = i / (katSayisi - 1);
+            var y = tepe + (taban - tepe) * Math.pow(p, 0.92);
+            var yari = 7 + 50 * Math.pow(p, 0.78);
+            var drop = 16 + 16 * p;
+            var dis = 7 + Math.round(p * 7);
+            var disDerin = 4 + 4 * p;
+
+            var d = 'M' + (cx - yari).toFixed(1) + ' ' + altY(y, drop, 0).toFixed(1);
+            var karNoktalari = [];
+
+            for (var k = 1; k <= dis; k++) {
+                var t = k / dis;
+                var x = cx - yari + 2 * yari * t;
+                var ay = altY(y, drop, t);
+                var ortaT = t - 0.5 / dis;
+                var ortaX = cx - yari + 2 * yari * ortaT;
+                var ortaY = altY(y, drop, ortaT) - disDerin - rnd(0, 2);
+                d += 'L' + ortaX.toFixed(1) + ' ' + ortaY.toFixed(1);
+                d += 'L' + x.toFixed(1) + ' ' + (ay + rnd(-1, 1)).toFixed(1);
+                if (k % 2 === 0) karNoktalari.push([ortaX, ortaY]);
+            }
+
+            d += 'L' + cx.toFixed(1) + ' ' + (y - 16 - 6 * (1 - p)).toFixed(1) + 'Z';
+
+            govde.push('<path d="' + d + '" fill="' + (i % 2 === 0 ? 'var(--tree-2)' : 'var(--tree-3)') + '"/>');
+
+            /* Dallarda biriken kar: diş uçlarını birleştiren ince şerit */
+            if (karNoktalari.length > 1 && i > 0) {
+                var kd = 'M' + karNoktalari[0][0].toFixed(1) + ' ' + (karNoktalari[0][1] + 1).toFixed(1);
+                for (var n = 1; n < karNoktalari.length; n++) {
+                    var pr = karNoktalari[n - 1], cu = karNoktalari[n];
+                    var mx = (pr[0] + cu[0]) / 2, my = Math.min(pr[1], cu[1]) - rnd(1, 3);
+                    kd += 'Q' + mx.toFixed(1) + ' ' + my.toFixed(1) + ' ' + cu[0].toFixed(1) + ' ' + (cu[1] + 1).toFixed(1);
+                }
+                kar.push('<path d="' + kd + '" fill="none" stroke="var(--snow)" stroke-width="' +
+                    (2.2 + p * 1.6).toFixed(1) + '" stroke-linecap="round" opacity="' + (0.5 + p * 0.35).toFixed(2) + '"/>');
+            }
+
+            if (i >= 2) {
+                var renkler = ['#ffd27d', '#9aa8ff', '#5ee3c9', '#ff9f8a'];
+                var adet = i >= 5 ? 3 : 2;
+                for (var l = 0; l < adet; l++) {
+                    var lt = rnd(0.12, 0.88);
+                    var lx = cx - yari + 2 * yari * lt;
+                    var ly = altY(y, drop, lt) - rnd(3, 9);
+                    isik.push('<circle class="bulb" cx="' + lx.toFixed(1) + '" cy="' + ly.toFixed(1) +
+                        '" r="' + rnd(1.9, 2.6).toFixed(1) + '" fill="' + renkler[(i + l) % renkler.length] + '"/>');
+                }
+            }
+        }
+
+        return '<svg class="winter-tree" viewBox="0 0 ' + VW + ' ' + VH + '" aria-hidden="true" focusable="false">' +
+            '<defs>' +
+            '<linearGradient id="wt-trunk" x1="0" y1="0" x2="1" y2="0">' +
+            '<stop offset="0" stop-color="#4a3626"/><stop offset=".55" stop-color="#6a4d35"/><stop offset="1" stop-color="#3d2c1f"/>' +
+            '</linearGradient>' +
+            '<radialGradient id="wt-glow" cx=".5" cy=".5" r=".5">' +
+            '<stop offset="0" stop-color="#ffd27d" stop-opacity=".45"/><stop offset="1" stop-color="#ffd27d" stop-opacity="0"/>' +
+            '</radialGradient>' +
+            '</defs>' +
+            '<rect x="' + (cx - 7) + '" y="162" width="14" height="30" rx="3" fill="url(#wt-trunk)"/>' +
+            '<ellipse cx="' + cx + '" cy="192" rx="28" ry="7" fill="var(--snow)" opacity=".5"/>' +
+            govde.join('') + kar.join('') +
+            '<circle cx="' + cx + '" cy="120" r="64" fill="url(#wt-glow)"/>' +
+            isik.join('') +
+            '<g class="star">' +
+            '<path d="M' + cx + ' 0 L' + (cx + 4.6) + ' 10.4 L' + (cx + 15.6) + ' 11.6 L' + (cx + 7.4) + ' 19 L' +
+            (cx + 9.8) + ' 30 L' + cx + ' 24 L' + (cx - 9.8) + ' 30 L' + (cx - 7.4) + ' 19 L' +
+            (cx - 15.6) + ' 11.6 L' + (cx - 4.6) + ' 10.4 Z" fill="var(--accent-3)"/>' +
+            '</g></svg>';
+    }
+
+    /* ====================================================================
+       Kardan adam
+       ==================================================================== */
+
+    var SNOWMAN_SVG =
+        '<svg class="sm-svg" viewBox="0 0 72 96" aria-hidden="true" focusable="false">' +
+        '<defs>' +
+        '<radialGradient id="sm-ball" cx=".36" cy=".3" r=".8">' +
+        '<stop offset="0" stop-color="#ffffff"/><stop offset=".62" stop-color="#f2f6fd"/><stop offset="1" stop-color="#ccd9ed"/>' +
+        '</radialGradient>' +
+        '<linearGradient id="sm-scarf" x1="0" y1="0" x2="0" y2="1">' +
+        '<stop offset="0" stop-color="#d4584f"/><stop offset="1" stop-color="#a8403a"/>' +
+        '</linearGradient>' +
+        '</defs>' +
+        '<g class="sm-body">' +
+        '<g class="sm-arms" stroke="#a87a4c" stroke-width="2.5" stroke-linecap="round" fill="none">' +
+        '<path d="M24 55 L4 44 M11 48 L7 39 M9 47 L1 46"/>' +
+        '<g class="sm-arm-r"><path d="M48 55 L68 44 M61 48 L65 39 M63 47 L71 46"/></g>' +
+        '</g>' +
+        '<ellipse cx="36" cy="78" rx="21" ry="18" fill="url(#sm-ball)"/>' +
+        '<ellipse cx="36" cy="87" rx="17" ry="7" fill="#c3d0e6" opacity=".4"/>' +
+        '<circle cx="36" cy="56" r="15" fill="url(#sm-ball)"/>' +
+        '<circle cx="31" cy="54" r="1.8" fill="#2a3040" opacity=".7"/>' +
+        '<circle cx="36" cy="61" r="1.8" fill="#2a3040" opacity=".7"/>' +
+        '<path d="M24 40 Q36 48 48 40 L48 46 Q36 54 24 46 Z" fill="url(#sm-scarf)"/>' +
+        '<g class="sm-tail">' +
+        '<path d="M44 45 L51 64 L44 66 L39 47 Z" fill="url(#sm-scarf)"/>' +
+        '<path d="M44 64 L51 64 L51 69 L44 69 Z" fill="#8f342f"/>' +
+        '</g>' +
+        '<circle cx="36" cy="28" r="13" fill="url(#sm-ball)"/>' +
+        '<ellipse cx="28.5" cy="31.5" rx="3.2" ry="2.1" fill="#f0a9a2" opacity=".45"/>' +
+        '<ellipse cx="43.5" cy="31.5" rx="3.2" ry="2.1" fill="#f0a9a2" opacity=".45"/>' +
+        '<circle cx="31" cy="25" r="1.9" fill="#232935"/>' +
+        '<circle cx="41" cy="25" r="1.9" fill="#232935"/>' +
+        '<circle cx="31.6" cy="24.3" r=".6" fill="#fff" opacity=".9"/>' +
+        '<circle cx="41.6" cy="24.3" r=".6" fill="#fff" opacity=".9"/>' +
+        '<rect class="sm-lid" x="28.7" y="21.6" width="4.6" height="5" rx="2" fill="#f2f6fd"/>' +
+        '<rect class="sm-lid sm-lid--r" x="38.7" y="21.6" width="4.6" height="5" rx="2" fill="#f2f6fd"/>' +
+        '<path d="M36 28.5 L48 31.5 L36 33.5 Z" fill="#e0872f"/>' +
+        '<path d="M36 28.5 L48 31.5 L36 30.5 Z" fill="#f0a048" opacity=".75"/>' +
+        '<path d="M29.5 34.2 Q36 40.4 42.5 34.2" stroke="#2a3040" stroke-width="1.8" fill="none" stroke-linecap="round"/>' +
+        '<g class="sm-hat-on">' +
+        '<path d="M23 17 Q36 10 49 17 L49 20.5 Q36 14 23 20.5 Z" fill="#2f3a52"/>' +
+        '<path d="M24.5 17 Q25.5 6 36 5 Q46.5 6 47.5 17 Z" fill="#3d4b69"/>' +
+        '<path d="M31 6.4 Q36 5 41 6.4 L41 16 L31 16 Z" fill="#46567a" opacity=".65"/>' +
+        '<circle cx="36" cy="3.8" r="3.3" fill="#e8eef8"/>' +
+        '</g>' +
+        '</g></svg>';
+
+    var HAT_SVG =
+        '<svg class="winter-hat" viewBox="0 0 30 21" aria-hidden="true" focusable="false">' +
+        '<path d="M1 14 Q15 7 29 14 L29 17.5 Q15 11 1 17.5 Z" fill="#2f3a52"/>' +
+        '<path d="M2.5 14 Q3.5 3 15 2 Q26.5 3 27.5 14 Z" fill="#3d4b69"/>' +
+        '<path d="M10 3.4 Q15 2 20 3.4 L20 13 L10 13 Z" fill="#46567a" opacity=".65"/>' +
+        '<circle cx="15" cy="1.2" r="3.2" fill="#e8eef8"/>' +
+        '</svg>';
+
+    /* ====================================================================
+       Katman
+       ==================================================================== */
 
     var layer = document.createElement('div');
     layer.className = 'winter-layer';
     layer.innerHTML =
-        '<div class="winter-scene">' + TREE_SVG + SNOWMAN_SVG + '</div>' +
         '<canvas class="winter-canvas" aria-hidden="true"></canvas>' +
+        agacSVG() +
+        '<button class="winter-snowman" type="button" aria-describedby="winter-bubble">' +
+        '<span class="sr-only">' + SITE.t('Kardan adamla konuş', 'Talk to the snowman') + '</span>' +
+        SNOWMAN_SVG + '</button>' +
+        HAT_SVG +
         '<div class="winter-bubble" id="winter-bubble" role="status" aria-live="polite"></div>';
     document.body.appendChild(layer);
 
     var canvas = layer.querySelector('.winter-canvas');
     var ctx = canvas.getContext('2d');
-    var scene = layer.querySelector('.winter-scene');
     var tree = layer.querySelector('.winter-tree');
     var snowman = layer.querySelector('.winter-snowman');
+    var hatEl = layer.querySelector('.winter-hat');
     var bubble = layer.querySelector('.winter-bubble');
+
+    /* Giriş bölümüne buzlanma katmanı */
+    var hero = document.querySelector('[data-hero]');
+    var frost = null;
+    if (hero) {
+        frost = document.createElement('div');
+        frost.className = 'winter-frost';
+        frost.setAttribute('aria-hidden', 'true');
+        hero.appendChild(frost);
+    }
 
     /* ---------------------------------------------- Gezinmedeki düğme */
 
@@ -126,13 +226,12 @@
         toggle.className = 'icon-btn winter-toggle';
         toggle.innerHTML =
             '<svg class="i" viewBox="0 0 24 24" aria-hidden="true">' +
-            '<path d="M12 2v20M12 2v20M3.6 7.2l16.8 9.6M20.4 7.2 3.6 16.8" />' +
-            '<path d="M12 6.4 9.4 4.2M12 6.4l2.6-2.2M12 17.6l-2.6 2.2M12 17.6l2.6 2.2" />' +
-            '<path d="m6.9 9.1-3.4-.5M6.9 9.1 5.6 5.9M17.1 14.9l3.4.5M17.1 14.9l1.3 3.2" />' +
-            '<path d="m6.9 14.9-1.3 3.2M6.9 14.9l-3.4.5M17.1 9.1l1.3-3.2M17.1 9.1l3.4-.5" />' +
+            '<path d="M12 2v20M3.6 7.2l16.8 9.6M20.4 7.2 3.6 16.8"/>' +
+            '<path d="M12 6.4 9.4 4.2M12 6.4l2.6-2.2M12 17.6l-2.6 2.2M12 17.6l2.6 2.2"/>' +
+            '<path d="m6.9 9.1-3.4-.5M6.9 9.1 5.6 5.9M17.1 14.9l3.4.5M17.1 14.9l1.3 3.2"/>' +
+            '<path d="m6.9 14.9-1.3 3.2M6.9 14.9l-3.4.5M17.1 9.1l1.3-3.2M17.1 9.1l3.4-.5"/>' +
             '</svg>';
-        var themeBtn = tools.querySelector('[data-theme-toggle]');
-        tools.insertBefore(toggle, themeBtn || null);
+        tools.insertBefore(toggle, tools.querySelector('[data-theme-toggle]') || null);
         toggle.addEventListener('click', function () { setEnabled(!enabled, true); });
     }
 
@@ -156,16 +255,26 @@
         if (enabled) { start(); } else { stop(); }
     }
 
-    /* ------------------------------------------------------ Kar motoru */
+    /* ====================================================================
+       Kar motoru
+       ==================================================================== */
 
     var DPR = Math.min(window.devicePixelRatio || 1, 2);
-    var BUCKET = 7;        // biriken kar sütun genişliği (px)
-    var MAX_PILE = 42;     // yığının tavan yüksekliği (px)
-    var TABAN = 7;         // sayfa açıldığında yerde duran kar
-    var BUYUME = 0.016;    // kare başına yığın artışı (px) — gözle görülür ama yavaş
+    var BUCKET = 9;
+    var ORTA_MAX = 12;       /* ekran ortasında örtünün tavanı (px) */
+    var KENAR_MAX = 40;      /* kenarlarda rüzgârın yığdığı kar (px) */
+    var BUYUME = 0.0022;     /* kare başına birikim — bilerek çok yavaş */
 
     var W = 0, H = 0;
-    var renk = { flake: 'rgba(255,255,255,.95)', pileTop: 'rgba(255,255,255,.97)', pileBottom: 'rgba(214,225,243,.92)' };
+    var flakes = [];
+    var ground = [];
+    var tavan = [];
+    var puffs = [];
+    var ruzgar = 0, ruzgarHedef = 0;
+    var mouse = { x: -999, y: -999, px: -999, py: -999, vx: 0, active: false };
+    var raf = null, running = false, sonZaman = 0;
+
+    var renk = { flake: 'rgba(255,255,255,.95)', pileTop: '#fff', pileBottom: '#dfe7f5' };
 
     function renkleriOku() {
         var cs = getComputedStyle(root);
@@ -176,12 +285,16 @@
         if (pt) renk.pileTop = pt;
         if (pb) renk.pileBottom = pb;
     }
-    var flakes = [];
-    var ground = [];
-    var gurultu = [];
-    var mouse = { x: -999, y: -999, active: false };
-    var raf = null;
-    var running = false;
+
+    /* Kenarlara doğru artan tavan: kar rüzgârla köşelere yığılır */
+    function tavanHesapla() {
+        tavan = new Array(ground.length);
+        for (var i = 0; i < ground.length; i++) {
+            var t = ground.length > 1 ? i / (ground.length - 1) : 0.5;
+            var kenar = Math.pow(Math.abs(t * 2 - 1), 2.6);
+            tavan[i] = ORTA_MAX + (KENAR_MAX - ORTA_MAX) * kenar;
+        }
+    }
 
     function olcekle() {
         W = window.innerWidth;
@@ -191,33 +304,33 @@
         ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 
         var adet = Math.round(W / BUCKET) + 1;
-        var eski = ground, eskiGurultu = gurultu;
+        var eski = ground;
         ground = new Array(adet);
-        gurultu = new Array(adet);
         for (var i = 0; i < adet; i++) {
-            ground[i] = eski.length
-                ? (eski[Math.min(i, eski.length - 1)] || 0)
-                : TABAN + Math.random() * 4;
-            gurultu[i] = eskiGurultu.length
-                ? (eskiGurultu[Math.min(i, eskiGurultu.length - 1)] || 1)
-                : 0.55 + Math.random() * 0.9;   /* sütunlar farklı hızda birikir */
+            ground[i] = eski.length ? (eski[Math.min(i, eski.length - 1)] || 0) : 0;
         }
+        tavanHesapla();
 
-        var hedef = Math.round(Math.min(140, Math.max(40, (W * H) / 17000)));
+        var hedef = Math.round(Math.min(150, Math.max(50, (W * H) / 15000)));
         while (flakes.length < hedef) flakes.push(yeniTane(true));
         if (flakes.length > hedef) flakes.length = hedef;
+
+        smYerlestir();
     }
 
+    /* Derinlik: 0 uzak (küçük, yavaş, soluk) — 1 yakın (büyük, hızlı, net) */
     function yeniTane(rastgeleY) {
+        var z = Math.random();
+        z = z * z;
         return {
             x: Math.random() * W,
-            y: rastgeleY ? Math.random() * H : -8,
-            r: 1 + Math.random() * 2.2,
-            hiz: 0.32 + Math.random() * 1,
-            vx: 0,
+            y: rastgeleY ? Math.random() * H : rnd(-40, -6),
+            z: z,
+            r: 0.7 + z * 2.5,
+            hiz: 0.18 + z * 0.7,
             faz: Math.random() * Math.PI * 2,
-            salinim: 0.22 + Math.random() * 0.5,
-            saydam: 0.5 + Math.random() * 0.5
+            salinim: 0.1 + Math.random() * 0.38,
+            saydam: 0.26 + z * 0.64
         };
     }
 
@@ -225,56 +338,48 @@
         return Math.max(0, Math.min(ground.length - 1, Math.round(x / BUCKET)));
     }
 
-    /* Komşu sütunları yumuşat — dik kar kuleleri oluşmasın */
     function duzlestir() {
         for (var i = 1; i < ground.length - 1; i++) {
             var bu = ground[i];
-            if (bu - ground[i - 1] > 3) { ground[i] -= 1.1; ground[i - 1] += 1.1; }
-            else if (bu - ground[i + 1] > 3) { ground[i] -= 1.1; ground[i + 1] += 1.1; }
+            if (bu - ground[i - 1] > 2.2) { ground[i] -= 0.8; ground[i - 1] += 0.8; }
+            else if (bu - ground[i + 1] > 2.2) { ground[i] -= 0.8; ground[i + 1] += 0.8; }
         }
     }
 
-    function adim() {
-        ctx.clearRect(0, 0, W, H);
-        ctx.fillStyle = renk.flake;
+    function adim(zaman) {
+        var dt = sonZaman ? Math.min(zaman - sonZaman, 48) : 16;
+        sonZaman = zaman;
+        var k = dt / 16.67;
 
-        /* Yağış sürdükçe zemin yavaşça yükselir; konan taneler yerel tümsek yapar */
+        ctx.clearRect(0, 0, W, H);
+
+        /* Rüzgâr: yavaş salınım + imlecin yatay hızı */
+        ruzgarHedef = Math.sin(zaman / 7400) * 0.5 + Math.sin(zaman / 2600) * 0.2;
+        if (mouse.active) ruzgarHedef += Math.max(-1.5, Math.min(1.5, mouse.vx * 0.085));
+        ruzgar += (ruzgarHedef - ruzgar) * 0.035 * k;
+        mouse.vx *= Math.pow(0.9, k);
+
         for (var g = 0; g < ground.length; g++) {
-            if (ground[g] < MAX_PILE) ground[g] += BUYUME * gurultu[g];
+            if (ground[g] < tavan[g]) ground[g] = Math.min(tavan[g], ground[g] + BUYUME * k);
         }
 
+        ctx.fillStyle = renk.flake;
         for (var i = 0; i < flakes.length; i++) {
             var f = flakes[i];
+            f.faz += 0.013 * k;
+            f.x += (Math.sin(f.faz) * f.salinim + ruzgar * (0.3 + f.z * 1.2)) * k;
+            f.y += f.hiz * k;
 
-            f.faz += 0.012;
-            f.x += Math.sin(f.faz) * f.salinim + f.vx;
-            f.y += f.hiz;
-            f.vx *= 0.94;
+            if (f.x < -14) f.x = W + 14;
+            else if (f.x > W + 14) f.x = -14;
 
-            /* Fare yakınsa taneyi it */
-            if (mouse.active) {
-                var dx = f.x - mouse.x, dy = f.y - mouse.y;
-                var d2 = dx * dx + dy * dy;
-                if (d2 < 13000 && d2 > 0.01) {
-                    var d = Math.sqrt(d2);
-                    var guc = (1 - d / 114) * 1.9;
-                    f.vx += (dx / d) * guc;
-                    f.y += (dy / d) * guc * 0.5;
-                }
-            }
-
-            if (f.x < -10) f.x = W + 10;
-            else if (f.x > W + 10) f.x = -10;
-
-            /* Yığına konma */
             var bi = bucketIndex(f.x);
             if (f.y + f.r >= H - ground[bi]) {
-                if (ground[bi] < MAX_PILE) ground[bi] += f.r * 0.9;
+                if (ground[bi] < tavan[bi]) ground[bi] = Math.min(tavan[bi], ground[bi] + f.r * 0.04);
                 flakes[i] = yeniTane(false);
                 continue;
             }
-
-            if (f.y > H + 10) { flakes[i] = yeniTane(false); continue; }
+            if (f.y > H + 14) { flakes[i] = yeniTane(false); continue; }
 
             ctx.globalAlpha = f.saydam;
             ctx.beginPath();
@@ -282,81 +387,326 @@
             ctx.fill();
         }
 
+        for (var p = puffs.length - 1; p >= 0; p--) {
+            var q = puffs[p];
+            q.vy += 0.045 * k;
+            q.x += (q.vx + ruzgar * 0.4) * k;
+            q.y += q.vy * k;
+            q.omur -= k;
+            var qb = bucketIndex(q.x);
+            if (q.y >= H - ground[qb] || q.omur <= 0) {
+                if (q.y >= H - ground[qb] && ground[qb] < tavan[qb]) ground[qb] += q.r * 0.1;
+                puffs.splice(p, 1);
+                continue;
+            }
+            ctx.globalAlpha = Math.min(0.95, q.omur / 60);
+            ctx.beginPath();
+            ctx.arc(q.x, q.y, q.r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
         ctx.globalAlpha = 1;
         duzlestir();
-        yiginCiz();
+        ortuCiz();
+        smGuncelle(dt);
 
         raf = window.requestAnimationFrame(adim);
     }
 
-    function yiginCiz() {
+    function ortuCiz() {
         if (!ground.length) return;
-
         ctx.beginPath();
         ctx.moveTo(0, H);
         ctx.lineTo(0, H - ground[0]);
-
         for (var i = 1; i < ground.length; i++) {
-            var oncekiX = (i - 1) * BUCKET;
-            var ortaX = oncekiX + BUCKET / 2;
-            ctx.quadraticCurveTo(oncekiX, H - ground[i - 1], ortaX, H - (ground[i - 1] + ground[i]) / 2);
+            var x0 = (i - 1) * BUCKET;
+            ctx.quadraticCurveTo(x0, H - ground[i - 1], x0 + BUCKET / 2, H - (ground[i - 1] + ground[i]) / 2);
         }
-
         ctx.lineTo(W, H - ground[ground.length - 1]);
         ctx.lineTo(W, H);
         ctx.closePath();
 
-        var gr = ctx.createLinearGradient(0, H - MAX_PILE, 0, H);
+        var gr = ctx.createLinearGradient(0, H - KENAR_MAX, 0, H);
         gr.addColorStop(0, renk.pileTop);
         gr.addColorStop(1, renk.pileBottom);
         ctx.fillStyle = gr;
         ctx.fill();
     }
 
-    /* ----------------------------------------- Fare / dokunma etkileşimi */
+    function puffEkle(x, y, adet, guc) {
+        for (var i = 0; i < adet; i++) {
+            puffs.push({
+                x: x + rnd(-6, 6), y: y + rnd(-4, 4),
+                vx: rnd(-guc, guc), vy: rnd(-guc * 0.5, 0.2),
+                r: rnd(0.9, 2.3), omur: rnd(70, 150)
+            });
+        }
+    }
+
+    /* ====================================================================
+       Fare
+       ==================================================================== */
 
     function konum(x, y) {
-        mouse.x = x;
-        mouse.y = y;
+        if (mouse.px > -900) mouse.vx = x - mouse.px;
+        mouse.px = x; mouse.py = y;
+        mouse.x = x; mouse.y = y;
         mouse.active = true;
 
-        /* Yığının yakınındaysak karı küreyelim */
-        if (H - y < MAX_PILE + 26) {
+        if (H - y < KENAR_MAX + 24) {
             var merkez = bucketIndex(x);
-            var yaricap = 7;
-            for (var i = merkez - yaricap; i <= merkez + yaricap; i++) {
+            for (var i = merkez - 6; i <= merkez + 6; i++) {
                 if (i < 0 || i >= ground.length) continue;
-                var uzaklik = Math.abs(i - merkez) / yaricap;
-                var azalt = (1 - uzaklik * uzaklik) * 2.6;
-                if (H - ground[i] > y - 18) ground[i] = Math.max(0, ground[i] - azalt);
+                var u = Math.abs(i - merkez) / 6;
+                if (H - ground[i] > y - 16) ground[i] = Math.max(0, ground[i] - (1 - u * u) * 1.6);
             }
+        }
+
+        if (frost) {
+            frost.style.transform = 'translate3d(' +
+                ((x / window.innerWidth - 0.5) * 18).toFixed(1) + 'px,' +
+                ((y / window.innerHeight - 0.5) * 11).toFixed(1) + 'px,0)';
         }
     }
 
     function onMove(e) { konum(e.clientX, e.clientY); }
-    function onLeave() { mouse.active = false; mouse.x = mouse.y = -999; }
-    function onTouch(e) {
-        if (e.touches && e.touches.length) konum(e.touches[0].clientX, e.touches[0].clientY);
+    function onLeave() { mouse.active = false; mouse.vx = 0; mouse.px = mouse.py = -999; }
+    function onTouch(e) { if (e.touches && e.touches.length) konum(e.touches[0].clientX, e.touches[0].clientY); }
+
+    /* ====================================================================
+       Kardan adam — davranış döngüsü
+       ==================================================================== */
+
+    var sm = {
+        x: 140, hedef: 140, yon: 1,
+        durum: 'bekle', t: 0, sure: 2200,
+        sol: 28, sag: 320, atti: false,
+        sapka: { dusuk: false, x: 0, y: 0, vx: 0, vy: 0, rot: 0, yerde: false }
+    };
+
+    function smYerlestir() {
+        sm.sol = 24;
+        /* Sağ sınır: ağacın ve sohbet düğmesinin alanına girmesin */
+        sm.sag = Math.max(sm.sol + 80, W * 0.54);
+        sm.x = Math.max(sm.sol, Math.min(sm.sag, sm.x));
     }
 
-    /* --------------------------------------------- Kardan adam asistanı */
+    var SM_SINIFLAR = ['is-walking', 'is-playing', 'is-falling', 'is-down', 'is-bending', 'is-rising'];
+
+    function smDurum(d, sure) {
+        sm.durum = d;
+        sm.t = 0;
+        sm.sure = sure || 0;
+        SM_SINIFLAR.forEach(function (c) { snowman.classList.remove(c); });
+        if (d === 'yuru' || d === 'sapkayaGit') snowman.classList.add('is-walking');
+        else if (d === 'oyna') snowman.classList.add('is-playing');
+        else if (d === 'dus') snowman.classList.add('is-falling');
+        else if (d === 'yerde') snowman.classList.add('is-down');
+        else if (d === 'kalk') snowman.classList.add('is-rising');
+        else if (d === 'sapkaAl') snowman.classList.add('is-bending');
+    }
+
+    function smSec() {
+        var r = Math.random();
+        if (r < 0.54) {
+            sm.hedef = rnd(sm.sol, sm.sag);
+            if (Math.abs(sm.hedef - sm.x) < 40) sm.hedef = sm.x + (Math.random() < 0.5 ? -80 : 80);
+            sm.hedef = Math.max(sm.sol, Math.min(sm.sag, sm.hedef));
+            smDurum('yuru');
+        } else if (r < 0.86) {
+            smDurum('oyna', 2300);
+        } else {
+            smDurum('kay', 460);
+        }
+    }
+
+    function smCiz() {
+        snowman.style.transform =
+            'translate3d(' + sm.x.toFixed(1) + 'px,0,0) scaleX(' + (sm.yon < 0 ? -1 : 1) + ')';
+    }
+
+    function sapkaCiz() {
+        hatEl.style.transform =
+            'translate3d(' + sm.sapka.x.toFixed(1) + 'px,' + (-sm.sapka.y).toFixed(1) + 'px,0) rotate(' +
+            sm.sapka.rot.toFixed(1) + 'deg)';
+    }
+
+    function zemin(x) { return ground.length ? ground[bucketIndex(x)] : 0; }
+
+    function smGuncelle(dt) {
+        if (reduced) return;
+        sm.t += dt;
+        var k = dt / 16.67;
+        var zy = zemin(sm.x);
+
+        switch (sm.durum) {
+
+            case 'bekle':
+                if (sm.t > sm.sure) smSec();
+                break;
+
+            case 'yuru': {
+                var fark = sm.hedef - sm.x;
+                sm.yon = fark < 0 ? -1 : 1;
+                sm.x += (fark < 0 ? -1 : 1) * Math.min(Math.abs(fark), 0.75 * k);
+                if (Math.abs(fark) < 1.5) smDurum('bekle', rnd(1400, 4200));
+                break;
+            }
+
+            case 'oyna':
+                if (sm.t > 1300 && !sm.atti) {
+                    sm.atti = true;
+                    var bx = sm.x + sm.yon * 24;
+                    puffEkle(bx, H - zy - 14, 10, 1.6);
+                    puffs.push({ x: bx, y: H - zy - 22, vx: sm.yon * 2.3, vy: -2.1, r: 3.1, omur: 130 });
+                }
+                if (sm.t > sm.sure) { sm.atti = false; smDurum('bekle', rnd(1200, 2600)); }
+                break;
+
+            case 'kay':
+                if (sm.t > sm.sure) {
+                    smDurum('dus', 560);
+                    sm.sapka.dusuk = true;
+                    sm.sapka.yerde = false;
+                    sm.sapka.x = sm.x + sm.yon * 6;
+                    sm.sapka.y = zy + 52;
+                    sm.sapka.vx = sm.yon * rnd(1, 1.9);
+                    sm.sapka.vy = rnd(2, 3);
+                    sm.sapka.rot = 0;
+                    snowman.classList.add('no-hat');
+                    hatEl.classList.add('is-loose');
+                    puffEkle(sm.x, H - zy - 8, 12, 1.4);
+                }
+                break;
+
+            case 'dus':
+                if (sm.t > sm.sure) smDurum('yerde', rnd(900, 1500));
+                break;
+
+            case 'yerde':
+                if (sm.t > sm.sure) smDurum('kalk', 640);
+                break;
+
+            case 'kalk':
+                if (sm.t > sm.sure) {
+                    if (sm.sapka.dusuk) {
+                        sm.hedef = Math.max(sm.sol, Math.min(sm.sag, sm.sapka.x));
+                        smDurum('sapkayaGit');
+                    } else {
+                        smDurum('bekle', rnd(1500, 3000));
+                    }
+                }
+                break;
+
+            case 'sapkayaGit': {
+                var d2 = sm.hedef - sm.x;
+                sm.yon = d2 < 0 ? -1 : 1;
+                sm.x += (d2 < 0 ? -1 : 1) * Math.min(Math.abs(d2), 0.75 * k);
+                if (Math.abs(d2) < 3) smDurum('sapkaAl', 700);
+                break;
+            }
+
+            case 'sapkaAl':
+                if (sm.t > sm.sure) {
+                    sm.sapka.dusuk = false;
+                    snowman.classList.remove('no-hat');
+                    hatEl.classList.remove('is-loose');
+                    puffEkle(sm.x, H - zy - 40, 7, 0.9);
+                    smDurum('silkele', 720);
+                }
+                break;
+
+            case 'silkele':
+                if (!snowman.classList.contains('is-shaking')) snowman.classList.add('is-shaking');
+                if (sm.t > sm.sure) {
+                    snowman.classList.remove('is-shaking');
+                    smDurum('bekle', rnd(1600, 3200));
+                }
+                break;
+
+            case 'selam':
+                if (sm.t > sm.sure) {
+                    snowman.classList.remove('is-waving');
+                    smDurum('bekle', rnd(1200, 2400));
+                }
+                break;
+        }
+
+        /* Düşen şapkanın fiziği */
+        if (sm.sapka.dusuk) {
+            if (!sm.sapka.yerde) {
+                sm.sapka.vy -= 0.16 * k;
+                sm.sapka.x += sm.sapka.vx * k;
+                sm.sapka.y += sm.sapka.vy * k;
+                sm.sapka.rot += sm.sapka.vx * 3 * k;
+                var hz = zemin(sm.sapka.x);
+                if (sm.sapka.y <= hz + 2) {
+                    sm.sapka.y = hz + 2;
+                    sm.sapka.yerde = true;
+                    sm.sapka.rot = sm.sapka.vx > 0 ? 14 : -14;
+                    puffEkle(sm.sapka.x, H - hz - 5, 6, 0.8);
+                }
+            } else {
+                sm.sapka.y = zemin(sm.sapka.x) + 2;
+            }
+            sapkaCiz();
+        }
+
+        snowman.style.bottom = Math.round(zy * 0.7) + 'px';
+        smCiz();
+    }
+
+    /* ====================================================================
+       Ağaç
+       ==================================================================== */
+
+    function agacSilkele() {
+        tree.classList.remove('is-shaking');
+        void tree.offsetWidth;
+        tree.classList.add('is-shaking');
+        if (!running) return;
+        var r = tree.getBoundingClientRect();
+        for (var i = 0; i < 24; i++) {
+            puffs.push({
+                x: r.left + rnd(r.width * 0.12, r.width * 0.88),
+                y: r.top + rnd(r.height * 0.18, r.height * 0.78),
+                vx: rnd(-0.5, 0.5), vy: rnd(0.2, 1),
+                r: rnd(1, 2.5), omur: rnd(90, 190)
+            });
+        }
+    }
+
+    tree.addEventListener('click', agacSilkele);
+
+    var agacZaman = null;
+    function agacZamanla() {
+        window.clearTimeout(agacZaman);
+        agacZaman = window.setTimeout(function () {
+            if (running && !document.hidden) agacSilkele();
+            agacZamanla();
+        }, rnd(15000, 32000));
+    }
+
+    /* ====================================================================
+       Konuşma balonu
+       ==================================================================== */
 
     var BOLUM = {
         hero: [
             ['Kar başladı. Üstteki kar tanesi düğmesinden kapatabilirsin.', 'Snow is on. You can switch it off with the snowflake button above.'],
-            ['Fareyi aşağıdaki karın üstünde gezdir — biriken karı küreyebilirsin.', 'Drag your cursor over the snow below — you can sweep the drift away.'],
-            ['Merhaba. Ben buranın tek kar sorumlusuyum.', 'Hello. I am the only one here in charge of snow.']
+            ['Fareyi hızlı oynat, rüzgâr çıksın.', 'Move your cursor fast — you will stir up some wind.'],
+            ['Aşağıdaki karı fareyle dağıtabilirsin.', 'You can sweep the snow at the bottom with your cursor.']
         ],
         about: [
             ['İrem burada ne yaptığını anlatıyor. Ben sadece kardan sorumluyum.', 'İrem explains what she does here. I am only responsible for the snow.'],
             ['Yıllardır süren bir mühendislik geçmişi. Benimki üç gün önce başladı.', 'Years of engineering behind this. Mine started three days ago.']
         ],
         approach: [
-            ['Ölçülebilir olmayan şey iyileştirilemez. Ben de her gün biraz eriyorum, ölçtüm.', 'What cannot be measured cannot be improved. I melt a little daily — I measured it.'],
+            ['Ölçülemeyen şey iyileştirilemez. Ben her gün biraz eriyorum, ölçtüm.', 'What cannot be measured cannot be improved. I melt a little daily — I measured it.'],
             ['Kanıta dayalı iş. Benim tek kanıtım bu havuç.', 'Evidence-based work. My only evidence is this carrot.']
         ],
         work: [
-            ['Üretimde çalışan sistemler. Benim tek üretimim bir kardan adam.', 'Systems running in production. My only production is one snowman.'],
+            ['Üretimde çalışan sistemler. Benim tek üretimim bir kar topu.', 'Systems running in production. My only production is one snowball.'],
             ['Vaka çalışmalarını aç, gerçekten okunmaya değer.', 'Open the case studies — they are genuinely worth reading.']
         ],
         lab: [
@@ -373,7 +723,7 @@
         ],
         reading: [
             ['Okuma listesi. Ben resimlere bakıyorum.', 'A reading list. I just look at the pictures.'],
-            ['Kaynakça uzun. Kışın günler kısa.', 'The bibliography is long. Winter days are short.']
+            ['Kaynakça uzun, kış günleri kısa.', 'The bibliography is long, winter days are short.']
         ],
         contact: [
             ['Yazmak için iyi bir gün. Kar da yağıyor.', 'A good day to write. It is snowing, too.'],
@@ -382,34 +732,31 @@
     };
 
     var GENEL = [
-        ['Ağaca tıkla, üstündeki karı silkeler.', 'Click the tree — it shakes the snow off.'],
-        ['Kar birikiyor. Fareyle dağıt, yeniden birikir.', 'The snow piles up. Sweep it with your cursor; it comes back.'],
-        ['İyi seneler. Şimdiden.', 'Happy new year. Early, I know.']
+        ['Ağaca tıkla, dallarındaki karı döksün.', 'Click the tree — it will shed the snow on its branches.'],
+        ['Kar yavaş yavaş kenarlara yığılıyor.', 'The snow slowly drifts toward the edges.'],
+        ['Birazdan yine düşeceğim, biliyorum.', 'I am going to fall over again soon. I know.']
     ];
 
-    var sonSoz = null;
-    var balonZaman = null;
+    var sonSoz = null, balonZaman = null;
 
     function aktifBolum() {
-        var bolumler = document.querySelectorAll('section[id], header[id], div[id]');
-        var orta = window.innerHeight / 2;
-        var en = null, enMesafe = Infinity;
-
-        for (var i = 0; i < bolumler.length; i++) {
-            if (!BOLUM[bolumler[i].id]) continue;
-            var r = bolumler[i].getBoundingClientRect();
+        var orta = window.innerHeight / 2, en = null, enMesafe = Infinity;
+        for (var id in BOLUM) {
+            if (!Object.prototype.hasOwnProperty.call(BOLUM, id)) continue;
+            var el = document.getElementById(id);
+            if (!el) continue;
+            var r = el.getBoundingClientRect();
             if (r.bottom < 0 || r.top > window.innerHeight) continue;
-            var mesafe = Math.abs(r.top + r.height / 2 - orta);
-            if (mesafe < enMesafe) { enMesafe = mesafe; en = bolumler[i].id; }
+            var m = Math.abs(r.top + r.height / 2 - orta);
+            if (m < enMesafe) { enMesafe = m; en = id; }
         }
         return en;
     }
 
     function sozSec() {
         var havuz = BOLUM[aktifBolum()] || GENEL;
-        var aday = havuz[0];
+        var aday = havuz[0], tur = 0;
         if (havuz.length > 1) {
-            var tur = 0;
             do { aday = havuz[Math.floor(Math.random() * havuz.length)]; }
             while (aday === sonSoz && ++tur < 6);
         }
@@ -417,12 +764,19 @@
         return SITE.t(aday[0], aday[1]);
     }
 
+    function balonYerlestir() {
+        if (!bubble.classList.contains('is-open')) return;
+        var gen = bubble.offsetWidth || 240;
+        bubble.style.left = Math.max(12, Math.min(W - gen - 12, sm.x - gen * 0.22)).toFixed(0) + 'px';
+        bubble.style.bottom = Math.round(74 + zemin(sm.x) * 0.7) + 'px';
+    }
+
     function konus() {
         var chatVar = !!(window.ChatUI && window.ChatUI.ask);
-
         bubble.innerHTML = '';
+
         var p = document.createElement('p');
-        p.style.margin = '0';
+        p.className = 'winter-bubble__text';
         p.textContent = sozSec();
         bubble.appendChild(p);
 
@@ -431,8 +785,7 @@
             btn.type = 'button';
             btn.className = 'winter-bubble__ask';
             btn.innerHTML = '<span class="orb-mini" aria-hidden="true"></span>';
-            btn.appendChild(document.createTextNode(
-                SITE.t('İrem\'in asistanına sor', 'Ask İrem\'s assistant')));
+            btn.appendChild(document.createTextNode(SITE.t('İrem\'in asistanına sor', 'Ask İrem\'s assistant')));
             btn.addEventListener('click', function () {
                 bubble.classList.remove('is-open');
                 window.ChatUI.ask(SITE.t(
@@ -443,63 +796,43 @@
         }
 
         bubble.classList.add('is-open');
+        balonYerlestir();
         window.clearTimeout(balonZaman);
-        balonZaman = window.setTimeout(function () {
-            bubble.classList.remove('is-open');
-        }, chatVar ? 8000 : 5200);
+        balonZaman = window.setTimeout(function () { bubble.classList.remove('is-open'); }, chatVar ? 8000 : 5400);
     }
 
     snowman.addEventListener('click', function () {
-        snowman.classList.remove('is-waving');
-        void snowman.offsetWidth;      // animasyonu yeniden tetikle
-        snowman.classList.add('is-waving');
+        if (sm.durum !== 'dus' && sm.durum !== 'yerde' && sm.durum !== 'kalk') {
+            snowman.classList.add('is-waving');
+            smDurum('selam', 1100);
+        }
         konus();
     });
 
-    snowman.addEventListener('mouseenter', function () {
-        if (!bubble.classList.contains('is-open')) konus();
-    });
-
-    /* Ağaca tıklayınca silkelensin ve üstünden kar dökülsün */
-    tree.addEventListener('click', function () {
-        tree.classList.remove('is-shaking');
-        void tree.offsetWidth;
-        tree.classList.add('is-shaking');
-
-        if (!running) return;
-        var kutu = tree.getBoundingClientRect();
-        for (var i = 0; i < 26; i++) {
-            flakes.push({
-                x: kutu.left + Math.random() * kutu.width,
-                y: kutu.top + Math.random() * kutu.height * 0.7,
-                r: 1.2 + Math.random() * 2.2,
-                hiz: 1.1 + Math.random() * 1.5,
-                vx: (Math.random() - 0.5) * 1.4,
-                faz: Math.random() * Math.PI * 2,
-                salinim: 0.3,
-                saydam: 0.92
-            });
-        }
-    });
-
-    /* ------------------------------------------------------ Başlat / dur */
+    /* ====================================================================
+       Başlat / dur
+       ==================================================================== */
 
     function start() {
-        if (running || reduced || !enabled) return;
+        if (running || !enabled) return;
         running = true;
         renkleriOku();
         olcekle();
+        if (reduced) { ortuCiz(); smCiz(); return; }
         window.addEventListener('mousemove', onMove, { passive: true });
         window.addEventListener('mouseout', onLeave, { passive: true });
         window.addEventListener('touchmove', onTouch, { passive: true });
         window.addEventListener('touchend', onLeave, { passive: true });
-        adim();   /* ilk kareyi hemen çiz: sekme arka plandayken bile sahne boş kalmasın */
+        sonZaman = 0;
+        agacZamanla();
+        adim(performance.now());
     }
 
     function stop() {
         running = false;
         if (raf) window.cancelAnimationFrame(raf);
         raf = null;
+        window.clearTimeout(agacZaman);
         window.removeEventListener('mousemove', onMove);
         window.removeEventListener('mouseout', onLeave);
         window.removeEventListener('touchmove', onTouch);
@@ -507,41 +840,18 @@
         if (W && H) ctx.clearRect(0, 0, W, H);
     }
 
-    /* Giriş bölümü ekrandayken süsleri gizle: hero'nun düğmeleri açıkta kalsın.
-       Hero'su olmayan sayfalarda (blog, vaka) süsler her zaman görünür. */
-    var hero = document.querySelector('[data-hero]');
-    if (hero) {
-        var sahneTik = false;
-        var sahneGuncelle = function () {
-            sahneTik = false;
-            var r = hero.getBoundingClientRect();
-            scene.classList.toggle('is-tucked', r.bottom > window.innerHeight - 56);
-        };
-        var sahneIste = function () {
-            if (sahneTik) return;
-            sahneTik = true;
-            window.requestAnimationFrame(sahneGuncelle);
-        };
-        sahneGuncelle();
-        window.addEventListener('scroll', sahneIste, { passive: true });
-        window.addEventListener('resize', sahneIste);
-    }
-
     var boyutZaman = null;
     window.addEventListener('resize', function () {
         window.clearTimeout(boyutZaman);
-        boyutZaman = window.setTimeout(function () { if (running) olcekle(); }, 180);
+        boyutZaman = window.setTimeout(function () { if (running) { olcekle(); balonYerlestir(); } }, 180);
     });
 
-    /* Sekme arkadayken boşuna çizme */
     document.addEventListener('visibilitychange', function () {
         if (document.hidden) { stop(); } else { start(); }
     });
 
-    /* Tema değişince tuvalin renkleri de değişsin */
     new MutationObserver(renkleriOku).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
 
-    /* Dil değişince kardan adamın etiketleri de değişsin */
     window.addEventListener('lang:change', function () {
         etiketle();
         var sr = snowman.querySelector('.sr-only');
@@ -549,12 +859,8 @@
         if (bubble.classList.contains('is-open')) konus();
     });
 
-    /* Hareket azaltma tercihi değişirse uy */
     var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var onMq = function (e) {
-        reduced = e.matches;
-        if (reduced) { stop(); } else { start(); }
-    };
+    var onMq = function (e) { reduced = e.matches; stop(); start(); };
     if (mq.addEventListener) { mq.addEventListener('change', onMq); }
     else if (mq.addListener) { mq.addListener(onMq); }
 
