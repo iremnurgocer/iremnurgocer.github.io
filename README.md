@@ -68,7 +68,8 @@ Fareyle üstünden geçince küreniyor, sonra yeniden doluyor.
 **Ağaç.** `agacSVG()` ile prosedürel üretiliyor: her kat, alt kenarı testere
 dişli bir çan; katlar üst üste binince iğne yapraklı siluet çıkıyor. Dal
 uçlarında kar şeridi, aralarında yanıp sönen ışıklar, tepede yıldız. Sağ alt
-köşede, sohbet düğmesinin solunda durur; 15-32 saniyede bir kendi kendine
+köşede, sohbet düğmesinin solunda durur — telefonda da, düğme yuvarlak ikona
+dönüştüğü için ona göre daralıp yanında kalır. 15-32 saniyede bir kendi kendine
 silkelenip dallarındaki karı döker, tıklayınca da aynısını yapar.
 
 **Kardan adam.** Alt şeritte kendi başına yaşayan bir karakter. Durum makinesi

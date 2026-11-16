@@ -355,10 +355,16 @@
     .winter-bubble { bottom: 84px; font-size: .82rem; }
 }
 
+/* Telefonda sohbet düğmesi 54px'lik bir daireye dönüşüyor (sağdan 14px);
+   ağaç onun soluna, kardan adamın dolaştığı bandın dışına yerleşir. */
 @media (max-width: 560px) {
-    .winter-tree { display: none; }
+    .winter-tree { right: 88px; width: 54px; }
     .winter-snowman { width: 36px; }
     .winter-bubble { bottom: 74px; width: min(220px, calc(100vw - 24px)); }
+}
+
+@media (max-width: 380px) {
+    .winter-tree { right: 84px; width: 48px; }
 }
 
 /* ==========================================================================
