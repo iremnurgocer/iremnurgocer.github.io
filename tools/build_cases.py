@@ -148,6 +148,7 @@ def page(i, c):
     <noscript><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/case.css">
+    <link rel="stylesheet" href="../assets/css/winter.css">
 </head>
 <body class="cs-page">
 
@@ -248,6 +249,7 @@ def page(i, c):
 <script src="../assets/js/palette.js" defer></script>
 <script src="../assets/js/chat.js" defer></script>
 <script src="../assets/js/fx.js" defer></script>
+<script src="../assets/js/winter.js" defer></script>
 </body>
 </html>
 """.format(

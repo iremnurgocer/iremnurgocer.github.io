@@ -98,6 +98,7 @@ def page(i, p):
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/case.css">
     <link rel="stylesheet" href="../assets/css/blog.css">
+    <link rel="stylesheet" href="../assets/css/winter.css">
 </head>
 <body class="cs-page bl-page">
 
@@ -220,6 +221,7 @@ def page(i, p):
 <script src="../assets/js/palette.js" defer></script>
 <script src="../assets/js/chat.js" defer></script>
 <script src="../assets/js/fx.js" defer></script>
+<script src="../assets/js/winter.js" defer></script>
 <script src="../assets/js/blog.js" defer></script>
 </body>
 </html>

@@ -31,6 +31,7 @@ Derleme adımı olmayan statik bir site (HTML, CSS ve sade JavaScript). GitHub P
 | `assets/js/flow.js` | WebGL yoksa kullanılan 2B ışık akışı (canvas) |
 | `assets/js/lab.js` | Laboratuvar demoları |
 | `assets/js/fx.js` | Mıknatıslı düğmeler, imleç halkası, ses |
+| `assets/css/winter.css`, `assets/js/winter.js` | Kış / yılbaşı teması: kar, biriken kar, çam ağacı, kardan adam |
 | `assets/css/case.css` | Vaka sayfası stilleri |
 | `tools/cases.py` | **Vaka içerikleri** (iki dilli) |
 | `tools/build_cases.py` | `work/*.html` sayfalarını üretir |
@@ -47,6 +48,29 @@ Derleme adımı olmayan statik bir site (HTML, CSS ve sade JavaScript). GitHub P
 | `blogs/*.html` | Üretilmiş blog sayfaları (elle düzenlemeyin) |
 | `covers/*.svg`, `covers/*.en.svg` | Blog kapak görselleri (Türkçe ve İngilizce) |
 | `worker/` | İsteğe bağlı yapay zeka sohbeti için Cloudflare Worker |
+
+## Kış teması
+
+Gezinmedeki kar tanesi düğmesi kar efektini açıp kapatır; tercih `localStorage`
+(`ing-winter`) içinde saklanır.
+
+- **Sezon penceresi:** tercih yoksa tema **15 Kasım - 10 Ocak** arasında
+  kendiliğinden açılır, dışında kapalıdır. Pencereyi değiştirmek için
+  `assets/js/winter.js` içindeki `inSeason` fonksiyonunu düzenleyin.
+- **Kar:** tek bir `<canvas>` üzerinde çizilir, dış kütüphane yoktur. Taneler
+  imleçten kaçar; yere biriken kar fareyle küreyebilir ve yeniden birikir.
+  Renkler `winter.css` içindeki `--flake`, `--pile-top`, `--pile-bottom`
+  değişkenlerinden gelir ve temaya göre değişir.
+- **Süsler:** çam ağacı ve kardan adam sol altta durur. 1480px üstünde içerik
+  sütununun dışındaki boşluğa yerleşir; altında köşe süsüne küçülür, 560px
+  altında ağaç gizlenir. Ana sayfada giriş bölümü ekrandayken süsler çekilir ki
+  hero'daki düğmelerin önünü kapatmasınlar.
+- **Kardan adam:** tıklayınca el sallar ve bulunduğunuz bölüme göre iki dilde
+  bir şey söyler (`BOLUM` sözlüğü). Balondaki düğme mevcut sohbet asistanını
+  (`window.ChatUI`) açar.
+- **Erişilebilirlik:** `prefers-reduced-motion` açıksa animasyon çalışmaz,
+  sekme arka plandayken çizim durur, katman `pointer-events: none` olduğu için
+  sayfanın tıklanabilirliğini etkilemez.
 
 ## Yerelde çalıştırma
 

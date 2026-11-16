@@ -1,0 +1,285 @@
+/* ==========================================================================
+   Kış / yılbaşı teması
+   Kar tanesi tuvali, biriken kar, çam ağacı ve kardan adam.
+   Katmanın tamamı winter.js tarafından enjekte edilir; sayfa HTML'leri sade kalır.
+   ========================================================================== */
+
+:root {
+    --snow: #ffffff;
+    --snow-2: #dfe7f5;
+    --tree-1: #1b3a24;
+    --tree-2: #27512f;
+    --tree-3: #33673a;
+    --tree-4: #3f7d45;
+    --scarf: #c9524a;
+    --scarf-dark: #a8403a;
+    --carrot: #e08a33;
+    --coal: #141720;
+    --star: var(--accent-3);
+
+    /* Tuvale aktarılan renkler (winter.js bunları okur) */
+    --flake: rgba(255, 255, 255, .95);
+    --pile-top: rgba(255, 255, 255, .97);
+    --pile-bottom: rgba(214, 225, 243, .92);
+}
+
+:root[data-theme="light"] {
+    --snow: #ffffff;
+    --snow-2: #ccd6e8;
+
+    /* Açık temada beyaz kar krem zeminde kayboluyor; soğuk bir griye çekiyoruz */
+    --flake: rgba(142, 160, 190, .85);
+    --pile-top: rgba(255, 255, 255, .98);
+    --pile-bottom: rgba(186, 201, 226, .95);
+}
+
+/* Tema kapalıyken hiçbir süs görünmesin */
+.winter-off .winter-layer { display: none; }
+
+/* --- Taşıyıcı katman --- */
+.winter-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 60;            /* sohbet düğmesinin (95) ve gezinmenin altında */
+    pointer-events: none;   /* sayfanın tıklanabilirliği hiç bozulmaz */
+    contain: strict;
+}
+
+.winter-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* --- Sol alttaki sahne: ağaç + kardan adam --- */
+/* Varsayılan: dar ekranlarda küçük bir köşe süsü.
+   Geniş ekranda (bkz. min-width: 1480px) süsler içerik sütununun dışındaki
+   boşluğa taşınır ve metnin önünü hiç kapatmaz. */
+.winter-scene {
+    position: absolute;
+    left: max(10px, env(safe-area-inset-left));
+    bottom: 0;
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    transition: opacity .4s var(--ease-out, ease), transform .4s var(--ease-out, ease);
+}
+
+/* Giriş bölümündeyken süsler çekilir — hero'daki düğmelerin önünü kapatmasın */
+.winter-scene.is-tucked {
+    opacity: 0;
+    transform: translateY(26px);
+    pointer-events: none;
+}
+
+/* --- Çam ağacı --- */
+.winter-tree {
+    width: 72px;
+    flex: none;
+    transform-origin: 50% 100%;
+    pointer-events: auto;
+    cursor: pointer;
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, .45));
+}
+
+:root[data-theme="light"] .winter-tree { filter: drop-shadow(0 10px 22px rgba(20, 22, 40, .2)); }
+
+.winter-tree.is-shaking { animation: tree-shake .7s var(--ease, ease-in-out); }
+
+@keyframes tree-shake {
+    0%, 100% { transform: rotate(0deg); }
+    15% { transform: rotate(-2.4deg); }
+    35% { transform: rotate(2deg); }
+    55% { transform: rotate(-1.2deg); }
+    78% { transform: rotate(.6deg); }
+}
+
+.winter-tree .bulb {
+    animation: bulb-glow 2.6s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+.winter-tree .bulb:nth-of-type(3n)   { animation-delay: .4s; }
+.winter-tree .bulb:nth-of-type(3n+1) { animation-delay: .95s; }
+.winter-tree .bulb:nth-of-type(4n)   { animation-delay: 1.6s; }
+
+@keyframes bulb-glow {
+    0%, 100% { opacity: .4; }
+    50%      { opacity: 1; }
+}
+
+.winter-tree .star {
+    animation: star-twinkle 3.8s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+@keyframes star-twinkle {
+    0%, 100% { opacity: .78; transform: scale(1); }
+    50%      { opacity: 1;   transform: scale(1.12); }
+}
+
+/* --- Kardan adam --- */
+.winter-snowman {
+    width: 54px;
+    flex: none;
+    margin-bottom: 2px;
+    padding: 0;
+    border: 0;
+    background: none;
+    pointer-events: auto;
+    cursor: pointer;
+    animation: snowman-bob 5.5s ease-in-out infinite;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, .4));
+}
+
+:root[data-theme="light"] .winter-snowman { filter: drop-shadow(0 10px 20px rgba(20, 22, 40, .18)); }
+
+.winter-snowman:hover { animation-play-state: paused; }
+
+.winter-snowman:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 6px;
+    border-radius: 14px;
+}
+
+@keyframes snowman-bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-5px); }
+}
+
+.winter-snowman .eyelid {
+    transform-box: fill-box;
+    transform-origin: top;
+    animation: snow-blink 6.5s ease-in-out infinite;
+}
+.winter-snowman .eyelid.right { animation-delay: .06s; }
+
+@keyframes snow-blink {
+    0%, 92%, 100% { transform: scaleY(0); }
+    95%           { transform: scaleY(1); }
+}
+
+.winter-snowman .arm-right {
+    transform-box: fill-box;
+    transform-origin: 10% 72%;
+}
+.winter-snowman.is-waving .arm-right { animation: snow-wave .85s ease-in-out 2; }
+
+@keyframes snow-wave {
+    0%, 100% { transform: rotate(0deg); }
+    32%      { transform: rotate(-24deg); }
+    66%      { transform: rotate(9deg); }
+}
+
+/* --- Konuşma balonu --- */
+.winter-bubble {
+    position: absolute;
+    left: max(16px, env(safe-area-inset-left));
+    bottom: 124px;
+    width: min(280px, calc(100vw - 32px));
+    padding: 14px 16px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--line-2);
+    border-radius: var(--r, 16px) var(--r, 16px) var(--r, 16px) 4px;
+    box-shadow: var(--shadow);
+    font-size: .875rem;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(8px) scale(.97);
+    transform-origin: 12% 100%;
+    transition: opacity .24s var(--ease-out, ease), transform .24s var(--ease-out, ease);
+    pointer-events: none;
+}
+
+.winter-bubble.is-open { opacity: 1; transform: none; pointer-events: auto; }
+
+.winter-bubble::after {
+    content: "";
+    position: absolute;
+    left: 22px; bottom: -7px;
+    width: 12px; height: 12px;
+    background: var(--surface);
+    border-right: 1px solid var(--line-2);
+    border-bottom: 1px solid var(--line-2);
+    transform: rotate(45deg);
+}
+
+.winter-bubble__ask {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 11px;
+    padding: 7px 13px;
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--text);
+    font: inherit;
+    font-size: .8rem;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, color .2s;
+}
+
+.winter-bubble__ask:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--surface-3);
+}
+
+.winter-bubble__ask .orb-mini {
+    width: 13px; height: 13px;
+    flex: none;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #9aa8ff, #5ee3c9, #ffb37d, #9aa8ff);
+}
+
+/* --- Gezinmedeki kar düğmesi --- */
+.winter-toggle[aria-pressed="false"] .i { opacity: .55; }
+.winter-toggle .i { transition: transform .45s var(--ease, ease), opacity .2s; }
+.winter-toggle[aria-pressed="true"] .i { transform: rotate(60deg); }
+
+/* --- Geniş ekran: içerik sütununun dışındaki boşluk --- */
+@media (min-width: 1480px) {
+    .winter-scene { left: calc(50% - (var(--wrap, 1200px) / 2) - 190px); }
+    .winter-tree { width: 100px; }
+    .winter-snowman { width: 74px; }
+    .winter-bubble {
+        left: calc(50% - (var(--wrap, 1200px) / 2) - 186px);
+        bottom: 168px;
+    }
+}
+
+/* --- Küçük ekranlar --- */
+@media (max-width: 900px) {
+    .winter-tree { width: 66px; }
+    .winter-snowman { width: 50px; }
+    .winter-bubble { bottom: 112px; font-size: .83rem; }
+}
+
+@media (max-width: 560px) {
+    .winter-tree { display: none; }        /* dar ekranda içeriği sıkıştırmasın */
+    .winter-snowman { width: 48px; }
+    .winter-bubble { bottom: 92px; width: min(230px, calc(100vw - 24px)); }
+}
+
+/* --- Hareket azaltma tercihi --- */
+@media (prefers-reduced-motion: reduce) {
+    .winter-snowman,
+    .winter-snowman .eyelid,
+    .winter-snowman.is-waving .arm-right,
+    .winter-tree .bulb,
+    .winter-tree .star,
+    .winter-tree.is-shaking {
+        animation: none;
+    }
+    .winter-bubble { transition: none; }
+}
+
+/* --- Yazdırma --- */
+@media print {
+    .winter-layer, .winter-toggle { display: none !important; }
+}
